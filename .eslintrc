@@ -1,0 +1,7 @@
+{
+  "plugins": ["fsd"],
+  "parserOptions": {
+    "ecmaVersion": 6,
+  },
+  "extends": ["plugin:fsd/all"]
+}

@@ -29,7 +29,7 @@ module.exports = {
     filename: 'build.js',
   },
 
-  // don't foget about dots...
+  // don't forget about dots...
   resolve: {
     extensions: ['.ts', '.js', '.scss', '.pug', '.html', '.css'],
   },
