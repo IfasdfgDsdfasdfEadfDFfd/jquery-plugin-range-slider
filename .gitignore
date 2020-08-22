@@ -1,5 +1,8 @@
 # npm packages
 node_modules
 
+# test coverage
+coverage
+
 # build stuff
 dist
