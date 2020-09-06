@@ -1,0 +1,14 @@
+@import './variables.scss';
+
+.range-slider__track {
+  position: absolute;
+
+  top: ($thumb-size - $track-height) / 2;
+
+  width: 100%;
+  height: $track-height;
+
+  background-color: transparent;
+  border: 1px solid #242426;
+  border-radius: 0.25rem;
+}

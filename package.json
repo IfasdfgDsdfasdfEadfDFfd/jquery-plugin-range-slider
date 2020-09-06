@@ -1,5 +1,5 @@
 {
-  "name": "slider-jquery-plugin",
+  "name": "jquery-plugin-range-slider",
   "version": "0.0.1",
   "description": "jQuey slider",
   "main": "index.js",

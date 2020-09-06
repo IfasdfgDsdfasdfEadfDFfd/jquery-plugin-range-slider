@@ -1,0 +1,36 @@
+@import './variables.scss';
+
+.range-slider__thumb {
+  position: absolute;
+  top: 0;
+
+  height: $thumb-size;
+  width: $thumb-size;
+
+  border: 1px solid #242426;
+  border-radius: 0.25rem;
+  background-color: #fff;
+}
+
+.range-slider__thumb__marker {
+  position: absolute;
+  top: -300%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  background-color: #fff;
+
+  font-family: inherit;
+
+  min-height: $thumb-size * 2;
+
+  border: 1px solid #242426;
+  border-radius: 10%;
+}
+
+.range-slider__thumb__marker--visible {
+  opacity: 1;
+}

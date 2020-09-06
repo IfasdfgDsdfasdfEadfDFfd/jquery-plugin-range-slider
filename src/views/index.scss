@@ -1,0 +1,17 @@
+@import './variables.scss';
+@import './input-range.scss';
+@import './slider-track.scss';
+@import './slider-progress.scss';
+@import './slider-thumb.scss';
+
+
+.range-slider {
+  position: relative;
+  height: $thumb-size;
+  margin-top: 2.5rem;
+}
+
+.range-slider--vertical {
+  transform: rotate(270deg);
+  margin: 40% 15%;
+}

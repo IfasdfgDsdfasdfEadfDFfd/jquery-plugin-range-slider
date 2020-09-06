@@ -7,11 +7,12 @@ const glob = require('glob');
 
 
 const SRC_DIR = path.resolve(path.join(process.cwd(), 'src'));
+const EXAMPLE_DIR = path.resolve(path.join(process.cwd(), 'example'));
 const DIST_DIR = path.resolve(path.join(process.cwd(), 'dist'));
 
 
 const getAllTemplates = folder => {
-  const SEARCH_DIR = path.join(SRC_DIR, folder);
+  const SEARCH_DIR = path.join(process.cwd(), folder);
 
   return glob.sync(`${SEARCH_DIR}/**/*.pug`).map(filepath => {
     return new HtmlWebpackPlugin({
@@ -23,10 +24,13 @@ const getAllTemplates = folder => {
 
 
 module.exports = {
-  entry: path.join(SRC_DIR, 'index.ts'),
+  entry: {
+    plugin: path.join(SRC_DIR, 'index.ts'),
+    example: path.join(EXAMPLE_DIR, 'index.js'),
+  },
   output: {
     path: DIST_DIR,
-    filename: 'build.js',
+    filename: '[name].build.js',
   },
 
   // don't forget about dots...
@@ -37,10 +41,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new HtmlWebpackPlugin({
-      template: path.join(SRC_DIR, 'index.pug'),
-      filename: 'index.html',
-    }),
+    ...getAllTemplates('example'),
   ],
 
   module: {

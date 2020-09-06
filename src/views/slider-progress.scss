@@ -1,0 +1,14 @@
+@import './variables.scss';
+
+.range-slider__progress {
+  position: absolute;
+
+  top: ($thumb-size - $track-height) / 2;
+  left: 0;
+  height: $track-height;
+
+  border: 1px solid #242426;
+  border-radius: 0.25rem;
+
+  background-color: rgb(21, 82, 31);
+}

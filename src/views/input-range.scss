@@ -1,0 +1,21 @@
+@import './variables.scss';
+
+.range-slider__input {
+  position: relative;
+  margin: 0px;
+  border: none;
+  width: 100%;
+  opacity: 0;
+  background-color: transparent;
+  z-index: 1;
+  -moz-appearance: none;
+}
+
+.range-slider__input::-moz-range-thumb {
+  width: $thumb-size;
+  height: $thumb-size;
+
+  border: 1px solid #242426;
+  border-radius: 0.25rem;
+  background-color: #fff;
+}

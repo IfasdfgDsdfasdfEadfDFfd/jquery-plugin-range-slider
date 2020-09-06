@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title Example
+  body
+
+    .container
+      #js-range-slider-id-0
+      #js-configurator-id-0.configurator
+        .configurator__tool
+          label(for='value')= 'value:'
+          input(type='text', id='value', size=2).configurator__value
+        .configurator__tool
+          label(for='min')= 'min:'
+          input(type='text', id='min', size=2).configurator__min
+        .configurator__tool
+          label(for='max')= 'max:'
+          input(type='text', id='max', size=2).configurator__max
+        .configurator__tool
+          label(for='step')= 'step:'
+          input(type='text', id='step', size=2).configurator__step
+        .configurator__tool
+          label(for='orient')= 'vertical:'
+          input(type='checkbox', id='orient').configurator__orient
+        .configurator__tool
+          label(for='marker-visibility')= 'MARKER:'
+          input(type='checkbox', id='marker-visibility').configurator__marker-visibility
