@@ -140,12 +140,20 @@ export class RangeSlider extends core.Provider<IRangeSliderStore> {
       sliderProgress.value = {...state};
 
       leftSliderThumb.position = {min: state.min, max: state.max, value: state.value[0]};
-      leftSliderThumb.markerVisibility = state.markerVisibility;
-      leftSliderThumb.markerValue = state.value;
+      leftSliderThumb.markerVisibility = state.markerVisibility && state.intervalMode;
+      leftSliderThumb.markerValue = state.value[0];
+      leftSliderThumb.hidden = !state.intervalMode;
 
       rightSliderThumb.position = {min: state.min, max: state.max, value: state.value[1]};
       rightSliderThumb.markerVisibility = state.markerVisibility;
-      rightSliderThumb.markerValue = state.value;
+      rightSliderThumb.markerValue = state.value[1];
+
+      if (state.intervalMode === false) {
+        leftInputRange.value = state.min;
+        sliderProgress.value = {...state, value: [0, state.value[1]]};
+        leftSliderThumb.position = {min: state.min, max: state.max, value: state.min};
+      }
+
     });
 
     return [leftInputRange, rightInputRange, sliderTrack, sliderProgress, leftSliderThumb, rightSliderThumb];
