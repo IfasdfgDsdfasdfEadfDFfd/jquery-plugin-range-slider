@@ -10,8 +10,11 @@ html(lang="en")
       #js-range-slider-id-0
       #js-configurator-id-0.configurator
         .configurator__tool
-          label(for='value')= 'value:'
-          input(type='text', id='value', size=2).configurator__value
+          label(for='value-left')= 'left value:'
+          input(type='text', id='value-left', size=2).configurator__value-left
+        .configurator__tool
+          label(for='value-right')= 'right value:'
+          input(type='text', id='value-right', size=2).configurator__value-right
         .configurator__tool
           label(for='min')= 'min:'
           input(type='text', id='min', size=2).configurator__min
@@ -27,3 +30,6 @@ html(lang="en")
         .configurator__tool
           label(for='marker-visibility')= 'MARKER:'
           input(type='checkbox', id='marker-visibility').configurator__marker-visibility
+        .configurator__tool
+          label(for='interval-mode')= 'INTERVAL:'
+          input(type='checkbox', id='interval-mode').configurator__interval-mode

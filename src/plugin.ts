@@ -3,7 +3,7 @@ import { RangeSlider } from './views';
 interface IProps {
   min?: number,
   max?: number,
-  value?: number,
+  value?: [number, number],
   step?: number,
   vertical?: boolean,
   markerVisibility?: boolean,
@@ -16,7 +16,8 @@ export function createRangeSlider(this: JQuery, props?: IProps) {
     subscirbe(cb: (state: any) => void) {
       rangeSlider.store.subscribe(cb);
     },
-    setValue(value: number) {
+
+    setValue(value: [number, number]) {
       rangeSlider.store.dispatch({type: RangeSlider.actions.CHANGE_VALUE, value});
     },
 
@@ -38,6 +39,10 @@ export function createRangeSlider(this: JQuery, props?: IProps) {
 
     setMarkerVisibility(value: boolean) {
       rangeSlider.store.dispatch({type: RangeSlider.actions.CHANGE_MARKER_VISIBILITY, value});
+    },
+
+    setIntervalMode(value: boolean) {
+      rangeSlider.store.dispatch({type: RangeSlider.actions.CHANGE_INTERVAL_MODE, value});
     },
   };
 }
