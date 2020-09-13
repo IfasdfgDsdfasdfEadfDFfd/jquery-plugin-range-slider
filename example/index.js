@@ -11,7 +11,6 @@ require('./index.scss');
   const right = el.find('.configurator__value-right');
 
   api.subscirbe(state => {
-    console.log('client', state.value);
 
     left.val(state.value[0]);
     right.val(state.value[1]);
@@ -26,8 +25,8 @@ require('./index.scss');
 
   });
 
-  left.on('focusout', event => api.setValue([event.target.value, right.val()].map(val => parseInt(val))));
-  right.on('focusout', event => api.setValue([left.val(), event.target.value].map(val => parseInt(val))));
+  left.on('focusout', event => api.setValue([event.target.value, right.val()].map(parseInt)));
+  right.on('focusout', event => api.setValue([left.val(), event.target.value].map(parseInt)));
 
   el.find('.configurator__min').on('focusout', (event) => api.setMin(event.target.value));
   el.find('.configurator__max').on('focusout', (event) => api.setMax(event.target.value));
