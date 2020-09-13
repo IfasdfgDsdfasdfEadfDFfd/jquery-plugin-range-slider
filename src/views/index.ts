@@ -73,7 +73,7 @@ export class RangeSlider extends core.Provider<IRangeSliderStore> {
             return {...state, markerVisibility: action.value};
 
           case RangeSlider.actions.CHANGE_INTERVAL_MODE:
-            return {...state, intervalMode: action.value};
+            return {...state, intervalMode: action.value, value: (action.value) ? state.value : [0, state.value[1]]};
 
           default:
             return state;
@@ -156,7 +156,14 @@ export class RangeSlider extends core.Provider<IRangeSliderStore> {
 
     });
 
-    return [leftInputRange, rightInputRange, sliderTrack, sliderProgress, leftSliderThumb, rightSliderThumb];
+    return [
+      leftInputRange,
+      rightInputRange,
+      sliderTrack,
+      sliderProgress,
+      leftSliderThumb,
+      rightSliderThumb
+    ];
   }
 
   initSelf() {
