@@ -8,6 +8,7 @@ export class InputRange extends View {
 
   set value(nextValue: number) {
     this.element.setAttribute('value', nextValue.toString());
+    (this.element as HTMLInputElement).value = nextValue.toString();
   }
 
   set min(nextMin: number) {
@@ -20,6 +21,16 @@ export class InputRange extends View {
 
   set step(nextStep: number) {
     this.element.setAttribute('step', nextStep.toString());
+  }
+
+  set intervalMode(apply: boolean) {
+    const className = 'range-slider__input--interval';
+
+    if (apply) {
+      this.element.classList.add(className);
+    } else {
+      this.element.classList.remove(className);
+    }
   }
 
   onChange(cb: EventCallback) {

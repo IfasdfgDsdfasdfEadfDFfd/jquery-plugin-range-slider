@@ -35,4 +35,14 @@ export class SliderThumb extends View {
         marker?.classList.remove('range-slider__thumb__marker--visible');
     }
   }
+
+  set hidden(value: boolean) {
+    const className = 'range-slider__thumb--hidden';
+
+    if (value) {
+      this.element.classList.add(className);
+    } else {
+      this.element.classList.remove(className);
+    }
+  }
 }

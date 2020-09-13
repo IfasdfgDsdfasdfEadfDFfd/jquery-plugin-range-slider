@@ -1,7 +1,7 @@
 @import './variables.scss';
 
 .range-slider__input {
-  position: relative;
+  position: absolute;
   margin: 0px;
   border: none;
   width: 100%;
@@ -11,11 +11,15 @@
   -moz-appearance: none;
 }
 
+.range-slider__input--interval {
+  pointer-events: none;
+}
+
 .range-slider__input::-moz-range-thumb {
-  width: $thumb-size;
-  height: $thumb-size;
+  pointer-events: all;
+  width: $thumb-size * 1.2;
+  height: $thumb-size * 1.2;
 
   border: 1px solid #242426;
-  border-radius: 0.25rem;
-  background-color: #fff;
+  background-color: transparent;
 }

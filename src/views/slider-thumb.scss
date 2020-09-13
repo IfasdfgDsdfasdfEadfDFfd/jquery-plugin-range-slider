@@ -1,6 +1,7 @@
 @import './variables.scss';
 
 .range-slider__thumb {
+  display: block;
   position: absolute;
   top: 0;
 
@@ -10,6 +11,10 @@
   border: 1px solid #242426;
   border-radius: 0.25rem;
   background-color: #fff;
+}
+
+.range-slider__thumb--hidden {
+  display: none;
 }
 
 .range-slider__thumb__marker {
