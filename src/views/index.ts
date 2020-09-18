@@ -3,34 +3,26 @@ import { InputRange } from './input-range';
 import { SliderTrack } from './slider-track';
 import { SliderProgress } from './slider-progress';
 import { SliderThumb } from './slider-thumb';
-import { IViewProps } from '../core';
+import { IViewProps, loadFromLocalStoragePlugin, saveToLocalStoragePlugin } from '../core';
+import { rangeSliderStoreReducer, actions } from './reducer';
 
-interface IRangeSliderStore {
-  min?: number,
-  max?: number,
-  value?: [number, number],
-  step?: number,
-  vertical?: boolean,
-  markerVisibility?: boolean,
-  intervalMode?: boolean
+export interface IRangeSliderStore {
+  min: number,
+  max: number,
+  value: [number, number],
+  step: number,
+  vertical: boolean,
+  markerVisibility: boolean,
+  intervalMode: boolean
 }
 
 export class RangeSlider extends core.Provider<IRangeSliderStore> {
-  static actions = {
-    CHANGE_VALUE: '@CHANGE_VALUE',
-    CHANGE_MIN: '@CHANGE_MIN',
-    CHANGE_MAX: '@CHANGE_MAX',
-    CHANGE_STEP: '@CHANGE_STEP',
-    CHANGE_ORIENT: '@CHANGE_ORIENT',
-    CHANGE_MARKER_VISIBILITY: '@CHANGE_MARKER_VISIBILITY',
-    CHANGE_INTERVAL_MODE: '@CHANGE_INTERVAL_MODE',
-  }
 
   constructor(root: HTMLElement, initValue?: IRangeSliderStore, attrs?: IViewProps['attrs']) {
     super(root, initValue, {class: 'range-slider', ...attrs});
   }
 
-  initStore(initValue: IRangeSliderStore = {}): core.Store {
+  initStore(initValue = {}): core.Store {
     const INIT = Object.assign({
       min: 0,
       max: 100,
@@ -39,45 +31,16 @@ export class RangeSlider extends core.Provider<IRangeSliderStore> {
       vertical: false,
       markerVisibility: false,
       intervalMode: false,
-    }, initValue);
+    }, initValue) as IRangeSliderStore;
 
-    return core.createStore(INIT,
-      (action, state): IRangeSliderStore => {
-        switch (action.type) {
+    const STORE_KEY = 'range-slider'
 
-          case RangeSlider.actions.CHANGE_VALUE:
-            const [left, right] = action.value;
-
-            const value = [
-              Math.max(state.min, Math.min(left, right)),
-              Math.min(state.max, Math.max(left, right)),
-            ];
-
-            return {...state, value};
-
-          case RangeSlider.actions.CHANGE_MIN:
-            const min = Math.min(parseInt(action.value), state.max);
-            return {...state, min};
-
-          case RangeSlider.actions.CHANGE_MAX:
-            const max = Math.max(parseInt(action.value), state.min);
-            return {...state, max};
-
-          case RangeSlider.actions.CHANGE_STEP:
-            return {...state, step: Math.min(Math.max(parseInt(action.value), 1), state.max)};
-
-          case RangeSlider.actions.CHANGE_ORIENT:
-            return {...state, vertical: action.value};
-
-          case RangeSlider.actions.CHANGE_MARKER_VISIBILITY:
-            return {...state, markerVisibility: action.value};
-
-          case RangeSlider.actions.CHANGE_INTERVAL_MODE:
-            return {...state, intervalMode: action.value, value: (action.value) ? state.value : [0, state.value[1]]};
-
-          default:
-            return state;
-        }
+    return core.createStore<IRangeSliderStore>(
+      INIT,
+      rangeSliderStoreReducer,
+      {
+        pre: [loadFromLocalStoragePlugin<IRangeSliderStore>(STORE_KEY)],
+        post: [saveToLocalStoragePlugin<IRangeSliderStore>(STORE_KEY)],
       }
     )
   }
@@ -101,7 +64,7 @@ export class RangeSlider extends core.Provider<IRangeSliderStore> {
 
     leftInputRange.onChange(event => {
       store.dispatch({
-        type: RangeSlider.actions.CHANGE_VALUE,
+        type: actions.CHANGE_VALUE,
         value: [
           parseInt(event?.target.value),
           parseInt(<string>rightInputRange.element.getAttribute('value')),
@@ -111,7 +74,7 @@ export class RangeSlider extends core.Provider<IRangeSliderStore> {
 
     rightInputRange.onChange(event => {
       store.dispatch({
-        type: RangeSlider.actions.CHANGE_VALUE,
+        type: actions.CHANGE_VALUE,
         value: [
           parseInt(<string>leftInputRange.element.getAttribute('value')),
           parseInt(event?.target.value),

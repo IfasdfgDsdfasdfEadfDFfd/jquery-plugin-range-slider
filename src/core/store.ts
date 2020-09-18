@@ -5,8 +5,7 @@ export type Action = {
   value?: any,
 };
 
-export type StateModifier = (initState: any) => any;
-export type Middleware = (args: {action: any, state: any}) => {action: Action, state: any};
+export type Plugin<T> = (state: T) => T;
 
 export type Reducer = (action: Action, state: any) => any;
 
@@ -18,14 +17,21 @@ export type Store = {
 };
 
 
-export const createStore = (
-  initState: any,
+export function createStore<T>(
+  initState: T,
   reducer: Reducer,
-): Store => {
+  plugins: {
+    pre?: Plugin<T>[],
+    post?: Plugin<T>[],
+  }
+): Store {
   const listeners: Listener[] = [];
-  let _state = initState;
+  let _state = plugins.pre?.reduce((state, plugin) => plugin(state), initState) || initState;
 
   const setNextState = (nextState: any) => {
+    for (const plugin of plugins.post || []) {
+      nextState = plugin(nextState);
+    }
     _state = nextState;
   };
 
@@ -52,3 +58,18 @@ export const createStore = (
 
   return { dispatch, getState, subscribe, coldStart };
 };
+
+
+export function loadFromLocalStoragePlugin<T> (key: string): Plugin<T> {
+  return (initState: T) => {
+    return JSON.parse(window.localStorage.getItem(key) as string) || initState;
+  }
+};
+
+
+export function saveToLocalStoragePlugin<T> (key: string): Plugin<T> {
+  return (state: T) => {
+    window.localStorage.setItem(key, JSON.stringify(state));
+    return state;
+  };
+}
