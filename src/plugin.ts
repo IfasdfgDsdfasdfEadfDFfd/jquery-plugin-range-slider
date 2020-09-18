@@ -1,15 +1,8 @@
-import { RangeSlider } from './views';
+import { IRangeSliderStore, RangeSlider } from './views';
+import { actions } from './views/reducer';
 
-interface IProps {
-  min?: number,
-  max?: number,
-  value?: [number, number],
-  step?: number,
-  vertical?: boolean,
-  markerVisibility?: boolean,
-}
 
-export function createRangeSlider(this: JQuery, props?: IProps) {
+export function createRangeSlider(this: JQuery, props?: IRangeSliderStore) {
   const rangeSlider = new RangeSlider(this.get(0), props);
 
   return {
@@ -18,31 +11,31 @@ export function createRangeSlider(this: JQuery, props?: IProps) {
     },
 
     setValue(value: [number, number]) {
-      rangeSlider.store.dispatch({type: RangeSlider.actions.CHANGE_VALUE, value});
+      rangeSlider.store.dispatch({type: actions.CHANGE_VALUE, value});
     },
 
     setMin(value: number) {
-      rangeSlider.store.dispatch({type: RangeSlider.actions.CHANGE_MIN, value});
+      rangeSlider.store.dispatch({type: actions.CHANGE_MIN, value});
     },
 
     setMax(value: number) {
-      rangeSlider.store.dispatch({type: RangeSlider.actions.CHANGE_MAX, value});
+      rangeSlider.store.dispatch({type: actions.CHANGE_MAX, value});
     },
 
     setStep(value: number) {
-      rangeSlider.store.dispatch({type: RangeSlider.actions.CHANGE_STEP, value});
+      rangeSlider.store.dispatch({type: actions.CHANGE_STEP, value});
     },
 
     setOrientVertical(value: boolean) {
-      rangeSlider.store.dispatch({type: RangeSlider.actions.CHANGE_ORIENT, value});
+      rangeSlider.store.dispatch({type: actions.CHANGE_ORIENT, value});
     },
 
     setMarkerVisibility(value: boolean) {
-      rangeSlider.store.dispatch({type: RangeSlider.actions.CHANGE_MARKER_VISIBILITY, value});
+      rangeSlider.store.dispatch({type: actions.CHANGE_MARKER_VISIBILITY, value});
     },
 
     setIntervalMode(value: boolean) {
-      rangeSlider.store.dispatch({type: RangeSlider.actions.CHANGE_INTERVAL_MODE, value});
+      rangeSlider.store.dispatch({type: actions.CHANGE_INTERVAL_MODE, value});
     },
   };
 }
