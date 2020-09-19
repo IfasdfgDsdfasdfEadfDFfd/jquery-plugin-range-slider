@@ -1,5 +1,5 @@
-import { IRangeSliderStore, RangeSlider } from './views';
-import { actions } from './views/reducer';
+import { IRangeSliderStore, RangeSlider } from './components';
+import { actions } from './components/reducer';
 
 
 export function createRangeSlider(this: JQuery, props?: IRangeSliderStore) {
