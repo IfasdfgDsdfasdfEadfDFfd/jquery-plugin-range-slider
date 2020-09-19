@@ -8,8 +8,8 @@ export type EventCallback = (event: any) => void;
 
 
 export class View {
-  tag: string;
-  element: HTMLElement;
+  readonly tag: string;
+  readonly element: HTMLElement;
 
   constructor({ tag, attrs, children }: IViewProps = {}) {
     this.tag = tag || 'div';
