@@ -9,9 +9,9 @@ export type Plugin<T> = (state: T) => T;
 
 export type Reducer = (action: Action, state: any) => any;
 
-export type Store = {
+export type Store<T> = {
   dispatch: (action: Action) => void,
-  getState: () => any,
+  getState: () => T,
   subscribe: (listener: Listener) => () => any,
   coldStart: () => void;
 };
@@ -23,8 +23,8 @@ export function createStore<T>(
   plugins: {
     pre?: Plugin<T>[],
     post?: Plugin<T>[],
-  }
-): Store {
+}
+): Store<T> {
   const listeners: Listener[] = [];
   let _state = plugins.pre?.reduce((state, plugin) => plugin(state), initState) || initState;
 
