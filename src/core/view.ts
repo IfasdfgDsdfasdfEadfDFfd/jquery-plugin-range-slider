@@ -1,5 +1,3 @@
-import { Store } from './';
-
 export interface IViewProps {
   tag?: string,
   attrs?: any,
@@ -12,7 +10,6 @@ export type EventCallback = (event: any) => void;
 export class View {
   tag: string;
   element: HTMLElement;
-  store: (Store|null) = null;
 
   constructor({ tag, attrs, children }: IViewProps = {}) {
     this.tag = tag || 'div';
