@@ -11,8 +11,9 @@ export class RangeSliderThumb extends HiddenView {
   }
 
   set position({min, max, value}: {min: number, max: number, value: number}) {
-    const percent = (value - min) / (max - min) * 100;
-    this.element.style.setProperty('left', `${percent - (.03 * percent)}%`);
+    const percent = (value - min) / (max - min);
+    const infelicity = 4 * percent;
+    this.element.style.setProperty('left', `${percent * 100 - infelicity}%`);
   };
 }
 
