@@ -9,11 +9,7 @@ export class Track extends View {
 }
 
 
-interface TElements {
-  track: Track;
-};
-
-export class RangeSliderTrack extends Provider<IRangeSliderStore, TElements> {
+export class RangeSliderTrack extends Provider<IRangeSliderStore, {track: Track}> {
   init() {
     this.elements.track = new Track();
     this.root = this.elements.track;
