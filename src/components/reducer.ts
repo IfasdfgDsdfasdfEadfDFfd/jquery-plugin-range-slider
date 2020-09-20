@@ -53,11 +53,11 @@ export const rangeSliderStoreReducer = (
 
     case actions.CHANGE_MIN:
       const min = Math.min(parseInt(action.value), state.max, state.value[0]);
-      return {...state, min};
+      return {...state, min: min - (min % state.step)};
 
     case actions.CHANGE_MAX:
       const max = Math.max(parseInt(action.value), state.min, state.value[1]);
-      return {...state, max};
+      return {...state, max: max - (max % state.step)};
 
     case actions.CHANGE_STEP:
       const step = Math.min(Math.max(parseInt(action.value), 1));
@@ -65,7 +65,8 @@ export const rangeSliderStoreReducer = (
         Math.round(state.value[0] - state.value[0] % step),
         Math.round(state.value[1] - state.value[1] % step),
       ] as [number, number]
-      return {...state, step, value};
+
+      return {...state, step, value, min: state.min - (state.min % step), max: state.max - (state.max % step)};
 
     case actions.CHANGE_ORIENT:
       return {...state, vertical: action.value};
