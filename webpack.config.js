@@ -17,6 +17,7 @@ const getAllTemplates = folder => {
   return glob.sync(`${SEARCH_DIR}/**/*.pug`).map(filepath => {
     return new HtmlWebpackPlugin({
       template: filepath,
+      favicon: path.join(EXAMPLE_DIR, 'favicon.png'),
       filename: `${path.parse(filepath).name}.html`,
     });
   });
@@ -63,7 +64,7 @@ module.exports = {
         use: ['awesome-typescript-loader'],
       },
       {
-        test: /\.(png|svg|eot|woff|woff2|ttf|)$/,
+        test: /\.(ico|png|svg|eot|woff|woff2|ttf|)$/,
         loader: 'file-loader',
         options: {
           name: '[name].[ext]',

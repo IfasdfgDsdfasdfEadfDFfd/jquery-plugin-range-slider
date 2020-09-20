@@ -16,6 +16,8 @@ export type Store<T> = {
   coldStart: () => void;
 };
 
+export type Validator = (action: Action) => Action;
+
 
 export function createStore<T>(
   initState: T,
@@ -23,7 +25,8 @@ export function createStore<T>(
   plugins: {
     pre?: Plugin<T>[],
     post?: Plugin<T>[],
-}
+  } = {},
+  validators: Validator[] = [],
 ): Store<T> {
   const listeners: Listener[] = [];
   let _state = plugins.pre?.reduce((state, plugin) => plugin(state), initState) || initState;
@@ -41,7 +44,8 @@ export function createStore<T>(
 
   const dispatch = (action: Action) => {
     const prevState = getState();
-    setNextState(reducer(action, prevState));
+    const validatedAction = validators.reduce((action, validator) => validator(action), action);
+    setNextState(reducer(validatedAction, prevState));
     listeners.forEach(listener => listener(getState()));
   };
 
@@ -72,4 +76,17 @@ export function saveToLocalStoragePlugin<T> (key: string): Plugin<T> {
     window.localStorage.setItem(key, JSON.stringify(state));
     return state;
   };
+}
+
+
+export function NaNValidator(action: Action): Action {
+  if (isNaN(action.value)) {
+    return {
+      type: '@NAN_VALIDATOR_CATCH',
+      value: {
+        from: action.type,
+      }
+    };
+  };
+  return action;
 }

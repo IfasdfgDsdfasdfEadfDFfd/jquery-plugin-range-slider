@@ -1,14 +1,8 @@
-@import './variables.scss';
-@import './input-range.scss';
-@import './slider-track.scss';
-@import './slider-progress.scss';
-@import './slider-thumb.scss';
-
+@import '../variables.scss';
 
 .range-slider {
   position: relative;
   height: $thumb-size;
-  margin-top: 2.5rem;
 }
 
 .range-slider--vertical {

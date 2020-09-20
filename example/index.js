@@ -25,17 +25,17 @@ require('./index.scss');
 
   });
 
-  left.on('focusout', event => api.setValue([event.target.value, right.val()].map(parseInt)));
-  right.on('focusout', event => api.setValue([left.val(), event.target.value].map(parseInt)));
+  left.on('focusout', event => api.setLeftValue(parseInt(event.target.value)));
+  right.on('focusout', event => api.setRightValue(parseInt(event.target.value)));
 
-  el.find('.configurator__min').on('focusout', (event) => api.setMin(event.target.value));
-  el.find('.configurator__max').on('focusout', (event) => api.setMax(event.target.value));
-  el.find('.configurator__step').on('focusout', (event) => api.setStep(event.target.value));
+  el.find('.configurator__min').on('focusout', (event) => api.setMin(parseInt(event.target.value)));
+  el.find('.configurator__max').on('focusout', (event) => api.setMax(parseInt(event.target.value)));
+  el.find('.configurator__step').on('focusout', (event) => api.setStep(parseInt(event.target.value)));
 
   el.find('.configurator__orient').on('click', (event) => api.setOrientVertical(!event.target.hasAttribute('checked')));
   el.find('.configurator__marker-visibility').on('click', (event) => api.setMarkerVisibility(!event.target.hasAttribute('checked')));
   el.find('.configurator__interval-mode').on('click', (event) => api.setIntervalMode(!event.target.hasAttribute('checked')));
 
-})($('#js-range-slider-id-0').createRangeSlider({
+})($('#js-range-slider-id-0').rangeSlider({
   value: [25, 75],
 }));

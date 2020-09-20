@@ -1,22 +1,24 @@
-import { View, Store } from "./";
-import { IViewProps } from "./view";
+import { Store } from "./";
+import { View } from "./view";
 
-export abstract class Provider<TStore> {
-  store: Store;
-  views: View[];
-  container: View;
 
-  constructor(root: HTMLElement, initValue?: TStore, attrs?: IViewProps['attrs']) {
-    this.store = this.initStore(initValue);
-    this.views = this.initViews(this.store);
+export abstract class Provider<TStore, TElements extends {}> {
+  readonly elements = {} as TElements;
+  private _root: View|undefined;
 
-    this.container = new View({tag: 'div', attrs: {...attrs}, children: this.views});
-    this.initSelf();
-
-    root.appendChild(this.container.element);
+  constructor(store: Store<TStore>) {
+    this.init(store);
+    store.subscribe((state: TStore) => this.render(state));
   }
 
-  abstract initStore(initValue?: TStore): Store;
-  abstract initViews(store: Store): View[];
-  abstract initSelf(): void;
+  set root(view: View) {
+    this._root = view;
+  }
+
+  get root(): View {
+    return this._root || new View({children: Object.values(this.elements)});
+  }
+
+  abstract init(store: Store<TStore>): void;
+  abstract render(state: TStore): void;
 }

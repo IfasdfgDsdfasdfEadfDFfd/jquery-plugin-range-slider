@@ -1,41 +1,45 @@
-import { IRangeSliderStore, RangeSlider } from './components';
-import { actions } from './components/reducer';
+import { createRangeSlider } from './components';
+import { actions, IRangeSliderStore } from './components/reducer';
 
 
-export function createRangeSlider(this: JQuery, props?: IRangeSliderStore) {
-  const rangeSlider = new RangeSlider(this.get(0), props);
+export function rangeSlider(this: JQuery, props: Partial<IRangeSliderStore> = {}) {
+  const store = createRangeSlider(this.get(0), props);
 
   return {
     subscirbe(cb: (state: any) => void) {
-      rangeSlider.store.subscribe(cb);
+      store.subscribe(cb);
     },
 
-    setValue(value: [number, number]) {
-      rangeSlider.store.dispatch({type: actions.CHANGE_VALUE, value});
+    setLeftValue(value: number) {
+      store.dispatch({type: actions.CHANGE_LEFT_VALUE, value});
+    },
+
+    setRightValue(value: number) {
+      store.dispatch({type: actions.CHANGE_RIGHT_VALUE, value});
     },
 
     setMin(value: number) {
-      rangeSlider.store.dispatch({type: actions.CHANGE_MIN, value});
+      store.dispatch({type: actions.CHANGE_MIN, value});
     },
 
     setMax(value: number) {
-      rangeSlider.store.dispatch({type: actions.CHANGE_MAX, value});
+      store.dispatch({type: actions.CHANGE_MAX, value});
     },
 
     setStep(value: number) {
-      rangeSlider.store.dispatch({type: actions.CHANGE_STEP, value});
+      store.dispatch({type: actions.CHANGE_STEP, value});
     },
 
     setOrientVertical(value: boolean) {
-      rangeSlider.store.dispatch({type: actions.CHANGE_ORIENT, value});
+      store.dispatch({type: actions.CHANGE_ORIENT, value});
     },
 
     setMarkerVisibility(value: boolean) {
-      rangeSlider.store.dispatch({type: actions.CHANGE_MARKER_VISIBILITY, value});
+      store.dispatch({type: actions.CHANGE_MARKER_VISIBILITY, value});
     },
 
     setIntervalMode(value: boolean) {
-      rangeSlider.store.dispatch({type: actions.CHANGE_INTERVAL_MODE, value});
+      store.dispatch({type: actions.CHANGE_INTERVAL_MODE, value});
     },
   };
 }
