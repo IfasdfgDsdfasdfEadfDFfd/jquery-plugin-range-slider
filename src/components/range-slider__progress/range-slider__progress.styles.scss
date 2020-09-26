@@ -1,9 +1,10 @@
-@import '../variables.scss';
+@import '../../variables.scss';
 
 .range-slider__progress {
   position: absolute;
 
-  top: ($thumb-size - $track-height) / 2;
+  top: $top-offset;
+
   left: 0;
   height: $track-height;
 

@@ -1,8 +1,8 @@
-@import '../variables.scss';
+@import '../../variables.scss';
 
 .range-slider {
   position: relative;
-  height: $thumb-size;
+  height: $thumb-height;
 }
 
 .range-slider--vertical {

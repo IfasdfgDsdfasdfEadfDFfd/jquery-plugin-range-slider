@@ -1,14 +1,17 @@
-@import '../variables.scss';
+@import '../../variables.scss';
 
 .range-slider__input {
   position: absolute;
+  height: $track-height;
+
   margin: 0px;
+  top: $top-offset;
+
   border: none;
+
   width: 100%;
-  // opacity: 0;
   background-color: transparent;
   z-index: 1;
-  -moz-appearance: none;
 }
 
 .range-slider__input--interval {
@@ -17,9 +20,30 @@
 
 .range-slider__input::-moz-range-thumb {
   pointer-events: all;
-  width: $thumb-size * 1.2;
-  height: $thumb-size * 1.2;
+
+  width: $thumb-width;
+  height: $thumb-height;
 
   border: 1px solid #242426;
-  background-color: transparent;
+  background-color: #fff;
+}
+
+.range-slider__input--hidden::-moz-range-thumb {
+  opacity: 0;
+}
+
+.range-slider__thumb-marker {
+  display: flex;
+  position: absolute;
+
+  margin-top: -2.2rem;
+  padding: .2rem;
+
+  background-color: #fff;
+  border: 1px solid #242426;
+  border-radius: .25rem;
+}
+
+.range-slider__thumb-marker--hidden {
+  display: none;
 }
