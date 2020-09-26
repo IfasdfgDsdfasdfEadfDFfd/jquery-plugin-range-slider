@@ -4,7 +4,7 @@ import {
   RightRangeSliderInputRange,
 } from '../range-slider__input-range';
 import { RangeSliderProgress } from '../range-slider__progress';
-import { LeftRangeSliderThumb, RightRangeSliderThumb } from '../range-slider__thumb';
+// import { LeftRangeSliderThumb, RightRangeSliderThumb } from '../range-slider__thumb';
 import { RangeSliderTrack } from '../range-slider__track';
  import { IRangeSliderStore } from '../reducer';
 
@@ -17,16 +17,16 @@ export class RangeSliderElement extends View {
     rightInput: RightRangeSliderInputRange,
     track: RangeSliderTrack,
     progress: RangeSliderProgress,
-    leftThumb: LeftRangeSliderThumb,
-    rightThumb: RightRangeSliderThumb,
+    // leftThumb: LeftRangeSliderThumb,
+    // rightThumb: RightRangeSliderThumb,
   ) {
     super({tag: 'div', attrs: {class: 'range-slider'}, children: [
       leftInput.root,
       rightInput.root,
       track.root,
       progress.root,
-      leftThumb.root,
-      rightThumb.root,
+      // leftThumb.root,
+      // rightThumb.root,
     ]});
   }
 
@@ -44,8 +44,8 @@ export class RangeSlider extends Provider<IRangeSliderStore, {slider: RangeSlide
       new RightRangeSliderInputRange(store),
       new RangeSliderTrack(store),
       new RangeSliderProgress(store),
-      new LeftRangeSliderThumb(store),
-      new RightRangeSliderThumb(store),
+      // new LeftRangeSliderThumb(store),
+      // new RightRangeSliderThumb(store),
     );
 
     this.root = this.elements.slider;
