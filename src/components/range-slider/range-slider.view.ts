@@ -4,9 +4,8 @@ import {
   RightRangeSliderInputRange,
 } from '../range-slider__input-range';
 import { RangeSliderProgress } from '../range-slider__progress';
-// import { LeftRangeSliderThumb, RightRangeSliderThumb } from '../range-slider__thumb';
 import { RangeSliderTrack } from '../range-slider__track';
- import { IRangeSliderStore } from '../reducer';
+import { IRangeSliderStore } from '../reducer';
 
 import './range-slider.styles.scss';
 
@@ -17,21 +16,22 @@ export class RangeSliderElement extends View {
     rightInput: RightRangeSliderInputRange,
     track: RangeSliderTrack,
     progress: RangeSliderProgress,
-    // leftThumb: LeftRangeSliderThumb,
-    // rightThumb: RightRangeSliderThumb,
   ) {
     super({tag: 'div', attrs: {class: 'range-slider'}, children: [
       leftInput.root,
       rightInput.root,
       track.root,
       progress.root,
-      // leftThumb.root,
-      // rightThumb.root,
     ]});
   }
 
   set vertical(value: boolean) {
     const className = 'range-slider--vertical';
+    this.element.classList.toggle(className, value);
+  }
+
+  set hasMarker(value: boolean) {
+    const className = 'range-slider--has-marker';
     this.element.classList.toggle(className, value);
   }
 }
@@ -44,8 +44,6 @@ export class RangeSlider extends Provider<IRangeSliderStore, {slider: RangeSlide
       new RightRangeSliderInputRange(store),
       new RangeSliderTrack(store),
       new RangeSliderProgress(store),
-      // new LeftRangeSliderThumb(store),
-      // new RightRangeSliderThumb(store),
     );
 
     this.root = this.elements.slider;
@@ -53,5 +51,6 @@ export class RangeSlider extends Provider<IRangeSliderStore, {slider: RangeSlide
 
   render(state: IRangeSliderStore) {
     this.elements.slider.vertical = state.vertical;
+    this.elements.slider.hasMarker = state.markerVisibility;
   }
 }

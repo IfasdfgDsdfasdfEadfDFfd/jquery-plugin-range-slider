@@ -5,11 +5,15 @@
   height: $thumb-height;
 }
 
+.range-slider--has-marker {
+  margin-top: 2.5rem;
+}
+
 .range-slider--vertical {
   transform: rotate(270deg);
   margin: 40% 15%;
 
-  & .range-slider__thumb__marker {
+  .range-slider__thumb-marker {
     transform: rotate(90deg);
   }
 }
