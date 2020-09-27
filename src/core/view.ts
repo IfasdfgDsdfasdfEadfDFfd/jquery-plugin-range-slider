@@ -28,11 +28,6 @@ export class View {
     this.appendChildren(children);
   }
 
-  replaceChildren(children: IViewProps['children']) {
-    this.element.innerHTML = '';
-    this.appendChildren(children);
-  }
-
   appendChildren(children: IViewProps['children']) {
     children?.reduce((el, child) => {
 
@@ -45,5 +40,10 @@ export class View {
 
       return el;
     }, this.element);
+  }
+
+  replaceChildren(children: IViewProps['children']) {
+    this.element.innerHTML = '';
+    this.appendChildren(children);
   }
 }
