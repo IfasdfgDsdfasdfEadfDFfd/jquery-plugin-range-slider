@@ -12,3 +12,42 @@
   border: 1px solid #242426;
   border-radius: 0.25rem;
 }
+
+.range-slider__track__scale {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+
+  margin: 1.7rem auto;
+  padding: 0px;
+}
+
+.range-slider__track__scale__item {
+  position: relative;
+
+  font-weight: bold;
+  padding-left: .7rem;
+  padding-right: .7rem;
+
+  cursor: pointer;
+
+  &:hover {
+    color: blue;
+
+    &::after {
+      border-color: blue;
+    }
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    height: 70%;
+    border-left: 2px solid #242427;
+    border-radius: .5rem;
+
+    left: calc(50% - 1px);
+    top: -.9rem;
+  }
+}

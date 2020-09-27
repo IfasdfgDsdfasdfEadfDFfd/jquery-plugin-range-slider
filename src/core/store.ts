@@ -55,7 +55,7 @@ export function createStore<T>(
 
   const subscribe = (listener: Listener) => {
     const index = listeners.push(listener) - 1;
-    coldStart();
+    listener(getState());
     // unsubscribe
     return () => listeners.splice(index, 1);
   };
@@ -88,5 +88,6 @@ export function NaNValidator(action: Action): Action {
       }
     };
   };
+
   return action;
 }
