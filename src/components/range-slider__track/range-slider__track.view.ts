@@ -1,5 +1,7 @@
-import { IRangeSliderStore } from '../reducer';
-import { Provider, View } from '../../core';
+import { actions, IRangeSliderStore } from '../reducer';
+import { Provider, Store, View } from '../../core';
+
+import styles from '../../exports.scss';
 
 
 export class Track extends View {
@@ -16,7 +18,23 @@ export class TrackScale extends View {
   }
 
   update(values: string[]) {
-    this.replaceChildren(values.map(value => new TrackScaleItem(value)));
+
+    const overflowRate = Math.ceil((values.length * parseInt(styles.minScaleItemWidth)) / this.element.clientWidth);
+
+    if (overflowRate > 1) {
+      const filteredValues = [];
+      for (let index = values.length - 1; index >= 0; index -= overflowRate) {
+        if (overflowRate / index > 1) {
+          index = 0;
+        }
+
+        filteredValues.unshift(values[index]);
+      }
+
+      this.replaceChildren(filteredValues.map(value => new TrackScaleItem(value)));
+    } else {
+      this.replaceChildren(values.map(value => new TrackScaleItem(value)));
+    }
   }
 }
 
@@ -36,19 +54,34 @@ export class RangeSliderTrack extends Provider<IRangeSliderStore, {
   private getSliderValues(state: IRangeSliderStore): string[] {
     const {min, max, step} = state;
 
-    const values = Array((max - min) / step + 1)
+    const length = (max - min) / step + 1
+
+    const values = Array(length)
       .fill(null)
       .map((_, index) => min + step * index)
-      .map(value => String(value));
+      .map(String)
 
     return values;
   }
 
-  init() {
+  init(store: Store<IRangeSliderStore>) {
     this.elements.scale = new TrackScale();
     this.elements.track = new Track(this.elements.scale);
 
     this.root = this.elements.track;
+
+    window.addEventListener('resize', () => {
+      this.elements.scale.update(this.getSliderValues(store.getState()));
+    });
+
+    this.elements.scale.element.addEventListener('click', (event: any) => {
+      if (event.target.nodeName === 'LI') {
+        store.dispatch({
+          type: actions.CHANGE_RIGHT_VALUE,
+          value: parseInt(event.target.textContent),
+        });
+      }
+    });
   }
 
   render(state: IRangeSliderStore) {
