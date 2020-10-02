@@ -52,8 +52,9 @@ export const rangeSliderStoreReducer = (
       ]};
 
     case actions.CHANGE_MIN:
-      const min = Math.min(parseInt(action.value), state.max, state.value[0]);
-      return {...state, min: min - (min % state.step)};
+      const min = Math.min(parseInt(action.value), state.max);
+      return {...state, min: min - (min % state.step),
+        value: [Math.max(min, state.value[0]), state.value[1]]};
 
     case actions.CHANGE_MAX:
       const max = Math.max(parseInt(action.value), state.min, state.value[1]);
