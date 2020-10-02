@@ -13,6 +13,7 @@ export type Store<T> = {
   dispatch: (action: Action) => void,
   getState: () => T,
   subscribe: (listener: Listener) => () => any,
+  coldStart: () => void;
 };
 
 export type Validator = (action: Action) => Action;
@@ -55,7 +56,11 @@ export function createStore<T>(
     return () => listeners.splice(index, 1);
   };
 
-  return { dispatch, getState, subscribe };
+  const coldStart = () => {
+    dispatch({type: '@COLD_START'});
+  }
+
+  return { dispatch, getState, subscribe, coldStart };
 };
 
 

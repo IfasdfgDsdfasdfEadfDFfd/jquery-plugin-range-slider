@@ -23,5 +23,7 @@ export function createRangeSlider(root: HTMLElement, initStoreValue: Partial<IRa
   const rangeSlider = new RangeSlider(store);
   root.appendChild(rangeSlider.root.element);
 
+  store.coldStart();
+
   return store;
 }
