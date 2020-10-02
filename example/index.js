@@ -1,6 +1,6 @@
 /* eslint-disable fsd/no-function-declaration-in-event-listener */
 const $ = require('jquery');
-require('../src');
+require('jquery-plugin-range-slider');
 require('./index.scss');
 
 
