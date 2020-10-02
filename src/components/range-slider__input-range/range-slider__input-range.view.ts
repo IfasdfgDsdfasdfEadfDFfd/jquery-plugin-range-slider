@@ -60,7 +60,6 @@ export abstract class RangeSliderInputRange extends Provider<IRangeSliderStore, 
     this.elements.input.max = state.max;
     this.elements.input.step = state.step;
     this.elements.input.intervalMode = state.intervalMode;
-
   }
 }
 
@@ -74,6 +73,15 @@ export class LeftRangeSliderInputRange extends RangeSliderInputRange {
         value: parseInt(event.target.value),
       })
     })
+
+
+    window.addEventListener('resize', () => {
+      const {max, min, value} = store.getState();
+
+      this.elements.marker.position = {
+        max, min, value: value[0]
+      };
+    });
   }
 
   render(state: IRangeSliderStore) {
@@ -102,6 +110,15 @@ export class RightRangeSliderInputRange extends RangeSliderInputRange {
         value: parseInt(event.target.value),
       })
     })
+
+
+    window.addEventListener('resize', () => {
+      const {max, min, value} = store.getState();
+
+      this.elements.marker.position = {
+        max, min, value: value[1]
+      };
+    });
   }
 
   render(state: IRangeSliderStore) {
