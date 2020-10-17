@@ -79,7 +79,7 @@ export function saveToLocalStoragePlugin<T> (key: string): Plugin<T> {
 }
 
 
-export function NaNValidator(action: Action): Action {
+export const NaNValidator: Validator = (action: Action): Action => {
   if (isNaN(action.value)) {
     return {
       type: '@NAN_VALIDATOR_CATCH',

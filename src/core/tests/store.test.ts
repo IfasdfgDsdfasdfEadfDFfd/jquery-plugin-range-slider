@@ -1,4 +1,4 @@
-import { createStore } from "../store";
+import { createStore, NaNValidator } from "../store";
 
 describe('store test', () => {
   const INIT_STATE = 'INIT_STATE';
@@ -7,7 +7,7 @@ describe('store test', () => {
   const REDUCER = jest.fn(x => x.value);
   const ACTION = jest.fn();
   ACTION.mockReturnValue({
-    name: 'action_name',
+    type: 'action_name',
     value: NEXT_STATE,
   });
 
@@ -50,4 +50,22 @@ describe('store test', () => {
     store.dispatch(ACTION());
     expect(LISTENER.mock.calls.length).toEqual(2);
   });
+
+  describe('test store validators', () => {
+    test('NaNValidator catch all action with {value: NaN}', () => {
+      const ACTION_NAN_VALUE = {
+        type: 'ACTION_NAME',
+        value: NaN,
+      };
+      const LISTENER = jest.fn(x => x);
+
+      const store = createStore(INIT_STATE, REDUCER, {}, [ NaNValidator ]);
+
+      store.subscribe(LISTENER);
+
+      store.dispatch(ACTION_NAN_VALUE);
+      expect(LISTENER.mock.calls[1][0].from).toEqual(ACTION_NAN_VALUE.type);
+    });
+  });
 });
+
