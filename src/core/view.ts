@@ -1,10 +1,10 @@
 export interface IViewProps {
   tag?: string;
-  attrs?: any;
-  children?: Array<View|string>;
+  attrs: {[key: string]: string};
+  children: Array<View|string>;
 }
 
-export type EventCallback = (event: any) => void;
+export type EventCallback = (event: Event) => void;
 
 
 export class View {
@@ -14,21 +14,22 @@ export class View {
   children: IViewProps['children'];
   attrs: IViewProps['attrs'];
 
-  constructor({ tag, attrs, children }: IViewProps = {}) {
+  constructor({ tag, attrs, children }: IViewProps) {
     this.tag = tag || 'div';
     this.children = children;
-    this.attrs = attrs || {};
+    this.attrs = attrs;
     this.element = document.createElement(this.tag);
 
     Object.keys(this.attrs).reduce((el, key) => {
-      this.element.setAttribute(key, this.attrs[key]);
+      const value = this.attrs[key];
+      el.setAttribute(key, value);
       return el;
     }, this.element);
 
     this.appendChildren(children);
   }
 
-  appendChildren(children: IViewProps['children']) {
+  appendChildren(children: IViewProps['children']): void {
     children?.reduce((el, child) => {
 
       if (typeof (child) === 'string') {
@@ -43,7 +44,7 @@ export class View {
     this.children = children;
   }
 
-  replaceChildren(children: IViewProps['children']) {
+  replaceChildren(children: IViewProps['children']): void {
     this.element.innerHTML = '';
     this.appendChildren(children);
   }
