@@ -2,11 +2,23 @@ import { createRangeSlider } from './components';
 import { actions, IRangeSliderStore } from './components/reducer';
 
 
-export function rangeSlider(this: JQuery, props: Partial<IRangeSliderStore> = {}) {
+interface PluginApi {
+  subscribe(cb: (state: IRangeSliderStore) => void): void;
+  setLeftValue(value: number): void;
+  setRightValue(value: number): void;
+  setMin(value: number): void;
+  setMax(value: number): void;
+  setStep(value: number): void;
+  setOrientVertical(value: boolean): void;
+  setMarkerVisibility(value: boolean): void;
+  setIntervalMode(value: boolean): void;
+}
+
+export function rangeSlider(this: JQuery, props: Partial<IRangeSliderStore> = {}): PluginApi {
   const store = createRangeSlider(this.get(0), props);
 
   return {
-    subscirbe(cb: (state: any) => void) {
+    subscribe(cb: (state: IRangeSliderStore) => void) {
       store.subscribe(cb);
     },
 
