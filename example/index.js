@@ -10,7 +10,7 @@ require('./index.scss');
   const left = el.find('.configurator__value-left');
   const right = el.find('.configurator__value-right');
 
-  api.subscirbe(state => {
+  api.subscribe(state => {
 
     left.val(state.value[0]);
     right.val(state.value[1]);
