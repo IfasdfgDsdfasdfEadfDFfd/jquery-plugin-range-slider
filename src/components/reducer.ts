@@ -1,4 +1,4 @@
-import { Action } from '../core';
+import { Action, Reducer } from '../core';
 
 
 export interface IRangeSliderStore {
@@ -23,13 +23,15 @@ export const actions = {
 };
 
 
-export const rangeSliderStoreReducer = (
+export const rangeSliderStoreReducer: Reducer<IRangeSliderStore> = (
   action: Action,
   state: IRangeSliderStore
 ): IRangeSliderStore => {
 
   let left: number;
   let right: number;
+  let min, max, step: number;
+  let value: [number, number];
 
   switch (action.type) {
 
@@ -52,20 +54,20 @@ export const rangeSliderStoreReducer = (
       ]};
 
     case actions.CHANGE_MIN:
-      const min = Math.min(parseInt(action.value), state.max);
+      min = Math.min(parseInt(action.value), state.max);
       return {...state, min: min - (min % state.step),
         value: [Math.max(min, state.value[0]), state.value[1]]};
 
     case actions.CHANGE_MAX:
-      const max = Math.max(parseInt(action.value), state.min, state.value[1]);
+      max = Math.max(parseInt(action.value), state.min, state.value[1]);
       return {...state, max: max - (max % state.step)};
 
     case actions.CHANGE_STEP:
-      const step = Math.min(Math.max(parseInt(action.value), 1));
-      const value = [
+      step = Math.min(Math.max(parseInt(action.value), 1));
+      value = [
         Math.round(state.value[0] - state.value[0] % step),
         Math.round(state.value[1] - state.value[1] % step),
-      ] as [number, number]
+      ];
 
       return {...state, step, value, min: state.min - (state.min % step), max: state.max - (state.max % step)};
 

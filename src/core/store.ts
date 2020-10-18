@@ -1,34 +1,35 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable fsd/hof-name-prefix */
 export type Listener<T> = (state: T) => void;
 
-export type Action<T> = {
+export type Action = {
   type: string,
-  value?: T,
+  value: any,
 };
 
 export type Plugin<T> = (state: T) => T;
 
-export type Reducer<TState, TAction> = (action: Action<TAction>, state: TState) => TState;
+export type Reducer<TState> = (action: Action, state: TState) => TState;
 
-export type Store<TState, TAction> = {
-  dispatch: (action: Action<TAction>) => void,
+export type Store<TState> = {
+  dispatch: (action: Action) => void,
   getState: () => TState,
   subscribe: (listener: Listener<TState>) => () => void,
   coldStart: () => void;
 };
 
-export type Validator<TReceivedAction, TReturnedAction> = (action: Action<TReceivedAction>) => Action<TReturnedAction>;
+export type Validator = (action: Action) => Action;
 
 
-export function createStore<TState, TAction>(
+export function createStore<TState>(
   initState: TState,
-  reducer: Reducer<TState, TAction>,
+  reducer: Reducer<TState>,
   plugins: {
     pre?: Plugin<TState>[],
     post?: Plugin<TState>[],
   } = {},
-  validators: Validator<TAction, unknown>[] = [],
-): Store<TState, TAction> {
+  validators: Validator[] = [],
+): Store<TState> {
   const listeners: Listener<TState>[] = [];
   let _state = plugins.pre?.reduce((state, plugin) => plugin(state), initState) || initState;
 
@@ -43,7 +44,7 @@ export function createStore<TState, TAction>(
     return _state;
   };
 
-  const dispatch = (action: Action<TAction>) => {
+  const dispatch = (action: Action) => {
     const prevState = getState();
     const validatedAction = validators.reduce((action, validator) => validator(action), action);
     setNextState(reducer(validatedAction, prevState));
@@ -59,7 +60,7 @@ export function createStore<TState, TAction>(
   };
 
   const coldStart = () => {
-    dispatch({type: '@COLD_START'});
+    dispatch({type: '@COLD_START', value: null});
   }
 
   return { dispatch, getState, subscribe, coldStart };
@@ -80,7 +81,7 @@ export function saveToLocalStoragePlugin<T> (key: string): Plugin<T> {
   };
 }
 
-export function NaNValidator<T>(action: Action<T>): Action<{from: string}> | Action<T> {
+export function NaNValidator(action: Action): Action {
   if (typeof action.value === 'number') {
     if (isNaN(action.value)) {
       return {

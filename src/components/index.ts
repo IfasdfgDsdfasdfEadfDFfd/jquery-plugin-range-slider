@@ -1,9 +1,9 @@
 import { RangeSlider } from "./range-slider/range-slider.view";
-import { createStore, loadFromLocalStoragePlugin, NaNValidator, saveToLocalStoragePlugin } from "../core";
+import { createStore, loadFromLocalStoragePlugin, NaNValidator, saveToLocalStoragePlugin, Store } from "../core";
 import { IRangeSliderStore, rangeSliderStoreReducer } from "./reducer";
 
 
-export function createRangeSlider(root: HTMLElement, initStoreValue: Partial<IRangeSliderStore>) {
+export function createRangeSlider(root: HTMLElement, initStoreValue: Partial<IRangeSliderStore>): Store<IRangeSliderStore> {
   const STORE_ID = 'range-sldider-store-id';
   const INIT_VALUE: IRangeSliderStore = Object.assign({
     min: 0,
