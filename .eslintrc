@@ -1,7 +1,15 @@
 {
-  "plugins": ["fsd"],
+  "root": true,
+  "plugins": ["@typescript-eslint", "fsd"],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 6
+    "ecmaVersion": 6,
+    "sourceType": "module"
   },
-  "extends": ["plugin:fsd/all"]
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:fsd/all"
+  ]
 }

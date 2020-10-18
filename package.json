@@ -6,7 +6,8 @@
     "build": "NODE_ENVIRONMENT=development webpack",
     "dev": "NODE_ENVIRONMENT=development webpack-dev-server",
     "test": "jest --watch --runInBand",
-    "coverage": "jest --coverage"
+    "coverage": "jest --coverage",
+    "lint": "eslint ./src/**/* --ext .ts"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,8 @@
     "@types/node-sass": "^4.11.1",
     "@types/webpack": "^4.41.21",
     "@types/webpack-env": "^1.15.2",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "@typescript-eslint/parser": "^4.4.1",
     "awesome-typescript-loader": "^5.2.1",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^3.6.0",
