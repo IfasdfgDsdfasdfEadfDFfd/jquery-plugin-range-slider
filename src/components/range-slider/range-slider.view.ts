@@ -38,7 +38,7 @@ export class RangeSliderElement extends View {
 
 
 export class RangeSlider extends Provider<IRangeSliderStore, {slider: RangeSliderElement}> {
-  init(store: Store<IRangeSliderStore>) {
+  init(store: Store<IRangeSliderStore>): void {
     this.elements.slider = new RangeSliderElement(
       new LeftRangeSliderInputRange(store),
       new RightRangeSliderInputRange(store),
@@ -49,7 +49,7 @@ export class RangeSlider extends Provider<IRangeSliderStore, {slider: RangeSlide
     this.root = this.elements.slider;
   }
 
-  render(state: IRangeSliderStore) {
+  render(state: IRangeSliderStore): void {
     this.elements.slider.vertical = state.vertical;
     this.elements.slider.hasMarker = state.markerVisibility;
   }
