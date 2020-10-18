@@ -4,7 +4,7 @@ import { Provider, View } from '../../core';
 
 export class Progress extends View {
   constructor() {
-    super({tag: 'div', attrs: {class: 'range-slider__progress'}});
+    super({tag: 'div', attrs: {class: 'range-slider__progress'}, children: []});
   }
 
   set value({min, max, value}: {min: number, max: number, value: [number, number]}) {
@@ -22,13 +22,14 @@ interface TElements {
 }
 
 export class RangeSliderProgress extends Provider<IRangeSliderStore, TElements> {
-  init() {
+  init(): void {
     this.elements.progress = new Progress();
     this.root = this.elements.progress;
   }
 
-  render(state: IRangeSliderStore) {
-    let {min, max, value} = state;
+  render(state: IRangeSliderStore): void {
+    const {min, max} = state;
+    let {value} = state;
 
     if (!state.intervalMode) {
       value = [min, value[1]];
