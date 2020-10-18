@@ -40,6 +40,7 @@ export class View {
 
       return el;
     }, this.element);
+    this.children = children;
   }
 
   replaceChildren(children: IViewProps['children']) {
