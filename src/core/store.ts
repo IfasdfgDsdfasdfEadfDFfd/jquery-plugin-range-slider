@@ -1,37 +1,38 @@
-export type Listener = (state: any) => void;
+/* eslint-disable fsd/hof-name-prefix */
+export type Listener<T> = (state: T) => void;
 
-export type Action = {
+export type Action<T> = {
   type: string,
-  value?: any,
+  value?: T,
 };
 
 export type Plugin<T> = (state: T) => T;
 
-export type Reducer = (action: Action, state: any) => any;
+export type Reducer<TState, TAction> = (action: Action<TAction>, state: TState) => TState;
 
-export type Store<T> = {
-  dispatch: (action: Action) => void,
-  getState: () => T,
-  subscribe: (listener: Listener) => () => any,
+export type Store<TState, TAction> = {
+  dispatch: (action: Action<TAction>) => void,
+  getState: () => TState,
+  subscribe: (listener: Listener<TState>) => () => void,
   coldStart: () => void;
 };
 
-export type Validator = (action: Action) => Action;
+export type Validator<TReceivedAction, TReturnedAction> = (action: Action<TReceivedAction>) => Action<TReturnedAction>;
 
 
-export function createStore<T>(
-  initState: T,
-  reducer: Reducer,
+export function createStore<TState, TAction>(
+  initState: TState,
+  reducer: Reducer<TState, TAction>,
   plugins: {
-    pre?: Plugin<T>[],
-    post?: Plugin<T>[],
+    pre?: Plugin<TState>[],
+    post?: Plugin<TState>[],
   } = {},
-  validators: Validator[] = [],
-): Store<T> {
-  const listeners: Listener[] = [];
+  validators: Validator<TAction, never>[] = [],
+): Store<TState, TAction> {
+  const listeners: Listener<TState>[] = [];
   let _state = plugins.pre?.reduce((state, plugin) => plugin(state), initState) || initState;
 
-  const setNextState = (nextState: any) => {
+  const setNextState = (nextState: TState) => {
     for (const plugin of plugins.post || []) {
       nextState = plugin(nextState);
     }
@@ -42,14 +43,15 @@ export function createStore<T>(
     return _state;
   };
 
-  const dispatch = (action: Action) => {
+  const dispatch = (action: Action<TAction>) => {
     const prevState = getState();
     const validatedAction = validators.reduce((action, validator) => validator(action), action);
     setNextState(reducer(validatedAction, prevState));
     listeners.forEach(listener => listener(getState()));
   };
 
-  const subscribe = (listener: Listener) => {
+  // eslint-disable-next-line fsd/hof-name-prefix
+  const subscribe = (listener: Listener<TState>) => {
     const index = listeners.push(listener) - 1;
     listener(getState());
     // unsubscribe
@@ -78,15 +80,16 @@ export function saveToLocalStoragePlugin<T> (key: string): Plugin<T> {
   };
 }
 
-
-export const NaNValidator: Validator = (action: Action): Action => {
-  if (isNaN(action.value)) {
-    return {
-      type: '@NAN_VALIDATOR_CATCH',
-      value: {
-        from: action.type,
-      }
-    };
+export function NaNValidator<T>(action: Action<T>): Action<{from: string}> | Action<T> {
+  if (typeof action.value === 'number') {
+    if (isNaN(action.value)) {
+      return {
+        type: '@NAN_VALIDATOR_CATCH',
+        value: {
+          from: action.type,
+        }
+      };
+    }
   }
 
   return action;
