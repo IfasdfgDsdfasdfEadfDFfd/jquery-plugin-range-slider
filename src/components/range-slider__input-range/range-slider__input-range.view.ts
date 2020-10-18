@@ -1,5 +1,5 @@
 import { IRangeSliderStore } from '../reducer';
-import { EventCallback, Provider, Store } from '../../core';
+import { Action, EventCallback, Provider, Store } from '../../core';
 import { actions } from '../reducer';
 import { HiddenView } from '../../core/shortcuts';
 
@@ -39,7 +39,7 @@ export class InputRange extends HiddenView {
     this.element.classList.toggle(className, apply);
   }
 
-  onChange(cb: EventCallback) {
+  onChange(cb: EventCallback): void {
     this.element.addEventListener('input', cb);
   }
 }
@@ -50,41 +50,44 @@ export abstract class RangeSliderInputRange extends Provider<IRangeSliderStore, 
   input: InputRange,
   marker: RangeSliderThumbMarker,
 }> {
-  init(_store?: Store<IRangeSliderStore>) {
+  abstract storeValueIndex: number;
+
+  init(store: Store<IRangeSliderStore>): void {
     this.elements.marker = new RangeSliderThumbMarker();
     this.elements.input = new InputRange(this.elements.marker);
+
+    this.elements.input.onChange(event => {
+
+      const target = event.target as HTMLInputElement;
+      store.dispatch(this.makeAction(parseInt(target.value)));
+    });
+
+    const {max, min, value} = store.getState();
+    window.addEventListener('resize', this.makeSetterForMarkerPosition(max, min, value[this.storeValueIndex]));
   }
 
-  render(state: IRangeSliderStore) {
+  render(state: IRangeSliderStore): void {
     this.elements.input.min = state.min;
     this.elements.input.max = state.max;
     this.elements.input.step = state.step;
     this.elements.input.intervalMode = state.intervalMode;
   }
+
+  private makeSetterForMarkerPosition(max: number, min: number, value: number): () => void {
+    return () => {
+      this.elements.marker.position = {
+        max, min, value: value,
+      };
+    }
+  }
+
+  abstract makeAction(value: number): Action;
 }
 
 export class LeftRangeSliderInputRange extends RangeSliderInputRange {
-  init(store: Store<IRangeSliderStore>) {
-    super.init();
+  storeValueIndex = 0;
 
-    this.elements.input.onChange(event => {
-      store.dispatch({
-        type: actions.CHANGE_LEFT_VALUE,
-        value: parseInt(event.target.value),
-      })
-    })
-
-
-    window.addEventListener('resize', () => {
-      const {max, min, value} = store.getState();
-
-      this.elements.marker.position = {
-        max, min, value: value[0]
-      };
-    });
-  }
-
-  render(state: IRangeSliderStore) {
+  render(state: IRangeSliderStore): void {
     super.render(state);
 
     if (state.intervalMode) {
@@ -98,36 +101,32 @@ export class LeftRangeSliderInputRange extends RangeSliderInputRange {
     this.elements.marker.value = state.value[0];
     this.elements.marker.position = {max: state.max, min: state.min, value: state.value[0]};
   }
+
+  makeAction(value: number): Action {
+    return {
+      type: actions.CHANGE_LEFT_VALUE,
+      value,
+    };
+  }
 }
 
 export class RightRangeSliderInputRange extends RangeSliderInputRange {
-  init(store: Store<IRangeSliderStore>) {
-    super.init();
+  storeValueIndex = 1;
 
-    this.elements.input.onChange(event => {
-      store.dispatch({
-        type: actions.CHANGE_RIGHT_VALUE,
-        value: parseInt(event.target.value),
-      })
-    })
-
-
-    window.addEventListener('resize', () => {
-      const {max, min, value} = store.getState();
-
-      this.elements.marker.position = {
-        max, min, value: value[1]
-      };
-    });
-  }
-
-  render(state: IRangeSliderStore) {
+  render(state: IRangeSliderStore): void {
     super.render(state);
     this.elements.input.value = state.value[1];
 
     this.elements.marker.hidden = !state.markerVisibility;
     this.elements.marker.value = state.value[1];
     this.elements.marker.position = {max: state.max, min: state.min, value: state.value[1]};
+  }
+
+  makeAction(value: number): Action {
+    return {
+      type: actions.CHANGE_RIGHT_VALUE,
+      value,
+    };
   }
 }
 
