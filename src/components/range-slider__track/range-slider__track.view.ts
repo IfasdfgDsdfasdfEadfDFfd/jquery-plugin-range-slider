@@ -14,10 +14,10 @@ export class Track extends View {
 
 export class TrackScale extends View {
   constructor() {
-    super({tag: 'ul', attrs: { class: 'range-slider__track__scale' }});
+    super({tag: 'ul', attrs: { class: 'range-slider__track__scale' }, children: []});
   }
 
-  update(values: string[]) {
+  update(values: string[]): void {
 
     const overflowRate = Math.ceil((values.length * parseInt(styles.minScaleItemWidth)) / this.element.clientWidth);
 
@@ -64,27 +64,35 @@ export class RangeSliderTrack extends Provider<IRangeSliderStore, {
     return values;
   }
 
-  init(store: Store<IRangeSliderStore>) {
+  private makeOnWindowResizeHandler(state: IRangeSliderStore): () => void {
+    return () => this.elements.scale.update(this.getSliderValues(state));
+  }
+
+  private makeOnClickHandler(store: Store<IRangeSliderStore>): (Event: MouseEvent) => void {
+    return (event: MouseEvent) => {
+      const target = event?.target as HTMLElement;
+
+      if (target.nodeName === 'LI') {
+        store.dispatch({
+          type: actions.CHANGE_RIGHT_VALUE,
+          value: parseInt(target.textContent || ''),
+        });
+      }
+    }
+  }
+
+  init(store: Store<IRangeSliderStore>): void {
     this.elements.scale = new TrackScale();
     this.elements.track = new Track(this.elements.scale);
 
     this.root = this.elements.track;
 
-    window.addEventListener('resize', () => {
-      this.elements.scale.update(this.getSliderValues(store.getState()));
-    });
+    window.addEventListener('resize', this.makeOnWindowResizeHandler(store.getState()));
 
-    this.elements.scale.element.addEventListener('click', (event: any) => {
-      if (event.target.nodeName === 'LI') {
-        store.dispatch({
-          type: actions.CHANGE_RIGHT_VALUE,
-          value: parseInt(event.target.textContent),
-        });
-      }
-    });
+    this.elements.scale.element.addEventListener('click', this.makeOnClickHandler(store));
   }
 
-  render(state: IRangeSliderStore) {
+  render(state: IRangeSliderStore): void {
     this.elements.scale.update(this.getSliderValues(state));
   }
 }
