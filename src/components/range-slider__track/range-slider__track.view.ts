@@ -39,7 +39,7 @@ export class TrackScale extends View {
 }
 
 export class TrackScaleItem extends View {
-  constructor(value: string = '') {
+  constructor(value = '') {
     super({tag: 'li', attrs: {
       class: 'range-slider__track__scale__item'}, children: [value],
     });

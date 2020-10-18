@@ -61,14 +61,14 @@ export function createStore<T>(
   }
 
   return { dispatch, getState, subscribe, coldStart };
-};
+}
 
 
 export function loadFromLocalStoragePlugin<T> (key: string): Plugin<T> {
   return (initState: T) => {
     return JSON.parse(window.localStorage.getItem(key) as string) || initState;
   }
-};
+}
 
 
 export function saveToLocalStoragePlugin<T> (key: string): Plugin<T> {
@@ -87,7 +87,7 @@ export const NaNValidator: Validator = (action: Action): Action => {
         from: action.type,
       }
     };
-  };
+  }
 
   return action;
 }

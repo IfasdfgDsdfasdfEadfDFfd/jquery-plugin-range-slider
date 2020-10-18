@@ -19,7 +19,7 @@ export class Progress extends View {
 
 interface TElements {
   progress: Progress;
-};
+}
 
 export class RangeSliderProgress extends Provider<IRangeSliderStore, TElements> {
   init() {
