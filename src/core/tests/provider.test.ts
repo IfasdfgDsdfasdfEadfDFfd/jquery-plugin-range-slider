@@ -21,6 +21,7 @@ describe('test provider', () => {
 
     STORE.dispatch({
       type: 'type',
+      value: '',
     });
 
     expect(renderHandler.mock.calls.length).toEqual(2);

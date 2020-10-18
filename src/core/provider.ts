@@ -6,7 +6,7 @@ export abstract class Provider<TStore, TElements> {
   readonly elements = {} as TElements;
   private _root: View|undefined;
 
-  constructor(store: Store<TStore, unknown>) {
+  constructor(store: Store<TStore>) {
     this.init(store);
     store.subscribe((state: TStore) => this.render(state));
   }
@@ -19,6 +19,6 @@ export abstract class Provider<TStore, TElements> {
     return this._root || new View({attrs: {}, children: Object.values(this.elements)});
   }
 
-  abstract init(store: Store<TStore, unknown>): void;
+  abstract init(store: Store<TStore>): void;
   abstract render(state: TStore): void;
 }
