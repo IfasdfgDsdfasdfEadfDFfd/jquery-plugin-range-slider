@@ -27,7 +27,7 @@ export function createStore<TState, TAction>(
     pre?: Plugin<TState>[],
     post?: Plugin<TState>[],
   } = {},
-  validators: Validator<TAction, never>[] = [],
+  validators: Validator<TAction, unknown>[] = [],
 ): Store<TState, TAction> {
   const listeners: Listener<TState>[] = [];
   let _state = plugins.pre?.reduce((state, plugin) => plugin(state), initState) || initState;
