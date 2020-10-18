@@ -16,4 +16,18 @@ describe('test view', () => {
     view.replaceChildren(NEW_CHILDREN);
     expect(view.children?.length).toEqual(NEW_CHILDREN.length);
   });
+
+  test('should have attrs', () => {
+    const ATTRS = {
+      'class': 'some-calss-name'
+    };
+
+    const view = new View({
+      tag: 'div',
+      attrs: ATTRS,
+      children: []
+    });
+
+    expect(view.attrs).toBe(ATTRS);
+  });
 });
