@@ -46,7 +46,6 @@ export class TrackScaleItem extends View {
   }
 }
 
-
 export class RangeSliderTrack extends Provider<IRangeSliderStore, {
   track: Track,
   scale: TrackScale,
@@ -54,12 +53,12 @@ export class RangeSliderTrack extends Provider<IRangeSliderStore, {
   private getSliderValues(state: IRangeSliderStore): string[] {
     const {min, max, step} = state;
 
-    const length = (max - min) / step + 1
+    const length = (max - min) / step + 1;
 
     const values = Array(length)
       .fill(null)
       .map((_, index) => min + step * index)
-      .map(String)
+      .map(String);
 
     return values;
   }

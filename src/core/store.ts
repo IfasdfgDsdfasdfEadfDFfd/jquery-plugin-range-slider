@@ -20,7 +20,6 @@ export type Store<TState> = {
 
 export type Validator = (action: Action) => Action;
 
-
 export function createStore<TState>(
   initState: TState,
   reducer: Reducer<TState>,
