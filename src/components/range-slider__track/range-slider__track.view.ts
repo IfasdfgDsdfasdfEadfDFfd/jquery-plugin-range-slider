@@ -4,7 +4,7 @@ import { Provider, Store, View } from '../../core';
 import styles from '../../exports.scss';
 
 
-export class Track extends View {
+class Track extends View {
   constructor(scale: TrackScale) {
     super({tag: 'div', attrs: {class: 'range-slider__track'}, children: [
       scale
@@ -12,7 +12,7 @@ export class Track extends View {
   }
 }
 
-export class TrackScale extends View {
+class TrackScale extends View {
   constructor() {
     super({tag: 'ul', attrs: { class: 'range-slider__track__scale' }, children: []});
   }
@@ -38,7 +38,7 @@ export class TrackScale extends View {
   }
 }
 
-export class TrackScaleItem extends View {
+class TrackScaleItem extends View {
   constructor(value = '') {
     super({tag: 'li', attrs: {
       class: 'range-slider__track__scale__item'}, children: [value],
@@ -46,7 +46,7 @@ export class TrackScaleItem extends View {
   }
 }
 
-export class RangeSliderTrack extends Provider<IRangeSliderStore, {
+class RangeSliderTrack extends Provider<IRangeSliderStore, {
   track: Track,
   scale: TrackScale,
 }> {
@@ -94,4 +94,12 @@ export class RangeSliderTrack extends Provider<IRangeSliderStore, {
   render(state: IRangeSliderStore): void {
     this.elements.scale.update(this.getSliderValues(state));
   }
+}
+
+
+export {
+  Track,
+  TrackScale,
+  TrackScaleItem,
+  RangeSliderTrack,
 }

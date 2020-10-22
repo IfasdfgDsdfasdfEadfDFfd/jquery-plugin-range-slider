@@ -1,13 +1,13 @@
-export interface IViewProps {
+interface IViewProps {
   tag?: string;
   attrs: {[key: string]: string};
   children: Array<View|string>;
 }
 
-export type EventCallback = (event: Event) => void;
+type EventCallback = (event: Event) => void;
 
 
-export class View {
+class View {
   readonly tag: string;
   readonly element: HTMLElement;
 
@@ -49,3 +49,9 @@ export class View {
     this.appendChildren(children);
   }
 }
+
+export {
+  IViewProps,
+  EventCallback,
+  View,
+};

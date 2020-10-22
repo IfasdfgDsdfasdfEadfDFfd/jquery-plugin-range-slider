@@ -3,7 +3,7 @@ import { createStore, loadFromLocalStoragePlugin, NaNValidator, saveToLocalStora
 import { IRangeSliderStore, rangeSliderStoreReducer } from "./reducer";
 
 
-export function createRangeSlider(root: HTMLElement, initStoreValue: Partial<IRangeSliderStore>): Store<IRangeSliderStore> {
+function createRangeSlider(root: HTMLElement, initStoreValue: Partial<IRangeSliderStore>): Store<IRangeSliderStore> {
   const STORE_ID = 'range-sldider-store-id';
   const INIT_VALUE: IRangeSliderStore = Object.assign({
     min: 0,
@@ -26,4 +26,9 @@ export function createRangeSlider(root: HTMLElement, initStoreValue: Partial<IRa
   store.coldStart();
 
   return store;
+}
+
+
+export {
+  createRangeSlider,
 }

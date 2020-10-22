@@ -2,7 +2,7 @@ import { IRangeSliderStore } from '../reducer';
 import { Provider, View } from '../../core';
 
 
-export class Progress extends View {
+class Progress extends View {
   constructor() {
     super({tag: 'div', attrs: {class: 'range-slider__progress'}, children: []});
   }
@@ -21,7 +21,7 @@ interface TElements {
   progress: Progress;
 }
 
-export class RangeSliderProgress extends Provider<IRangeSliderStore, TElements> {
+class RangeSliderProgress extends Provider<IRangeSliderStore, TElements> {
   init(): void {
     this.elements.progress = new Progress();
     this.root = this.elements.progress;
@@ -37,4 +37,10 @@ export class RangeSliderProgress extends Provider<IRangeSliderStore, TElements> 
 
     this.elements.progress.value = {min, max , value};
   }
+}
+
+
+export {
+  Progress,
+  RangeSliderProgress,
 }

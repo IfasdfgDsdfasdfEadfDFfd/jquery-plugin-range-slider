@@ -10,7 +10,7 @@ import { IRangeSliderStore } from '../reducer';
 import './range-slider.styles.scss';
 
 
-export class RangeSliderElement extends View {
+class RangeSliderElement extends View {
   constructor(
     leftInput: LeftRangeSliderInputRange,
     rightInput: RightRangeSliderInputRange,
@@ -36,8 +36,7 @@ export class RangeSliderElement extends View {
   }
 }
 
-
-export class RangeSlider extends Provider<IRangeSliderStore, {slider: RangeSliderElement}> {
+class RangeSlider extends Provider<IRangeSliderStore, {slider: RangeSliderElement}> {
   init(store: Store<IRangeSliderStore>): void {
     this.elements.slider = new RangeSliderElement(
       new LeftRangeSliderInputRange(store),
@@ -53,4 +52,9 @@ export class RangeSlider extends Provider<IRangeSliderStore, {slider: RangeSlide
     this.elements.slider.vertical = state.vertical;
     this.elements.slider.hasMarker = state.markerVisibility;
   }
+}
+
+
+export {
+  RangeSlider,
 }

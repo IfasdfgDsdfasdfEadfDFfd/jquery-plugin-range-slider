@@ -1,7 +1,7 @@
 import { Action, Reducer } from '../core';
 
 
-export interface IRangeSliderStore {
+interface IRangeSliderStore {
   min: number,
   max: number,
   value: [number, number],
@@ -11,7 +11,7 @@ export interface IRangeSliderStore {
   intervalMode: boolean
 }
 
-export const actions = {
+const actions = {
   CHANGE_LEFT_VALUE: '@CHANGE_LEFT_VALUE',
   CHANGE_RIGHT_VALUE: '@CHANGE_RIGHT_VALUE',
   CHANGE_MIN: '@CHANGE_MIN',
@@ -23,7 +23,7 @@ export const actions = {
 };
 
 
-export const rangeSliderStoreReducer: Reducer<IRangeSliderStore> = (
+const rangeSliderStoreReducer: Reducer<IRangeSliderStore> = (
   action: Action,
   state: IRangeSliderStore
 ): IRangeSliderStore => {
@@ -86,3 +86,10 @@ export const rangeSliderStoreReducer: Reducer<IRangeSliderStore> = (
       return state;
   }
 };
+
+
+export {
+  IRangeSliderStore,
+  rangeSliderStoreReducer,
+  actions,
+}

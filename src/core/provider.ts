@@ -2,7 +2,7 @@ import { Store } from "./";
 import { View } from "./view";
 
 
-export abstract class Provider<TStore, TElements> {
+abstract class Provider<TStore, TElements> {
   readonly elements = {} as TElements;
   private _root: View|undefined;
 
@@ -22,3 +22,5 @@ export abstract class Provider<TStore, TElements> {
   abstract init(store: Store<TStore>): void;
   abstract render(state: TStore): void;
 }
+
+export { Provider };

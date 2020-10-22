@@ -14,7 +14,7 @@ interface PluginApi {
   setIntervalMode(value: boolean): void;
 }
 
-export function rangeSlider(this: JQuery, props: Partial<IRangeSliderStore> = {}): PluginApi {
+function rangeSlider(this: JQuery, props: Partial<IRangeSliderStore> = {}): PluginApi {
   const store = createRangeSlider(this.get(0), props);
 
   return {
@@ -55,3 +55,5 @@ export function rangeSlider(this: JQuery, props: Partial<IRangeSliderStore> = {}
     },
   };
 }
+
+export { rangeSlider };

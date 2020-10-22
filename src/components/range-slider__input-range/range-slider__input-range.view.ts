@@ -1,12 +1,12 @@
-import { IRangeSliderStore } from '../reducer';
+import { IRangeSliderStore , actions } from '../reducer';
 import { Action, EventCallback, Provider, Store } from '../../core';
-import { actions } from '../reducer';
+
 import { HiddenView } from '../../core/shortcuts';
 
 import styles from '../../exports.scss';
 
 
-export class InputRange extends HiddenView {
+class InputRange extends HiddenView {
   readonly hidingElementClassName = 'range-slider__input--hidden';
 
   constructor(marker: RangeSliderThumbMarker) {
@@ -44,9 +44,7 @@ export class InputRange extends HiddenView {
   }
 }
 
-
-
-export abstract class RangeSliderInputRange extends Provider<IRangeSliderStore, {
+abstract class RangeSliderInputRange extends Provider<IRangeSliderStore, {
   input: InputRange,
   marker: RangeSliderThumbMarker,
 }> {
@@ -84,7 +82,7 @@ export abstract class RangeSliderInputRange extends Provider<IRangeSliderStore, 
   abstract makeAction(value: number): Action;
 }
 
-export class LeftRangeSliderInputRange extends RangeSliderInputRange {
+class LeftRangeSliderInputRange extends RangeSliderInputRange {
   storeValueIndex = 0;
 
   render(state: IRangeSliderStore): void {
@@ -110,7 +108,7 @@ export class LeftRangeSliderInputRange extends RangeSliderInputRange {
   }
 }
 
-export class RightRangeSliderInputRange extends RangeSliderInputRange {
+class RightRangeSliderInputRange extends RangeSliderInputRange {
   storeValueIndex = 1;
 
   render(state: IRangeSliderStore): void {
@@ -130,7 +128,7 @@ export class RightRangeSliderInputRange extends RangeSliderInputRange {
   }
 }
 
-export class RangeSliderThumbMarker extends HiddenView {
+class RangeSliderThumbMarker extends HiddenView {
   readonly hidingElementClassName = 'range-slider__thumb-marker--hidden';
 
   constructor() {
@@ -154,3 +152,12 @@ export class RangeSliderThumbMarker extends HiddenView {
     this.element.style.setProperty('left', `${percent - (thumbPercent * ratio) + offset}%`);
   }
 }
+
+
+export {
+  InputRange,
+  RangeSliderInputRange,
+  LeftRangeSliderInputRange,
+  RightRangeSliderInputRange,
+  RangeSliderThumbMarker,
+};

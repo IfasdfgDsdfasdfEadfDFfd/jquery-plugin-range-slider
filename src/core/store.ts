@@ -1,26 +1,26 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable fsd/hof-name-prefix */
-export type Listener<T> = (state: T) => void;
+type Listener<T> = (state: T) => void;
 
-export type Action = {
+type Action = {
   type: string,
   value: any,
 };
 
-export type Plugin<T> = (state: T) => T;
+type Plugin<T> = (state: T) => T;
 
-export type Reducer<TState> = (action: Action, state: TState) => TState;
+type Reducer<TState> = (action: Action, state: TState) => TState;
 
-export type Store<TState> = {
+type Store<TState> = {
   dispatch: (action: Action) => void,
   getState: () => TState,
   subscribe: (listener: Listener<TState>) => () => void,
   coldStart: () => void;
 };
 
-export type Validator = (action: Action) => Action;
+type Validator = (action: Action) => Action;
 
-export function createStore<TState>(
+function createStore<TState>(
   initState: TState,
   reducer: Reducer<TState>,
   plugins: {
@@ -50,7 +50,6 @@ export function createStore<TState>(
     listeners.forEach(listener => listener(getState()));
   };
 
-  // eslint-disable-next-line fsd/hof-name-prefix
   const subscribe = (listener: Listener<TState>) => {
     const index = listeners.push(listener) - 1;
     listener(getState());
@@ -66,21 +65,21 @@ export function createStore<TState>(
 }
 
 
-export function loadFromLocalStoragePlugin<T> (key: string): Plugin<T> {
+function loadFromLocalStoragePlugin<T> (key: string): Plugin<T> {
   return (initState: T) => {
     return JSON.parse(window.localStorage.getItem(key) as string) || initState;
   }
 }
 
 
-export function saveToLocalStoragePlugin<T> (key: string): Plugin<T> {
+function saveToLocalStoragePlugin<T> (key: string): Plugin<T> {
   return (state: T) => {
     window.localStorage.setItem(key, JSON.stringify(state));
     return state;
   };
 }
 
-export function NaNValidator(action: Action): Action {
+function NaNValidator(action: Action): Action {
   if (typeof action.value === 'number') {
     if (isNaN(action.value)) {
       return {
@@ -94,3 +93,17 @@ export function NaNValidator(action: Action): Action {
 
   return action;
 }
+
+export {
+  Listener,
+  Action,
+  Reducer,
+  Store,
+  Plugin,
+  Validator,
+
+  createStore,
+  loadFromLocalStoragePlugin,
+  saveToLocalStoragePlugin,
+  NaNValidator,
+};
