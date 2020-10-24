@@ -40,8 +40,9 @@ class TrackScale extends View {
 
 class TrackScaleItem extends View {
   constructor(value = '') {
+    const button = new View({tag: 'button', attrs: {class: 'range-slider__track-scale__button'}, children: [value]});
     super({tag: 'li', attrs: {
-      class: 'range-slider__track-scale__item'}, children: [value],
+      class: 'range-slider__track-scale__item'}, children: [button],
     });
   }
 }
