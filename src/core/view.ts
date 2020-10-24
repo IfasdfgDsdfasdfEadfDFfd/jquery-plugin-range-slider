@@ -41,12 +41,12 @@ class View {
 
       return el;
     }, this.element);
-    this.children = children;
   }
 
   replaceChildren(children: IViewProps['children']): void {
     this.element.innerHTML = '';
     this.appendChildren(children);
+    this.children = children;
   }
 }
 

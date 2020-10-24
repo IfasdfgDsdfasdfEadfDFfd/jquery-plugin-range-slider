@@ -30,3 +30,18 @@
 .range-slider__thumb--hidden {
   opacity: 0;
 }
+
+.range-slider__thumb__marker {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  color: #fff;
+
+  margin-top: -3rem;
+  padding: .3rem 0;
+
+  background-color: $primary-color;
+}
