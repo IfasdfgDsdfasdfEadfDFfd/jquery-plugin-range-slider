@@ -5,46 +5,60 @@ import styles from '../../exports.scss';
 
 class Thumb extends HiddenView {
   hidingElementClassName = 'range-slider__thumb--hidden'
+
   marker!: ThumbMarker;
+  lastValues!: {
+    max: number,
+    min: number,
+    value: number
+  };
 
   constructor() {
     super({tag: 'div', attrs: {class: 'range-slider__thumb'}, children: [new ThumbMarker()]});
     this.marker = this.children[0] as ThumbMarker;
   }
 
-  set position({
-    max, min, value, orientation,
-  }: {
-    max: number, min: number, value: number, orientation: string,
-  }) {
-    const thumbWidth = <number>parseInt(styles.thumbWidth) * parseInt(styles.rootFontSize)
-      + (<number>parseInt(styles.thumbBorderWidth) * 2);
+  positionate({max, min, value}: {[key: string]: number}): void {
+    this.lastValues = {max, min, value};
+
+    const thumbWidth = <number>this.element.clientWidth - 4;
     const sliderWidth = <number>this.element.parentElement?.clientWidth;
 
-    const ratio = (value - min) / (max - min);
-
     const thumbPercent = (thumbWidth / sliderWidth) * 100;
-    const rightOffset = thumbPercent / 4 * (1- ratio);
-    const leftOffset = thumbPercent / 4 * (ratio);
-    const percent = (ratio * 100);
 
-    if (orientation === 'right') {
-      this.element.style.setProperty('right', `${100 - percent - (thumbPercent * (1 - ratio)) - rightOffset}%`);
-    } else {
-      this.element.style.setProperty(orientation, `${percent - (thumbPercent * ratio) - leftOffset}%`);
-    }
+    const ratio = this.ratio;
+    const percent = ratio * 100;
+    const offset = this.getOffset(thumbPercent, ratio);
+
+    this.element.style.setProperty('left',
+      `${percent - (thumbPercent * ratio) - offset}%`);
 
     this.marker.value = value;
   }
 
   set focused(value: boolean) {
     this.element.classList.toggle('range-slider__thumb--focused', value);
+    this.positionCorrection();
     this.marker.positionCorrection();
   }
 
   set hovered(value: boolean) {
     this.element.classList.toggle('range-slider__thumb--hovered', value);
+    this.positionCorrection();
     this.marker.positionCorrection();
+  }
+
+  get ratio(): number {
+    const { max, min, value } = this.lastValues;
+    return (value - min) / (max - min);
+  }
+
+  getOffset(elPercent: number, ratio: number): number {
+    return elPercent / 4 * ratio;
+  }
+
+  positionCorrection(): void {
+    this.positionate(this.lastValues);
   }
 }
 

@@ -17,45 +17,27 @@
   display: flex;
   justify-content: space-between;
 
-  padding: .1rem 0px;
-  margin: 1rem auto;
+  padding: 0;
+  margin-top: 1.4rem;
 
-  border-bottom: 1px solid #242426;
+  border-bottom: 2px solid $gray-color;
 }
 
 .range-slider__track__scale__item {
   position: relative;
-  display: flex;
-  justify-content: center;
 
   font-weight: bold;
   font-size: 80%;
+  background-color: #fff;
 
   min-width: $min-scale-item-width;
+
+  border-left: 2px solid $gray-color;
+  padding-left: 5px;
 
   cursor: pointer;
 
   &:hover {
-    color: blue;
-
-    &::after {
-      border-color: blue;
-    }
-  }
-
-  &::after {
-    content: '';
-
-    position: absolute;
-    height: 90%;
-
-    border-left: 1px solid #242427;
-    border-radius: .5rem;
-
-    left: 0;
-  }
-
-  &:nth-child(even) {
-    background-color: #dadada;
+    color: $primary-color;
   }
 }
