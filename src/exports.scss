@@ -3,9 +3,19 @@
 
 :export {
   rootFontSize: $root-font-size;
+
   thumbWidth: $thumb-width;
   thumbHeight: $thumb-height;
+  thumbBorderWidth: $thumb-border-width;
+
   trackHeight: $track-height;
+
   topOffset: $top-offset;
+
   minScaleItemWidth: $min-scale-item-width;
+
+  borderRadius: $border-radius;
+
+  grayColor: $gray-color;
+  primaryColor: $primary-color;
 }

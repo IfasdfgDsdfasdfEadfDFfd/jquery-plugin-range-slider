@@ -16,7 +16,6 @@ class Progress extends View {
   }
 }
 
-
 interface TElements {
   progress: Progress;
 }

@@ -1,0 +1,31 @@
+@import '../../variables.scss';
+
+.range-slider__thumb {
+  position: absolute;
+  top: $thumb-height * .1;
+
+  background-color: $primary-color;
+
+  width: $thumb-width * .8;
+  height: $thumb-height * .8;
+
+  border: $thumb-border-width solid #fff;
+  border-radius: $thumb-border-radius;
+
+  transition: all .2s ease;
+
+  opacity: 1;
+  z-index: 1;
+}
+
+.range-slider__thumb--focused {
+  top: 0;
+  width: $thumb-width;
+  height: $thumb-height;
+
+  transition: all .2s ease;
+}
+
+.range-slider__thumb--hidden {
+  opacity: 0;
+}

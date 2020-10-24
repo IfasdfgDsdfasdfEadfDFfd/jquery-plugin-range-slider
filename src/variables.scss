@@ -1,6 +1,18 @@
 $root-font-size: 16px;
-$thumb-width: 2rem;
-$thumb-height: 1.2rem;
-$track-height: .6rem;
-$top-offset: ($thumb-height - $track-height) / 2;
+
+// thumb
+$thumb-width: 1.6rem;
+$thumb-height: 1.6rem;
+$thumb-border-width: 2px;
+$thumb-border-radius: 50%;
+
+$track-height: .4rem;
+
 $min-scale-item-width: 50px;
+
+$top-offset: ($thumb-height - $track-height) / 2;
+$border-radius: .25rem;
+
+// colors
+$gray-color: #dfdfdf;
+$primary-color: #1565c0;

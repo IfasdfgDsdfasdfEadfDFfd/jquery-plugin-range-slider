@@ -1,16 +1,11 @@
 import { IRangeSliderStore , actions } from '../reducer';
-import { Action, EventCallback, Provider, Store } from '../../core';
-
-import { HiddenView } from '../../core/shortcuts';
-
-import styles from '../../exports.scss';
+import { Thumb } from '../range-slider__thumb';
+import { View, Action, EventCallback, Provider, Store } from '../../core';
 
 
-class InputRange extends HiddenView {
-  readonly hidingElementClassName = 'range-slider__input--hidden';
-
-  constructor(marker: RangeSliderThumbMarker) {
-    super({tag: 'input', attrs: {type: 'range', class: 'range-slider__input'}, children: [marker]});
+class InputRange extends View {
+  constructor() {
+    super({tag: 'input', attrs: {type: 'range', class: 'range-slider__input'}, children: []});
   }
 
   set value(nextValue: number) {
@@ -42,26 +37,31 @@ class InputRange extends HiddenView {
   onChange(cb: EventCallback): void {
     this.element.addEventListener('input', cb);
   }
+
+  onFocusIn(cb: EventCallback): void {
+    this.element.addEventListener('focusin', cb)
+  }
+
+  onFocusOut(cb: EventCallback): void {
+    this.element.addEventListener('focusout', cb)
+  }
 }
 
 abstract class RangeSliderInputRange extends Provider<IRangeSliderStore, {
   input: InputRange,
-  marker: RangeSliderThumbMarker,
+  thumb: Thumb,
 }> {
-  abstract storeValueIndex: number;
-
   init(store: Store<IRangeSliderStore>): void {
-    this.elements.marker = new RangeSliderThumbMarker();
-    this.elements.input = new InputRange(this.elements.marker);
+    this.elements.input = new InputRange();
+    this.elements.thumb = new Thumb();
 
     this.elements.input.onChange(event => {
-
       const target = event.target as HTMLInputElement;
       store.dispatch(this.makeAction(parseInt(target.value)));
     });
 
-    const {max, min, value} = store.getState();
-    window.addEventListener('resize', this.makeSetterForMarkerPosition(max, min, value[this.storeValueIndex]));
+    this.elements.input.onFocusIn(() => this.elements.thumb.focused = true);
+    this.elements.input.onFocusOut(() => this.elements.thumb.focused = false);
   }
 
   render(state: IRangeSliderStore): void {
@@ -71,33 +71,23 @@ abstract class RangeSliderInputRange extends Provider<IRangeSliderStore, {
     this.elements.input.intervalMode = state.intervalMode;
   }
 
-  private makeSetterForMarkerPosition(max: number, min: number, value: number): () => void {
-    return () => {
-      this.elements.marker.position = {
-        max, min, value: value,
-      };
-    }
-  }
-
   abstract makeAction(value: number): Action;
 }
 
 class LeftRangeSliderInputRange extends RangeSliderInputRange {
-  storeValueIndex = 0;
-
   render(state: IRangeSliderStore): void {
     super.render(state);
 
-    if (state.intervalMode) {
-      this.elements.input.value = state.value[0];
-    } else {
+    if (!state.intervalMode) {
       this.elements.input.value = state.min;
     }
-    this.elements.input.hidden = !state.intervalMode;
 
-    this.elements.marker.hidden = !state.markerVisibility || !state.intervalMode;
-    this.elements.marker.value = state.value[0];
-    this.elements.marker.position = {max: state.max, min: state.min, value: state.value[0]};
+    this.elements.thumb.hidden = !state.intervalMode;
+
+    this.elements.input.value = state.value[0];
+
+    const { max, min, value } = state;
+    this.elements.thumb.position = { max, min, value: value[0], orientation: 'left' };
   }
 
   makeAction(value: number): Action {
@@ -109,15 +99,12 @@ class LeftRangeSliderInputRange extends RangeSliderInputRange {
 }
 
 class RightRangeSliderInputRange extends RangeSliderInputRange {
-  storeValueIndex = 1;
-
   render(state: IRangeSliderStore): void {
     super.render(state);
     this.elements.input.value = state.value[1];
 
-    this.elements.marker.hidden = !state.markerVisibility;
-    this.elements.marker.value = state.value[1];
-    this.elements.marker.position = {max: state.max, min: state.min, value: state.value[1]};
+    const { max, min, value } = state;
+    this.elements.thumb.position = { max, min, value: value[1], orientation: 'right' };
   }
 
   makeAction(value: number): Action {
@@ -128,36 +115,9 @@ class RightRangeSliderInputRange extends RangeSliderInputRange {
   }
 }
 
-class RangeSliderThumbMarker extends HiddenView {
-  readonly hidingElementClassName = 'range-slider__thumb-marker--hidden';
-
-  constructor() {
-    super({ tag: 'div', attrs: { class: 'range-slider__thumb-marker' }, children: [String()]});
-  }
-
-  set value(value: number) {
-    this.element.replaceChild(document.createTextNode(value.toString()), this.element.firstChild as Node);
-  }
-
-  set position({max, min, value}: {max: number, min: number, value: number}) {
-    const thumbWidth = <number>parseInt(styles.thumbWidth) * parseInt(styles.rootFontSize);
-    const sliderWidth = <number>this.element.parentElement?.clientWidth;
-
-    const ratio = (value - min) / (max - min);
-
-    const thumbPercent = (thumbWidth / sliderWidth) * 100;
-    const offset = ((thumbWidth - this.element.clientWidth) / 2 / sliderWidth) * 100;
-    const percent = (ratio * 100);
-
-    this.element.style.setProperty('left', `${percent - (thumbPercent * ratio) + offset}%`);
-  }
-}
-
 
 export {
   InputRange,
-  RangeSliderInputRange,
   LeftRangeSliderInputRange,
   RightRangeSliderInputRange,
-  RangeSliderThumbMarker,
 };
