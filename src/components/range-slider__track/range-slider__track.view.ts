@@ -71,7 +71,7 @@ class RangeSliderTrack extends Provider<IRangeSliderStore, {
     return (event: MouseEvent) => {
       const target = event?.target as HTMLElement;
 
-      if (target.nodeName === 'LI') {
+      if (target.nodeName === 'BUTTON') {
         store.dispatch({
           type: actions.CHANGE_RIGHT_VALUE,
           value: parseInt(target.textContent || ''),
