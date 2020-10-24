@@ -12,8 +12,6 @@
   border: $thumb-border-width solid #fff;
   border-radius: $thumb-border-radius;
 
-  transition: all .2s ease;
-
   opacity: 1;
   z-index: 1;
 }
@@ -24,7 +22,11 @@
   width: $thumb-width;
   height: $thumb-height;
 
-  transition: all .2s ease;
+  & > .range-slider__thumb__marker {
+    padding-top: 0;
+    font-weight: bold;
+    transition: all .2s ease;
+  }
 }
 
 .range-slider__thumb--hidden {
@@ -38,10 +40,18 @@
   justify-content: center;
   align-items: center;
 
+  line-height: 24px;
   color: #fff;
 
+  margin: auto;
   margin-top: -3rem;
-  padding: .3rem 0;
+  padding-top: 2px;
 
   background-color: $primary-color;
+
+  transition: all .2s ease;
+}
+
+.range-slider__thumb__marker--hidden {
+  opacity: 0;
 }

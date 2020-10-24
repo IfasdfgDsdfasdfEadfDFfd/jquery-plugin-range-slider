@@ -79,6 +79,8 @@ abstract class RangeSliderInputRange extends Provider<IRangeSliderStore, {
     this.elements.input.max = state.max;
     this.elements.input.step = state.step;
     this.elements.input.intervalMode = state.intervalMode;
+
+    this.elements.thumb.marker.hidden = !state.markerVisibility;
   }
 
   abstract makeAction(value: number): Action;

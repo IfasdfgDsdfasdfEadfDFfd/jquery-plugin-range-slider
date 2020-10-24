@@ -5,9 +5,11 @@ import styles from '../../exports.scss';
 
 class Thumb extends HiddenView {
   hidingElementClassName = 'range-slider__thumb--hidden'
+  marker!: ThumbMarker;
 
   constructor() {
     super({tag: 'div', attrs: {class: 'range-slider__thumb'}, children: [new ThumbMarker()]});
+    this.marker = this.children[0] as ThumbMarker;
   }
 
   set position({
@@ -32,20 +34,23 @@ class Thumb extends HiddenView {
       this.element.style.setProperty(orientation, `${percent - (thumbPercent * ratio) - leftOffset}%`);
     }
 
-    (this.children[0] as ThumbMarker).value = value;
+    this.marker.value = value;
   }
 
   set focused(value: boolean) {
     this.element.classList.toggle('range-slider__thumb--focused', value);
+    this.marker.positionCorrection();
   }
 
   set hovered(value: boolean) {
     this.element.classList.toggle('range-slider__thumb--hovered', value);
+    this.marker.positionCorrection();
   }
 }
 
 class ThumbMarker extends HiddenView {
-  hidingElementClassName = 'range-slider__thumb--hidden'
+  hidingElementClassName = 'range-slider__thumb__marker--hidden'
+  _value!: number;
 
   constructor() {
     super({tag: 'div', attrs: {class: 'range-slider__thumb__marker'}, children: []});
@@ -57,8 +62,14 @@ class ThumbMarker extends HiddenView {
     const width = value.toString().length * parseInt(styles.rootFontSize);
     this.element.style.setProperty('width', `${width}px`);
 
-    const offset = (width - <number>this.element.parentElement?.clientWidth) / 2;
-    this.element.style.setProperty('margin-left', `-${offset}px`)
+    const offset = -((width - <number>this.element.parentElement?.clientWidth) / 2);
+    this.element.style.setProperty('margin-left', `${offset}px`)
+
+    this._value = value;
+  }
+
+  positionCorrection() {
+    this.value = this._value;
   }
 }
 
