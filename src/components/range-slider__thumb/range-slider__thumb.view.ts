@@ -59,7 +59,10 @@ class ThumbMarker extends HiddenView {
   set value(value: number) {
     this.replaceChildren([value.toString()]);
 
-    const width = value.toString().length * parseInt(styles.rootFontSize);
+    const width = Math.max(
+      value.toString().length * parseInt(styles.rootFontSize),
+      parseInt(styles.minThumbMarkerWidth) * parseInt(styles.rootFontSize)
+    );
     this.element.style.setProperty('width', `${width}px`);
 
     const offset = -((width - <number>this.element.parentElement?.clientWidth) / 2);

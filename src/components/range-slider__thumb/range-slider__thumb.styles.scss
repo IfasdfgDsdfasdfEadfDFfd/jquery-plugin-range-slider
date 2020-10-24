@@ -46,6 +46,9 @@
   margin: auto;
   margin-top: -3rem;
   padding-top: 2px;
+  min-width: $min-thumb-marker-width;
+
+  border-radius: 15%;
 
   background-color: $primary-color;
 

@@ -4,6 +4,7 @@ interface CssExports {
   'borderRadius': string;
   'grayColor': string;
   'minScaleItemWidth': string;
+  'minThumbMarkerWidth': string;
   'primaryColor': string;
   'rootFontSize': string;
   'thumbBorderWidth': string;
