@@ -3,7 +3,6 @@ import { Provider, Store, View } from '../../core';
 
 import styles from '../../exports.scss';
 
-
 class Track extends View {
   constructor(scale: TrackScale) {
     super({tag: 'div', attrs: {class: 'range-slider__track'}, children: [
@@ -17,24 +16,21 @@ class TrackScale extends View {
     super({tag: 'ul', attrs: { class: 'range-slider__track-scale' }, children: []});
   }
 
-  update(values: string[]): void {
+  update(values: number[]): void {
+    const overflowRate = Math.ceil(values.reduce((sum, value) => {
+      return sum + (value.toString().length * (parseInt(styles.rootFontSize) * 1.4));
+    }, 0) / <number>this.element.clientWidth);
 
-    const overflowRate = Math.ceil((values.length * parseInt(styles.minScaleItemWidth)) / this.element.clientWidth);
-
-    if (overflowRate > 1) {
-      const filteredValues = [];
-      for (let index = values.length - 1; index >= 0; index -= overflowRate) {
-        if (overflowRate / index > 1) {
-          index = 0;
-        }
-
-        filteredValues.unshift(values[index]);
-      }
-
-      this.replaceChildren(filteredValues.map(value => new TrackScaleItem(value)));
-    } else {
-      this.replaceChildren(values.map(value => new TrackScaleItem(value)));
+    const nextValues = [];
+    for (let index = 0; index <= values.length; index += overflowRate) {
+      nextValues.push(values[index]);
     }
+
+    if (nextValues[nextValues.length-1] !== values[values.length-1]) {
+      nextValues.push(values[values.length-1]);
+    }
+
+    this.replaceChildren(nextValues.map(value => new TrackScaleItem(value.toString())));
   }
 }
 
@@ -51,21 +47,20 @@ class RangeSliderTrack extends Provider<IRangeSliderStore, {
   track: Track,
   scale: TrackScale,
 }> {
-  private getSliderValues(state: IRangeSliderStore): string[] {
+  private getSliderValues(state: IRangeSliderStore): number[] {
     const {min, max, step} = state;
 
     const length = (max - min) / step + 1;
 
     const values = Array(length)
       .fill(null)
-      .map((_, index) => min + step * index)
-      .map(String);
+      .map((_, index) => min + step * index);
 
     return values;
   }
 
   private makeOnWindowResizeHandler(state: IRangeSliderStore): () => void {
-    return () => this.elements.scale.update(this.getSliderValues(state));
+    return () => this.render(state);
   }
 
   private makeOnClickHandler(store: Store<IRangeSliderStore>): (Event: MouseEvent) => void {

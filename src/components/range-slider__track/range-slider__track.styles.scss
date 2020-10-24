@@ -23,7 +23,6 @@
 
 .range-slider__track-scale__item {
   position: relative;
-  min-width: $min-scale-item-width;
 }
 
 .range-slider__track-scale__button {
@@ -39,14 +38,7 @@
 
   cursor: pointer;
 
-  &:hover {
-    color: $primary-color;
-
-    &::after {
-      border-color: $primary-color;
-    }
-  }
-
+  &:hover,
   &:focus {
     outline: none;
     color: $primary-color;
