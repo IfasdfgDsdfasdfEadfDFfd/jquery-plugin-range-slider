@@ -14,7 +14,7 @@ class Track extends View {
 
 class TrackScale extends View {
   constructor() {
-    super({tag: 'ul', attrs: { class: 'range-slider__track__scale' }, children: []});
+    super({tag: 'ul', attrs: { class: 'range-slider__track-scale' }, children: []});
   }
 
   update(values: string[]): void {
@@ -41,7 +41,7 @@ class TrackScale extends View {
 class TrackScaleItem extends View {
   constructor(value = '') {
     super({tag: 'li', attrs: {
-      class: 'range-slider__track__scale__item'}, children: [value],
+      class: 'range-slider__track-scale__item'}, children: [value],
     });
   }
 }
