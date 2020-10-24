@@ -15,7 +15,6 @@ class Thumb extends HiddenView {
   }: {
     max: number, min: number, value: number, orientation: string,
   }) {
-    console.log(orientation)
     const thumbWidth = <number>parseInt(styles.thumbWidth) * parseInt(styles.rootFontSize)
       + (<number>parseInt(styles.thumbBorderWidth) * 2);
     const sliderWidth = <number>this.element.parentElement?.clientWidth;
