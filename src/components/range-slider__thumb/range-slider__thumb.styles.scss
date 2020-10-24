@@ -18,6 +18,7 @@
   z-index: 1;
 }
 
+.range-slider__thumb--hovered,
 .range-slider__thumb--focused {
   top: 0;
   width: $thumb-width;

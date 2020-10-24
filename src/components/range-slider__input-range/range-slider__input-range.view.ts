@@ -45,6 +45,14 @@ class InputRange extends View {
   onFocusOut(cb: EventCallback): void {
     this.element.addEventListener('focusout', cb)
   }
+
+  onMouseIn(cb: EventCallback): void {
+    this.element.addEventListener('mouseenter', cb);
+  }
+
+  onMouseOut(cb: EventCallback): void {
+    this.element.addEventListener('mouseleave', cb);
+  }
 }
 
 abstract class RangeSliderInputRange extends Provider<IRangeSliderStore, {
@@ -62,6 +70,8 @@ abstract class RangeSliderInputRange extends Provider<IRangeSliderStore, {
 
     this.elements.input.onFocusIn(() => this.elements.thumb.focused = true);
     this.elements.input.onFocusOut(() => this.elements.thumb.focused = false);
+    this.elements.input.onMouseIn(() => this.elements.thumb.hovered = true);
+    this.elements.input.onMouseOut(() => this.elements.thumb.hovered = false);
   }
 
   render(state: IRangeSliderStore): void {

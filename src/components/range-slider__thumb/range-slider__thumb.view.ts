@@ -37,6 +37,10 @@ class Thumb extends HiddenView {
   set focused(value: boolean) {
     this.element.classList.toggle('range-slider__thumb--focused', value);
   }
+
+  set hovered(value: boolean) {
+    this.element.classList.toggle('range-slider__thumb--hovered', value);
+  }
 }
 
 
