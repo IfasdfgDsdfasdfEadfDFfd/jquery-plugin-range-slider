@@ -21,7 +21,9 @@ class TrackScale extends HiddenView {
   }
 
   update(values: number[]): void {
-    // const overflowRate = ;
+    const overflowRate = Math.ceil(values.reduce((sum, value) => {
+      return sum + (value.toString().length * (parseInt(styles.rootFontSize) * 1.4));
+    }, 0) / <number>this.element.clientWidth);
 
     const items = values.map((value, index) => {
       const percent = 100 / (values.length - 1) * index;
@@ -31,6 +33,8 @@ class TrackScale extends HiddenView {
       const ratio = (value - min) / (max - min);
 
       return this.createItem(value.toString(), percent, ratio);
+    }).filter((_, index) => {
+      return index % overflowRate === 0;
     });
 
     this.replaceChildren(items);
