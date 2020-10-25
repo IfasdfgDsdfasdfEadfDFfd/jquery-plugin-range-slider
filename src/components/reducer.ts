@@ -7,8 +7,9 @@ interface IRangeSliderStore {
   value: [number, number],
   step: number,
   vertical: boolean,
-  markerVisibility: boolean,
   intervalMode: boolean
+  markerVisibility: boolean,
+  trackScaleVisibility: boolean,
 }
 
 const actions = {
@@ -18,8 +19,9 @@ const actions = {
   CHANGE_MAX: '@CHANGE_MAX',
   CHANGE_STEP: '@CHANGE_STEP',
   CHANGE_ORIENT: '@CHANGE_ORIENT',
-  CHANGE_MARKER_VISIBILITY: '@CHANGE_MARKER_VISIBILITY',
   CHANGE_INTERVAL_MODE: '@CHANGE_INTERVAL_MODE',
+  CHANGE_MARKER_VISIBILITY: '@CHANGE_MARKER_VISIBILITY',
+  CHANGE_TRACK_SCALE_VISIBILITY: '@CHANGE_TRACK_SCALE_VISIBILITY',
 };
 
 
@@ -74,13 +76,16 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderStore> = (
     case actions.CHANGE_ORIENT:
       return {...state, vertical: action.value};
 
-    case actions.CHANGE_MARKER_VISIBILITY:
-      return {...state, markerVisibility: action.value};
-
     case actions.CHANGE_INTERVAL_MODE:
       return {...state, intervalMode: action.value,
         value: (action.value) ? state.value : [state.min, state.value[1]]
       };
+
+    case actions.CHANGE_MARKER_VISIBILITY:
+      return {...state, markerVisibility: action.value};
+
+    case actions.CHANGE_TRACK_SCALE_VISIBILITY:
+      return {...state, trackScaleVisibility: action.value};
 
     default:
       return state;

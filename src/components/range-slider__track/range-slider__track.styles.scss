@@ -21,6 +21,14 @@
   margin-top: 1.4rem;
 }
 
+.range-slider__track-scale--hidden {
+  opacity: 0;
+
+  & > * {
+    pointer-events: none;
+  }
+}
+
 .range-slider__track-scale__item {
   position: absolute;
 }

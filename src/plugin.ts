@@ -10,8 +10,9 @@ interface PluginApi {
   setMax(value: number): void;
   setStep(value: number): void;
   setOrientVertical(value: boolean): void;
-  setMarkerVisibility(value: boolean): void;
   setIntervalMode(value: boolean): void;
+  setMarkerVisibility(value: boolean): void;
+  setTrackScaleVisibility(value: boolean): void;
 }
 
 function rangeSlider(this: JQuery, props: Partial<IRangeSliderStore> = {}): PluginApi {
@@ -46,12 +47,16 @@ function rangeSlider(this: JQuery, props: Partial<IRangeSliderStore> = {}): Plug
       store.dispatch({type: actions.CHANGE_ORIENT, value});
     },
 
+    setIntervalMode(value: boolean) {
+      store.dispatch({type: actions.CHANGE_INTERVAL_MODE, value});
+    },
+
     setMarkerVisibility(value: boolean) {
       store.dispatch({type: actions.CHANGE_MARKER_VISIBILITY, value});
     },
 
-    setIntervalMode(value: boolean) {
-      store.dispatch({type: actions.CHANGE_INTERVAL_MODE, value});
+    setTrackScaleVisibility(value: boolean) {
+      store.dispatch({type: actions.CHANGE_TRACK_SCALE_VISIBILITY, value});
     },
   };
 }

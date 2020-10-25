@@ -11,8 +11,9 @@ function createRangeSlider(root: HTMLElement, initStoreValue: Partial<IRangeSlid
     step: 5,
     value: [20, 80],
     vertical: false,
-    markerVisibility: false,
     intervalMode: true,
+    markerVisibility: false,
+    trackScaleVisibility: true,
   }, initStoreValue);
 
   const store = createStore<IRangeSliderStore>(INIT_VALUE, rangeSliderStoreReducer, {

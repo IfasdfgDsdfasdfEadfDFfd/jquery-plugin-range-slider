@@ -1,6 +1,6 @@
 import { actions, IRangeSliderStore } from '../reducer';
 import { Provider, Store, View } from '../../core';
-import { getOffset } from '../../core/shortcuts';
+import { getOffset, HiddenView } from '../../core/shortcuts';
 
 import styles from '../../exports.scss';
 
@@ -12,7 +12,9 @@ class Track extends View {
   }
 }
 
-class TrackScale extends View {
+class TrackScale extends HiddenView {
+  hidingElementClassName = 'range-slider__track-scale--hidden';
+
   constructor() {
     super({tag: 'ul', attrs: { class: 'range-slider__track-scale' }, children: []});
   }
@@ -101,6 +103,7 @@ class RangeSliderTrack extends Provider<IRangeSliderStore, {
 
   render(state: IRangeSliderStore): void {
     this.elements.scale.update(this.getSliderValues(state));
+    this.elements.scale.hidden = state.trackScaleVisibility;
   }
 }
 
