@@ -18,6 +18,7 @@
 	"dbaeumer.vscode-eslint",
 	"ms-vscode.vscode-typescript-tslint-plugin",
 	"editorconfig.editorconfig",
+	"bungcip.better-toml",
 	"esbenp.prettier-vscode"
 ]
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
