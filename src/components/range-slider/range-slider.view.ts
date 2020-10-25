@@ -36,21 +36,41 @@ class RangeSliderElement extends View {
   }
 }
 
-class RangeSlider extends Provider<IRangeSliderStore, {slider: RangeSliderElement}> {
+class RangeSlider extends Provider<IRangeSliderStore, {
+  slider: RangeSliderElement
+  leftInput: LeftRangeSliderInputRange,
+  rightInput: RightRangeSliderInputRange,
+  track: RangeSliderTrack,
+  progress: RangeSliderProgress,
+}> {
   init(store: Store<IRangeSliderStore>): void {
+    this.elements.leftInput = new LeftRangeSliderInputRange(store),
+    this.elements.rightInput = new RightRangeSliderInputRange(store),
+    this.elements.track = new RangeSliderTrack(store),
+    this.elements.progress = new RangeSliderProgress(store),
+
     this.elements.slider = new RangeSliderElement(
-      new LeftRangeSliderInputRange(store),
-      new RightRangeSliderInputRange(store),
-      new RangeSliderTrack(store),
-      new RangeSliderProgress(store),
+      this.elements.leftInput,
+      this.elements.rightInput,
+      this.elements.track,
+      this.elements.progress,
     );
 
     this.root = this.elements.slider;
+
+    // eslint-disable-next-line fsd/no-function-declaration-in-event-listener
+    window.addEventListener('resize', () => this.onWindowResize(store.getState()));
   }
 
   render(state: IRangeSliderStore): void {
     this.elements.slider.vertical = state.vertical;
     this.elements.slider.hasMarker = state.markerVisibility;
+  }
+
+  onWindowResize(state: IRangeSliderStore): void {
+    this.elements.track.render(state);
+    this.elements.leftInput.elements.thumb.positionCorrection();
+    this.elements.rightInput.elements.thumb.positionCorrection();
   }
 }
 

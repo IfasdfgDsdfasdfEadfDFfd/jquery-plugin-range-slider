@@ -73,10 +73,6 @@ class RangeSliderTrack extends Provider<IRangeSliderStore, {
     return values;
   }
 
-  private makeOnWindowResizeHandler(state: IRangeSliderStore): () => void {
-    return () => this.render(state);
-  }
-
   private makeOnClickHandler(store: Store<IRangeSliderStore>): (Event: MouseEvent) => void {
     return (event: MouseEvent) => {
       const target = event?.target as HTMLElement;
@@ -95,8 +91,6 @@ class RangeSliderTrack extends Provider<IRangeSliderStore, {
     this.elements.track = new Track(this.elements.scale);
 
     this.root = this.elements.track;
-
-    window.addEventListener('resize', this.makeOnWindowResizeHandler(store.getState()));
 
     this.elements.scale.element.addEventListener('click', this.makeOnClickHandler(store));
   }
