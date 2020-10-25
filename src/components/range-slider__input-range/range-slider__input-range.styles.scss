@@ -5,11 +5,18 @@
   height: $track-height;
   opacity: 0;
 
-  margin: 0px;
+  margin: 0;
   top: $top-offset;
 
   width: 100%;
   z-index: 2;
+
+  &:focus {
+    &::-moz-range-thumb {
+      width: $thumb-width;
+      height: $thumb-height;
+    }
+  }
 }
 
 .range-slider__input--interval {
@@ -19,9 +26,8 @@
 .range-slider__input::-moz-range-thumb {
   pointer-events: all;
 
-  width: $thumb-width;
-  height: $thumb-height;
+  width: $thumb-width * .8;
+  height: $thumb-height * .8;
 
-  border-width: $thumb-border-width;
   border-radius: $thumb-border-radius;
 }

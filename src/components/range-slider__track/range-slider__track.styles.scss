@@ -33,9 +33,14 @@
   position: absolute;
 }
 
+.range-slider__track-scale__item--hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .range-slider__track-scale__button {
-  margin: auto;
   width: 100%;
+  padding: 0;
 
   font-weight: bold;
   font-size: 80%;
