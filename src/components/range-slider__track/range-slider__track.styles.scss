@@ -22,7 +22,7 @@
 }
 
 .range-slider__track-scale__item {
-  position: relative;
+  position: absolute;
 }
 
 .range-slider__track-scale__button {
@@ -34,7 +34,7 @@
 
   border: none;
   color: rgba(#000, .3);
-  background-color: #fff;
+  background-color: transparent;
 
   cursor: pointer;
 

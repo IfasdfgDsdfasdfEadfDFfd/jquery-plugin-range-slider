@@ -1,5 +1,6 @@
 import { actions, IRangeSliderStore } from '../reducer';
 import { Provider, Store, View } from '../../core';
+import { getOffset } from '../../core/shortcuts';
 
 import styles from '../../exports.scss';
 
@@ -21,16 +22,27 @@ class TrackScale extends View {
       return sum + (value.toString().length * (parseInt(styles.rootFontSize) * 1.4));
     }, 0) / <number>this.element.clientWidth);
 
-    const nextValues = [];
-    for (let index = 0; index <= values.length; index += overflowRate) {
+    const nextValues: number[] = [];
+    for (let index = 0; index < values.length; index += overflowRate) {
       nextValues.push(values[index]);
     }
+    nextValues[nextValues.length-1] = values[values.length-1];
 
-    if (nextValues[nextValues.length-1] !== values[values.length-1]) {
-      nextValues.push(values[values.length-1]);
-    }
+    const items = nextValues.map(value => new TrackScaleItem(value.toString()));
+    this.replaceChildren(items);
 
-    this.replaceChildren(nextValues.map(value => new TrackScaleItem(value.toString())));
+    items.forEach((item, index) => {
+      const selfWidth = <number>item.element.clientWidth;
+      const parentWidth = <number>this.element.clientWidth;
+
+      const max = nextValues[nextValues.length-1];
+      const min = nextValues[0];
+      const value = nextValues[index];
+
+      const offset = getOffset(selfWidth, parentWidth, value, max, min);
+
+      item.element.style.setProperty('left', `${offset}%`);
+    });
   }
 }
 

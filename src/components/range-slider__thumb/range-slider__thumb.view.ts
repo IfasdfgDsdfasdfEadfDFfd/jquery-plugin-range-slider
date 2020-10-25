@@ -1,4 +1,4 @@
-import { HiddenView } from "../../core/shortcuts";
+import { HiddenView, getOffset } from "../../core/shortcuts";
 
 import styles from '../../exports.scss';
 
@@ -21,17 +21,13 @@ class Thumb extends HiddenView {
   positionate({max, min, value}: {[key: string]: number}): void {
     this.lastValues = {max, min, value};
 
-    const thumbWidth = <number>this.element.clientWidth - 4;
+    const thumbWidth = <number>this.element.clientWidth + parseInt(styles.thumbWidth);
     const sliderWidth = <number>this.element.parentElement?.clientWidth;
 
-    const thumbPercent = (thumbWidth / sliderWidth) * 100;
-
-    const ratio = this.ratio;
-    const percent = ratio * 100;
-    const offset = this.getOffset(thumbPercent, ratio);
+    const offset = getOffset(thumbWidth, sliderWidth, value, max, min);
 
     this.element.style.setProperty('left',
-      `${percent - (thumbPercent * ratio) - offset}%`);
+      `${offset}%`);
 
     this.marker.value = value;
   }
@@ -46,15 +42,6 @@ class Thumb extends HiddenView {
     this.element.classList.toggle('range-slider__thumb--hovered', value);
     this.positionCorrection();
     this.marker.positionCorrection();
-  }
-
-  get ratio(): number {
-    const { max, min, value } = this.lastValues;
-    return (value - min) / (max - min);
-  }
-
-  getOffset(elPercent: number, ratio: number): number {
-    return elPercent / 4 * ratio;
   }
 
   positionCorrection(): void {
