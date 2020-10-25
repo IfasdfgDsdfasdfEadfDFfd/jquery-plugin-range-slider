@@ -13,7 +13,9 @@
     "plugin:fsd/all",
     "plugin:import/errors",
     "plugin:import/warnings",
-    "plugin:import/typescript"
+    "plugin:import/typescript",
+    "prettier",
+    "prettier/@typescript-eslint"
   ],
   "rules": {
     "import/first": ["error"],
