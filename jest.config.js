@@ -1,8 +1,10 @@
+const { defaults } = require('jest-config');
+
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'jsdom',
-  moduleFileExtensions: ['ts'],
+  moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts'],
   moduleNameMapper: {
-    "^.+\\.(scss)$": "identity-obj-proxy",
+    '^.+\\.(scss)$': 'identity-obj-proxy',
   },
 };
