@@ -2,7 +2,7 @@ import { View } from "./view";
 
 
 class HiddenView extends View {
-  readonly hidingElementClassName!: string;
+  hidingElementClassName!: string;
 
   set hidden(value: boolean) {
     this.element.classList.toggle(this.hidingElementClassName, value);
@@ -14,7 +14,6 @@ const getOffset = (selfWidth: number, parentWidth: number, value: number, max: n
   const ratio = (value - min) / (max - min);
   const offsetPercent = 100 * ratio;
   const selfPercent = selfWidth / parentWidth * 100 * ratio;
-  console.log(selfWidth, parentWidth)
 
   return offsetPercent - selfPercent;
 };

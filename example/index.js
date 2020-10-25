@@ -32,6 +32,14 @@ require('./index.scss');
   el.find('.configurator__max').on('focusout', (event) => api.setMax(parseInt(event.target.value)));
   el.find('.configurator__step').on('focusout', (event) => api.setStep(parseInt(event.target.value)));
 
+  let unsubscribe = () => {};
+  el.find('.configurator__prefix').on('focusout', (event) => {
+    unsubscribe();
+    unsubscribe = api.registerMiddleware((value) => {
+      return `${event.target.value}${value}`;
+    });
+  });
+
   el.find('.configurator__orient')
     .on('click', (event) => api.setOrientVertical(!event.target.hasAttribute('checked')));
 

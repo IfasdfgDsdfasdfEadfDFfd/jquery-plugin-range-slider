@@ -1,8 +1,9 @@
 import { actions, IRangeSliderStore } from '../reducer';
 import { Provider, Store, View } from '../../core';
-import { getOffset, HiddenView } from '../../core/shortcuts';
+import { HiddenView } from '../../core/shortcuts';
 
 import styles from '../../exports.scss';
+
 
 class Track extends View {
   constructor(scale: TrackScale) {
@@ -24,36 +25,47 @@ class TrackScale extends HiddenView {
       return sum + (value.toString().length * (parseInt(styles.rootFontSize) * 1.4));
     }, 0) / <number>this.element.clientWidth);
 
-    const nextValues: number[] = [];
-    for (let index = 0; index < values.length; index += overflowRate) {
-      nextValues.push(values[index]);
-    }
-    nextValues[nextValues.length-1] = values[values.length-1];
+    const items = values.map((value, index) => {
+      const percent = 100 / (values.length - 1) * index;
 
-    const items = nextValues.map(value => new TrackScaleItem(value.toString()));
-    this.replaceChildren(items);
+      const max = values[values.length - 1];
+      const min = values[0];
+      const ratio = (value - min) / (max - min);
 
-    items.forEach((item, index) => {
-      const selfWidth = <number>item.element.clientWidth;
-      const parentWidth = <number>this.element.clientWidth;
-
-      const max = nextValues[nextValues.length-1];
-      const min = nextValues[0];
-      const value = nextValues[index];
-
-      const offset = getOffset(selfWidth, parentWidth, value, max, min);
-
-      item.element.style.setProperty('left', `${offset}%`);
+      return this.createItem(value.toString(), percent, ratio);
+    }).reverse().filter((_, index, arr) => {
+      if (index === arr.length - 1) return true;
+      return index % overflowRate === 0;
     });
+
+    this.replaceChildren(items);
+  }
+
+  createItem(value: string, percentOffset: number, ratio: number): TrackScaleItem {
+    const item = new TrackScaleItem(value);
+    const itemWidth = value.length * (parseInt(styles.rootFontSize));
+    const thumbWidth = parseFloat(styles.thumbWidth) * .8
+      * parseInt(styles.rootFontSize) - parseInt(styles.thumbBorderWidth);
+
+    item.element.style.setProperty('width', `${itemWidth}px`);
+    item.element.style.setProperty('left', `${percentOffset}%`);
+    item.element.style.setProperty('margin-left', `${-(
+      itemWidth / 2 - thumbWidth / 2 + thumbWidth * ratio
+    )}px`);
+
+    return item;
   }
 }
 
-class TrackScaleItem extends View {
+class TrackScaleItem extends HiddenView {
+
   constructor(value = '') {
     const button = new View({tag: 'button', attrs: {class: 'range-slider__track-scale__button'}, children: [value]});
     super({tag: 'li', attrs: {
       class: 'range-slider__track-scale__item'}, children: [button],
     });
+
+    this.hidingElementClassName = 'range-slider__track-scale__item--hidden';
   }
 }
 
@@ -97,7 +109,7 @@ class RangeSliderTrack extends Provider<IRangeSliderStore, {
 
   render(state: IRangeSliderStore): void {
     this.elements.scale.update(this.getSliderValues(state));
-    this.elements.scale.hidden = state.trackScaleVisibility;
+    this.elements.scale.hidden = !state.trackScaleVisibility;
   }
 }
 
