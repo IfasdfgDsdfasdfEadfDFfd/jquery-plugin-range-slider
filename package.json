@@ -7,7 +7,8 @@
     "dev": "NODE_ENVIRONMENT=development webpack-dev-server",
     "test": "jest --watch --runInBand",
     "coverage": "jest --coverage",
-    "lint": "eslint ./src/**/* --ext .ts"
+    "lint": "eslint ./src/**/* --ext .ts",
+    "prettify": "prettier --write ./src/**/*.ts"
   },
   "repository": {
     "type": "git",

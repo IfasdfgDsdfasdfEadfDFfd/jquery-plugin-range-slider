@@ -1,10 +1,9 @@
-import { Store } from "./";
-import { View } from "./view";
-
+import { Store } from './';
+import { View } from './view';
 
 abstract class Provider<TStore, TElements> {
   readonly elements = {} as TElements;
-  private _root: View|undefined;
+  private _root: View | undefined;
 
   constructor(store: Store<TStore>) {
     this.init(store);
@@ -16,7 +15,10 @@ abstract class Provider<TStore, TElements> {
   }
 
   get root(): View {
-    return this._root || new View({attrs: {}, children: Object.values(this.elements)});
+    return (
+      this._root ||
+      new View({ attrs: {}, children: Object.values(this.elements) })
+    );
   }
 
   abstract init(store: Store<TStore>): void;

@@ -4,7 +4,6 @@ import { rangeSlider } from './plugin';
 
 import './index.scss';
 
-
 jQuery.fn.extend({
   rangeSlider,
 });
