@@ -61,8 +61,9 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderStore> = (
         value: [Math.max(min, state.value[0]), state.value[1]]};
 
     case actions.CHANGE_MAX:
-      max = Math.max(parseInt(action.value), state.min, state.value[1]);
-      return {...state, max: max - (max % state.step)};
+      max = Math.max(parseInt(action.value), state.min);
+      right = Math.min(max, state.value[1]);
+      return {...state, max: max - (max % state.step), value: [state.value[0], right]};
 
     case actions.CHANGE_STEP:
       step = Math.min(Math.max(parseInt(action.value), 1));
