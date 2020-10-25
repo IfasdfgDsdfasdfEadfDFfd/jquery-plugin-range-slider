@@ -97,7 +97,7 @@ class RangeSliderTrack extends Provider<IRangeSliderStore, {
 
   render(state: IRangeSliderStore): void {
     this.elements.scale.update(this.getSliderValues(state));
-    this.elements.scale.hidden = state.trackScaleVisibility;
+    this.elements.scale.hidden = !state.trackScaleVisibility;
   }
 }
 
