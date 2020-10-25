@@ -33,7 +33,8 @@ class TrackScale extends HiddenView {
       const ratio = (value - min) / (max - min);
 
       return this.createItem(value.toString(), percent, ratio);
-    }).filter((_, index) => {
+    }).reverse().filter((_, index, arr) => {
+      if (index === arr.length - 1) return true;
       return index % overflowRate === 0;
     });
 
