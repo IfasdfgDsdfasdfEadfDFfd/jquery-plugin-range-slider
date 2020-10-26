@@ -1,16 +1,11 @@
-@import '../../variables.scss';
+@import "../../variables";
 
 .range-slider__progress {
   position: absolute;
-
   top: $top-offset;
-
   left: 0;
   height: $track-height;
-
   border-radius: 0.25rem;
-
   background-color: $primary-color;
-
-  transition: all .2s ease;
+  transition: all 0.2s ease;
 }

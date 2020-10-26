@@ -1,5 +1,5 @@
-import { Provider } from "../provider";
-import { createStore } from "../store";
+import { Provider } from '../provider';
+import { createStore } from '../store';
 
 describe('test provider', () => {
   test('call render every time store updated', () => {

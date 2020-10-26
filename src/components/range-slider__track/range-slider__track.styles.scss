@@ -1,32 +1,25 @@
-@import '../../variables.scss';
+@import "../../variables";
 
 .range-slider__track {
   position: absolute;
-
   top: $top-offset;
-
   width: 100%;
   height: $track-height;
-
-  background-color: $gray-color;
   border-radius: 0.25rem;
+  background-color: $gray-color;
 }
 
 .range-slider__track-scale {
-  list-style: none;
   display: flex;
   justify-content: space-between;
-
-  padding: 0;
   margin-top: 1.4rem;
+  padding: 0;
+  list-style: none;
 }
 
 .range-slider__track-scale--hidden {
   opacity: 0;
-
-  & > * {
-    pointer-events: none;
-  }
+  pointer-events: none;
 }
 
 .range-slider__track-scale__item {
@@ -41,32 +34,29 @@
 .range-slider__track-scale__button {
   width: 100%;
   padding: 0;
-
+  border: 0;
+  background-color: transparent;
+  color: rgba(#000, 0.3);
   font-weight: bold;
   font-size: 80%;
-
-  border: none;
-  color: rgba(#000, .3);
-  background-color: transparent;
-
   cursor: pointer;
+
+  &::after {
+    content: none;
+    position: absolute;
+    bottom: 90%;
+    left: 50%;
+    height: 70%;
+    border-left: 2px solid $gray-color;
+  }
 
   &:hover,
   &:focus {
-    outline: none;
     color: $primary-color;
+    outline: none;
 
     &::after {
       border-color: $primary-color;
     }
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    border-left: 2px solid $gray-color;
-    height: 70%;
-    left: 50%;
-    bottom: 90%;
   }
 }

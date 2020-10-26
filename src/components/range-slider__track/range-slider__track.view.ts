@@ -4,12 +4,13 @@ import { HiddenView } from '../../core/shortcuts';
 
 import styles from '../../exports.scss';
 
-
 class Track extends View {
   constructor(scale: TrackScale) {
-    super({tag: 'div', attrs: {class: 'range-slider__track'}, children: [
-      scale
-    ]});
+    super({
+      tag: 'div',
+      attrs: { class: 'range-slider__track' },
+      children: [scale],
+    });
   }
 }
 
@@ -17,64 +18,91 @@ class TrackScale extends HiddenView {
   hidingElementClassName = 'range-slider__track-scale--hidden';
 
   constructor() {
-    super({tag: 'ul', attrs: { class: 'range-slider__track-scale' }, children: []});
+    super({
+      tag: 'ul',
+      attrs: { class: 'range-slider__track-scale' },
+      children: [],
+    });
   }
 
   update(values: number[]): void {
-    const overflowRate = Math.ceil(values.reduce((sum, value) => {
-      return sum + (value.toString().length * (parseInt(styles.rootFontSize) * 1.4));
-    }, 0) / <number>this.element.clientWidth);
+    const overflowRate = Math.ceil(
+      values.reduce((sum, value) => {
+        return (
+          sum + value.toString().length * (parseInt(styles.rootFontSize) * 1.4)
+        );
+      }, 0) / <number>this.element.clientWidth,
+    );
 
-    const items = values.map((value, index) => {
-      const percent = 100 / (values.length - 1) * index;
+    const items = values
+      .map((value, index) => {
+        const percent = (100 / (values.length - 1)) * index;
 
-      const max = values[values.length - 1];
-      const min = values[0];
-      const ratio = (value - min) / (max - min);
+        const max = values[values.length - 1];
+        const min = values[0];
+        const ratio = (value - min) / (max - min);
 
-      return this.createItem(value.toString(), percent, ratio);
-    }).reverse().filter((_, index, arr) => {
-      if (index === arr.length - 1) return true;
-      return index % overflowRate === 0;
-    });
+        return this.createItem(value.toString(), percent, ratio);
+      })
+      .reverse()
+      .filter((_, index, arr) => {
+        if (index === arr.length - 1) return true;
+        return index % overflowRate === 0;
+      });
 
     this.replaceChildren(items);
   }
 
-  createItem(value: string, percentOffset: number, ratio: number): TrackScaleItem {
+  createItem(
+    value: string,
+    percentOffset: number,
+    ratio: number,
+  ): TrackScaleItem {
     const item = new TrackScaleItem(value);
-    const itemWidth = value.length * (parseInt(styles.rootFontSize));
-    const thumbWidth = parseFloat(styles.thumbWidth) * .8
-      * parseInt(styles.rootFontSize) - parseInt(styles.thumbBorderWidth);
+    const itemWidth = value.length * parseInt(styles.rootFontSize);
+    const thumbWidth =
+      parseFloat(styles.thumbWidth) * 0.8 * parseInt(styles.rootFontSize) -
+      parseInt(styles.thumbBorderWidth);
 
     item.element.style.setProperty('width', `${itemWidth}px`);
     item.element.style.setProperty('left', `${percentOffset}%`);
-    item.element.style.setProperty('margin-left', `${-(
-      itemWidth / 2 - thumbWidth / 2 + thumbWidth * ratio
-    )}px`);
+    item.element.style.setProperty(
+      'margin-left',
+      `${-(itemWidth / 2 - thumbWidth / 2 + thumbWidth * ratio)}px`,
+    );
 
     return item;
   }
 }
 
 class TrackScaleItem extends HiddenView {
-
   constructor(value = '') {
-    const button = new View({tag: 'button', attrs: {class: 'range-slider__track-scale__button'}, children: [value]});
-    super({tag: 'li', attrs: {
-      class: 'range-slider__track-scale__item'}, children: [button],
+    const button = new View({
+      tag: 'button',
+      attrs: { class: 'range-slider__track-scale__button' },
+      children: [value],
+    });
+    super({
+      tag: 'li',
+      attrs: {
+        class: 'range-slider__track-scale__item',
+      },
+      children: [button],
     });
 
     this.hidingElementClassName = 'range-slider__track-scale__item--hidden';
   }
 }
 
-class RangeSliderTrack extends Provider<IRangeSliderStore, {
-  track: Track,
-  scale: TrackScale,
-}> {
+class RangeSliderTrack extends Provider<
+  IRangeSliderStore,
+  {
+    track: Track;
+    scale: TrackScale;
+  }
+> {
   private getSliderValues(state: IRangeSliderStore): number[] {
-    const {min, max, step} = state;
+    const { min, max, step } = state;
 
     const length = (max - min) / step + 1;
 
@@ -85,7 +113,9 @@ class RangeSliderTrack extends Provider<IRangeSliderStore, {
     return values;
   }
 
-  private makeOnClickHandler(store: Store<IRangeSliderStore>): (Event: MouseEvent) => void {
+  private makeOnClickHandler(
+    store: Store<IRangeSliderStore>,
+  ): (Event: MouseEvent) => void {
     return (event: MouseEvent) => {
       const target = event?.target as HTMLElement;
 
@@ -95,7 +125,7 @@ class RangeSliderTrack extends Provider<IRangeSliderStore, {
           value: parseInt(target.textContent || ''),
         });
       }
-    }
+    };
   }
 
   init(store: Store<IRangeSliderStore>): void {
@@ -104,7 +134,10 @@ class RangeSliderTrack extends Provider<IRangeSliderStore, {
 
     this.root = this.elements.track;
 
-    this.elements.scale.element.addEventListener('click', this.makeOnClickHandler(store));
+    this.elements.scale.element.addEventListener(
+      'click',
+      this.makeOnClickHandler(store),
+    );
   }
 
   render(state: IRangeSliderStore): void {
@@ -113,10 +146,4 @@ class RangeSliderTrack extends Provider<IRangeSliderStore, {
   }
 }
 
-
-export {
-  Track,
-  TrackScale,
-  TrackScaleItem,
-  RangeSliderTrack,
-}
+export { Track, TrackScale, TrackScaleItem, RangeSliderTrack };

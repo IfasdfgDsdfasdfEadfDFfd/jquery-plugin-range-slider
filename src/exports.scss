@@ -1,20 +1,16 @@
-@import './variables.scss';
-
+/* stylelint-disable property-case */
+/* stylelint-disable property-no-unknown */
+@import "./variables";
 
 :export {
-  rootFontSize: $root-font-size;
-
-  thumbWidth: $thumb-width;
-  thumbHeight: $thumb-height;
-  thumbBorderWidth: $thumb-border-width;
-  minThumbMarkerWidth: $min-thumb-marker-width;
-
-  trackHeight: $track-height;
-
-  topOffset: $top-offset;
-
   borderRadius: $border-radius;
-
   grayColor: $gray-color;
+  minThumbMarkerWidth: $min-thumb-marker-width;
   primaryColor: $primary-color;
+  rootFontSize: $root-font-size;
+  thumbBorderWidth: $thumb-border-width;
+  thumbHeight: $thumb-height;
+  thumbWidth: $thumb-width;
+  topOffset: $top-offset;
+  trackHeight: $track-height;
 }
