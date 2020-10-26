@@ -1,4 +1,4 @@
-@import '../../variables.scss';
+@import "../../variables";
 
 .range-slider {
   position: relative;
@@ -10,8 +10,8 @@
 }
 
 .range-slider--vertical {
-  transform: rotate(270deg);
   margin: 50% auto;
+  transform: rotate(270deg);
 
   .range-slider__thumb-marker {
     transform: rotate(90deg);

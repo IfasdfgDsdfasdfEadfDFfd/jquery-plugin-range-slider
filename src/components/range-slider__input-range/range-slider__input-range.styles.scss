@@ -1,15 +1,20 @@
-@import '../../variables.scss';
+@import "../../variables";
 
 .range-slider__input {
   position: absolute;
+  top: $top-offset;
+  z-index: 2;
+  width: 100%;
   height: $track-height;
+  margin: 0;
   opacity: 0;
 
-  margin: 0;
-  top: $top-offset;
-
-  width: 100%;
-  z-index: 2;
+  &::-moz-range-thumb {
+    width: $thumb-width * 0.8;
+    height: $thumb-height * 0.8;
+    border-radius: $thumb-border-radius;
+    pointer-events: all;
+  }
 
   &:focus {
     &::-moz-range-thumb {
@@ -21,13 +26,4 @@
 
 .range-slider__input--interval {
   pointer-events: none;
-}
-
-.range-slider__input::-moz-range-thumb {
-  pointer-events: all;
-
-  width: $thumb-width * .8;
-  height: $thumb-height * .8;
-
-  border-radius: $thumb-border-radius;
 }

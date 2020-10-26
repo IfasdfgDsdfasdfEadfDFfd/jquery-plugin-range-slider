@@ -1,4 +1,4 @@
-import { createStore, NaNValidator } from "../store";
+import { createStore, NaNValidator } from '../store';
 
 describe('store test', () => {
   const INIT_STATE = 'INIT_STATE';
@@ -59,7 +59,7 @@ describe('store test', () => {
       };
       const LISTENER = jest.fn(x => x);
 
-      const store = createStore(INIT_STATE, REDUCER, {}, [ NaNValidator ]);
+      const store = createStore(INIT_STATE, REDUCER, {}, [NaNValidator]);
 
       store.subscribe(LISTENER);
 
@@ -68,4 +68,3 @@ describe('store test', () => {
     });
   });
 });
-

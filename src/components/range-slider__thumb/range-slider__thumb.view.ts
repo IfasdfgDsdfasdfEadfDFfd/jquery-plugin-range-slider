@@ -1,33 +1,36 @@
-import { HiddenView, getOffset } from "../../core/shortcuts";
+import { HiddenView, getOffset } from '../../core/shortcuts';
 
 import styles from '../../exports.scss';
 
-
 class Thumb extends HiddenView {
-  hidingElementClassName = 'range-slider__thumb--hidden'
+  hidingElementClassName = 'range-slider__thumb--hidden';
 
   marker!: ThumbMarker;
   lastValues!: {
-    max: number,
-    min: number,
-    value: number
+    max: number;
+    min: number;
+    value: number;
   };
 
   constructor() {
-    super({tag: 'div', attrs: {class: 'range-slider__thumb'}, children: [new ThumbMarker()]});
+    super({
+      tag: 'div',
+      attrs: { class: 'range-slider__thumb' },
+      children: [new ThumbMarker()],
+    });
     this.marker = this.children[0] as ThumbMarker;
   }
 
-  positionate({max, min, value}: {[key: string]: number}): void {
-    this.lastValues = {max, min, value};
+  positionate({ max, min, value }: { [key: string]: number }): void {
+    this.lastValues = { max, min, value };
 
-    const thumbWidth = <number>this.element.clientWidth + parseInt(styles.thumbWidth);
+    const thumbWidth =
+      <number>this.element.clientWidth + parseInt(styles.thumbWidth);
     const sliderWidth = <number>this.element.parentElement?.clientWidth;
 
     const offset = getOffset(thumbWidth, sliderWidth, value, max, min);
 
-    this.element.style.setProperty('left',
-      `${offset}%`);
+    this.element.style.setProperty('left', `${offset}%`);
 
     this.marker.value = value;
   }
@@ -50,11 +53,15 @@ class Thumb extends HiddenView {
 }
 
 class ThumbMarker extends HiddenView {
-  hidingElementClassName = 'range-slider__thumb__marker--hidden'
+  hidingElementClassName = 'range-slider__thumb__marker--hidden';
   _value!: number;
 
   constructor() {
-    super({tag: 'div', attrs: {class: 'range-slider__thumb__marker'}, children: []});
+    super({
+      tag: 'div',
+      attrs: { class: 'range-slider__thumb__marker' },
+      children: [],
+    });
   }
 
   set value(value: number) {
@@ -62,12 +69,15 @@ class ThumbMarker extends HiddenView {
 
     const width = Math.max(
       value.toString().length * parseInt(styles.rootFontSize),
-      parseInt(styles.minThumbMarkerWidth) * parseInt(styles.rootFontSize)
+      parseInt(styles.minThumbMarkerWidth) * parseInt(styles.rootFontSize),
     );
     this.element.style.setProperty('width', `${width}px`);
 
-    const offset = -((width - <number>this.element.parentElement?.clientWidth) / 2);
-    this.element.style.setProperty('margin-left', `${offset}px`)
+    const offset = -(
+      (width - <number>this.element.parentElement?.clientWidth) /
+      2
+    );
+    this.element.style.setProperty('margin-left', `${offset}px`);
 
     this._value = value;
   }
@@ -77,7 +87,4 @@ class ThumbMarker extends HiddenView {
   }
 }
 
-
-export {
-  Thumb,
-};
+export { Thumb };

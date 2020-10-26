@@ -19,7 +19,9 @@
 	"ms-vscode.vscode-typescript-tslint-plugin",
 	"editorconfig.editorconfig",
 	"bungcip.better-toml",
-	"esbenp.prettier-vscode"
+	"esbenp.prettier-vscode",
+	"stylelint.vscode-stylelint",
+	"streetsidesoftware.code-spell-checker"
 ]
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],

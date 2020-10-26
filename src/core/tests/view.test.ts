@@ -1,4 +1,4 @@
-import { View } from "../view";
+import { View } from '../view';
 
 describe('test view', () => {
   test('should have children', () => {
@@ -19,13 +19,13 @@ describe('test view', () => {
 
   test('should have attrs', () => {
     const ATTRS = {
-      'class': 'some-calss-name'
+      class: 'some-calss-name',
     };
 
     const view = new View({
       tag: 'div',
       attrs: ATTRS,
-      children: []
+      children: [],
     });
 
     expect(view.attrs).toBe(ATTRS);

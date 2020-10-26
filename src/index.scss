@@ -1,6 +1,10 @@
-@import './variables.scss';
+@import "./variables";
 
-*, html {
-  box-sizing: border-box;
+html {
+  color: #000;
   font-size: $root-font-size;
+}
+
+* {
+  box-sizing: border-box;
 }

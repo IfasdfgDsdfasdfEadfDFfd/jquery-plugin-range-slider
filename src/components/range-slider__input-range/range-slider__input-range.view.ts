@@ -1,11 +1,14 @@
-import { IRangeSliderStore , actions } from '../reducer';
+import { IRangeSliderStore, actions } from '../reducer';
 import { Thumb } from '../range-slider__thumb';
 import { View, Action, EventCallback, Provider, Store } from '../../core';
 
-
 class InputRange extends View {
   constructor() {
-    super({tag: 'input', attrs: {type: 'range', class: 'range-slider__input'}, children: []});
+    super({
+      tag: 'input',
+      attrs: { type: 'range', class: 'range-slider__input' },
+      children: [],
+    });
   }
 
   set value(nextValue: number) {
@@ -39,11 +42,11 @@ class InputRange extends View {
   }
 
   onFocusIn(cb: EventCallback): void {
-    this.element.addEventListener('focusin', cb)
+    this.element.addEventListener('focusin', cb);
   }
 
   onFocusOut(cb: EventCallback): void {
-    this.element.addEventListener('focusout', cb)
+    this.element.addEventListener('focusout', cb);
   }
 
   onMouseIn(cb: EventCallback): void {
@@ -55,10 +58,13 @@ class InputRange extends View {
   }
 }
 
-abstract class RangeSliderInputRange extends Provider<IRangeSliderStore, {
-  input: InputRange,
-  thumb: Thumb,
-}> {
+abstract class RangeSliderInputRange extends Provider<
+  IRangeSliderStore,
+  {
+    input: InputRange;
+    thumb: Thumb;
+  }
+> {
   init(store: Store<IRangeSliderStore>): void {
     this.elements.input = new InputRange();
     this.elements.thumb = new Thumb();
@@ -68,10 +74,10 @@ abstract class RangeSliderInputRange extends Provider<IRangeSliderStore, {
       store.dispatch(this.makeAction(parseInt(target.value)));
     });
 
-    this.elements.input.onFocusIn(() => this.elements.thumb.focused = true);
-    this.elements.input.onFocusOut(() => this.elements.thumb.focused = false);
-    this.elements.input.onMouseIn(() => this.elements.thumb.hovered = true);
-    this.elements.input.onMouseOut(() => this.elements.thumb.hovered = false);
+    this.elements.input.onFocusIn(() => (this.elements.thumb.focused = true));
+    this.elements.input.onFocusOut(() => (this.elements.thumb.focused = false));
+    this.elements.input.onMouseIn(() => (this.elements.thumb.hovered = true));
+    this.elements.input.onMouseOut(() => (this.elements.thumb.hovered = false));
   }
 
   render(state: IRangeSliderStore): void {
@@ -127,9 +133,4 @@ class RightRangeSliderInputRange extends RangeSliderInputRange {
   }
 }
 
-
-export {
-  InputRange,
-  LeftRangeSliderInputRange,
-  RightRangeSliderInputRange,
-};
+export { InputRange, LeftRangeSliderInputRange, RightRangeSliderInputRange };

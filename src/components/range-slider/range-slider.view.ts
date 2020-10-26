@@ -9,7 +9,6 @@ import { IRangeSliderStore } from '../reducer';
 
 import './range-slider.styles.scss';
 
-
 class RangeSliderElement extends View {
   constructor(
     leftInput: LeftRangeSliderInputRange,
@@ -17,12 +16,11 @@ class RangeSliderElement extends View {
     track: RangeSliderTrack,
     progress: RangeSliderProgress,
   ) {
-    super({tag: 'div', attrs: {class: 'range-slider'}, children: [
-      leftInput.root,
-      rightInput.root,
-      track.root,
-      progress.root,
-    ]});
+    super({
+      tag: 'div',
+      attrs: { class: 'range-slider' },
+      children: [leftInput.root, rightInput.root, track.root, progress.root],
+    });
   }
 
   set vertical(value: boolean) {
@@ -36,30 +34,34 @@ class RangeSliderElement extends View {
   }
 }
 
-class RangeSlider extends Provider<IRangeSliderStore, {
-  slider: RangeSliderElement
-  leftInput: LeftRangeSliderInputRange,
-  rightInput: RightRangeSliderInputRange,
-  track: RangeSliderTrack,
-  progress: RangeSliderProgress,
-}> {
+class RangeSlider extends Provider<
+  IRangeSliderStore,
+  {
+    slider: RangeSliderElement;
+    leftInput: LeftRangeSliderInputRange;
+    rightInput: RightRangeSliderInputRange;
+    track: RangeSliderTrack;
+    progress: RangeSliderProgress;
+  }
+> {
   init(store: Store<IRangeSliderStore>): void {
-    this.elements.leftInput = new LeftRangeSliderInputRange(store),
-    this.elements.rightInput = new RightRangeSliderInputRange(store),
-    this.elements.track = new RangeSliderTrack(store),
-    this.elements.progress = new RangeSliderProgress(store),
-
-    this.elements.slider = new RangeSliderElement(
-      this.elements.leftInput,
-      this.elements.rightInput,
-      this.elements.track,
-      this.elements.progress,
-    );
+    (this.elements.leftInput = new LeftRangeSliderInputRange(store)),
+      (this.elements.rightInput = new RightRangeSliderInputRange(store)),
+      (this.elements.track = new RangeSliderTrack(store)),
+      (this.elements.progress = new RangeSliderProgress(store)),
+      (this.elements.slider = new RangeSliderElement(
+        this.elements.leftInput,
+        this.elements.rightInput,
+        this.elements.track,
+        this.elements.progress,
+      ));
 
     this.root = this.elements.slider;
 
     // eslint-disable-next-line fsd/no-function-declaration-in-event-listener
-    window.addEventListener('resize', () => this.onWindowResize(store.getState()));
+    window.addEventListener('resize', () =>
+      this.onWindowResize(store.getState()),
+    );
   }
 
   render(state: IRangeSliderStore): void {
@@ -74,7 +76,4 @@ class RangeSlider extends Provider<IRangeSliderStore, {
   }
 }
 
-
-export {
-  RangeSlider,
-}
+export { RangeSlider };
