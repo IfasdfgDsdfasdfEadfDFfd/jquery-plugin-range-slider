@@ -3,13 +3,13 @@ const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const glob = require('glob');
-
 
 const SRC_DIR = path.resolve(path.join(process.cwd(), 'src'));
 const EXAMPLE_DIR = path.resolve(path.join(process.cwd(), 'example'));
 const DIST_DIR = path.resolve(path.join(process.cwd(), 'dist'));
-
+const IS_DEV_MODE = process.env.NODE_ENVIRONMENT === 'development';
 
 const getAllTemplates = folder => {
   const SEARCH_DIR = path.join(process.cwd(), folder);
@@ -22,7 +22,6 @@ const getAllTemplates = folder => {
     });
   });
 };
-
 
 module.exports = {
   entry: {
@@ -43,21 +42,27 @@ module.exports = {
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     ...getAllTemplates('example'),
+    new MiniCssExtractPlugin({
+      filename: IS_DEV_MODE ? '[name].css' : '[name.hash.css]',
+      chunkFilename: IS_DEV_MODE ? '[id].css' : '[id.hash.css]',
+    }),
   ],
 
   module: {
     rules: [
       {
         test: /\.pug$/,
-        use: {loader: 'pug-loader', options: {pretty: true}},
+        use: { loader: 'pug-loader', options: { pretty: true } },
       },
       {
         test: /\.scss$/,
         use: [
-          {loader: 'style-loader',},
-          {loader: 'css-modules-typescript-loader'},
-          {loader: 'css-loader',},
-          {loader: 'sass-loader',},
+          IS_DEV_MODE
+            ? { loader: 'style-loader' }
+            : MiniCssExtractPlugin.loader,
+          { loader: 'css-modules-typescript-loader' },
+          { loader: 'css-loader' },
+          { loader: 'sass-loader' },
         ],
       },
       {
@@ -92,5 +97,5 @@ module.exports = {
       poll: true,
       ignored: /node_modules/,
     },
-  }
+  },
 };

@@ -71,6 +71,7 @@
   },
   "dependencies": {
     "jquery": "^3.5.1",
-    "jquery-plugin-range-slider": "file:./src"
+    "jquery-plugin-range-slider": "file:./src",
+    "mini-css-extract-plugin": "^1.2.0"
   }
 }
