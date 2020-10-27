@@ -12,7 +12,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background-color: #fff;
   box-shadow: 0px 0px 5px 5px rgb(204, 204, 204);
-  border-radius: .4rem;
+  border-radius: 0.4rem;
 
   & > * {
     width: 100%;
@@ -26,7 +26,7 @@ body {
     margin: 3rem;
     padding: 2rem;
 
-    & .configurator {
+    & .configuration {
       width: 70%;
     }
   }
@@ -34,19 +34,19 @@ body {
 
 @media only screen and (max-width: 1024px) {
   .container {
-    & .configurator {
+    & .configuration {
       width: 100%;
     }
   }
 }
 
-.configurator {
+.configuration {
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(2, 1fr);
 }
 
 @media only screen and (max-width: 540px) {
-  .configurator {
+  .configuration {
     grid-template: repeat(3, 1fr) / 1fr;
   }
 
@@ -58,7 +58,7 @@ body {
   }
 }
 
-.configurator__tool {
+.configuration__tool {
   margin: 1rem;
   display: flex;
   justify-content: space-between;
@@ -73,25 +73,25 @@ body {
 
   & input[type="text"] {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: .8rem;
+    font-size: 0.8rem;
     font-weight: bold;
     border: none;
-    border-radius: .2rem;
+    border-radius: 0.2rem;
     box-shadow: 0px 0px 4px 2px rgb(224, 224, 224);
-    padding: .5rem .7rem;
+    padding: 0.5rem 0.7rem;
     text-align: center;
   }
 
   & input[type="checkbox"] {
     box-shadow: 0px 0px 4px 2px rgb(224, 224, 224);
     appearance: none;
-    border-radius: .2rem;
+    border-radius: 0.2rem;
     min-width: 2rem;
     min-height: 2rem;
     background-size: 0px;
 
     &:checked {
-      background-image: url('./check_mark.svg');
+      background-image: url("./check_mark.svg");
       background-repeat: no-repeat;
       background-position: center;
       background-size: 70%;
@@ -102,4 +102,3 @@ body {
     box-shadow: 0px 0px 5px 5px rgb(214, 214, 214);
   }
 }
-

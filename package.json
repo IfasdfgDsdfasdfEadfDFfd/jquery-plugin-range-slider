@@ -8,7 +8,7 @@
     "test": "jest --watch --runInBand",
     "coverage": "jest --coverage",
     "lint:ts": "eslint ./src/**/* --ext .ts",
-    "lint:scss": "stylelint ./src/**/*.scss",
+    "lint:scss": "stylelint ./src/**/*.scss ./example/index.scss",
     "prettify": "prettier --write ./src/**/*"
   },
   "repository": {
