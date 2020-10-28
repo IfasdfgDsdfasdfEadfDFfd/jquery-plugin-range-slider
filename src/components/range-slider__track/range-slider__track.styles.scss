@@ -42,7 +42,7 @@
   cursor: pointer;
 
   &::after {
-    content: none;
+    content: "";
     position: absolute;
     bottom: 90%;
     left: 50%;

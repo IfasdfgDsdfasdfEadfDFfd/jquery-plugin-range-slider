@@ -4,17 +4,17 @@ body {
 
 .container {
   display: flex;
-  justify-content: center;
-  align-items: center;
   gap: 10rem;
-  padding: 5rem;
+  align-items: center;
+  justify-content: center;
   margin: 5rem;
-  font-family: Arial, Helvetica, sans-serif;
+  padding: 5rem;
+  border-radius: 0.4rem;
   background-color: #fff;
-  box-shadow: 0px 0px 5px 5px rgb(204, 204, 204);
-  border-radius: .4rem;
+  box-shadow: 0 0 5px 5px rgb(204, 204, 204);
+  font-family: "Arial", "Helvetica", sans-serif;
 
-  & > * {
+  > * {
     width: 100%;
   }
 }
@@ -26,7 +26,7 @@ body {
     margin: 3rem;
     padding: 2rem;
 
-    & .configurator {
+    .configuration {
       width: 70%;
     }
   }
@@ -34,19 +34,19 @@ body {
 
 @media only screen and (max-width: 1024px) {
   .container {
-    & .configurator {
+    .configuration {
       width: 100%;
     }
   }
 }
 
-.configurator {
+.configuration {
   display: grid;
   grid-template: repeat(3, 1fr) / repeat(2, 1fr);
 }
 
 @media only screen and (max-width: 540px) {
-  .configurator {
+  .configuration {
     grid-template: repeat(3, 1fr) / 1fr;
   }
 
@@ -58,48 +58,47 @@ body {
   }
 }
 
-.configurator__tool {
-  margin: 1rem;
+.configuration__tool {
   display: flex;
-  justify-content: space-between;
   gap: 1rem;
   align-items: center;
+  justify-content: space-between;
+  margin: 1rem;
+}
 
-  & label {
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 1rem;
-  }
+label {
+  font-weight: bold;
+  font-size: 1rem;
+  text-transform: uppercase;
+}
 
-  & input[type="text"] {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: .8rem;
-    font-weight: bold;
-    border: none;
-    border-radius: .2rem;
-    box-shadow: 0px 0px 4px 2px rgb(224, 224, 224);
-    padding: .5rem .7rem;
-    text-align: center;
-  }
+input[type="text"] {
+  padding: 0.5rem 0.7rem;
+  border: 0;
+  border-radius: 0.2rem;
+  box-shadow: 0 0 4px 2px rgb(224, 224, 224);
+  font-weight: bold;
+  font-size: 0.8rem;
+  font-family: "Arial", "Helvetica", sans-serif;
+  text-align: center;
+}
 
-  & input[type="checkbox"] {
-    box-shadow: 0px 0px 4px 2px rgb(224, 224, 224);
-    appearance: none;
-    border-radius: .2rem;
-    min-width: 2rem;
-    min-height: 2rem;
-    background-size: 0px;
+input[type="checkbox"] {
+  min-width: 2rem;
+  min-height: 2rem;
+  border-radius: 0.2rem;
+  background-size: 0;
+  box-shadow: 0 0 4px 2px rgb(224, 224, 224);
+  appearance: none;
 
-    &:checked {
-      background-image: url('./check_mark.svg');
-      background-repeat: no-repeat;
-      background-position: center;
-      background-size: 70%;
-    }
-  }
-
-  & input:focus {
-    box-shadow: 0px 0px 5px 5px rgb(214, 214, 214);
+  &:checked {
+    background-image: url("./check_mark.svg");
+    background-position: center;
+    background-size: 70%;
+    background-repeat: no-repeat;
   }
 }
 
+input:focus {
+  box-shadow: 0 0 5px 5px rgb(214, 214, 214);
+}
