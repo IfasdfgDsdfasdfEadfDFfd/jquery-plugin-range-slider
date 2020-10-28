@@ -3,12 +3,36 @@ require('jquery-plugin-range-slider');
 require('./index.scss');
 
 window.addEventListener('load', () => {
-  for (const index of [1, 2, 3, 4, 5]) {
-    attachConfigurationPanelToRangeSlider(index);
+  const parameters = [
+    {
+      index: 1,
+      value: [10, 20],
+    },
+    {
+      index: 2,
+      value: [13, 73],
+    },
+    {
+      index: 3,
+      value: [54, 58],
+    },
+    {
+      index: 4,
+      value: [21, 53],
+    },
+    {
+      index: 5,
+      value: [22, 36],
+    },
+  ];
+  for (const { index, value } of parameters) {
+    attachConfigurationPanelToRangeSlider(index, {
+      value,
+    });
   }
 });
 
-const attachConfigurationPanelToRangeSlider = index => {
+const attachConfigurationPanelToRangeSlider = (index, props) => {
   (function (api) {
     const el = $(`#js-configuration-id-${index}`);
 
@@ -78,9 +102,5 @@ const attachConfigurationPanelToRangeSlider = index => {
     el.find('.configuration__track-scale-visibility').on('click', event =>
       api.setTrackScaleVisibility(!event.target.hasAttribute('checked')),
     );
-  })(
-    $(`#js-range-slider-id-${index}`).rangeSlider({
-      value: [25, 75],
-    }),
-  );
+  })($(`#js-range-slider-id-${index}`).rangeSlider(props));
 };

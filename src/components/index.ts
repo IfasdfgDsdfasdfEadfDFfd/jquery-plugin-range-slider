@@ -12,7 +12,7 @@ function createRangeSlider(
   root: HTMLElement,
   initStoreValue: Partial<IRangeSliderStore>,
 ): Store<IRangeSliderStore> {
-  const STORE_ID = 'range-sldider-store-id';
+  const STORE_ID = `store-for-${root.id}`;
   const INIT_VALUE: IRangeSliderStore = Object.assign(
     {
       min: 0,
