@@ -6,29 +6,37 @@ window.addEventListener('load', () => {
   const parameters = [
     {
       index: 1,
-      value: [10, 20],
+      props: {
+        value: [10, 20],
+      },
     },
     {
       index: 2,
-      value: [13, 73],
+      props: {
+        value: [13, 73],
+      },
     },
     {
       index: 3,
-      value: [54, 58],
+      props: {
+        value: [54, 58],
+      },
     },
     {
       index: 4,
-      value: [21, 53],
+      props: {
+        value: [21, 53],
+      },
     },
     {
       index: 5,
-      value: [22, 36],
+      props: {
+        value: [22, 36],
+      },
     },
   ];
-  for (const { index, value } of parameters) {
-    attachConfigurationPanelToRangeSlider(index, {
-      value,
-    });
+  for (const { index, props } of parameters) {
+    attachConfigurationPanelToRangeSlider(index, props);
   }
 });
 
