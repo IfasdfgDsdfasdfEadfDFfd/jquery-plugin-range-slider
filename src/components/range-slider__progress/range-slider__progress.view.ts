@@ -1,4 +1,4 @@
-import { IRangeSliderStore } from '../reducer';
+import { IRangeSliderState } from '../reducer';
 import { Provider, View } from '../../core';
 
 class Progress extends View {
@@ -31,13 +31,13 @@ interface TElements {
   progress: Progress;
 }
 
-class RangeSliderProgress extends Provider<IRangeSliderStore, TElements> {
+class RangeSliderProgress extends Provider<IRangeSliderState, TElements> {
   init(): void {
     this.elements.progress = new Progress();
     this.root = this.elements.progress;
   }
 
-  render(state: IRangeSliderStore): void {
+  render(state: IRangeSliderState): void {
     const { min, max } = state;
     let { value } = state;
 

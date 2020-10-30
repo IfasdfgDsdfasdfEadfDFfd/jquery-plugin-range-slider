@@ -1,4 +1,4 @@
-import { IRangeSliderStore, actions } from '../reducer';
+import { IRangeSliderState, actions } from '../reducer';
 import { Thumb } from '../range-slider__thumb';
 import { View, Action, EventCallback, Provider, Store } from '../../core';
 
@@ -59,13 +59,13 @@ class InputRange extends View {
 }
 
 abstract class RangeSliderInputRange extends Provider<
-  IRangeSliderStore,
+  IRangeSliderState,
   {
     input: InputRange;
     thumb: Thumb;
   }
 > {
-  init(store: Store<IRangeSliderStore>): void {
+  init(store: Store<IRangeSliderState>): void {
     this.elements.input = new InputRange();
     this.elements.thumb = new Thumb();
 
@@ -80,7 +80,7 @@ abstract class RangeSliderInputRange extends Provider<
     this.elements.input.onMouseOut(() => (this.elements.thumb.hovered = false));
   }
 
-  render(state: IRangeSliderStore): void {
+  render(state: IRangeSliderState): void {
     this.elements.input.min = state.min;
     this.elements.input.max = state.max;
     this.elements.input.step = state.step;
@@ -93,7 +93,7 @@ abstract class RangeSliderInputRange extends Provider<
 }
 
 class LeftRangeSliderInputRange extends RangeSliderInputRange {
-  render(state: IRangeSliderStore): void {
+  render(state: IRangeSliderState): void {
     super.render(state);
 
     if (!state.intervalMode) {
@@ -117,7 +117,7 @@ class LeftRangeSliderInputRange extends RangeSliderInputRange {
 }
 
 class RightRangeSliderInputRange extends RangeSliderInputRange {
-  render(state: IRangeSliderStore): void {
+  render(state: IRangeSliderState): void {
     super.render(state);
     this.elements.input.value = state.value[1];
 

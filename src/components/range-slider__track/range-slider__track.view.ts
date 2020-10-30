@@ -1,4 +1,4 @@
-import { actions, IRangeSliderStore } from '../reducer';
+import { actions, IRangeSliderState } from '../reducer';
 import { Provider, Store, View } from '../../core';
 import { HiddenView } from '../../core/shortcuts';
 
@@ -95,13 +95,13 @@ class TrackScaleItem extends HiddenView {
 }
 
 class RangeSliderTrack extends Provider<
-  IRangeSliderStore,
+  IRangeSliderState,
   {
     track: Track;
     scale: TrackScale;
   }
 > {
-  private getSliderValues(state: IRangeSliderStore): number[] {
+  private getSliderValues(state: IRangeSliderState): number[] {
     const { min, max, step } = state;
 
     const length = (max - min) / step + 1;
@@ -114,7 +114,7 @@ class RangeSliderTrack extends Provider<
   }
 
   private makeOnClickHandler(
-    store: Store<IRangeSliderStore>,
+    store: Store<IRangeSliderState>,
   ): (Event: MouseEvent) => void {
     return (event: MouseEvent) => {
       const target = event?.target as HTMLElement;
@@ -128,7 +128,7 @@ class RangeSliderTrack extends Provider<
     };
   }
 
-  init(store: Store<IRangeSliderStore>): void {
+  init(store: Store<IRangeSliderState>): void {
     this.elements.scale = new TrackScale();
     this.elements.track = new Track(this.elements.scale);
 
@@ -140,7 +140,7 @@ class RangeSliderTrack extends Provider<
     );
   }
 
-  render(state: IRangeSliderStore): void {
+  render(state: IRangeSliderState): void {
     this.elements.scale.update(this.getSliderValues(state));
     this.elements.scale.hidden = !state.trackScaleVisibility;
   }

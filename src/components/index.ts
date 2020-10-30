@@ -6,14 +6,14 @@ import {
   saveToLocalStoragePlugin,
   Store,
 } from '../core';
-import { IRangeSliderStore, rangeSliderStoreReducer } from './reducer';
+import { IRangeSliderState, rangeSliderStoreReducer } from './reducer';
 
 function createRangeSlider(
   root: HTMLElement,
-  initStoreValue: Partial<IRangeSliderStore>,
-): Store<IRangeSliderStore> {
+  initStoreValue: Partial<IRangeSliderState>,
+): Store<IRangeSliderState> {
   const STORE_ID = `store-for-${root.id}`;
-  const INIT_VALUE: IRangeSliderStore = Object.assign(
+  const INIT_VALUE: IRangeSliderState = Object.assign(
     {
       min: 0,
       max: 100,
@@ -27,7 +27,7 @@ function createRangeSlider(
     initStoreValue,
   );
 
-  const store = createStore<IRangeSliderStore>(
+  const store = createStore<IRangeSliderState>(
     INIT_VALUE,
     rangeSliderStoreReducer,
     {

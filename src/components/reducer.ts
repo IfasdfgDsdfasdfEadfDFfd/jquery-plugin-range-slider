@@ -1,6 +1,6 @@
 import { Action, Reducer } from '../core';
 
-interface IRangeSliderStore {
+interface IRangeSliderState {
   min: number;
   max: number;
   value: [number, number];
@@ -23,10 +23,10 @@ const actions = {
   CHANGE_TRACK_SCALE_VISIBILITY: '@CHANGE_TRACK_SCALE_VISIBILITY',
 };
 
-const rangeSliderStoreReducer: Reducer<IRangeSliderStore> = (
+const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
   action: Action,
-  state: IRangeSliderStore,
-): IRangeSliderStore => {
+  state: IRangeSliderState,
+): IRangeSliderState => {
   let left: number;
   let right: number;
   let min, max, step: number;
@@ -104,4 +104,4 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderStore> = (
   }
 };
 
-export { IRangeSliderStore, rangeSliderStoreReducer, actions };
+export { IRangeSliderState, rangeSliderStoreReducer, actions };
