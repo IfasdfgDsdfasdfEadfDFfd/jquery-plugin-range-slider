@@ -1,0 +1,1 @@
+import { rangeSliderStoreReducer } from './reducer';
