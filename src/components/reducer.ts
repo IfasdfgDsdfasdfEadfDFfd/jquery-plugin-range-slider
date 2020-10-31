@@ -39,7 +39,10 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
 
       return {
         ...state,
-        value: [left - (left % state.step), right - (right % state.step)],
+        value: [
+          left - Math.round(left % state.step),
+          right - Math.round(right % state.step),
+        ],
       };
 
     case actions.CHANGE_RIGHT_VALUE:

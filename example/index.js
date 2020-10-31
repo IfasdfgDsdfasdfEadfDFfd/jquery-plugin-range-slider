@@ -70,21 +70,19 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
       );
     });
 
-    left.on('focusout', event =>
-      api.setLeftValue(parseInt(event.target.value)),
-    );
+    left.on('focusout', event => api.setLeftValue(Number(event.target.value)));
     right.on('focusout', event =>
-      api.setRightValue(parseInt(event.target.value)),
+      api.setRightValue(Number(event.target.value)),
     );
 
     el.find('.configuration__min').on('focusout', event =>
-      api.setMin(parseInt(event.target.value)),
+      api.setMin(Number(event.target.value)),
     );
     el.find('.configuration__max').on('focusout', event =>
-      api.setMax(parseInt(event.target.value)),
+      api.setMax(Number(event.target.value)),
     );
     el.find('.configuration__step').on('focusout', event =>
-      api.setStep(parseInt(event.target.value)),
+      api.setStep(Number(event.target.value)),
     );
 
     let unsubscribe = () => {};
