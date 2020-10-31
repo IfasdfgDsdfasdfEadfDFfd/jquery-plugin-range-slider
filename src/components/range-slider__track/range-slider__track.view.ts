@@ -1,4 +1,4 @@
-import { actions, IRangeSliderState } from '../reducer';
+import { actionNames, IRangeSliderState } from '../reducer';
 import { Provider, Store, View } from '../../core';
 import { HiddenView } from '../../core/shortcuts';
 
@@ -121,7 +121,7 @@ class RangeSliderTrack extends Provider<
 
       if (target.nodeName === 'BUTTON') {
         store.dispatch({
-          type: actions.CHANGE_RIGHT_VALUE,
+          name: actionNames.CHANGE_RIGHT_VALUE,
           value: parseInt(target.textContent || ''),
         });
       }

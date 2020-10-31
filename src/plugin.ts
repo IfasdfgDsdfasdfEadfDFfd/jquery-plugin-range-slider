@@ -1,5 +1,5 @@
 import { createRangeSlider } from './components';
-import { actions, IRangeSliderState } from './components/reducer';
+import { actionNames, IRangeSliderState } from './components/reducer';
 
 interface PluginApi {
   subscribe(cb: (state: IRangeSliderState) => void): void;
@@ -26,39 +26,42 @@ function rangeSlider(
     },
 
     setLeftValue(value: number) {
-      store.dispatch({ type: actions.CHANGE_LEFT_VALUE, value });
+      store.dispatch({ name: actionNames.CHANGE_LEFT_VALUE, value });
     },
 
     setRightValue(value: number) {
-      store.dispatch({ type: actions.CHANGE_RIGHT_VALUE, value });
+      store.dispatch({ name: actionNames.CHANGE_RIGHT_VALUE, value });
     },
 
     setMin(value: number) {
-      store.dispatch({ type: actions.CHANGE_MIN, value });
+      store.dispatch({ name: actionNames.CHANGE_MIN, value });
     },
 
     setMax(value: number) {
-      store.dispatch({ type: actions.CHANGE_MAX, value });
+      store.dispatch({ name: actionNames.CHANGE_MAX, value });
     },
 
     setStep(value: number) {
-      store.dispatch({ type: actions.CHANGE_STEP, value });
+      store.dispatch({ name: actionNames.CHANGE_STEP, value });
     },
 
     setOrientVertical(value: boolean) {
-      store.dispatch({ type: actions.CHANGE_ORIENT, value });
+      store.dispatch({ name: actionNames.CHANGE_ORIENT, value });
     },
 
     setIntervalMode(value: boolean) {
-      store.dispatch({ type: actions.CHANGE_INTERVAL_MODE, value });
+      store.dispatch({ name: actionNames.CHANGE_INTERVAL_MODE, value });
     },
 
     setMarkerVisibility(value: boolean) {
-      store.dispatch({ type: actions.CHANGE_MARKER_VISIBILITY, value });
+      store.dispatch({ name: actionNames.CHANGE_MARKER_VISIBILITY, value });
     },
 
     setTrackScaleVisibility(value: boolean) {
-      store.dispatch({ type: actions.CHANGE_TRACK_SCALE_VISIBILITY, value });
+      store.dispatch({
+        name: actionNames.CHANGE_TRACK_SCALE_VISIBILITY,
+        value,
+      });
     },
   };
 }

@@ -1,7 +1,11 @@
-import { actions, rangeSliderStoreReducer, IRangeSliderState } from './reducer';
+import {
+  actionNames,
+  rangeSliderStoreReducer,
+  IRangeSliderState,
+} from './reducer';
 
 describe('test reducer', () => {
-  describe(`${actions.CHANGE_LEFT_VALUE} (MIN: 50, MAX: 100, STEP: 5)`, () => {
+  describe(`${actionNames.CHANGE_LEFT_VALUE} (MIN: 50, MAX: 100, STEP: 5)`, () => {
     const MIN = 50;
     const MAX = 100;
     const STEP = 5;
@@ -16,7 +20,7 @@ describe('test reducer', () => {
 
     test('min <= value <= max', () => {
       const ACTION = {
-        type: actions.CHANGE_LEFT_VALUE,
+        name: actionNames.CHANGE_LEFT_VALUE,
         value: 80,
       };
 
@@ -27,7 +31,7 @@ describe('test reducer', () => {
 
     test('min >= value <= max ', () => {
       const ACTION = {
-        type: actions.CHANGE_LEFT_VALUE,
+        name: actionNames.CHANGE_LEFT_VALUE,
         value: 30,
       };
 
@@ -38,7 +42,7 @@ describe('test reducer', () => {
 
     test('min <= value >= max ', () => {
       const ACTION = {
-        type: actions.CHANGE_LEFT_VALUE,
+        name: actionNames.CHANGE_LEFT_VALUE,
         value: 110,
       };
 
@@ -48,7 +52,7 @@ describe('test reducer', () => {
     });
   });
 
-  describe(`${actions.CHANGE_LEFT_VALUE} (MIN: -50, MAX: 0, STEP: 5)`, () => {
+  describe(`${actionNames.CHANGE_LEFT_VALUE} (MIN: -50, MAX: 0, STEP: 5)`, () => {
     const MIN = -50;
     const MAX = 0;
     const STEP = 5;
@@ -63,7 +67,7 @@ describe('test reducer', () => {
 
     test('min <= value <= max', () => {
       const ACTION = {
-        type: actions.CHANGE_LEFT_VALUE,
+        name: actionNames.CHANGE_LEFT_VALUE,
         value: -20,
       };
 
@@ -74,7 +78,7 @@ describe('test reducer', () => {
 
     test('min >= value <= max ', () => {
       const ACTION = {
-        type: actions.CHANGE_LEFT_VALUE,
+        name: actionNames.CHANGE_LEFT_VALUE,
         value: -100,
       };
 
@@ -85,7 +89,7 @@ describe('test reducer', () => {
 
     test('min <= value >= max ', () => {
       const ACTION = {
-        type: actions.CHANGE_LEFT_VALUE,
+        name: actionNames.CHANGE_LEFT_VALUE,
         value: 1,
       };
 
@@ -95,7 +99,7 @@ describe('test reducer', () => {
     });
   });
 
-  describe(`${actions.CHANGE_LEFT_VALUE} (MIN: 0.5, MAX: 2.5, STEP: 0.1)`, () => {
+  describe(`${actionNames.CHANGE_LEFT_VALUE} (MIN: 0.5, MAX: 2.5, STEP: 0.1)`, () => {
     const MIN = 0.5;
     const MAX = 2.5;
     const STEP = 0.1;
@@ -110,7 +114,7 @@ describe('test reducer', () => {
 
     test('min <= value <= max', () => {
       const ACTION = {
-        type: actions.CHANGE_LEFT_VALUE,
+        name: actionNames.CHANGE_LEFT_VALUE,
         value: 1.5,
       };
 
@@ -121,7 +125,7 @@ describe('test reducer', () => {
 
     test('min >= value <= max ', () => {
       const ACTION = {
-        type: actions.CHANGE_LEFT_VALUE,
+        name: actionNames.CHANGE_LEFT_VALUE,
         value: 0.2,
       };
 
@@ -132,7 +136,7 @@ describe('test reducer', () => {
 
     test('min <= value >= max ', () => {
       const ACTION = {
-        type: actions.CHANGE_LEFT_VALUE,
+        name: actionNames.CHANGE_LEFT_VALUE,
         value: 3.3,
       };
 
@@ -142,7 +146,7 @@ describe('test reducer', () => {
     });
   });
 
-  describe(`${actions.CHANGE_RIGHT_VALUE} (MIN: 50, MAX: 100, STEP: 5)`, () => {
+  describe(`${actionNames.CHANGE_RIGHT_VALUE} (MIN: 50, MAX: 100, STEP: 5)`, () => {
     const MIN = 50;
     const MAX = 100;
     const STEP = 5;
@@ -157,7 +161,7 @@ describe('test reducer', () => {
 
     test('min <= value <= max', () => {
       const ACTION = {
-        type: actions.CHANGE_RIGHT_VALUE,
+        name: actionNames.CHANGE_RIGHT_VALUE,
         value: 75,
       };
 
@@ -168,7 +172,7 @@ describe('test reducer', () => {
 
     test('min >= value <= max ', () => {
       const ACTION = {
-        type: actions.CHANGE_RIGHT_VALUE,
+        name: actionNames.CHANGE_RIGHT_VALUE,
         value: 0,
       };
 
@@ -179,7 +183,7 @@ describe('test reducer', () => {
 
     test('min <= value >= max ', () => {
       const ACTION = {
-        type: actions.CHANGE_RIGHT_VALUE,
+        name: actionNames.CHANGE_RIGHT_VALUE,
         value: 110,
       };
 

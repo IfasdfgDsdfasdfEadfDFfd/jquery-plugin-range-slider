@@ -7,7 +7,7 @@ describe('store test', () => {
   const REDUCER = jest.fn(x => x.value);
   const ACTION = jest.fn();
   ACTION.mockReturnValue({
-    type: 'action_name',
+    name: 'action_name',
     value: NEXT_STATE,
   });
 
@@ -54,7 +54,7 @@ describe('store test', () => {
   describe('test store validators', () => {
     test('NaNValidator catch all action with {value: NaN}', () => {
       const ACTION_NAN_VALUE = {
-        type: 'ACTION_NAME',
+        name: 'ACTION_NAME',
         value: NaN,
       };
       const LISTENER = jest.fn(x => x);
@@ -64,7 +64,7 @@ describe('store test', () => {
       store.subscribe(LISTENER);
 
       store.dispatch(ACTION_NAN_VALUE);
-      expect(LISTENER.mock.calls[1][0].from).toEqual(ACTION_NAN_VALUE.type);
+      expect(LISTENER.mock.calls[1][0].from).toEqual(ACTION_NAN_VALUE.name);
     });
   });
 });
