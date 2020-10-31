@@ -1,6 +1,7 @@
 import { actionNames, getMax, getMin } from './actions';
 import { Action, Reducer } from '../../core';
 import { getValue } from './actions/change-value';
+import { makeValue } from './actions/common';
 
 interface IRangeSliderState {
   min: number;
@@ -17,8 +18,7 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
   action: Action,
   state: IRangeSliderState,
 ): IRangeSliderState => {
-  let min, max, step: number;
-  let value: [number, number];
+  let min, max: number;
 
   switch (action.name) {
     case actionNames.CHANGE_LEFT_VALUE:
@@ -64,18 +64,15 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
       };
 
     case actionNames.CHANGE_STEP:
-      step = Math.min(Math.max(parseInt(action.value), 1));
-      value = [
-        Math.round(state.value[0] - (state.value[0] % step)),
-        Math.round(state.value[1] - (state.value[1] % step)),
-      ];
-
       return {
         ...state,
-        step,
-        value,
-        min: state.min - (state.min % step),
-        max: state.max - (state.max % step),
+        step: action.value,
+        value: [
+          makeValue(state.value[0]).multipleBy(action.value),
+          makeValue(state.value[1]).multipleBy(action.value),
+        ],
+        min: makeValue(state.min).multipleBy(action.value),
+        max: makeValue(state.max).multipleBy(action.value),
       };
 
     case actionNames.CHANGE_ORIENT:

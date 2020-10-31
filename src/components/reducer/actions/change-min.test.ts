@@ -23,5 +23,6 @@ describe(`${CHANGE_MIN} MAX: 100, STEP: 1`, () => {
     const result = getMin(MIN, MAX, STEP);
 
     expect(result).toEqual(MAX);
+    expect(result).toEqual(MIN);
   });
 });
