@@ -1,4 +1,3 @@
-import { Provider, Store, View } from '../../core';
 import {
   LeftRangeSliderInputRange,
   RightRangeSliderInputRange,
@@ -6,6 +5,7 @@ import {
 import { RangeSliderProgress } from '../range-slider__progress';
 import { RangeSliderTrack } from '../range-slider__track';
 import { IRangeSliderState } from '../reducer';
+import { Provider, Store, View } from '../../core';
 
 import './range-slider.styles.scss';
 
