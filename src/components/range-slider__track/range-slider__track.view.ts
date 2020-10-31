@@ -105,6 +105,7 @@ class RangeSliderTrack extends Provider<
     const { min, max, step } = state;
 
     const length = (max - min) / step + 1;
+    console.log(length);
 
     const values = Array(length)
       .fill(null)

@@ -25,4 +25,11 @@ describe(`${CHANGE_MIN} MAX: 100, STEP: 1`, () => {
     expect(result).toEqual(MAX);
     expect(result).toEqual(MIN);
   });
+
+  test('min:float < max', () => {
+    const MIN = 0.1;
+    const result = getMin(MIN, MAX, STEP);
+
+    expect(result).toEqual(STEP);
+  });
 });

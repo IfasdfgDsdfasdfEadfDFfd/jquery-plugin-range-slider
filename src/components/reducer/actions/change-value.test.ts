@@ -26,11 +26,11 @@ describe(actionNames.CHANGE_LEFT_VALUE, () => {
     });
   });
 
-  describe('(MIN: -50, MAX: 0, RIGHT: -40, STEP: 5)', () => {
+  describe('(MIN: -50, MAX: 0, RIGHT: -40, STEP: -5)', () => {
     const MIN = -50;
     const MAX = 0;
     const RIGHT = -10;
-    const STEP = 5;
+    const STEP = -5;
 
     test('min < value < right < max', () => {
       const VALUE = -20;
@@ -103,11 +103,11 @@ describe(actionNames.CHANGE_RIGHT_VALUE, () => {
     });
   });
 
-  describe('(MIN: -50, MAX: 0, LEFT: -40, STEP: 5)', () => {
+  describe('(MIN: -50, MAX: 0, LEFT: -40, STEP: -5)', () => {
     const MIN = -50;
     const MAX = 0;
     const LEFT = -40;
-    const STEP = 5;
+    const STEP = -5;
 
     test('min < left < value < max', () => {
       const VALUE = -10;
