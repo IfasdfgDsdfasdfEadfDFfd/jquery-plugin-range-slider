@@ -55,6 +55,12 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
       };
 
     case actionNames.CHANGE_MAX:
+      console.log(
+        action.value,
+        state.min,
+        state.step,
+        getMax(action.value, state.min, state.step),
+      );
       max = getMax(action.value, state.min, state.step);
 
       return {
