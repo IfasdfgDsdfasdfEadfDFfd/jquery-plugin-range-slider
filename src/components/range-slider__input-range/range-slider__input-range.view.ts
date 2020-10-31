@@ -1,4 +1,4 @@
-import { IRangeSliderState, actions } from '../reducer';
+import { IRangeSliderState, actionNames } from '../reducer';
 import { Thumb } from '../range-slider__thumb';
 import { View, Action, EventCallback, Provider, Store } from '../../core';
 
@@ -6,7 +6,7 @@ class InputRange extends View {
   constructor() {
     super({
       tag: 'input',
-      attrs: { type: 'range', class: 'range-slider__input' },
+      attrs: { type: 'range', name: 'range', class: 'range-slider__input' },
       children: [],
     });
   }
@@ -110,7 +110,7 @@ class LeftRangeSliderInputRange extends RangeSliderInputRange {
 
   makeAction(value: number): Action {
     return {
-      type: actions.CHANGE_LEFT_VALUE,
+      name: actionNames.CHANGE_LEFT_VALUE,
       value,
     };
   }
@@ -127,7 +127,7 @@ class RightRangeSliderInputRange extends RangeSliderInputRange {
 
   makeAction(value: number): Action {
     return {
-      type: actions.CHANGE_RIGHT_VALUE,
+      name: actionNames.CHANGE_RIGHT_VALUE,
       value,
     };
   }

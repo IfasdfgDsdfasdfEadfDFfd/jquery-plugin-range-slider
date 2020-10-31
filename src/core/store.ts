@@ -3,7 +3,7 @@
 type Listener<T> = (state: T) => void;
 
 type Action = {
-  type: string;
+  name: string;
   value: any;
 };
 
@@ -63,7 +63,7 @@ function createStore<TState>(
   };
 
   const coldStart = () => {
-    dispatch({ type: '@COLD_START', value: null });
+    dispatch({ name: '@COLD_START', value: null });
   };
 
   return { dispatch, getState, subscribe, coldStart };
@@ -86,9 +86,9 @@ function NaNValidator(action: Action): Action {
   if (typeof action.value === 'number') {
     if (isNaN(action.value)) {
       return {
-        type: '@NAN_VALIDATOR_CATCH',
+        name: '@NAN_VALIDATOR_CATCH',
         value: {
-          from: action.type,
+          from: action.name,
         },
       };
     }
