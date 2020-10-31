@@ -4,13 +4,14 @@ const CHANGE_LEFT_VALUE = '@CHANGE_LEFT_VALUE';
 const CHANGE_RIGHT_VALUE = '@CHANGE_RIGHT_VALUE';
 
 const getValue = (
-  value: number,
+  leftValue: number,
+  rightValue: number,
   min: number,
   max: number,
   step: number,
 ): [number, number] => {
-  const leftValue = parseLeftValue(value, min, max);
-  const rightValue = parseRightValue(value, min, max);
+  leftValue = parseLeftValue(leftValue, min, max);
+  rightValue = parseRightValue(rightValue, min, max);
 
   return [
     makeValue(leftValue).multipleBy(step),
