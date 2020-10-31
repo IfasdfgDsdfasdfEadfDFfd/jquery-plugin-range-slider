@@ -101,18 +101,6 @@ class RangeSliderTrack extends Provider<
     scale: TrackScale;
   }
 > {
-  getSliderValues(state: IRangeSliderState): number[] {
-    const { min, max, step } = state;
-
-    const length = Math.round((max - min) / step + 1);
-
-    const values = Array(length)
-      .fill(null)
-      .map((_, index) => min + step * index);
-
-    return values;
-  }
-
   private makeOnClickHandler(
     store: Store<IRangeSliderState>,
   ): (Event: MouseEvent) => void {
@@ -141,9 +129,21 @@ class RangeSliderTrack extends Provider<
   }
 
   render(state: IRangeSliderState): void {
-    this.elements.scale.update(this.getSliderValues(state));
+    this.elements.scale.update(
+      getSliderValues(state.min, state.max, state.step),
+    );
     this.elements.scale.hidden = !state.trackScaleVisibility;
   }
 }
 
-export { Track, TrackScale, TrackScaleItem, RangeSliderTrack };
+const getSliderValues = (min: number, max: number, step: number): number[] => {
+  const length = Math.round((max - min) / step + 1);
+
+  const values = Array(length)
+    .fill(null)
+    .map((_, index) => Number((min + step * index).toFixed(1)));
+
+  return values;
+};
+
+export { Track, TrackScale, TrackScaleItem, RangeSliderTrack, getSliderValues };
