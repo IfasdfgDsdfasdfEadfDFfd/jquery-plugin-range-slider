@@ -1,4 +1,4 @@
-import { actionNames, getMin } from './actions';
+import { actionNames, getMax, getMin } from './actions';
 import { Action, Reducer } from '../../core';
 import { getValue } from './actions/change-value';
 
@@ -17,7 +17,6 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
   action: Action,
   state: IRangeSliderState,
 ): IRangeSliderState => {
-  let right: number;
   let min, max, step: number;
   let value: [number, number];
 
@@ -35,7 +34,7 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
       };
 
     case actionNames.CHANGE_MIN:
-      min = getMin(action.value, state.max, state.min);
+      min = getMin(action.value, state.max, state.step);
 
       return {
         ...state,
@@ -44,12 +43,12 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
       };
 
     case actionNames.CHANGE_MAX:
-      max = Math.max(parseInt(action.value), state.min);
-      right = Math.min(max, state.value[1]);
+      max = getMax(action.value, state.min, state.step);
+
       return {
         ...state,
-        max: max - (max % state.step),
-        value: [state.value[0], right],
+        max,
+        value: [state.value[0], Math.min(state.value[1], max)],
       };
 
     case actionNames.CHANGE_STEP:

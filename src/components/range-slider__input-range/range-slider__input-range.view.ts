@@ -6,7 +6,7 @@ class InputRange extends View {
   constructor() {
     super({
       tag: 'input',
-      attrs: { name: 'range', class: 'range-slider__input' },
+      attrs: { type: 'range', name: 'range', class: 'range-slider__input' },
       children: [],
     });
   }
