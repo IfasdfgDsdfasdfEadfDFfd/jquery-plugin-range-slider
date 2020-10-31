@@ -8,6 +8,10 @@ const makeValue = (
       return value % step === 0 ? value : step;
     }
 
+    if (Math.round(value) !== value && Math.round(step) === step) {
+      value = Math.floor(value);
+    }
+
     return value - Math.round(value % step);
   },
 });

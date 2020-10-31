@@ -25,4 +25,11 @@ describe(`${CHANGE_MAX} MIN: 0, STEP: 1`, () => {
     expect(result).toEqual(MAX);
     expect(result).toEqual(MIN);
   });
+
+  test('max:float > min, max % multiple !== 0', () => {
+    const MAX = 10.3;
+    const result = getMax(MAX, MIN, STEP);
+
+    expect(result).toEqual(10);
+  });
 });

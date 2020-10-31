@@ -21,7 +21,7 @@ class Thumb extends HiddenView {
     this.marker = this.children[0] as ThumbMarker;
   }
 
-  positionate({ max, min, value }: { [key: string]: number }): void {
+  positioning({ max, min, value }: { [key: string]: number }): void {
     this.lastValues = { max, min, value };
 
     const thumbWidth =
@@ -48,7 +48,7 @@ class Thumb extends HiddenView {
   }
 
   positionCorrection(): void {
-    this.positionate(this.lastValues);
+    this.positioning(this.lastValues);
   }
 }
 
