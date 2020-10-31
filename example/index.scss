@@ -42,7 +42,7 @@ body {
 
 .configuration {
   display: grid;
-  grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+  grid-template: repeat(5, 1fr) / repeat(2, 1fr);
 }
 
 @media only screen and (max-width: 540px) {
