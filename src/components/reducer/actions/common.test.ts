@@ -23,8 +23,8 @@ describe('makeValue().', () => {
     });
 
     test('value > multiple:float, value % multiple !== 0', () => {
-      const result = makeValue(15).multipleBy(0.1);
-      expect(result).toEqual(15);
+      const result = makeValue(15).multipleBy(0.4);
+      expect(result).toEqual(14.8);
     });
 
     test('value:float > multiple, value % multiple !== 0', () => {

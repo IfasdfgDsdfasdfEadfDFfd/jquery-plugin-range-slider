@@ -12,6 +12,10 @@ const makeValue = (
       value = Math.floor(value);
     }
 
+    if (Math.round(value) === value && Math.round(step) !== step) {
+      return value - Number((value % step).toFixed(2));
+    }
+
     return value - Math.round(value % step);
   },
 });

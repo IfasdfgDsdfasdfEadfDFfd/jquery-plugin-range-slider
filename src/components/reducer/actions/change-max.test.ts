@@ -32,4 +32,12 @@ describe(`${CHANGE_MAX} MIN: 0, STEP: 1`, () => {
 
     expect(result).toEqual(10);
   });
+
+  test('max > min, step:float', () => {
+    const MAX = 10;
+    const STEP = 0.4;
+    const result = getMax(MAX, MIN, STEP);
+
+    expect(result).not.toEqual(MAX);
+  });
 });
