@@ -101,7 +101,7 @@ class RangeSliderTrack extends Provider<
     scale: TrackScale;
   }
 > {
-  private getSliderValues(state: IRangeSliderState): number[] {
+  getSliderValues(state: IRangeSliderState): number[] {
     const { min, max, step } = state;
 
     const length = (max - min) / step + 1;
