@@ -1,4 +1,9 @@
+$small-screen: 540px;
+$middle-screen: 1280px;
+
 body {
+  margin: 0;
+  padding: 0;
   background-color: rgb(248, 248, 248);
 }
 
@@ -19,43 +24,9 @@ body {
   }
 }
 
-@media only screen and (max-width: 1024px) {
-  .container {
-    flex-flow: column nowrap;
-    gap: 2rem;
-    margin: 3rem;
-    padding: 2rem;
-
-    .configuration {
-      width: 70%;
-    }
-  }
-}
-
-@media only screen and (max-width: 1024px) {
-  .container {
-    .configuration {
-      width: 100%;
-    }
-  }
-}
-
 .configuration {
   display: grid;
   grid-template: repeat(5, 1fr) / repeat(2, 1fr);
-}
-
-@media only screen and (max-width: 540px) {
-  .configuration {
-    grid-template: repeat(10, 1fr) / 1fr;
-  }
-
-  .container {
-    flex-flow: column nowrap;
-    gap: 2rem;
-    margin: 1rem;
-    padding: 1rem;
-  }
 }
 
 .configuration__tool {
@@ -103,4 +74,26 @@ input:focus {
   border: 0;
   box-shadow: 0 0 5px 5px rgb(214, 214, 214);
   outline: 0;
+}
+
+@media only screen and (max-width: $middle-screen) {
+  .container {
+    flex-flow: column nowrap;
+    gap: 2rem;
+    margin: 3rem;
+    padding: 2rem;
+  }
+}
+
+@media only screen and (max-width: $small-screen) {
+  .configuration {
+    grid-template: repeat(10, 1fr) / 1fr;
+  }
+
+  .container {
+    flex-flow: column nowrap;
+    gap: 3rem;
+    margin: 3rem 1rem;
+    padding: 2rem 1rem;
+  }
 }
