@@ -100,5 +100,7 @@ input[type="checkbox"] {
 }
 
 input:focus {
+  border: 0;
   box-shadow: 0 0 5px 5px rgb(214, 214, 214);
+  outline: 0;
 }
