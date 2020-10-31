@@ -1,3 +1,5 @@
+import { makeValue } from './common';
+
 const CHANGE_LEFT_VALUE = '@CHANGE_LEFT_VALUE';
 const CHANGE_RIGHT_VALUE = '@CHANGE_RIGHT_VALUE';
 
@@ -11,8 +13,8 @@ const getValue = (
   const rightValue = parseRightValue(value, min, max);
 
   return [
-    leftValue - Math.round(leftValue % step),
-    rightValue - Math.round(rightValue % step),
+    makeValue(leftValue).multipleBy(step),
+    makeValue(rightValue).multipleBy(step),
   ];
 };
 

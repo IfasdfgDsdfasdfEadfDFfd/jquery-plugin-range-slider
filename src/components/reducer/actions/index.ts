@@ -4,10 +4,12 @@ import {
   getValue,
 } from './change-value';
 
+import { CHANGE_MIN, getMin } from './change-min';
+
 const actionNames = {
   CHANGE_LEFT_VALUE,
   CHANGE_RIGHT_VALUE,
-  CHANGE_MIN: '@CHANGE_MIN',
+  CHANGE_MIN,
   CHANGE_MAX: '@CHANGE_MAX',
   CHANGE_STEP: '@CHANGE_STEP',
   CHANGE_ORIENT: '@CHANGE_ORIENT',
@@ -16,4 +18,4 @@ const actionNames = {
   CHANGE_TRACK_SCALE_VISIBILITY: '@CHANGE_TRACK_SCALE_VISIBILITY',
 };
 
-export { actionNames, getValue };
+export { actionNames, getValue, getMin };

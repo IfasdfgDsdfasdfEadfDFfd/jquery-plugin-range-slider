@@ -1,4 +1,4 @@
-import { actionNames } from './actions';
+import { actionNames, getMin } from './actions';
 import { Action, Reducer } from '../../core';
 import { getValue } from './actions/change-value';
 
@@ -35,10 +35,11 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
       };
 
     case actionNames.CHANGE_MIN:
-      min = Math.min(parseInt(action.value), state.max);
+      min = getMin(action.value, state.max, state.min);
+
       return {
         ...state,
-        min: min - (min % state.step),
+        min,
         value: [Math.max(min, state.value[0]), state.value[1]],
       };
 
