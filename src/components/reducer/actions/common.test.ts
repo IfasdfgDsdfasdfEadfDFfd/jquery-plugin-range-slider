@@ -7,7 +7,7 @@ describe('makeValue().', () => {
       expect(result).toEqual(0);
     });
 
-    test('value < multiple, value % multiple !== 0', () => {
+    test('value:float < multiple, value % multiple !== 0', () => {
       const result = makeValue(0.1).multipleBy(1);
       expect(result).toEqual(1);
     });
@@ -15,6 +15,21 @@ describe('makeValue().', () => {
     test('value > multiple, value % multiple === 0', () => {
       const result = makeValue(2).multipleBy(1);
       expect(result).toEqual(2);
+    });
+
+    test('value:float > multiple:float, value % multiple === 0', () => {
+      const result = makeValue(1.5).multipleBy(0.1);
+      expect(result).toEqual(1.5);
+    });
+
+    test('value > multiple:float, value % multiple !== 0', () => {
+      const result = makeValue(15).multipleBy(0.1);
+      expect(result).toEqual(15);
+    });
+
+    test('value:float > multiple, value % multiple !== 0', () => {
+      const result = makeValue(15.7).multipleBy(5);
+      expect(result).toEqual(15);
     });
   });
 });

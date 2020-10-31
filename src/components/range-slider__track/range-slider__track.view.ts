@@ -104,8 +104,7 @@ class RangeSliderTrack extends Provider<
   getSliderValues(state: IRangeSliderState): number[] {
     const { min, max, step } = state;
 
-    const length = (max - min) / step + 1;
-    console.log(length);
+    const length = Math.round((max - min) / step + 1);
 
     const values = Array(length)
       .fill(null)
