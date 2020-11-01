@@ -5,6 +5,7 @@ interface PluginApi {
   subscribe(cb: (state: IRangeSliderState) => void): void;
   setLeftValue(value: number): void;
   setRightValue(value: number): void;
+  // setPrefix(value: string): void;
   setMin(value: number): void;
   setMax(value: number): void;
   setStep(value: number): void;
@@ -18,47 +19,55 @@ function rangeSlider(
   this: JQuery,
   props: Partial<IRangeSliderState> = {},
 ): PluginApi {
-  const store = createRangeSlider(this.get(0), props);
+  const componentStore = createRangeSlider(this.get(0), props);
 
   return {
     subscribe(cb: (state: IRangeSliderState) => void) {
-      store.subscribe(cb);
+      componentStore.subscribe(cb);
     },
 
     setLeftValue(value: number) {
-      store.dispatch({ name: actionNames.CHANGE_LEFT_VALUE, value });
+      componentStore.dispatch({ name: actionNames.CHANGE_LEFT_VALUE, value });
     },
 
     setRightValue(value: number) {
-      store.dispatch({ name: actionNames.CHANGE_RIGHT_VALUE, value });
+      componentStore.dispatch({ name: actionNames.CHANGE_RIGHT_VALUE, value });
     },
 
+    // setPrefix(value: string) {},
+
     setMin(value: number) {
-      store.dispatch({ name: actionNames.CHANGE_MIN, value });
+      componentStore.dispatch({ name: actionNames.CHANGE_MIN, value });
     },
 
     setMax(value: number) {
-      store.dispatch({ name: actionNames.CHANGE_MAX, value });
+      componentStore.dispatch({ name: actionNames.CHANGE_MAX, value });
     },
 
     setStep(value: number) {
-      store.dispatch({ name: actionNames.CHANGE_STEP, value });
+      componentStore.dispatch({ name: actionNames.CHANGE_STEP, value });
     },
 
     setOrientVertical(value: boolean) {
-      store.dispatch({ name: actionNames.CHANGE_ORIENT, value });
+      componentStore.dispatch({ name: actionNames.CHANGE_ORIENT, value });
     },
 
     setIntervalMode(value: boolean) {
-      store.dispatch({ name: actionNames.CHANGE_INTERVAL_MODE, value });
+      componentStore.dispatch({
+        name: actionNames.CHANGE_INTERVAL_MODE,
+        value,
+      });
     },
 
     setMarkerVisibility(value: boolean) {
-      store.dispatch({ name: actionNames.CHANGE_MARKER_VISIBILITY, value });
+      componentStore.dispatch({
+        name: actionNames.CHANGE_MARKER_VISIBILITY,
+        value,
+      });
     },
 
     setTrackScaleVisibility(value: boolean) {
-      store.dispatch({
+      componentStore.dispatch({
         name: actionNames.CHANGE_TRACK_SCALE_VISIBILITY,
         value,
       });

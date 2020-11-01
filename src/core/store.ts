@@ -66,7 +66,12 @@ function createStore<TState>(
     dispatch({ name: '@COLD_START', value: null });
   };
 
-  return { dispatch, getState, subscribe, coldStart };
+  return {
+    dispatch,
+    getState,
+    subscribe,
+    coldStart,
+  };
 }
 
 function loadFromLocalStoragePlugin<T>(key: string): Plugin<T> {

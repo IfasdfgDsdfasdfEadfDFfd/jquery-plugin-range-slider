@@ -85,12 +85,8 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
       api.setStep(Number(event.target.value)),
     );
 
-    let unsubscribe = () => {};
     el.find('.configuration__prefix').on('focusout', event => {
-      unsubscribe();
-      unsubscribe = api.registerMiddleware(value => {
-        return `${event.target.value}${value}`;
-      });
+      api.setPrefix(event.target.value);
     });
 
     el.find('.configuration__orient').on('click', event =>

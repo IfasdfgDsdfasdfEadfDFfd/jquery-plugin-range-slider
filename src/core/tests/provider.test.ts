@@ -3,10 +3,10 @@ import { createStore } from '../store';
 
 describe('test provider', () => {
   test('call render every time store updated', () => {
-    const STORE = createStore('', () => '');
+    const STORE = createStore<string>('', () => '');
     const renderHandler = jest.fn();
 
-    class SomeProvider extends Provider<unknown, unknown> {
+    class SomeProvider extends Provider<string, unknown> {
       init() {
         // placeholder
       }
