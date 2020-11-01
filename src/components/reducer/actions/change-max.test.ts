@@ -38,6 +38,6 @@ describe(`${CHANGE_MAX} MIN: 0, STEP: 1`, () => {
     const STEP = 0.4;
     const result = getMax(MAX, MIN, STEP);
 
-    expect(result).not.toEqual(MAX);
+    expect(result).toEqual(10);
   });
 });

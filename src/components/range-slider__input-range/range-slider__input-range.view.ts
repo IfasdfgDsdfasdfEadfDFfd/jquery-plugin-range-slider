@@ -71,7 +71,7 @@ abstract class RangeSliderInputRange extends Provider<
 
     this.elements.input.onChange(event => {
       const target = event.target as HTMLInputElement;
-      store.dispatch(this.makeAction(parseInt(target.value)));
+      store.dispatch(this.makeAction(Number(target.value)));
     });
 
     this.elements.input.onFocusIn(() => (this.elements.thumb.focused = true));

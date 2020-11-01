@@ -110,7 +110,7 @@ class RangeSliderTrack extends Provider<
       if (target.nodeName === 'BUTTON') {
         store.dispatch({
           name: actionNames.CHANGE_RIGHT_VALUE,
-          value: parseInt(target.textContent || ''),
+          value: Number(target.textContent || ''),
         });
       }
     };
