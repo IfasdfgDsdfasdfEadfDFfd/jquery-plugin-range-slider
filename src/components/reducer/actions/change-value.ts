@@ -10,12 +10,12 @@ const getValue = (
   max: number,
   step: number,
 ): [number, number] => {
-  leftValue = parseLeftValue(leftValue, min, max);
-  rightValue = parseRightValue(rightValue, leftValue, max);
+  const nextLeftValue = parseLeftValue(leftValue, min, rightValue);
+  const nextRightValue = parseRightValue(rightValue, leftValue, max);
 
   return [
-    makeValue(leftValue).multipleBy(step),
-    makeValue(rightValue).multipleBy(step),
+    makeValue(nextLeftValue).multipleBy(step),
+    makeValue(nextRightValue).multipleBy(step),
   ];
 };
 

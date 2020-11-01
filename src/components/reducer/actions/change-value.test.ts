@@ -10,7 +10,7 @@ describe(actionNames.CHANGE_LEFT_VALUE, () => {
     test('min < value < right < max', () => {
       const VALUE = 80;
       const NEXT_VALUE = getValue(VALUE, RIGHT, MIN, MAX, STEP);
-      expect(NEXT_VALUE[0]).toEqual(VALUE);
+      expect(NEXT_VALUE[0]).toEqual(RIGHT);
     });
 
     test('min > value < right < max ', () => {
@@ -22,7 +22,7 @@ describe(actionNames.CHANGE_LEFT_VALUE, () => {
     test('min < value > max > right', () => {
       const VALUE = 110;
       const NEXT_VALUE = getValue(VALUE, RIGHT, MIN, MAX, STEP);
-      expect(NEXT_VALUE[0]).toEqual(MAX);
+      expect(NEXT_VALUE[0]).toEqual(RIGHT);
     });
   });
 
@@ -47,7 +47,7 @@ describe(actionNames.CHANGE_LEFT_VALUE, () => {
     test('min < value > max > right', () => {
       const VALUE = 1;
       const NEXT_VALUE = getValue(VALUE, RIGHT, MIN, MAX, STEP);
-      expect(NEXT_VALUE[0]).toEqual(MAX);
+      expect(NEXT_VALUE[0]).toEqual(RIGHT);
     });
   });
 
@@ -72,7 +72,7 @@ describe(actionNames.CHANGE_LEFT_VALUE, () => {
     test('min < value > max > right', () => {
       const VALUE = 3.3;
       const NEXT_VALUE = getValue(VALUE, RIGHT, MIN, MAX, STEP);
-      expect(NEXT_VALUE[0]).toEqual(MAX);
+      expect(NEXT_VALUE[0]).toEqual(RIGHT);
     });
   });
 });
@@ -93,7 +93,7 @@ describe(actionNames.CHANGE_RIGHT_VALUE, () => {
     test('min > left > value < max ', () => {
       const VALUE = 0;
       const NEXT_VALUE = getValue(LEFT, VALUE, MIN, MAX, STEP);
-      expect(NEXT_VALUE[1]).toEqual(MIN);
+      expect(NEXT_VALUE[1]).toEqual(LEFT);
     });
 
     test('left < min < value > max', () => {
@@ -118,7 +118,7 @@ describe(actionNames.CHANGE_RIGHT_VALUE, () => {
     test('min > left > value < max ', () => {
       const VALUE = -55;
       const NEXT_VALUE = getValue(LEFT, VALUE, MIN, MAX, STEP);
-      expect(NEXT_VALUE[1]).toEqual(MIN);
+      expect(NEXT_VALUE[1]).toEqual(LEFT);
     });
 
     test('left < min < value > max', () => {
@@ -143,7 +143,7 @@ describe(actionNames.CHANGE_RIGHT_VALUE, () => {
     test('min > left > value < max ', () => {
       const VALUE = 0.3;
       const NEXT_VALUE = getValue(LEFT, VALUE, MIN, MAX, STEP);
-      expect(NEXT_VALUE[1]).toEqual(MIN);
+      expect(NEXT_VALUE[1]).toEqual(LEFT);
     });
 
     test('left < min < value > max', () => {
