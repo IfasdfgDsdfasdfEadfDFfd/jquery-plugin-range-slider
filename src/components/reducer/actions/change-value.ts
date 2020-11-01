@@ -11,7 +11,7 @@ const getValue = (
   step: number,
 ): [number, number] => {
   leftValue = parseLeftValue(leftValue, min, max);
-  rightValue = parseRightValue(rightValue, min, max);
+  rightValue = parseRightValue(rightValue, leftValue, max);
 
   return [
     makeValue(leftValue).multipleBy(step),
