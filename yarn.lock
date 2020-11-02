@@ -4966,9 +4966,6 @@ jest@^26.1.0:
     import-local "^3.0.2"
     jest-cli "^26.6.1"
 
-jquery-plugin-range-slider-src@./src:
-  version "0.0.2"
-
 "jquery-plugin-range-slider@file:./src":
   version "0.0.2"
 
