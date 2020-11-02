@@ -9,7 +9,6 @@ body {
 
 .container {
   display: flex;
-  gap: 10rem;
   align-items: center;
   justify-content: center;
   margin: 5rem;
@@ -76,12 +75,22 @@ input:focus {
   outline: 0;
 }
 
+@media only screen and (min-width: $middle-screen) {
+  .configuration {
+    margin-left: 5rem;
+  }
+}
+
 @media only screen and (max-width: $middle-screen) {
   .container {
     flex-flow: column nowrap;
     gap: 2rem;
     margin: 3rem;
     padding: 2rem;
+  }
+
+  .configuration {
+    margin-top: 3rem;
   }
 }
 
