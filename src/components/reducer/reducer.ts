@@ -6,6 +6,7 @@ interface IRangeSliderState {
   min: number;
   max: number;
   value: [number, number];
+  prefix: string;
   step: number;
   vertical: boolean;
   intervalMode: boolean;
@@ -74,6 +75,9 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
         min,
         max,
       };
+
+    case actionNames.CHANGE_PREFIX:
+      return { ...state, prefix: action.value };
 
     case actionNames.CHANGE_ORIENT:
       return { ...state, vertical: action.value };

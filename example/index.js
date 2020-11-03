@@ -54,6 +54,7 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
       el.find('.configuration__min').val(state.min);
       el.find('.configuration__max').val(state.max);
       el.find('.configuration__step').val(state.step);
+      el.find('.configuration__prefix').val(state.prefix);
 
       el.find('.configuration__orient').attr('checked', state.vertical);
       el.find('.configuration__interval-mode').attr(

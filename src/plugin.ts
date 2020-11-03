@@ -5,7 +5,7 @@ interface PluginApi {
   subscribe(cb: (state: IRangeSliderState) => void): void;
   setLeftValue(value: number): void;
   setRightValue(value: number): void;
-  // setPrefix(value: string): void;
+  setPrefix(value: string): void;
   setMin(value: number): void;
   setMax(value: number): void;
   setStep(value: number): void;
@@ -34,7 +34,12 @@ function rangeSlider(
       componentStore.dispatch({ name: actionNames.CHANGE_RIGHT_VALUE, value });
     },
 
-    // setPrefix(value: string) {},
+    setPrefix(value: string) {
+      componentStore.dispatch({
+        name: actionNames.CHANGE_PREFIX,
+        value: value || '',
+      });
+    },
 
     setMin(value: number) {
       componentStore.dispatch({ name: actionNames.CHANGE_MIN, value });

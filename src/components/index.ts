@@ -19,6 +19,7 @@ function createRangeSlider(
       max: 100,
       step: 5,
       value: [20, 80],
+      prefix: '',
       vertical: false,
       intervalMode: true,
       markerVisibility: false,

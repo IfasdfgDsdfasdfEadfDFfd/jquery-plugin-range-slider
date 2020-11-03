@@ -10,6 +10,7 @@ class Thumb extends HiddenView {
     max: number;
     min: number;
     value: number;
+    prefix: string;
   };
 
   constructor() {
@@ -21,8 +22,8 @@ class Thumb extends HiddenView {
     this.marker = this.children[0] as ThumbMarker;
   }
 
-  positioning({ max, min, value }: { [key: string]: number }): void {
-    this.lastValues = { max, min, value };
+  positioning(max: number, min: number, value: number, prefix: string): void {
+    this.lastValues = { max, min, value, prefix };
 
     const thumbWidth =
       <number>this.element.clientWidth + parseInt(styles.thumbWidth);
@@ -32,7 +33,7 @@ class Thumb extends HiddenView {
 
     this.element.style.setProperty('left', `${offset}%`);
 
-    this.marker.value = value;
+    this.marker.value = `${prefix}${value}`;
   }
 
   set focused(value: boolean) {
@@ -48,13 +49,14 @@ class Thumb extends HiddenView {
   }
 
   positionCorrection(): void {
-    this.positioning(this.lastValues);
+    const { max, min, value, prefix } = this.lastValues;
+    this.positioning(max, min, value, prefix);
   }
 }
 
 class ThumbMarker extends HiddenView {
   hidingElementClassName = 'range-slider__thumb__marker--hidden';
-  _value!: number;
+  _value!: string;
 
   constructor() {
     super({
@@ -64,11 +66,11 @@ class ThumbMarker extends HiddenView {
     });
   }
 
-  set value(value: number) {
-    this.replaceChildren([value.toString()]);
+  set value(value: string) {
+    this.replaceChildren([value]);
 
     const width = Math.max(
-      value.toString().length * parseInt(styles.rootFontSize),
+      value.length * parseInt(styles.rootFontSize),
       parseInt(styles.minThumbMarkerWidth) * parseInt(styles.rootFontSize),
     );
     this.element.style.setProperty('width', `${width}px`);

@@ -104,8 +104,8 @@ class LeftRangeSliderInputRange extends RangeSliderInputRange {
 
     this.elements.input.value = state.value[0];
 
-    const { max, min, value } = state;
-    this.elements.thumb.positioning({ max, min, value: value[0] });
+    const { max, min, value, prefix } = state;
+    this.elements.thumb.positioning(max, min, value[0], prefix);
   }
 
   makeAction(value: number): Action {
@@ -121,8 +121,8 @@ class RightRangeSliderInputRange extends RangeSliderInputRange {
     super.render(state);
     this.elements.input.value = state.value[1];
 
-    const { max, min, value } = state;
-    this.elements.thumb.positioning({ max, min, value: value[1] });
+    const { max, min, value, prefix } = state;
+    this.elements.thumb.positioning(max, min, value[1], prefix);
   }
 
   makeAction(value: number): Action {

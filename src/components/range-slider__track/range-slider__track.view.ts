@@ -25,12 +25,10 @@ class TrackScale extends HiddenView {
     });
   }
 
-  update(values: number[]): void {
+  update(values: string[]): void {
     const overflowRate = Math.ceil(
       values.reduce((sum, value) => {
-        return (
-          sum + value.toString().length * (parseInt(styles.rootFontSize) * 1.4)
-        );
+        return sum + value.length * (parseInt(styles.rootFontSize) * 1.4);
       }, 0) / <number>this.element.clientWidth,
     );
 
@@ -38,9 +36,9 @@ class TrackScale extends HiddenView {
       .map((value, index) => {
         const percent = (100 / (values.length - 1)) * index;
 
-        const max = values[values.length - 1];
-        const min = values[0];
-        const ratio = (value - min) / (max - min);
+        const max = values.length - 1;
+        const min = 0;
+        const ratio = (index - min) / (max - min);
 
         return this.createItem(value.toString(), percent, ratio);
       })
@@ -105,11 +103,13 @@ class RangeSliderTrack extends Provider<
   ): (Event: MouseEvent) => void {
     return (event: MouseEvent) => {
       const target = event?.target as HTMLElement;
+      const text = target.textContent || '';
+      const { prefix } = store.getState();
 
       if (target.nodeName === 'BUTTON') {
         store.dispatch({
           name: actionNames.CHANGE_RIGHT_VALUE,
-          value: Number(target.textContent || ''),
+          value: Number(text.substr(prefix.length)),
         });
       }
     };
@@ -128,19 +128,19 @@ class RangeSliderTrack extends Provider<
   }
 
   render(state: IRangeSliderState): void {
-    this.elements.scale.update(
-      getSliderValues(state.min, state.max, state.step),
-    );
+    this.elements.scale.update(getSliderValues(state));
     this.elements.scale.hidden = !state.trackScaleVisibility;
   }
 }
 
-const getSliderValues = (min: number, max: number, step: number): number[] => {
+const getSliderValues = (state: IRangeSliderState): string[] => {
+  const { max, min, step, prefix } = state;
   const length = Math.round((max - min) / step + 1);
 
   const values = Array(length)
     .fill(null)
-    .map((_, index) => Number((min + step * index).toFixed(1)));
+    .map((_, index) => Number((min + step * index).toFixed(1)))
+    .map(value => `${prefix}${value}`);
 
   return values;
 };
