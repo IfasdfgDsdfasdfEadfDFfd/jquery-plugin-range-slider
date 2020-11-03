@@ -44,7 +44,6 @@ class TrackScale extends HiddenView {
 
         return this.createItem(value.toString(), percent, ratio);
       })
-      .reverse()
       .filter((_, index, arr) => {
         if (index === arr.length - 1) return true;
         return index % overflowRate === 0;
