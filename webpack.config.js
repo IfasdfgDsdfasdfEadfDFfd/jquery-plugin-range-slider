@@ -30,7 +30,7 @@ module.exports = {
   },
   output: {
     path: DIST_DIR,
-    filename: '[name].build.[hash].js',
+    filename: '[name].build.js',
   },
 
   // don't forget about dots...
