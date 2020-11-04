@@ -138,8 +138,10 @@ class RangeSliderTrack extends Provider<
     return (event: MouseEvent) => {
       const target = event?.target as HTMLElement;
       const text = target.textContent || '';
-      const { prefix, value } = store.getState();
-      const nextValue = Number(text.substr(prefix.length));
+      const { prefix, postfix, value } = store.getState();
+      const nextValue = Number(
+        text.substr(prefix.length, text.length - 1 - postfix.length),
+      );
 
       const actionName =
         Math.abs(value[0] - nextValue) > Math.abs(value[1] - nextValue)
