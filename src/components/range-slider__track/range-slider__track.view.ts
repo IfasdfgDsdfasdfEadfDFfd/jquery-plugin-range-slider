@@ -1,6 +1,5 @@
 import { actionNames, IRangeSliderState } from '../reducer';
 import { Provider, Store, View } from '../../core';
-import { HiddenView } from '../../core/shortcuts';
 
 import styles from '../../exports.scss';
 
@@ -14,8 +13,8 @@ class Track extends View {
   }
 }
 
-class TrackScale extends HiddenView {
-  hidingElementClassName = 'range-slider__track-scale--hidden';
+class TrackScale extends View {
+  hidingClassName = 'range-slider__track-scale--hidden';
 
   constructor() {
     super({
@@ -71,11 +70,24 @@ class TrackScale extends HiddenView {
       `${-(itemWidth / 2 - thumbWidth / 2 + thumbWidth * ratio)}px`,
     );
 
+    item.onMouseIn(() => (item.hovered = true));
+    item.onMouseOut(() => (item.hovered = false));
+    item.onFocusIn(() => (item.focused = true));
+    item.onFocusOut(() => (item.focused = false));
+
     return item;
+  }
+
+  set activeColor(value: string) {
+    this.children.forEach(child => {
+      (child as TrackScaleItem).color = value;
+    });
   }
 }
 
-class TrackScaleItem extends HiddenView {
+class TrackScaleItem extends View {
+  lastColor: string;
+
   constructor(value = '') {
     const button = new View({
       tag: 'button',
@@ -90,7 +102,26 @@ class TrackScaleItem extends HiddenView {
       children: [button],
     });
 
-    this.hidingElementClassName = 'range-slider__track-scale__item--hidden';
+    this.hidingClassName = 'range-slider__track-scale__item--hidden';
+    this.lastColor = '';
+  }
+
+  set color(value: string) {
+    this.lastColor = value;
+    this.resetColor();
+  }
+
+  onFocus(): void {
+    this.resetColor();
+  }
+
+  onHover(): void {
+    this.resetColor();
+  }
+
+  resetColor(): void {
+    if (this.isFocused || this.isHovered)
+      this.element.style.setProperty('color', this.lastColor);
   }
 }
 
@@ -139,6 +170,7 @@ class RangeSliderTrack extends Provider<
   render(state: IRangeSliderState): void {
     this.elements.scale.update(getSliderValues(state));
     this.elements.scale.hidden = !state.trackScaleVisibility;
+    this.elements.scale.activeColor = state.primaryColor;
   }
 }
 

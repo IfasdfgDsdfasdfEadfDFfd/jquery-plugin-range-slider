@@ -13,6 +13,7 @@ interface PluginApi {
   setIntervalMode(value: boolean): void;
   setMarkerVisibility(value: boolean): void;
   setTrackScaleVisibility(value: boolean): void;
+  setPrimaryColor(value: string): void;
 }
 
 function rangeSlider(
@@ -26,56 +27,68 @@ function rangeSlider(
       componentStore.subscribe(cb);
     },
 
-    setLeftValue(value: number) {
+    setLeftValue(value) {
       componentStore.dispatch({ name: actionNames.CHANGE_LEFT_VALUE, value });
     },
 
-    setRightValue(value: number) {
+    setRightValue(value) {
       componentStore.dispatch({ name: actionNames.CHANGE_RIGHT_VALUE, value });
     },
 
-    setPrefix(value: string) {
+    setPrefix(value) {
       componentStore.dispatch({
         name: actionNames.CHANGE_PREFIX,
         value: value || '',
       });
     },
 
-    setMin(value: number) {
+    setMin(value) {
       componentStore.dispatch({ name: actionNames.CHANGE_MIN, value });
     },
 
-    setMax(value: number) {
+    setMax(value) {
       componentStore.dispatch({ name: actionNames.CHANGE_MAX, value });
     },
 
-    setStep(value: number) {
+    setStep(value) {
       componentStore.dispatch({ name: actionNames.CHANGE_STEP, value });
     },
 
-    setOrientVertical(value: boolean) {
+    setOrientVertical(value) {
       componentStore.dispatch({ name: actionNames.CHANGE_ORIENT, value });
     },
 
-    setIntervalMode(value: boolean) {
+    setIntervalMode(value) {
       componentStore.dispatch({
         name: actionNames.CHANGE_INTERVAL_MODE,
         value,
       });
     },
 
-    setMarkerVisibility(value: boolean) {
+    setMarkerVisibility(value) {
       componentStore.dispatch({
         name: actionNames.CHANGE_MARKER_VISIBILITY,
         value,
       });
     },
 
-    setTrackScaleVisibility(value: boolean) {
+    setTrackScaleVisibility(value) {
       componentStore.dispatch({
         name: actionNames.CHANGE_TRACK_SCALE_VISIBILITY,
         value,
       });
+    },
+
+    setPrimaryColor(value) {
+      if (value.startsWith('#')) {
+        const substringValue = value.substr(1);
+        if (substringValue.length === 3 || substringValue.length === 6) {
+          componentStore.dispatch({
+            name: actionNames.CHANGE_PRIMARY_COLOR,
+            value,
+          });
+        }
+      }
     },
   };
 }

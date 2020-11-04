@@ -46,6 +46,7 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
 
     const left = el.find('.configuration__value-left');
     const right = el.find('.configuration__value-right');
+    const primaryColor = el.find('.configuration__primary-color');
 
     api.subscribe(state => {
       left.val(state.value[0]);
@@ -55,6 +56,7 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
       el.find('.configuration__max').val(state.max);
       el.find('.configuration__step').val(state.step);
       el.find('.configuration__prefix').val(state.prefix);
+      primaryColor.val(state.primaryColor);
 
       el.find('.configuration__orient').attr('checked', state.vertical);
       el.find('.configuration__interval-mode').attr(
@@ -105,5 +107,9 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
     el.find('.configuration__track-scale-visibility').on('click', event =>
       api.setTrackScaleVisibility(!event.target.hasAttribute('checked')),
     );
+
+    primaryColor.on('focusout', event => {
+      api.setPrimaryColor(event.target.value);
+    });
   })($(`#js-range-slider-id-${index}`).rangeSlider(props));
 };

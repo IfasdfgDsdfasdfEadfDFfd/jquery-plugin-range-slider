@@ -1,9 +1,12 @@
-import { HiddenView, getOffset } from '../../core/shortcuts';
+import { View } from '../../core';
+import { getOffset } from '../../core/shortcuts';
 
 import styles from '../../exports.scss';
 
-class Thumb extends HiddenView {
-  hidingElementClassName = 'range-slider__thumb--hidden';
+class Thumb extends View {
+  hidingClassName = 'range-slider__thumb--hidden';
+  focusClassName = 'range-slider__thumb--focused';
+  hoverClassName = 'range-slider__thumb--hovered';
 
   marker!: ThumbMarker;
   lastValues!: {
@@ -12,6 +15,8 @@ class Thumb extends HiddenView {
     value: number;
     prefix: string;
   };
+  lastColor!: string;
+  isFocused = false;
 
   constructor() {
     super({
@@ -36,22 +41,46 @@ class Thumb extends HiddenView {
     this.marker.value = `${prefix}${value}`;
   }
 
-  set focused(value: boolean) {
-    this.element.classList.toggle('range-slider__thumb--focused', value);
-  }
-
-  set hovered(value: boolean) {
-    this.element.classList.toggle('range-slider__thumb--hovered', value);
+  set primaryColor(value: string) {
+    if (value !== this.lastColor) {
+      this.element.style.setProperty('background-color', value);
+      this.marker.element.style.setProperty('background-color', value);
+      this.lastColor = value;
+    }
   }
 
   positionCorrection(): void {
     const { max, min, value, prefix } = this.lastValues;
     this.positioning(max, min, value, prefix);
   }
+
+  onFocus(): void {
+    this.colorReset();
+  }
+
+  onHover(): void {
+    this.colorReset();
+  }
+
+  colorReset(): void {
+    if (this.isFocused || this.isHovered) {
+      this.element.style.removeProperty('background-color');
+      this.marker.element.style.removeProperty('background-color');
+      this.element.style.setProperty('border-color', this.lastColor);
+      this.marker.element.style.setProperty('color', this.lastColor);
+      this.marker.element.style.setProperty('border-color', this.lastColor);
+    } else {
+      this.element.style.removeProperty('border-color');
+      this.marker.element.style.removeProperty('border-color');
+      this.marker.element.style.removeProperty('color');
+      this.element.style.setProperty('background-color', this.lastColor);
+      this.marker.element.style.setProperty('background-color', this.lastColor);
+    }
+  }
 }
 
-class ThumbMarker extends HiddenView {
-  hidingElementClassName = 'range-slider__thumb__marker--hidden';
+class ThumbMarker extends View {
+  hidingClassName = 'range-slider__thumb__marker--hidden';
   _value!: string;
 
   constructor() {

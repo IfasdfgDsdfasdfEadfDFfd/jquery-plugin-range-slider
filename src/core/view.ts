@@ -10,6 +10,16 @@ class View {
   readonly tag: string;
   readonly element: HTMLElement;
 
+  focusClassName = '';
+  hoverClassName = '';
+  hidingClassName = '';
+
+  isFocused!: boolean;
+  isHovered!: boolean;
+  isHidden!: boolean;
+
+  throwErrorIfHookNotImplemented = false;
+
   children: IViewProps['children'];
   attrs: IViewProps['attrs'];
 
@@ -45,6 +55,58 @@ class View {
     this.element.innerHTML = '';
     this.appendChildren(children);
     this.children = children;
+  }
+
+  onFocusIn(cb: EventCallback): void {
+    this.element.addEventListener('focusin', cb);
+  }
+
+  onFocusOut(cb: EventCallback): void {
+    this.element.addEventListener('focusout', cb);
+  }
+
+  onMouseIn(cb: EventCallback): void {
+    this.element.addEventListener('mouseenter', cb);
+  }
+
+  onMouseOut(cb: EventCallback): void {
+    this.element.addEventListener('mouseleave', cb);
+  }
+
+  set focused(value: boolean) {
+    if (this.focusClassName)
+      this.element.classList.toggle(this.focusClassName, value);
+    this.isFocused = value;
+    this.onFocus();
+  }
+
+  set hovered(value: boolean) {
+    if (this.hoverClassName)
+      this.element.classList.toggle(this.hoverClassName, value);
+    this.isHovered = value;
+    this.onHover();
+  }
+
+  set hidden(value: boolean) {
+    if (this.hidingClassName)
+      this.element.classList.toggle(this.hidingClassName, value);
+    this.isHidden = value;
+    this.onHide();
+  }
+
+  onFocus(): void {
+    if (this.throwErrorIfHookNotImplemented)
+      throw new Error('Not Implemented!');
+  }
+
+  onHover(): void {
+    if (this.throwErrorIfHookNotImplemented)
+      throw new Error('Not Implemented!');
+  }
+
+  onHide(): void {
+    if (this.throwErrorIfHookNotImplemented)
+      throw new Error('Not Implemented!');
   }
 }
 

@@ -24,6 +24,7 @@
 
 .range-slider__track-scale__item {
   position: absolute;
+  color: $primary-color;
 }
 
 .range-slider__track-scale__item--hidden {
@@ -52,11 +53,11 @@
 
   &:hover,
   &:focus {
-    color: $primary-color;
+    color: inherit;
     outline: none;
 
     &::after {
-      border-color: $primary-color;
+      border-color: inherit;
     }
   }
 }

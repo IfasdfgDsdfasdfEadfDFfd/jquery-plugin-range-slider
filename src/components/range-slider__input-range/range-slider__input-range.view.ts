@@ -40,22 +40,6 @@ class InputRange extends View {
   onChange(cb: EventCallback): void {
     this.element.addEventListener('input', cb);
   }
-
-  onFocusIn(cb: EventCallback): void {
-    this.element.addEventListener('focusin', cb);
-  }
-
-  onFocusOut(cb: EventCallback): void {
-    this.element.addEventListener('focusout', cb);
-  }
-
-  onMouseIn(cb: EventCallback): void {
-    this.element.addEventListener('mouseenter', cb);
-  }
-
-  onMouseOut(cb: EventCallback): void {
-    this.element.addEventListener('mouseleave', cb);
-  }
 }
 
 abstract class RangeSliderInputRange extends Provider<
@@ -86,6 +70,7 @@ abstract class RangeSliderInputRange extends Provider<
     this.elements.input.step = state.step;
     this.elements.input.intervalMode = state.intervalMode;
 
+    this.elements.thumb.primaryColor = state.primaryColor;
     this.elements.thumb.marker.hidden = !state.markerVisibility;
   }
 
