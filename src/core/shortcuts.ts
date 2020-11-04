@@ -1,13 +1,3 @@
-import { View } from './view';
-
-class HiddenView extends View {
-  hidingElementClassName!: string;
-
-  set hidden(value: boolean) {
-    this.element.classList.toggle(this.hidingElementClassName, value);
-  }
-}
-
 const getOffset = (
   selfWidth: number,
   parentWidth: number,
@@ -22,4 +12,4 @@ const getOffset = (
   return offsetPercent - selfPercent;
 };
 
-export { HiddenView, getOffset };
+export { getOffset };
