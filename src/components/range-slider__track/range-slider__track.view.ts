@@ -24,30 +24,17 @@ class TrackScale extends View {
     });
   }
 
-  update(values: string[]): void {
-    let overflowRate = Math.ceil(
-      values.reduce((sum, value) => {
-        return sum + value.length * (parseInt(styles.rootFontSize) * 1.4);
-      }, 0) / <number>this.element.clientWidth,
-    );
+  update(values: [number, string][]): void {
+    const items = values.map(([index, value]) => {
+      console.log(index, value);
+      const percent = (100 / values[values.length - 1][0]) * index;
 
-    while ((values.length - 1) % overflowRate !== 0 && overflowRate < 100) {
-      overflowRate += 1;
-    }
+      const max = values[values.length - 1][0];
+      const min = 0;
+      const ratio = (index - min) / (max - min);
 
-    const items = values
-      .map((value, index) => {
-        const percent = (100 / (values.length - 1)) * index;
-
-        const max = values.length - 1;
-        const min = 0;
-        const ratio = (index - min) / (max - min);
-
-        return this.createItem(value, percent, ratio);
-      })
-      .filter((_, index) => {
-        return index % overflowRate === 0;
-      });
+      return this.createItem(value, percent, ratio);
+    });
 
     this.replaceChildren(items);
   }
@@ -140,7 +127,7 @@ class RangeSliderTrack extends Provider<
       const text = target.textContent || '';
       const { prefix, postfix, value } = store.getState();
       const nextValue = Number(
-        text.substr(prefix.length, text.length - 1 - postfix.length),
+        text.substr(prefix.length, text.length - postfix.length),
       );
 
       const actionName =
@@ -176,16 +163,25 @@ class RangeSliderTrack extends Provider<
   }
 }
 
-const getSliderValues = (state: IRangeSliderState): string[] => {
+const getSliderValues = (state: IRangeSliderState): [number, string][] => {
   const { max, min, step, prefix, postfix } = state;
   const length = Math.round((max - min) / step + 1);
 
-  const values = Array(length)
-    .fill(null)
-    .map((_, index) => Number((min + step * index).toFixed(1)))
-    .map(value => `${prefix}${value}${postfix}`);
+  const first = 0;
+  const middle = Math.floor(length / 2);
+  const leftMiddle = Math.floor(length / 4);
+  const rightMiddle = Math.floor(length / 4) * 3;
+  const last = length - 1;
 
-  return values;
+  const values = [
+    [first, min],
+    [leftMiddle, step * leftMiddle],
+    [middle, step * middle],
+    [rightMiddle, step * rightMiddle],
+    [last, max],
+  ].map(([index, value]) => [index, `${prefix}${value}${postfix}`]);
+
+  return values as [number, string][];
 };
 
 export { Track, TrackScale, TrackScaleItem, RangeSliderTrack, getSliderValues };
