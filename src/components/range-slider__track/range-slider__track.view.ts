@@ -61,7 +61,7 @@ class TrackScale extends HiddenView {
     const item = new TrackScaleItem(value);
     const itemWidth = value.length * parseInt(styles.rootFontSize);
     const thumbWidth =
-      parseFloat(styles.thumbWidth) * 0.8 * parseInt(styles.rootFontSize) -
+      parseFloat(styles.thumbWidth) * parseInt(styles.rootFontSize) -
       parseInt(styles.thumbBorderWidth);
 
     item.element.style.setProperty('width', `${itemWidth}px`);
