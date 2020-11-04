@@ -1,4 +1,4 @@
-import { RangeSlider } from './range-slider/range-slider.view';
+import { RangeSlider } from './range-slider';
 import {
   createStore,
   loadFromLocalStoragePlugin,
@@ -7,6 +7,8 @@ import {
   Store,
 } from '../core';
 import { IRangeSliderState, rangeSliderStoreReducer } from './reducer';
+
+import styles from '../exports.scss';
 
 function createRangeSlider(
   root: HTMLElement,
@@ -24,6 +26,7 @@ function createRangeSlider(
       intervalMode: true,
       markerVisibility: false,
       trackScaleVisibility: true,
+      primaryColor: styles.primaryColor,
     },
     initStoreValue,
   );

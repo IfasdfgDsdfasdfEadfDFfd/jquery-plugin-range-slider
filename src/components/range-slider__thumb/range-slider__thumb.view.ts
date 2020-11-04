@@ -30,7 +30,6 @@ class Thumb extends HiddenView {
     const sliderWidth = <number>this.element.parentElement?.clientWidth;
 
     const offset = getOffset(thumbWidth, sliderWidth, value, max, min);
-    console.log(this.element.clientWidth, thumbWidth, sliderWidth, offset);
 
     this.element.style.setProperty('left', `${offset}%`);
 

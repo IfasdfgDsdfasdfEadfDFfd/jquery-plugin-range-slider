@@ -7,8 +7,6 @@ import { RangeSliderTrack } from '../range-slider__track';
 import { IRangeSliderState } from '../reducer';
 import { Provider, Store, View } from '../../core';
 
-import './range-slider.styles.scss';
-
 class RangeSliderElement extends View {
   constructor(
     leftInput: LeftRangeSliderInputRange,

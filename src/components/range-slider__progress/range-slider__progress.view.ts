@@ -25,6 +25,10 @@ class Progress extends View {
     this.element.style.left = `${leftOffset}%`;
     this.element.style.right = `${100 - rightOffset}%`;
   }
+
+  set primaryColor(value: string) {
+    this.element.style.setProperty('background-color', value);
+  }
 }
 
 interface TElements {
@@ -46,6 +50,7 @@ class RangeSliderProgress extends Provider<IRangeSliderState, TElements> {
     }
 
     this.elements.progress.value = { min, max, value };
+    this.elements.progress.primaryColor = state.primaryColor;
   }
 }
 

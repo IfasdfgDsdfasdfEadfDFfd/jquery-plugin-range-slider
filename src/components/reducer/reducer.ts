@@ -12,6 +12,7 @@ interface IRangeSliderState {
   intervalMode: boolean;
   markerVisibility: boolean;
   trackScaleVisibility: boolean;
+  primaryColor: string;
 }
 
 const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
@@ -94,6 +95,9 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
 
     case actionNames.CHANGE_TRACK_SCALE_VISIBILITY:
       return { ...state, trackScaleVisibility: action.value };
+
+    case actionNames.CHANGE_PRIMARY_COLOR:
+      return { ...state, primaryColor: action.value };
 
     default:
       return state;
