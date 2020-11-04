@@ -175,13 +175,13 @@ class RangeSliderTrack extends Provider<
 }
 
 const getSliderValues = (state: IRangeSliderState): string[] => {
-  const { max, min, step, prefix } = state;
+  const { max, min, step, prefix, postfix } = state;
   const length = Math.round((max - min) / step + 1);
 
   const values = Array(length)
     .fill(null)
     .map((_, index) => Number((min + step * index).toFixed(1)))
-    .map(value => `${prefix}${value}`);
+    .map(value => `${prefix}${value}${postfix}`);
 
   return values;
 };

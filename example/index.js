@@ -47,6 +47,7 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
     const left = el.find('.configuration__value-left');
     const right = el.find('.configuration__value-right');
     const primaryColor = el.find('.configuration__primary-color');
+    const postfix = el.find('.configuration__postfix');
 
     api.subscribe(state => {
       left.val(state.value[0]);
@@ -56,6 +57,7 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
       el.find('.configuration__max').val(state.max);
       el.find('.configuration__step').val(state.step);
       el.find('.configuration__prefix').val(state.prefix);
+      postfix.val(state.postfix);
       primaryColor.val(state.primaryColor);
 
       el.find('.configuration__orient').attr('checked', state.vertical);
@@ -90,6 +92,10 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
 
     el.find('.configuration__prefix').on('focusout', event => {
       api.setPrefix(event.target.value);
+    });
+
+    postfix.on('focusout', event => {
+      api.setPostfix(event.target.value);
     });
 
     el.find('.configuration__orient').on('click', event =>

@@ -6,6 +6,7 @@ interface PluginApi {
   setLeftValue(value: number): void;
   setRightValue(value: number): void;
   setPrefix(value: string): void;
+  setPostfix(value: string): void;
   setMin(value: number): void;
   setMax(value: number): void;
   setStep(value: number): void;
@@ -38,6 +39,13 @@ function rangeSlider(
     setPrefix(value) {
       componentStore.dispatch({
         name: actionNames.CHANGE_PREFIX,
+        value: value || '',
+      });
+    },
+
+    setPostfix(value) {
+      componentStore.dispatch({
+        name: actionNames.CHANGE_POSTFIX,
         value: value || '',
       });
     },

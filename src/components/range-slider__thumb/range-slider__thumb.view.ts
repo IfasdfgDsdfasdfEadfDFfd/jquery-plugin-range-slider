@@ -14,6 +14,7 @@ class Thumb extends View {
     min: number;
     value: number;
     prefix: string;
+    postfix: string;
   };
   lastColor!: string;
   isFocused = false;
@@ -27,8 +28,14 @@ class Thumb extends View {
     this.marker = this.children[0] as ThumbMarker;
   }
 
-  positioning(max: number, min: number, value: number, prefix: string): void {
-    this.lastValues = { max, min, value, prefix };
+  positioning(
+    max: number,
+    min: number,
+    value: number,
+    prefix: string,
+    postfix: string,
+  ): void {
+    this.lastValues = { max, min, value, prefix, postfix };
 
     const thumbWidth =
       <number>this.element.clientWidth + parseInt(styles.thumbWidth);
@@ -38,7 +45,7 @@ class Thumb extends View {
 
     this.element.style.setProperty('left', `${offset}%`);
 
-    this.marker.value = `${prefix}${value}`;
+    this.marker.value = `${prefix}${value}${postfix}`;
   }
 
   set primaryColor(value: string) {
@@ -50,8 +57,8 @@ class Thumb extends View {
   }
 
   positionCorrection(): void {
-    const { max, min, value, prefix } = this.lastValues;
-    this.positioning(max, min, value, prefix);
+    const { max, min, value, prefix, postfix } = this.lastValues;
+    this.positioning(max, min, value, prefix, postfix);
   }
 
   onFocus(): void {
