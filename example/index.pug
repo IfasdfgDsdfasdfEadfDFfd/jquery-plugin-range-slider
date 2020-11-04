@@ -11,35 +11,53 @@ html(lang="en")
         div(id="js-range-slider-id-" + index)
         div(id="js-configuration-id-" + index).configuration
           .configuration__tool
-            label(for='value-left')= 'left value:'
-            input(type='text', id='value-left-' + index, size=2).configuration__value-left
+            -var id = 'left-value-' + index
+            label(for=id)= 'left value:'
+            input(type='text', id=id, size=2).configuration__value-left
           .configuration__tool
-            label(for='value-right')= 'right value:'
-            input(type='text', id='value-right-' + index, size=2).configuration__value-right
+            -var id = 'right-value-' + index
+            label(for=id)= 'right value:'
+            input(type='text', id=id, size=2).configuration__value-right
           .configuration__tool
-            label(for='min')= 'min:'
-            input(type='text', id='min-' + index, size=2).configuration__min
+            -var id = 'min-' + index
+            label(for=id)= 'min:'
+            input(type='text', id=id, size=2).configuration__min
           .configuration__tool
-            label(for='max')= 'max:'
-            input(type='text', id='max-' + index, size=2).configuration__max
+            -var id = 'max-' + index
+            label(for=id)= 'max:'
+            input(type='text', id=id, size=2).configuration__max
           .configuration__tool
-            label(for='step')= 'step:'
-            input(type='text', id='step-' + index, size=2).configuration__step
+            -var id = 'step-' + index
+            label(for=id)= 'step:'
+            input(type='text', id=id, size=2).configuration__step
           .configuration__tool
-            label(for='orient')= 'vertical:'
-            input(type='checkbox', id='orient-' + index).configuration__orient
+            -var id = 'v-orient-' + index
+            label(for=id)= 'vertical:'
+            input(type='checkbox', id=id).configuration__orient
           .configuration__tool
-            label(for='marker-visibility')= 'MARKER:'
-            input(type='checkbox', id='marker-visibility-' + index).configuration__marker-visibility
+            -var id = 'marker-visibility-' + index
+            label(for=id)= 'MARKER:'
+            input(type='checkbox', id=id).configuration__marker-visibility
           .configuration__tool
-            label(for='interval-mode')= 'INTERVAL:'
-            input(type='checkbox', id='interval-mode-' + index).configuration__interval-mode
+            -var id = 'interval-mode' + index
+            label(for=id)= 'INTERVAL:'
+            input(type='checkbox', id=id).configuration__interval-mode
           .configuration__tool
-            label(for='track-scale-visibility')= 'TRACK SCALE:'
-            input(type='checkbox', id='track-scale-visibility-' + index).configuration__track-scale-visibility
+            -var id = 'track-scale-visibility' + index
+            label(for=id)= 'TRACK SCALE:'
+            input(type='checkbox', id=id).configuration__track-scale-visibility
           .configuration__tool
-            label(for='prefix')= 'PREFIX:'
-            input(type='text', id='prefix-' + index, size=4).configuration__prefix
+            -var id = 'primary-color-' + index
+            label(for=id)= 'COLOR:'
+            input(type='text', id=id, size=4).configuration__primary-color
+          .configuration__tool
+            -var id = 'prefix-' + index
+            label(for=id)= 'PREFIX:'
+            input(type='text', id=id, size=4).configuration__prefix
+          .configuration__tool
+            -var id = 'postfix-' + index
+            label(for=id)= 'POSTFIX:'
+            input(type='text', id=id, size=4).configuration__postfix
 
     each index in [1, 2, 3, 4, 5]
       +slider(index)
