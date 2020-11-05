@@ -26,7 +26,6 @@ class TrackScale extends View {
 
   update(values: [number, string][]): void {
     const items = values.map(([index, value]) => {
-      console.log(index, value);
       const percent = (100 / values[values.length - 1][0]) * index;
 
       const max = values[values.length - 1][0];
@@ -166,20 +165,18 @@ class RangeSliderTrack extends Provider<
 const getSliderValues = (state: IRangeSliderState): [number, string][] => {
   const { max, min, step, prefix, postfix } = state;
   const length = Math.round((max - min) / step + 1);
+  const lastIndex = length - 1;
 
-  const first = 0;
-  const middle = Math.floor(length / 2);
-  const leftMiddle = Math.floor(length / 4);
-  const rightMiddle = Math.floor(length / 4) * 3;
-  const last = length - 1;
+  const delimiter = [3, 5, 7, 11, 1].filter(
+    prime => lastIndex % prime === 0,
+  )[0];
+  const multiplier = Math.max(lastIndex / delimiter, 2);
+  console.log(multiplier);
 
-  const values = [
-    [first, min],
-    [leftMiddle, step * leftMiddle],
-    [middle, step * middle],
-    [rightMiddle, step * rightMiddle],
-    [last, max],
-  ].map(([index, value]) => [index, `${prefix}${value}${postfix}`]);
+  const values = new Array(Math.ceil(length / multiplier))
+    .fill(null)
+    .map((_, index) => [index, step * index * multiplier + min])
+    .map(([index, value]) => [index, `${prefix}${value}${postfix}`]);
 
   return values as [number, string][];
 };
