@@ -167,11 +167,12 @@ const getSliderValues = (state: IRangeSliderState): [number, string][] => {
   const length = Math.round((max - min) / step + 1);
   const lastIndex = length - 1;
 
-  const delimiter = [3, 5, 7, 11, 1].filter(
-    prime => lastIndex % prime === 0,
-  )[0];
-  const multiplier = Math.max(lastIndex / delimiter, 2);
-  console.log(multiplier);
+  const delimiter = [3, 5, 7, 11, 1]
+    .filter(prime => lastIndex % prime === 0)
+    .shift() as number;
+
+  let multiplier = lastIndex / delimiter;
+  multiplier = multiplier < 10 ? Math.min(multiplier, delimiter) : multiplier;
 
   const values = new Array(Math.ceil(length / multiplier))
     .fill(null)
