@@ -13,27 +13,35 @@ html(lang="en")
           .configuration__tool
             -var id = 'left-value-' + index
             label(for=id)= 'left value:'
-            input(type='text', id=id, size=2).configuration__value-left
+            input(type='text', id=id).configuration__value-left
           .configuration__tool
             -var id = 'right-value-' + index
             label(for=id)= 'right value:'
-            input(type='text', id=id, size=2).configuration__value-right
+            input(type='text', id=id).configuration__value-right
           .configuration__tool
             -var id = 'min-' + index
             label(for=id)= 'min:'
-            input(type='text', id=id, size=2).configuration__min
+            input(type='text', id=id).configuration__min
           .configuration__tool
             -var id = 'max-' + index
             label(for=id)= 'max:'
-            input(type='text', id=id, size=2).configuration__max
+            input(type='text', id=id).configuration__max
           .configuration__tool
             -var id = 'step-' + index
             label(for=id)= 'step:'
-            input(type='text', id=id, size=2).configuration__step
+            input(type='text', id=id).configuration__step
           .configuration__tool
-            -var id = 'v-orient-' + index
-            label(for=id)= 'vertical:'
-            input(type='checkbox', id=id).configuration__orient
+            -var id = 'primary-color-' + index
+            label(for=id)= 'COLOR:'
+            input(type='text', id=id).configuration__primary-color
+          .configuration__tool
+            -var id = 'prefix-' + index
+            label(for=id)= 'PREFIX:'
+            input(type='text', id=id).configuration__prefix
+          .configuration__tool
+            -var id = 'postfix-' + index
+            label(for=id)= 'POSTFIX:'
+            input(type='text', id=id).configuration__postfix
           .configuration__tool
             -var id = 'marker-visibility-' + index
             label(for=id)= 'MARKER:'
@@ -47,17 +55,9 @@ html(lang="en")
             label(for=id)= 'TRACK SCALE:'
             input(type='checkbox', id=id).configuration__track-scale-visibility
           .configuration__tool
-            -var id = 'primary-color-' + index
-            label(for=id)= 'COLOR:'
-            input(type='text', id=id, size=4).configuration__primary-color
-          .configuration__tool
-            -var id = 'prefix-' + index
-            label(for=id)= 'PREFIX:'
-            input(type='text', id=id, size=4).configuration__prefix
-          .configuration__tool
-            -var id = 'postfix-' + index
-            label(for=id)= 'POSTFIX:'
-            input(type='text', id=id, size=4).configuration__postfix
+            -var id = 'v-orient-' + index
+            label(for=id)= 'vertical:'
+            input(type='checkbox', id=id).configuration__orient
 
     each index in [1, 2, 3, 4, 5]
       +slider(index)
