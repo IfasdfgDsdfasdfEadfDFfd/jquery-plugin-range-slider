@@ -134,7 +134,7 @@ class RangeSliderTrack extends Provider<
       );
 
       const actionName =
-        Math.abs(value[0] - nextValue) > Math.abs(value[1] - nextValue)
+        Math.abs(value[0] - nextValue) >= Math.abs(value[1] - nextValue)
           ? actionNames.CHANGE_RIGHT_VALUE
           : actionNames.CHANGE_LEFT_VALUE;
 
