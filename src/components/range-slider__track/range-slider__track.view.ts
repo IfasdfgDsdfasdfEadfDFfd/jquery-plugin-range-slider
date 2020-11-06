@@ -125,8 +125,12 @@ class RangeSliderTrack extends Provider<
       const target = event?.target as HTMLElement;
       const text = target.textContent || '';
       const { prefix, postfix, value } = store.getState();
+
       const nextValue = Number(
-        text.substr(prefix.length, text.length - postfix.length),
+        text.substr(
+          prefix.length,
+          text.length - prefix.length - postfix.length,
+        ),
       );
 
       const actionName =
