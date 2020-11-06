@@ -46,33 +46,38 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
 
     const left = el.find('.configuration__value-left');
     const right = el.find('.configuration__value-right');
+
+    const min = el.find('.configuration__min');
+    const max = el.find('.configuration__max');
+    const step = el.find('.configuration__step');
+
+    const prefix = el.find('.configuration__prefix');
     const primaryColor = el.find('.configuration__primary-color');
     const postfix = el.find('.configuration__postfix');
+
+    const orient = el.find('.configuration__orient');
+    const intervalMode = el.find('.configuration__interval-mode');
+    const markerVisibility = el.find('.configuration__marker-visibility');
+    const trackScaleVisibility = el.find(
+      '.configuration__track-scale-visibility',
+    );
 
     api.subscribe(state => {
       left.val(state.value[0]);
       right.val(state.value[1]);
 
-      el.find('.configuration__min').val(state.min);
-      el.find('.configuration__max').val(state.max);
-      el.find('.configuration__step').val(state.step);
-      el.find('.configuration__prefix').val(state.prefix);
+      min.val(state.min);
+      max.val(state.max);
+      step.val(state.step);
+
+      prefix.val(state.prefix);
       postfix.val(state.postfix);
       primaryColor.val(state.primaryColor);
 
-      el.find('.configuration__orient').attr('checked', state.vertical);
-      el.find('.configuration__interval-mode').attr(
-        'checked',
-        state.intervalMode,
-      );
-      el.find('.configuration__marker-visibility').attr(
-        'checked',
-        state.markerVisibility,
-      );
-      el.find('.configuration__track-scale-visibility').attr(
-        'checked',
-        state.trackScaleVisibility,
-      );
+      orient.attr('checked', state.vertical);
+      intervalMode.attr('checked', state.intervalMode);
+      markerVisibility.attr('checked', state.markerVisibility);
+      trackScaleVisibility.attr('checked', state.trackScaleVisibility);
     });
 
     left.on('focusout', event => api.setLeftValue(Number(event.target.value)));
@@ -80,17 +85,11 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
       api.setRightValue(Number(event.target.value)),
     );
 
-    el.find('.configuration__min').on('focusout', event =>
-      api.setMin(Number(event.target.value)),
-    );
-    el.find('.configuration__max').on('focusout', event =>
-      api.setMax(Number(event.target.value)),
-    );
-    el.find('.configuration__step').on('focusout', event =>
-      api.setStep(Number(event.target.value)),
-    );
+    min.on('focusout', event => api.setMin(Number(event.target.value)));
+    max.on('focusout', event => api.setMax(Number(event.target.value)));
+    step.on('focusout', event => api.setStep(Number(event.target.value)));
 
-    el.find('.configuration__prefix').on('focusout', event => {
+    prefix.on('focusout', event => {
       api.setPrefix(event.target.value);
     });
 
@@ -98,19 +97,19 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
       api.setPostfix(event.target.value);
     });
 
-    el.find('.configuration__orient').on('click', event =>
+    orient.on('click', event =>
       api.setOrientVertical(!event.target.hasAttribute('checked')),
     );
 
-    el.find('.configuration__interval-mode').on('click', event =>
+    intervalMode.on('click', event =>
       api.setIntervalMode(!event.target.hasAttribute('checked')),
     );
 
-    el.find('.configuration__marker-visibility').on('click', event =>
+    markerVisibility.on('click', event =>
       api.setMarkerVisibility(!event.target.hasAttribute('checked')),
     );
 
-    el.find('.configuration__track-scale-visibility').on('click', event =>
+    trackScaleVisibility.on('click', event =>
       api.setTrackScaleVisibility(!event.target.hasAttribute('checked')),
     );
 
