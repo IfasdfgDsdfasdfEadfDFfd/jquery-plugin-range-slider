@@ -133,8 +133,8 @@ class RangeSliderTrack extends Provider<
         ),
       );
 
-      const actionName = intervalMode ?
-        Math.abs(value[0] - nextValue) >= Math.abs(value[1] - nextValue)
+      const actionName = intervalMode
+        ? Math.abs(value[0] - nextValue) >= Math.abs(value[1] - nextValue)
           ? actionNames.CHANGE_RIGHT_VALUE
           : actionNames.CHANGE_LEFT_VALUE
         : actionNames.CHANGE_RIGHT_VALUE;
@@ -176,7 +176,7 @@ const getSliderValues = (state: IRangeSliderState): [number, string][] => {
     .filter(prime => lastIndex % prime === 0)
     .shift() as number;
 
-  let multiplier = lastIndex / delimiter;
+  let multiplier = Math.max(lastIndex / delimiter, 1);
   multiplier = multiplier < 10 ? Math.min(multiplier, delimiter) : multiplier;
 
   const values = new Array(Math.ceil(length / multiplier))
