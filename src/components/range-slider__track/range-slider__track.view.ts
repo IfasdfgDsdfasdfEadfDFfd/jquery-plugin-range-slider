@@ -124,7 +124,7 @@ class RangeSliderTrack extends Provider<
     return (event: MouseEvent) => {
       const target = event?.target as HTMLElement;
       const text = target.textContent || '';
-      const { prefix, postfix, value } = store.getState();
+      const { prefix, postfix, value, intervalMode } = store.getState();
 
       const nextValue = Number(
         text.substr(
@@ -133,10 +133,11 @@ class RangeSliderTrack extends Provider<
         ),
       );
 
-      const actionName =
+      const actionName = intervalMode ?
         Math.abs(value[0] - nextValue) >= Math.abs(value[1] - nextValue)
           ? actionNames.CHANGE_RIGHT_VALUE
-          : actionNames.CHANGE_LEFT_VALUE;
+          : actionNames.CHANGE_LEFT_VALUE
+        : actionNames.CHANGE_RIGHT_VALUE;
 
       if (target.nodeName === 'BUTTON') {
         store.dispatch({
