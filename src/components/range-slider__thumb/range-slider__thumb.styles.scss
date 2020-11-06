@@ -29,6 +29,7 @@
 
 .range-slider__thumb--hovered,
 .range-slider__thumb--focused {
+  z-index: 2;
   border-color: $primary-color;
   background-color: $white-color;
   outline: 0;
