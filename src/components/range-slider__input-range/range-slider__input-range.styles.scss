@@ -8,33 +8,24 @@
   height: $track-height;
   margin: 0;
   opacity: 0;
+  appearance: none;
 
   /* We have duplicate code parts here
   but I really think it's sass compiler bug */
   &::-webkit-slider-thumb {
-    width: $thumb-width * 0.8;
-    height: $thumb-height * 0.8;
+    width: $thumb-width;
+    height: $thumb-height;
     border-radius: $thumb-border-radius;
     pointer-events: all;
+    appearance: none;
   }
 
   &::-moz-range-thumb {
-    width: $thumb-width * 0.8;
-    height: $thumb-height * 0.8;
+    width: $thumb-width;
+    height: $thumb-height;
     border-radius: $thumb-border-radius;
     pointer-events: all;
-  }
-
-  &:focus {
-    &::-webkit-slider-thumb {
-      width: $thumb-width;
-      height: $thumb-height;
-    }
-
-    &::-moz-range-thumb {
-      width: $thumb-width;
-      height: $thumb-height;
-    }
+    appearance: none;
   }
 }
 
