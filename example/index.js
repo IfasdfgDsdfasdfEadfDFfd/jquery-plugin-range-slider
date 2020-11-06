@@ -7,32 +7,33 @@ window.addEventListener('load', () => {
     {
       index: 1,
       props: {
-        value: [10, 20],
+        step: 1,
+        from: 777,
+        to: 999,
+        min: 10000,
+        max: 10000000,
+        color: '#742',
+        markerVisibility: false,
+        trackScaleVisibility: false,
+        intervalMode: false,
+        vertical: true,
       },
     },
     {
       index: 2,
-      props: {
-        value: [13, 73],
-      },
+      props: {},
     },
     {
       index: 3,
-      props: {
-        value: [54, 58],
-      },
+      props: {},
     },
     {
       index: 4,
-      props: {
-        value: [21, 53],
-      },
+      props: {},
     },
     {
       index: 5,
-      props: {
-        value: [22, 36],
-      },
+      props: {},
     },
   ];
   for (const { index, props } of parameters) {

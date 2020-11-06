@@ -2,19 +2,35 @@ import { actionNames, getMax, getMin } from './actions';
 import { Action, Reducer } from '../../core';
 import { getValue } from './actions/change-value';
 
+import styles from '../../exports.scss';
+
 interface IRangeSliderState {
   min: number;
   max: number;
   value: [number, number];
+  step: number;
   prefix: string;
   postfix: string;
-  step: number;
   vertical: boolean;
   intervalMode: boolean;
   markerVisibility: boolean;
   trackScaleVisibility: boolean;
   primaryColor: string;
 }
+
+const defaultState: IRangeSliderState = {
+  min: 0,
+  max: 100,
+  value: [25, 75],
+  step: 5,
+  prefix: '',
+  postfix: '',
+  vertical: false,
+  intervalMode: true,
+  markerVisibility: true,
+  trackScaleVisibility: true,
+  primaryColor: styles.primaryColor,
+};
 
 const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
   action: Action,
@@ -108,4 +124,9 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
   }
 };
 
-export { IRangeSliderState, rangeSliderStoreReducer, actionNames };
+export {
+  IRangeSliderState,
+  rangeSliderStoreReducer,
+  actionNames,
+  defaultState,
+};

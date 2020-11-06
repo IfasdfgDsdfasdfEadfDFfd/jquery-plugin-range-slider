@@ -8,32 +8,14 @@ import {
 } from '../core';
 import { IRangeSliderState, rangeSliderStoreReducer } from './reducer';
 
-import styles from '../exports.scss';
-
 function createRangeSlider(
   root: HTMLElement,
-  initStoreValue: Partial<IRangeSliderState>,
+  initStoreValue: IRangeSliderState,
 ): Store<IRangeSliderState> {
   const STORE_ID = `store-for-${root.id}`;
-  const INIT_VALUE: IRangeSliderState = Object.assign(
-    {
-      min: 0,
-      max: 100,
-      step: 5,
-      value: [20, 80],
-      prefix: '',
-      postfix: '',
-      vertical: false,
-      intervalMode: true,
-      markerVisibility: false,
-      trackScaleVisibility: true,
-      primaryColor: styles.primaryColor,
-    },
-    initStoreValue,
-  );
 
   const store = createStore<IRangeSliderState>(
-    INIT_VALUE,
+    initStoreValue,
     rangeSliderStoreReducer,
     {
       pre: [loadFromLocalStoragePlugin(STORE_ID)],
