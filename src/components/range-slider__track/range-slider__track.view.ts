@@ -172,12 +172,12 @@ const getSliderValues = (state: IRangeSliderState): [number, string][] => {
   const length = Math.round((max - min) / step + 1);
   const lastIndex = length - 1;
 
-  const delimiter = [3, 5, 7, 11, 1]
-    .filter(prime => lastIndex % prime === 0)
-    .shift() as number;
+  const primes = [3, 5, 7, 11];
 
-  let multiplier = Math.max(lastIndex / delimiter, 1);
-  multiplier = multiplier < 10 ? Math.min(multiplier, delimiter) : multiplier;
+  const delimiter = getDelimiter(lastIndex, primes);
+
+  let multiplier = Math.max(Math.floor(lastIndex / delimiter), 1);
+  multiplier = multiplier < 15 ? Math.min(multiplier, delimiter) : multiplier;
 
   const values = new Array(Math.ceil(length / multiplier))
     .fill(null)
@@ -185,6 +185,16 @@ const getSliderValues = (state: IRangeSliderState): [number, string][] => {
     .map(([index, value]) => [index, `${prefix}${value}${postfix}`]);
 
   return values as [number, string][];
+};
+
+const getDelimiter = (dividend: number, delimiters: number[]): number => {
+  for (const delimiter of delimiters) {
+    if (dividend % delimiter === 0) {
+      return delimiter;
+    }
+  }
+
+  return getDelimiter(dividend - 1, delimiters);
 };
 
 export { Track, TrackScale, TrackScaleItem, RangeSliderTrack, getSliderValues };
