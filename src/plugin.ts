@@ -5,12 +5,14 @@ import {
   IRangeSliderState,
 } from './components/reducer';
 
+type cb = (arg: number) => string;
+
 interface PluginApi {
   subscribe(cb: (state: IRangeSliderState) => void): void;
   setLeftValue(value: number): void;
   setRightValue(value: number): void;
-  setPrefix(value: string): void;
-  setPostfix(value: string): void;
+  setPrefix(value: string | cb): void;
+  setPostfix(value: string | cb): void;
   setMin(value: number): void;
   setMax(value: number): void;
   setStep(value: number): void;
@@ -56,13 +58,23 @@ function rangeSlider(
     }
   }
 
+  const prefix =
+    typeof props.prefix === 'function'
+      ? props.prefix
+      : (value: number) => props.prefix || defaultState.prefix(value);
+
+  const postfix =
+    typeof props.postfix === 'function'
+      ? props.postfix
+      : (value: number) => props.postfix || defaultState.postfix(value);
+
   const userDefinedProps: IRangeSliderState = {
     value: [leftValue, rightValue],
     min: props.min === undefined ? defaultState.min : props.min,
     max: props.max === undefined ? defaultState.max : props.max,
     step: props.step === undefined ? defaultState.step : props.step,
-    prefix: props.prefix === undefined ? defaultState.prefix : props.prefix,
-    postfix: props.postfix === undefined ? defaultState.postfix : props.postfix,
+    prefix,
+    postfix,
     vertical:
       props.vertical === undefined ? defaultState.vertical : props.vertical,
     intervalMode:

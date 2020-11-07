@@ -30,7 +30,7 @@ window.addEventListener('load', () => {
         min: 1,
         max: 6,
         prefix: '',
-        postfix: ' room(s)',
+        postfix: value => (value > 1 ? ' rooms' : ' room'),
         color: '#0392cf',
         markerVisibility: false,
         trackScaleVisibility: true,

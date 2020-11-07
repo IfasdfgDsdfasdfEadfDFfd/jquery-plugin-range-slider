@@ -4,13 +4,15 @@ import { getValue } from './actions/change-value';
 
 import styles from '../../exports.scss';
 
+type cb<T> = (value: T) => string;
+
 interface IRangeSliderState {
   min: number;
   max: number;
   value: [number, number];
   step: number;
-  prefix: string;
-  postfix: string;
+  prefix: cb<number>;
+  postfix: cb<number>;
   vertical: boolean;
   intervalMode: boolean;
   markerVisibility: boolean;
@@ -23,8 +25,8 @@ const defaultState: IRangeSliderState = {
   max: 100,
   value: [25, 75],
   step: 5,
-  prefix: '',
-  postfix: '',
+  prefix: () => '',
+  postfix: () => '',
   vertical: false,
   intervalMode: true,
   markerVisibility: true,

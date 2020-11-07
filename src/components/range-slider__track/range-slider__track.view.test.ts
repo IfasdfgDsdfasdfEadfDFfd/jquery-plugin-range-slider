@@ -7,13 +7,11 @@ describe('range-slider__track', () => {
       const MAX = 10;
       const MIN = 0;
       const STEP = 0.4;
-      const PREFIX = '';
 
       const result = getSliderValues({
         min: MIN,
         max: MAX,
         step: STEP,
-        prefix: PREFIX,
       } as IRangeSliderState);
       expect(result.length).toBeGreaterThan(0);
     });

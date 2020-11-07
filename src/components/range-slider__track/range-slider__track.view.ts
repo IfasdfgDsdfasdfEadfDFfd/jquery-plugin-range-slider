@@ -169,6 +169,7 @@ class RangeSliderTrack extends Provider<
 
 const getSliderValues = (state: IRangeSliderState): [number, string][] => {
   const { max, min, step, prefix, postfix } = state;
+
   const length = Math.round((max - min) / step + 1);
   const lastIndex = length - 1;
 
@@ -182,7 +183,10 @@ const getSliderValues = (state: IRangeSliderState): [number, string][] => {
   const values = new Array(Math.ceil(length / multiplier))
     .fill(null)
     .map((_, index) => [index, step * index * multiplier + min])
-    .map(([index, value]) => [index, `${prefix}${value}${postfix}`]);
+    .map(([index, value]) => [
+      index,
+      `${prefix(value)}${value}${postfix(value)}`,
+    ]);
 
   return values as [number, string][];
 };
