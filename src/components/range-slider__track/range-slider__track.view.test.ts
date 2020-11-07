@@ -30,5 +30,18 @@ describe('range-slider__track', () => {
       } as IRangeSliderState);
       expect(result.length).toBeGreaterThan(2);
     });
+
+    test('MAX: 105, MIN: 20, STEP: 5', () => {
+      const MAX = 105;
+      const MIN = 20;
+      const STEP = 5;
+
+      const result = getSliderValues({
+        min: MIN,
+        max: MAX,
+        step: STEP,
+      } as IRangeSliderState);
+      expect(result.length).toBeGreaterThan(2);
+    });
   });
 });
