@@ -82,7 +82,6 @@ module.exports = {
 
   mode: process.env.NODE_ENVIRONMENT,
   devtool: 'inline-source-map',
-  watch: true,
 
   devServer: {
     contentBase: DIST_DIR,

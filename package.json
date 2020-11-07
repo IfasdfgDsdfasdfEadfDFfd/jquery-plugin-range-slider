@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "jQuey slider",
   "scripts": {
-    "build": "NODE_ENVIRONMENT=development webpack",
+    "build:prod": "NODE_ENVIRONMENT=production webpack",
+    "build:dev": "NODE_ENVIRONMENT=development webpack --watch",
     "dev": "NODE_ENVIRONMENT=development webpack-dev-server",
     "test": "jest --watch --runInBand",
     "coverage": "jest --coverage",
