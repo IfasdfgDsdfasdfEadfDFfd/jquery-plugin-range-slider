@@ -182,10 +182,10 @@ const getSliderValues = (state: IRangeSliderState): [number, string][] => {
 
   const values = new Array(Math.ceil(length / multiplier))
     .fill(null)
-    .map((_, index) => [index, step * index * multiplier + min])
+    .map((_, index) => [index, (step * index * multiplier + min).toFixed(1)])
     .map(([index, value]) => [
       index,
-      `${prefix(value)}${value}${postfix(value)}`,
+      `${prefix(Number(value))}${value}${postfix(Number(value))}`,
     ]);
 
   return values as [number, string][];

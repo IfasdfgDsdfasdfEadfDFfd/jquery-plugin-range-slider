@@ -1,4 +1,4 @@
-import { IRangeSliderState } from '../reducer';
+import { defaultState } from '../reducer';
 import { getSliderValues } from './range-slider__track.view';
 
 describe('range-slider__track', () => {
@@ -8,12 +8,37 @@ describe('range-slider__track', () => {
       const MIN = 0;
       const STEP = 0.4;
 
-      const result = getSliderValues({
-        min: MIN,
-        max: MAX,
-        step: STEP,
-      } as IRangeSliderState);
+      const result = getSliderValues(
+        Object.assign(defaultState, {
+          min: MIN,
+          max: MAX,
+          step: STEP,
+        }),
+      );
       expect(result.length).toBeGreaterThan(0);
+    });
+
+    test('MAX: 4, MIN: -2.5, STEP: 0.1', () => {
+      const MAX = 4;
+      const MIN = -2.5;
+      const STEP = 0.1;
+
+      const getAccuracy = (value: number | string) =>
+        (value.toString().split('.')[1] || '').length;
+
+      const minAccuracy = getAccuracy(MIN);
+
+      const result = getSliderValues(
+        Object.assign(defaultState, {
+          min: MIN,
+          max: MAX,
+          step: STEP,
+        }),
+      );
+      expect(result.length).toBeGreaterThan(0);
+      result.forEach(value => {
+        expect(getAccuracy(value[1])).toBe(minAccuracy);
+      });
     });
 
     test('MAX: 100, MIN: 20, STEP: 5', () => {
@@ -21,11 +46,13 @@ describe('range-slider__track', () => {
       const MIN = 20;
       const STEP = 5;
 
-      const result = getSliderValues({
-        min: MIN,
-        max: MAX,
-        step: STEP,
-      } as IRangeSliderState);
+      const result = getSliderValues(
+        Object.assign(defaultState, {
+          min: MIN,
+          max: MAX,
+          step: STEP,
+        }),
+      );
       expect(result.length).toBeGreaterThan(2);
     });
 
@@ -34,11 +61,13 @@ describe('range-slider__track', () => {
       const MIN = 20;
       const STEP = 5;
 
-      const result = getSliderValues({
-        min: MIN,
-        max: MAX,
-        step: STEP,
-      } as IRangeSliderState);
+      const result = getSliderValues(
+        Object.assign(defaultState, {
+          min: MIN,
+          max: MAX,
+          step: STEP,
+        }),
+      );
       expect(result.length).toBeGreaterThan(2);
     });
   });
