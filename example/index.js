@@ -41,13 +41,13 @@ window.addEventListener('load', () => {
     {
       index: 3,
       props: {
-        min: -4.5,
-        max: 4.5,
+        min: -18,
+        max: 22.3,
         step: 0.1,
-        from: -2.5,
-        to: 2,
+        from: -7.5,
+        to: 18.2,
         prefix: '',
-        postfix: 'sec',
+        postfix: '°C',
         color: '#ffcc5c',
         markerVisibility: true,
         trackScaleVisibility: true,
