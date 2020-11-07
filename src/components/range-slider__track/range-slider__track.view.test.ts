@@ -26,7 +26,7 @@ describe('range-slider__track', () => {
       const getAccuracy = (value: number | string) =>
         (value.toString().split('.')[1] || '').length;
 
-      const minAccuracy = getAccuracy(MIN);
+      const stepAccuracy = getAccuracy(STEP);
 
       const result = getSliderValues(
         Object.assign(defaultState, {
@@ -37,7 +37,7 @@ describe('range-slider__track', () => {
       );
       expect(result.length).toBeGreaterThan(0);
       result.forEach(value => {
-        expect(getAccuracy(value[1])).toBe(minAccuracy);
+        expect(getAccuracy(value.rawValue)).toBe(stepAccuracy);
       });
     });
 

@@ -24,15 +24,15 @@ class TrackScale extends View {
     });
   }
 
-  update(values: [number, string][]): void {
-    const items = values.map(([index, value]) => {
-      const percent = (100 / values[values.length - 1][0]) * index;
+  update(values: sliderValue[]): void {
+    const items = values.map(({ index, displayValue }) => {
+      const percent = (100 / values[values.length - 1].index) * index;
 
-      const max = values[values.length - 1][0];
+      const max = values[values.length - 1].index;
       const min = 0;
       const ratio = (index - min) / (max - min);
 
-      return this.createItem(value, percent, ratio);
+      return this.createItem(displayValue, percent, ratio);
     });
 
     this.replaceChildren(items);
@@ -118,21 +118,23 @@ class RangeSliderTrack extends Provider<
     scale: TrackScale;
   }
 > {
+  lastSliderValues: sliderValue[] = [];
+
   private makeOnClickHandler(
     store: Store<IRangeSliderState>,
   ): (Event: MouseEvent) => void {
     return (event: MouseEvent) => {
       const target = event?.target as HTMLElement;
       const text = target.textContent || '';
-      const { prefix, postfix, value, intervalMode } = store.getState();
+      const { value, intervalMode } = store.getState();
 
-      const nextValue = Number(
-        text.substr(
-          prefix.length,
-          text.length - prefix.length - postfix.length,
-        ),
-      );
-      console.log(nextValue);
+      let nextValue = this.lastSliderValues[0].rawValue;
+      for (const sliderValue of this.lastSliderValues) {
+        if (sliderValue.displayValue === text) {
+          nextValue = sliderValue.rawValue;
+          break;
+        }
+      }
 
       const actionName = intervalMode
         ? Math.abs(value[0] - nextValue) >= Math.abs(value[1] - nextValue)
@@ -162,13 +164,21 @@ class RangeSliderTrack extends Provider<
   }
 
   render(state: IRangeSliderState): void {
-    this.elements.scale.update(getSliderValues(state));
+    this.lastSliderValues = getSliderValues(state);
+
+    this.elements.scale.update(this.lastSliderValues);
     this.elements.scale.hidden = !state.trackScaleVisibility;
     this.elements.scale.activeColor = state.primaryColor;
   }
 }
 
-const getSliderValues = (state: IRangeSliderState): [number, string][] => {
+interface sliderValue {
+  index: number;
+  rawValue: number;
+  displayValue: string;
+}
+
+const getSliderValues = (state: IRangeSliderState): sliderValue[] => {
   const { max, min, step, prefix, postfix } = state;
   const accuracy = (step.toString().split('.')[1] || '').length;
 
@@ -188,12 +198,13 @@ const getSliderValues = (state: IRangeSliderState): [number, string][] => {
       index,
       (step * index * multiplier + min).toFixed(accuracy),
     ])
-    .map(([index, value]) => [
+    .map(([index, value]) => ({
       index,
-      `${prefix(Number(value))}${value}${postfix(Number(value))}`,
-    ]);
+      rawValue: value,
+      displayValue: `${prefix(Number(value))}${value}${postfix(Number(value))}`,
+    }));
 
-  return values as [number, string][];
+  return values as sliderValue[];
 };
 
 const getDelimiter = (dividend: number, delimiters: number[]): number => {
