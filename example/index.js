@@ -40,7 +40,20 @@ window.addEventListener('load', () => {
     },
     {
       index: 3,
-      props: {},
+      props: {
+        min: -4.5,
+        max: 4.5,
+        step: 0.1,
+        from: -2.5,
+        to: 2,
+        prefix: '',
+        postfix: 'sec',
+        color: '#ffcc5c',
+        markerVisibility: true,
+        trackScaleVisibility: true,
+        intervalMode: true,
+        vertical: false,
+      },
     },
     {
       index: 4,

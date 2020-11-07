@@ -109,16 +109,18 @@ function rangeSlider(
     },
 
     setPrefix(value) {
+      value = makeValueAsCallback(value);
       componentStore.dispatch({
         name: actionNames.CHANGE_PREFIX,
-        value: value || '',
+        value,
       });
     },
 
     setPostfix(value) {
+      value = makeValueAsCallback(value);
       componentStore.dispatch({
         name: actionNames.CHANGE_POSTFIX,
-        value: value || '',
+        value,
       });
     },
 
@@ -172,5 +174,13 @@ function rangeSlider(
     },
   };
 }
+
+const makeValueAsCallback = (value: string | cb): cb => {
+  if (typeof value === 'function') {
+    return value;
+  }
+
+  return () => value;
+};
 
 export { rangeSlider };
