@@ -132,6 +132,7 @@ class RangeSliderTrack extends Provider<
           text.length - prefix.length - postfix.length,
         ),
       );
+      console.log(nextValue);
 
       const actionName = intervalMode
         ? Math.abs(value[0] - nextValue) >= Math.abs(value[1] - nextValue)
@@ -169,6 +170,7 @@ class RangeSliderTrack extends Provider<
 
 const getSliderValues = (state: IRangeSliderState): [number, string][] => {
   const { max, min, step, prefix, postfix } = state;
+  const accuracy = (step.toString().split('.')[1] || '').length;
 
   const length = Math.round((max - min) / step + 1);
   const lastIndex = length - 1;
@@ -182,7 +184,10 @@ const getSliderValues = (state: IRangeSliderState): [number, string][] => {
 
   const values = new Array(Math.ceil(length / multiplier))
     .fill(null)
-    .map((_, index) => [index, (step * index * multiplier + min).toFixed(1)])
+    .map((_, index) => [
+      index,
+      (step * index * multiplier + min).toFixed(accuracy),
+    ])
     .map(([index, value]) => [
       index,
       `${prefix(Number(value))}${value}${postfix(Number(value))}`,
