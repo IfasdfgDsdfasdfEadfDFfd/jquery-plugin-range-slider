@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const glob = require('glob');
 
 const SRC_DIR = path.resolve(path.join(process.cwd(), 'src'));
@@ -11,22 +12,10 @@ const EXAMPLE_DIR = path.resolve(path.join(process.cwd(), 'example'));
 const DIST_DIR = path.resolve(path.join(process.cwd(), 'dist'));
 const IS_DEV_MODE = process.env.NODE_ENVIRONMENT === 'development';
 
-const getAllTemplates = folder => {
-  const SEARCH_DIR = path.join(process.cwd(), folder);
-
-  return glob.sync(`${SEARCH_DIR}/**/*.pug`).map(filepath => {
-    return new HtmlWebpackPlugin({
-      template: filepath,
-      favicon: path.join(EXAMPLE_DIR, 'favicon.png'),
-      filename: `${path.parse(filepath).name}.html`,
-    });
-  });
-};
-
 module.exports = {
   entry: {
     plugin: path.join(SRC_DIR, 'index.ts'),
-    example: path.join(EXAMPLE_DIR, 'index.js'),
+    example: { import: path.join(EXAMPLE_DIR, 'index.js'), dependOn: 'plugin' },
   },
   output: {
     path: DIST_DIR,
@@ -41,10 +30,14 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    ...getAllTemplates('example'),
+    new HtmlWebpackPlugin({
+      template: path.join(EXAMPLE_DIR, 'index.pug'),
+      favicon: path.join(EXAMPLE_DIR, 'favicon.png'),
+      filename: 'index.html',
+    }),
     new MiniCssExtractPlugin({
-      filename: IS_DEV_MODE ? '[name].css' : '[name.hash.css]',
-      chunkFilename: IS_DEV_MODE ? '[id].css' : '[id.hash.css]',
+      filename: IS_DEV_MODE ? '[name].css' : '[name].[hash].css',
+      chunkFilename: IS_DEV_MODE ? '[id].css' : '[id].[hash].css',
     }),
   ],
 
@@ -81,7 +74,7 @@ module.exports = {
   },
 
   mode: process.env.NODE_ENVIRONMENT,
-  devtool: 'inline-source-map',
+  devtool: IS_DEV_MODE ? 'inline-source-map' : 'source-map',
 
   devServer: {
     contentBase: DIST_DIR,
@@ -97,5 +90,12 @@ module.exports = {
       poll: true,
       ignored: /node_modules/,
     },
+  },
+
+  optimization: {
+    minimize: true,
+    removeAvailableModules: true,
+    mergeDuplicateChunks: true,
+    minimizer: [new CssMinimizerPlugin()],
   },
 };
