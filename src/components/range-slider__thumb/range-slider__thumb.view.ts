@@ -1,5 +1,5 @@
 import { View } from '../../core';
-import { getOffset } from '../../core/shortcuts';
+import { getOffset } from '../../core/utils';
 
 import styles from '../../exports.scss';
 

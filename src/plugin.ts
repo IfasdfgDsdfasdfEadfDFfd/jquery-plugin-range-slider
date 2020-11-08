@@ -4,11 +4,11 @@ import {
   defaultState,
   IRangeSliderState,
 } from './components/reducer';
-
-type cb = (arg: number) => string;
+import { makeValueLikeCallback, cb } from './core/utils';
 
 interface PluginApi {
   subscribe(cb: (state: IRangeSliderState) => void): void;
+  setFixedValues(value: string[]): void;
   setLeftValue(value: number): void;
   setRightValue(value: number): void;
   setPrefix(value: string | cb): void;
@@ -30,8 +30,8 @@ interface PluginProps {
   max: number;
   step: number;
   values: Array<string | number>;
-  prefix: string;
-  postfix: string;
+  prefix: string | cb;
+  postfix: string | cb;
   vertical: boolean;
   intervalMode: boolean;
   markerVisibility: boolean;
@@ -45,6 +45,10 @@ function rangeSlider(
 ): PluginApi {
   let leftValue = defaultState.value[0];
   let rightValue = defaultState.value[1];
+  const fixedValues =
+    props.values === undefined
+      ? defaultState.fixedValues
+      : props.values.map(String);
 
   if (props.values && props.values?.length !== 0) {
     if (props.from && props.to) {
@@ -58,17 +62,18 @@ function rangeSlider(
     }
   }
 
-  const prefix =
-    typeof props.prefix === 'function'
-      ? props.prefix
-      : (value: number) => props.prefix || defaultState.prefix(value);
+  let prefix = defaultState.prefix;
+  if (props.prefix) {
+    prefix = makeValueLikeCallback(props.prefix);
+  }
 
-  const postfix =
-    typeof props.postfix === 'function'
-      ? props.postfix
-      : (value: number) => props.postfix || defaultState.postfix(value);
+  let postfix = defaultState.postfix;
+  if (props.postfix) {
+    postfix = makeValueLikeCallback(props.postfix);
+  }
 
   const userDefinedProps: IRangeSliderState = {
+    fixedValues,
     value: [leftValue, rightValue],
     min: props.min === undefined ? defaultState.min : props.min,
     max: props.max === undefined ? defaultState.max : props.max,
@@ -93,11 +98,20 @@ function rangeSlider(
       props.color === undefined ? defaultState.primaryColor : props.color,
   };
 
+  console.log('plugin', userDefinedProps.prefix, userDefinedProps.postfix);
+
   const componentStore = createRangeSlider(this.get(0), userDefinedProps);
 
   return {
     subscribe(cb: (state: IRangeSliderState) => void) {
       componentStore.subscribe(cb);
+    },
+
+    setFixedValues(value) {
+      componentStore.dispatch({
+        name: actionNames.CHANGE_FIXED_VALUES,
+        value,
+      });
     },
 
     setLeftValue(value) {
@@ -109,7 +123,7 @@ function rangeSlider(
     },
 
     setPrefix(value) {
-      value = makeValueAsCallback(value);
+      value = makeValueLikeCallback(value);
       componentStore.dispatch({
         name: actionNames.CHANGE_PREFIX,
         value,
@@ -117,7 +131,7 @@ function rangeSlider(
     },
 
     setPostfix(value) {
-      value = makeValueAsCallback(value);
+      value = makeValueLikeCallback(value);
       componentStore.dispatch({
         name: actionNames.CHANGE_POSTFIX,
         value,
@@ -174,13 +188,5 @@ function rangeSlider(
     },
   };
 }
-
-const makeValueAsCallback = (value: string | cb): cb => {
-  if (typeof value === 'function') {
-    return value;
-  }
-
-  return () => value;
-};
 
 export { rangeSlider };

@@ -12,4 +12,9 @@ const getOffset = (
   return offsetPercent - selfPercent;
 };
 
-export { getOffset };
+type cb = (value: number) => string;
+const makeValueLikeCallback = (value: string | cb): cb => {
+  return typeof value === 'function' ? value : () => value;
+};
+
+export { getOffset, makeValueLikeCallback, cb };

@@ -73,6 +73,8 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
   (function (api) {
     const el = $(`#js-configuration-id-${index}`);
 
+    const fixedValues = el.find('.configuration__values');
+
     const left = el.find('.configuration__value-left');
     const right = el.find('.configuration__value-right');
 
@@ -92,6 +94,9 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
     );
 
     api.subscribe(state => {
+      console.log(state);
+      fixedValues.val(state.fixedValues.toString().replaceAll(',', ' '));
+
       left.val(state.value[0]);
       right.val(state.value[1]);
 
@@ -108,6 +113,10 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
       markerVisibility.attr('checked', state.markerVisibility);
       trackScaleVisibility.attr('checked', state.trackScaleVisibility);
     });
+
+    fixedValues.on('focusout', event =>
+      api.setFixedValues(event.target.value.split(' ')),
+    );
 
     left.on('focusout', event => api.setLeftValue(Number(event.target.value)));
     right.on('focusout', event =>

@@ -74,39 +74,29 @@ function createStore<TState>(
   };
 }
 
-function loadFromLocalStoragePlugin<T>(key: string): Plugin<T> {
+function loadFromLocalStoragePlugin<T>(storageName: string): Plugin<T> {
   return (initState: T) => {
-    let state = JSON.parse(window.localStorage.getItem(key) as string);
-
-    try {
-      Object.keys(state).forEach(key => {
-        state[key] = state[key].toString().startsWith('func:')
-          ? eval(state[key].slice(5))
-          : state[key];
-      });
-    } catch {
-      state = initState;
-    }
-
-    return state;
+    const state = JSON.parse(
+      window.localStorage.getItem(storageName) as string,
+    );
+    return state || initState;
   };
 }
 
 function saveToLocalStoragePlugin<T>(key: string): Plugin<T> {
-  return (state: T) => {
-    const cachedState = Object.assign({}, state);
-    window.localStorage.setItem(key, stringify(state as never));
-    return cachedState;
+  return (state: any) => {
+    const originState = Object.assign({}, state);
+
+    Object.keys(state).map(key => {
+      if (typeof state[key] === 'function') {
+        state[key] = '';
+      }
+    });
+    window.localStorage.setItem(key, JSON.stringify(state));
+
+    return originState;
   };
 }
-
-const stringify = (value: Record<string, unknown>): string => {
-  Object.keys(value).forEach(key => {
-    value[key] =
-      typeof value[key] === 'function' ? 'func:' + value[key] : value[key];
-  });
-  return JSON.stringify(value);
-};
 
 function NaNValidator(action: Action): Action {
   if (typeof action.value === 'number') {

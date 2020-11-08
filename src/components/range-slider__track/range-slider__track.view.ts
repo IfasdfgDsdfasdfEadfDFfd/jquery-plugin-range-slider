@@ -2,6 +2,7 @@ import { actionNames, IRangeSliderState } from '../reducer';
 import { Provider, Store, View } from '../../core';
 
 import styles from '../../exports.scss';
+import { makeValueLikeCallback } from '../../core/utils';
 
 class Track extends View {
   constructor(scale: TrackScale) {
@@ -120,7 +121,36 @@ class RangeSliderTrack extends Provider<
 > {
   lastSliderValues: sliderValue[] = [];
 
-  private makeOnClickHandler(
+  init(store: Store<IRangeSliderState>): void {
+    this.elements.scale = new TrackScale();
+    this.elements.track = new Track(this.elements.scale);
+
+    this.root = this.elements.track;
+
+    this.elements.scale.element.addEventListener(
+      'click',
+      this.makeOnClickHandler(store),
+    );
+  }
+
+  render(state: IRangeSliderState): void {
+    const { min, max, step } = state;
+    const prefix = makeValueLikeCallback(state.prefix);
+    const postfix = makeValueLikeCallback(state.postfix);
+    this.lastSliderValues = this.getSliderValues(
+      min,
+      max,
+      step,
+      prefix,
+      postfix,
+    );
+
+    this.elements.scale.update(this.lastSliderValues);
+    this.elements.scale.hidden = !state.trackScaleVisibility;
+    this.elements.scale.activeColor = state.primaryColor;
+  }
+
+  makeOnClickHandler(
     store: Store<IRangeSliderState>,
   ): (Event: MouseEvent) => void {
     return (event: MouseEvent) => {
@@ -151,24 +181,48 @@ class RangeSliderTrack extends Provider<
     };
   }
 
-  init(store: Store<IRangeSliderState>): void {
-    this.elements.scale = new TrackScale();
-    this.elements.track = new Track(this.elements.scale);
+  getSliderValues(
+    from: number,
+    to: number,
+    step: number,
+    prefix: IRangeSliderState['prefix'],
+    postfix: IRangeSliderState['postfix'],
+  ): sliderValue[] {
+    const accuracy = (step.toString().split('.')[1] || '').length;
 
-    this.root = this.elements.track;
+    const length = Math.round((to - from) / step + 1);
+    const lastIndex = length - 1;
 
-    this.elements.scale.element.addEventListener(
-      'click',
-      this.makeOnClickHandler(store),
-    );
+    const primes = [3, 5, 7, 11];
+
+    const delimiter = this.getDelimiter(lastIndex, primes);
+
+    let multiplier = Math.max(Math.floor(lastIndex / delimiter), 1);
+    multiplier = multiplier < 15 ? Math.min(multiplier, delimiter) : multiplier;
+
+    const values = new Array(Math.ceil(length / multiplier))
+      .fill(null)
+      .map((_, index) => [
+        index,
+        Number((step * index * multiplier + from).toFixed(accuracy)),
+      ])
+      .map(([index, value]) => ({
+        index,
+        rawValue: value,
+        displayValue: `${prefix(value)}${value}${postfix(value)}`,
+      }));
+
+    return values as sliderValue[];
   }
 
-  render(state: IRangeSliderState): void {
-    this.lastSliderValues = getSliderValues(state);
+  getDelimiter(dividend: number, delimiters: number[]): number {
+    for (const delimiter of delimiters) {
+      if (dividend % delimiter === 0) {
+        return delimiter;
+      }
+    }
 
-    this.elements.scale.update(this.lastSliderValues);
-    this.elements.scale.hidden = !state.trackScaleVisibility;
-    this.elements.scale.activeColor = state.primaryColor;
+    return this.getDelimiter(dividend - 1, delimiters);
   }
 }
 
@@ -178,43 +232,4 @@ interface sliderValue {
   displayValue: string;
 }
 
-const getSliderValues = (state: IRangeSliderState): sliderValue[] => {
-  const { max, min, step, prefix, postfix } = state;
-  const accuracy = (step.toString().split('.')[1] || '').length;
-
-  const length = Math.round((max - min) / step + 1);
-  const lastIndex = length - 1;
-
-  const primes = [3, 5, 7, 11];
-
-  const delimiter = getDelimiter(lastIndex, primes);
-
-  let multiplier = Math.max(Math.floor(lastIndex / delimiter), 1);
-  multiplier = multiplier < 15 ? Math.min(multiplier, delimiter) : multiplier;
-
-  const values = new Array(Math.ceil(length / multiplier))
-    .fill(null)
-    .map((_, index) => [
-      index,
-      (step * index * multiplier + min).toFixed(accuracy),
-    ])
-    .map(([index, value]) => ({
-      index,
-      rawValue: value,
-      displayValue: `${prefix(Number(value))}${value}${postfix(Number(value))}`,
-    }));
-
-  return values as sliderValue[];
-};
-
-const getDelimiter = (dividend: number, delimiters: number[]): number => {
-  for (const delimiter of delimiters) {
-    if (dividend % delimiter === 0) {
-      return delimiter;
-    }
-  }
-
-  return getDelimiter(dividend - 1, delimiters);
-};
-
-export { Track, TrackScale, TrackScaleItem, RangeSliderTrack, getSliderValues };
+export { Track, TrackScale, TrackScaleItem, RangeSliderTrack };
