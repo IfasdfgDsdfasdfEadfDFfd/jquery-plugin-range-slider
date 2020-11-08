@@ -1,1 +1,1 @@
-# Website for booking a hotel
+# JQuery plugin
