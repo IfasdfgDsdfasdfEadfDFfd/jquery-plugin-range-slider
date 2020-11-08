@@ -1,7 +1,7 @@
 {
-  "name": "jquery-plugin-range-slider",
+  "name": "@gugfug/jquery-plugin-range-slider",
   "sideEffect": false,
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "jQuey slider",
   "scripts": {
     "build:prod": "NODE_ENV=production webpack",
