@@ -7,8 +7,6 @@ type Action = {
   value: any;
 };
 
-type Plugin<T> = (state: T) => T;
-
 type Reducer<TState> = (action: Action, state: TState) => TState;
 
 type Store<TState> = {
@@ -23,21 +21,12 @@ type Validator = (action: Action) => Action;
 function createStore<TState>(
   initState: TState,
   reducer: Reducer<TState>,
-  plugins: {
-    pre?: Plugin<TState>[];
-    post?: Plugin<TState>[];
-  } = {},
   validators: Validator[] = [],
 ): Store<TState> {
   const listeners: Listener<TState>[] = [];
-  let _state =
-    plugins.pre?.reduce((state, plugin) => plugin(state), initState) ||
-    initState;
+  let _state = initState;
 
   const setNextState = (nextState: TState) => {
-    for (const plugin of plugins.post || []) {
-      nextState = plugin(nextState);
-    }
     _state = nextState;
   };
 
@@ -74,30 +63,6 @@ function createStore<TState>(
   };
 }
 
-function loadFromLocalStoragePlugin<T>(storageName: string): Plugin<T> {
-  return (initState: T) => {
-    const state = JSON.parse(
-      window.localStorage.getItem(storageName) as string,
-    );
-    return state || initState;
-  };
-}
-
-function saveToLocalStoragePlugin<T>(key: string): Plugin<T> {
-  return (state: any) => {
-    const originState = Object.assign({}, state);
-
-    Object.keys(state).map(key => {
-      if (typeof state[key] === 'function') {
-        state[key] = '';
-      }
-    });
-    window.localStorage.setItem(key, JSON.stringify(state));
-
-    return originState;
-  };
-}
-
 function NaNValidator(action: Action): Action {
   if (typeof action.value === 'number') {
     if (isNaN(action.value)) {
@@ -118,10 +83,7 @@ export {
   Action,
   Reducer,
   Store,
-  Plugin,
   Validator,
   createStore,
-  loadFromLocalStoragePlugin,
-  saveToLocalStoragePlugin,
   NaNValidator,
 };
