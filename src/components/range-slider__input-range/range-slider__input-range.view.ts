@@ -72,6 +72,7 @@ abstract class RangeSliderInputRange extends Provider<
 
     this.elements.thumb.primaryColor = state.primaryColor;
     this.elements.thumb.marker.hidden = !state.markerVisibility;
+    if (state.vertical) this.elements.thumb.marker.setVerticalMargin();
   }
 
   abstract makeAction(value: number): Action;

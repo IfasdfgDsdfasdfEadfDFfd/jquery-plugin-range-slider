@@ -13,7 +13,26 @@
   margin: 50% auto;
   transform: rotate(270deg);
 
-  .range-slider__thumb-marker {
+  .range-slider__track-scale {
+    margin-top: 2.5rem;
+  }
+
+  .range-slider__thumb__marker {
     transform: rotate(90deg);
+  }
+
+  .range-slider__track-scale__item {
+    transform: rotate(90deg);
+  }
+
+  .range-slider__track-scale__button {
+    &::after {
+      top: 45%;
+      width: 1rem;
+      height: 0;
+      margin-left: -2.5rem;
+      border-top: 2px solid $gray-color;
+      border-left: 0;
+    }
   }
 }

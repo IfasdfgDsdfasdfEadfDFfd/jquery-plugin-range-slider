@@ -122,6 +122,11 @@ class ThumbMarker extends View {
   positionCorrection() {
     this.value = this._value;
   }
+
+  setVerticalMargin() {
+    const offset = -this.element.clientWidth;
+    this.element.style.setProperty('margin-top', `${offset}px`);
+  }
 }
 
 export { Thumb };
