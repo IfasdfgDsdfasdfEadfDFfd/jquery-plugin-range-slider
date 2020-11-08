@@ -75,7 +75,7 @@ module.exports = {
   },
 
   mode: process.env.NODE_ENV,
-  devtool: IS_DEV_MODE ? 'inline-source-map' : 'source-map',
+  devtool: IS_DEV_MODE ? 'eval-cheap-module-source-map' : 'source-map',
 
   devServer: {
     contentBase: DIST_DIR,
