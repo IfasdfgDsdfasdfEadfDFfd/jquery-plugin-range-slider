@@ -8,6 +8,7 @@
     "stylelint-scss",
     "stylelint-order"
   ],
+  "ignoreFiles": "./dist/**/*.css",
   "rules": {
     "selector-class-pattern": null,
     "selector-pseudo-class-no-unknown": [
