@@ -111,19 +111,32 @@ function rangeSlider(
 
     setFixedValues(value) {
       if (value.length > 0) {
-        componentStore.dispatch({
-          name: actionNames.CHANGE_FIXED_VALUES,
-          value,
-        });
+        const { fixedValues } = componentStore.getState();
+
+        if (value !== fixedValues) {
+          componentStore.dispatch({
+            name: actionNames.CHANGE_FIXED_VALUES,
+            value,
+          });
+        }
       }
     },
 
     setLeftValue(value) {
-      componentStore.dispatch({ name: actionNames.CHANGE_LEFT_VALUE, value });
+      const state = componentStore.getState();
+
+      if (value !== state.value[0])
+        componentStore.dispatch({ name: actionNames.CHANGE_LEFT_VALUE, value });
     },
 
     setRightValue(value) {
-      componentStore.dispatch({ name: actionNames.CHANGE_RIGHT_VALUE, value });
+      const state = componentStore.getState();
+
+      if (value !== state.value[1])
+        componentStore.dispatch({
+          name: actionNames.CHANGE_RIGHT_VALUE,
+          value,
+        });
     },
 
     setPrefix(value) {
@@ -143,15 +156,24 @@ function rangeSlider(
     },
 
     setMin(value) {
-      componentStore.dispatch({ name: actionNames.CHANGE_MIN, value });
+      const { min } = componentStore.getState();
+
+      if (value !== min)
+        componentStore.dispatch({ name: actionNames.CHANGE_MIN, value });
     },
 
     setMax(value) {
-      componentStore.dispatch({ name: actionNames.CHANGE_MAX, value });
+      const { max } = componentStore.getState();
+
+      if (value !== max)
+        componentStore.dispatch({ name: actionNames.CHANGE_MAX, value });
     },
 
     setStep(value) {
-      componentStore.dispatch({ name: actionNames.CHANGE_STEP, value });
+      const { step } = componentStore.getState();
+
+      if (value !== step)
+        componentStore.dispatch({ name: actionNames.CHANGE_STEP, value });
     },
 
     setOrientVertical(value) {
@@ -180,13 +202,18 @@ function rangeSlider(
     },
 
     setPrimaryColor(value) {
-      if (value.startsWith('#')) {
-        const substringValue = value.substr(1);
-        if (substringValue.length === 3 || substringValue.length === 6) {
-          componentStore.dispatch({
-            name: actionNames.CHANGE_PRIMARY_COLOR,
-            value,
-          });
+      const { primaryColor } = componentStore.getState();
+
+      if (value !== primaryColor) {
+        if (value.startsWith('#')) {
+          const substringValue = value.substr(1);
+
+          if (substringValue.length === 3 || substringValue.length === 6) {
+            componentStore.dispatch({
+              name: actionNames.CHANGE_PRIMARY_COLOR,
+              value,
+            });
+          }
         }
       }
     },
