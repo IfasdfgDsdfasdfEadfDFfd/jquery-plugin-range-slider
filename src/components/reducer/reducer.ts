@@ -124,7 +124,16 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
       return { ...state, primaryColor: action.value };
 
     case actionNames.CHANGE_FIXED_VALUES:
-      return { ...state, fixedValues: action.value };
+      min = 0;
+      max = action.value.length - 1;
+
+      return {
+        ...state,
+        fixedValues: action.value,
+        min,
+        max,
+        value: getValue(state.value[0], state.value[1], min, max, 1),
+      };
 
     default:
       return state;
