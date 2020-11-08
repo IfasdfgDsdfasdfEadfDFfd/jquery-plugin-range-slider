@@ -57,11 +57,33 @@ window.addEventListener('load', () => {
     },
     {
       index: 4,
-      props: {},
+      props: {
+        values: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        from: 'Tue',
+        to: 'Fri',
+        color: '#fe4a49',
+        markerVisibility: true,
+        trackScaleVisibility: true,
+        intervalMode: true,
+        vertical: false,
+      },
     },
     {
       index: 5,
-      props: {},
+      props: {
+        min: -18,
+        max: 22.3,
+        step: 0.1,
+        from: -7.5,
+        to: 18.2,
+        prefix: '',
+        postfix: '°C',
+        color: '#ffcc5c',
+        markerVisibility: true,
+        trackScaleVisibility: true,
+        intervalMode: true,
+        vertical: false,
+      },
     },
   ];
   for (const { index, props } of parameters) {
@@ -72,6 +94,8 @@ window.addEventListener('load', () => {
 const attachConfigurationPanelToRangeSlider = (index, props) => {
   (function (api) {
     const el = $(`#js-configuration-id-${index}`);
+
+    const fixedValues = el.find('.configuration__values');
 
     const left = el.find('.configuration__value-left');
     const right = el.find('.configuration__value-right');
@@ -92,6 +116,8 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
     );
 
     api.subscribe(state => {
+      fixedValues.val(state.fixedValues.toString().replaceAll(',', ' '));
+
       left.val(state.value[0]);
       right.val(state.value[1]);
 
@@ -108,6 +134,10 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
       markerVisibility.attr('checked', state.markerVisibility);
       trackScaleVisibility.attr('checked', state.trackScaleVisibility);
     });
+
+    fixedValues.on('focusout', event =>
+      api.setFixedValues(event.target.value.split(' ')),
+    );
 
     left.on('focusout', event => api.setLeftValue(Number(event.target.value)));
     right.on('focusout', event =>

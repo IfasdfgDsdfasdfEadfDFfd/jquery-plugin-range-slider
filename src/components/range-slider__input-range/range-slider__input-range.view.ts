@@ -89,19 +89,18 @@ class LeftRangeSliderInputRange extends RangeSliderInputRange {
 
     this.elements.input.value = state.value[0];
 
-    const { max, min, value, prefix, postfix } = state;
+    const { max, min, value, prefix, postfix, fixedValues } = state;
 
-    const prefixValue =
-      typeof prefix === 'function' ? prefix(value[0]) : prefix;
-    const postfixValue =
-      typeof postfix === 'function' ? postfix(value[0]) : postfix;
+    const displayValue =
+      fixedValues.length > 1 ? fixedValues[value[0]] : value[0];
 
     this.elements.thumb.positioning(
       max,
       min,
       value[0],
-      prefixValue,
-      postfixValue,
+      prefix(value[0]),
+      postfix(value[0]),
+      displayValue,
     );
   }
 
@@ -118,19 +117,18 @@ class RightRangeSliderInputRange extends RangeSliderInputRange {
     super.render(state);
     this.elements.input.value = state.value[1];
 
-    const { max, min, value, prefix, postfix } = state;
+    const { max, min, value, prefix, postfix, fixedValues } = state;
 
-    const prefixValue =
-      typeof prefix === 'function' ? prefix(value[1]) : prefix;
-    const postfixValue =
-      typeof postfix === 'function' ? postfix(value[1]) : postfix;
+    const displayValue =
+      fixedValues.length > 1 ? fixedValues[value[1]] : value[1];
 
     this.elements.thumb.positioning(
       max,
       min,
       value[1],
-      prefixValue,
-      postfixValue,
+      prefix(value[1]),
+      postfix(value[1]),
+      displayValue,
     );
   }
 

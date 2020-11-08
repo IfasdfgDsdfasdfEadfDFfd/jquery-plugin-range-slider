@@ -18,6 +18,7 @@ interface IRangeSliderState {
   markerVisibility: boolean;
   trackScaleVisibility: boolean;
   primaryColor: string;
+  fixedValues: string[];
 }
 
 const defaultState: IRangeSliderState = {
@@ -32,6 +33,7 @@ const defaultState: IRangeSliderState = {
   markerVisibility: true,
   trackScaleVisibility: true,
   primaryColor: styles.primaryColor,
+  fixedValues: [],
 };
 
 const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
@@ -121,12 +123,16 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
     case actionNames.CHANGE_PRIMARY_COLOR:
       return { ...state, primaryColor: action.value };
 
+    case actionNames.CHANGE_FIXED_VALUES:
+      return { ...state, fixedValues: action.value };
+
     default:
       return state;
   }
 };
 
 export {
+  cb,
   IRangeSliderState,
   rangeSliderStoreReducer,
   actionNames,

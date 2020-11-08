@@ -58,6 +58,10 @@ html(lang="en")
             -var id = 'v-orient-' + index
             label(for=id)= 'vertical:'
             input(type='checkbox', id=id).configuration__orient
+          .configuration__tool.configuration__tool--wide
+            -var id = 'fixed-values-' + index
+            label(for=id)= 'values:'
+            input(type='text', id=id).configuration__values
 
     each index in [1, 2, 3, 4, 5]
       +slider(index)

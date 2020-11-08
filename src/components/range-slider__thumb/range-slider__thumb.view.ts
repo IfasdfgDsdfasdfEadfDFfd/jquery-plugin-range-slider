@@ -1,5 +1,5 @@
 import { View } from '../../core';
-import { getOffset } from '../../core/shortcuts';
+import { getOffset } from '../../core/utils';
 
 import styles from '../../exports.scss';
 
@@ -15,6 +15,7 @@ class Thumb extends View {
     value: number;
     prefix: string;
     postfix: string;
+    displayValue: number | string;
   };
   lastColor!: string;
   isFocused = false;
@@ -32,10 +33,12 @@ class Thumb extends View {
     max: number,
     min: number,
     value: number,
-    prefix: string,
-    postfix: string,
+    prefix = '',
+    postfix = '',
+    displayValue?: number | string,
   ): void {
-    this.lastValues = { max, min, value, prefix, postfix };
+    displayValue = displayValue || value;
+    this.lastValues = { max, min, value, prefix, postfix, displayValue };
 
     const thumbWidth =
       <number>this.element.clientWidth + parseInt(styles.thumbWidth);
@@ -45,7 +48,7 @@ class Thumb extends View {
 
     this.element.style.setProperty('left', `${offset}%`);
 
-    this.marker.value = `${prefix}${value}${postfix}`;
+    this.marker.value = `${prefix}${displayValue}${postfix}`;
   }
 
   set primaryColor(value: string) {

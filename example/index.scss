@@ -36,6 +36,14 @@ body {
   margin: 1rem;
 }
 
+.configuration__tool--wide {
+  grid-column: 1 / span 2;
+}
+
+.configuration__values {
+  width: 100%;
+}
+
 label {
   font-weight: bold;
   font-size: 1rem;
