@@ -98,8 +98,6 @@ function rangeSlider(
       props.color === undefined ? defaultState.primaryColor : props.color,
   };
 
-  console.log('plugin', userDefinedProps.prefix, userDefinedProps.postfix);
-
   const componentStore = createRangeSlider(this.get(0), userDefinedProps);
 
   return {

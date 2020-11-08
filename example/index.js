@@ -94,7 +94,6 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
     );
 
     api.subscribe(state => {
-      console.log(state);
       fixedValues.val(state.fixedValues.toString().replaceAll(',', ' '));
 
       left.val(state.value[0]);
