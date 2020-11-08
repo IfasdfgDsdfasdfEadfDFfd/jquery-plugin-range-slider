@@ -5,6 +5,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const glob = require('glob');
 
 const SRC_DIR = path.resolve(path.join(process.cwd(), 'src'));
@@ -97,6 +98,6 @@ module.exports = {
     minimize: true,
     removeAvailableModules: true,
     mergeDuplicateChunks: true,
-    minimizer: [new CssMinimizerPlugin()],
+    minimizer: [new TerserPlugin(), new CssMinimizerPlugin()],
   },
 };
