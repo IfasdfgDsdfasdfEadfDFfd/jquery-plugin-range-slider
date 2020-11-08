@@ -132,7 +132,8 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
         fixedValues: action.value,
         min,
         max,
-        value: getValue(state.value[0], state.value[1], min, max, 1),
+        step: 1,
+        value: [min, max],
       };
 
     default:

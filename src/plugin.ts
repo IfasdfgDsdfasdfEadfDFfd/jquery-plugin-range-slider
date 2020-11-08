@@ -110,10 +110,12 @@ function rangeSlider(
     },
 
     setFixedValues(value) {
-      componentStore.dispatch({
-        name: actionNames.CHANGE_FIXED_VALUES,
-        value,
-      });
+      if (value.length > 0) {
+        componentStore.dispatch({
+          name: actionNames.CHANGE_FIXED_VALUES,
+          value,
+        });
+      }
     },
 
     setLeftValue(value) {
