@@ -134,16 +134,25 @@ class RangeSliderTrack extends Provider<
   }
 
   render(state: IRangeSliderState): void {
-    const { min, max, step } = state;
-    const prefix = makeValueLikeCallback(state.prefix);
-    const postfix = makeValueLikeCallback(state.postfix);
-    this.lastSliderValues = this.getSliderValues(
-      min,
-      max,
-      step,
-      prefix,
-      postfix,
-    );
+    const { min, max, step, fixedValues } = state;
+
+    if (fixedValues.length > 0) {
+      this.lastSliderValues = fixedValues.slice().map((value, index) => ({
+        index,
+        rawValue: index,
+        displayValue: value,
+      }));
+    } else {
+      const prefix = makeValueLikeCallback(state.prefix);
+      const postfix = makeValueLikeCallback(state.postfix);
+      this.lastSliderValues = this.getSliderValues(
+        min,
+        max,
+        step,
+        prefix,
+        postfix,
+      );
+    }
 
     this.elements.scale.update(this.lastSliderValues);
     this.elements.scale.hidden = !state.trackScaleVisibility;

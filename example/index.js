@@ -57,11 +57,33 @@ window.addEventListener('load', () => {
     },
     {
       index: 4,
-      props: {},
+      props: {
+        values: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        from: 'Tue',
+        to: 'Fri',
+        color: '#fe4a49',
+        markerVisibility: true,
+        trackScaleVisibility: true,
+        intervalMode: true,
+        vertical: false,
+      },
     },
     {
       index: 5,
-      props: {},
+      props: {
+        min: -18,
+        max: 22.3,
+        step: 0.1,
+        from: -7.5,
+        to: 18.2,
+        prefix: '',
+        postfix: '°C',
+        color: '#ffcc5c',
+        markerVisibility: true,
+        trackScaleVisibility: true,
+        intervalMode: true,
+        vertical: false,
+      },
     },
   ];
   for (const { index, props } of parameters) {

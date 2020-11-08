@@ -45,15 +45,19 @@ function rangeSlider(
 ): PluginApi {
   let leftValue = defaultState.value[0];
   let rightValue = defaultState.value[1];
-  const fixedValues =
-    props.values === undefined
-      ? defaultState.fixedValues
-      : props.values.map(String);
+  let fixedValues = defaultState.fixedValues;
 
   if (props.values && props.values?.length !== 0) {
+    fixedValues = props.values.map(String);
+    props.max = fixedValues.length - 1;
+    props.min = 0;
+    props.step = 1;
+
     if (props.from && props.to) {
-      leftValue = props.values?.indexOf(props.from) || 0;
-      rightValue = props.values?.indexOf(props.to) || props.values.length - 1;
+      const leftValueIndex = props.values.indexOf(props.from);
+      const rightValueIndex = props.values.indexOf(props.to);
+      leftValue = leftValueIndex === -1 ? props.min : leftValueIndex;
+      rightValue = rightValueIndex === -1 ? props.max : rightValueIndex;
     }
   } else {
     if (typeof props.from === 'number' && typeof props.to === 'number') {
