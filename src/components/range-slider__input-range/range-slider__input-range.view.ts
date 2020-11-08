@@ -80,7 +80,6 @@ abstract class RangeSliderInputRange extends Provider<
 
 class LeftRangeSliderInputRange extends RangeSliderInputRange {
   render(state: IRangeSliderState): void {
-    console.log('left input rendered');
     super.render(state);
 
     if (!state.intervalMode) {
@@ -116,7 +115,6 @@ class LeftRangeSliderInputRange extends RangeSliderInputRange {
 
 class RightRangeSliderInputRange extends RangeSliderInputRange {
   render(state: IRangeSliderState): void {
-    console.log('right input render');
     super.render(state);
     this.elements.input.value = state.value[1];
 

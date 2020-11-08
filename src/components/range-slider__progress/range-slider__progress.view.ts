@@ -42,7 +42,6 @@ class RangeSliderProgress extends Provider<IRangeSliderState, TElements> {
   }
 
   render(state: IRangeSliderState): void {
-    console.log('progress rendered');
     const { min, max } = state;
     let { value } = state;
 

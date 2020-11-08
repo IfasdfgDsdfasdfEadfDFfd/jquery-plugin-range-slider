@@ -134,7 +134,6 @@ class RangeSliderTrack extends Provider<
   }
 
   render(state: IRangeSliderState): void {
-    console.log('track rendered');
     const { min, max, step, fixedValues } = state;
 
     if (fixedValues.length > 0) {
