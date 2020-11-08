@@ -11,7 +11,6 @@ const SRC_DIR = path.resolve(path.join(process.cwd(), 'src'));
 const EXAMPLE_DIR = path.resolve(path.join(process.cwd(), 'example'));
 const DIST_DIR = path.resolve(path.join(process.cwd(), 'dist'));
 const IS_DEV_MODE = process.env.NODE_ENV === 'development';
-console.log(process.env.NODE_ENV);
 
 module.exports = {
   entry: {
@@ -20,6 +19,7 @@ module.exports = {
   },
   output: {
     path: DIST_DIR,
+    publicPath: '',
     filename: '[name].build.js',
   },
 
@@ -37,8 +37,8 @@ module.exports = {
       filename: 'index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: IS_DEV_MODE ? '[name].css' : '[name].[hash].css',
-      chunkFilename: IS_DEV_MODE ? '[id].css' : '[id].[hash].css',
+      filename: IS_DEV_MODE ? '[name].css' : '[name].[fullhash].css',
+      chunkFilename: IS_DEV_MODE ? '[id].css' : '[id].[fullhash].css',
     }),
   ],
 
