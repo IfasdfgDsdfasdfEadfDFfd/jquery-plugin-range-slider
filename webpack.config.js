@@ -10,7 +10,8 @@ const glob = require('glob');
 const SRC_DIR = path.resolve(path.join(process.cwd(), 'src'));
 const EXAMPLE_DIR = path.resolve(path.join(process.cwd(), 'example'));
 const DIST_DIR = path.resolve(path.join(process.cwd(), 'dist'));
-const IS_DEV_MODE = process.env.NODE_ENVIRONMENT === 'development';
+const IS_DEV_MODE = process.env.NODE_ENV === 'development';
+console.log(process.env.NODE_ENV);
 
 module.exports = {
   entry: {
@@ -73,7 +74,7 @@ module.exports = {
     ],
   },
 
-  mode: process.env.NODE_ENVIRONMENT,
+  mode: process.env.NODE_ENV,
   devtool: IS_DEV_MODE ? 'inline-source-map' : 'source-map',
 
   devServer: {
