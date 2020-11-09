@@ -10,6 +10,21 @@ Simple range slider with minimalistic design and fully featured api that allow y
 - set your own list of data
 - support vertical and horizontal layout
 
+## Installation
+
+Installation process as simple as it can be
+you can do it with npm
+
+`npm install @unpredictable-username/jquery-plugin-range-slider@0.1.0`
+
+or yarn
+
+`yarn add @unpredictable-username/jquery-plugin-range-slider@0.1.0`
+
+or just clone this repository
+
+`git clone https://github.com/unpredictable-username/jquery-plugin-range-slider.git`
+
 ## Usage
 
 After installation you need to import plugin
