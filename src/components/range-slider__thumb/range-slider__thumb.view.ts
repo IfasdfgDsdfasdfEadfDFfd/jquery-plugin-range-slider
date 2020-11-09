@@ -65,8 +65,8 @@ class Thumb extends View {
   }
 
   positionCorrection(): void {
-    const { max, min, value, prefix, postfix } = this.lastValues;
-    this.positioning(max, min, value, prefix, postfix);
+    const { max, min, value, prefix, postfix, displayValue } = this.lastValues;
+    this.positioning(max, min, value, prefix, postfix, displayValue);
   }
 
   onFocus(): void {
