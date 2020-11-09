@@ -12,8 +12,7 @@ Simple range slider with minimalistic design and fully featured api that allow y
 
 ## Installation
 
-Installation process as simple as it can be
-you can do it with npm
+Installation process as simple as it can be. You can do it with npm
 
 `npm install @unpredictable-username/jquery-plugin-range-slider@0.1.0`
 
