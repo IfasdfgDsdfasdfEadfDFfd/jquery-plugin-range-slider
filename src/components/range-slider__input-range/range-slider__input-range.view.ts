@@ -95,14 +95,14 @@ class LeftRangeSliderInputRange extends RangeSliderInputRange {
     const displayValue =
       fixedValues.length > 1 ? fixedValues[value[0]] : value[0];
 
-    this.elements.thumb.positioning(
+    this.elements.thumb.positioning({
       max,
       min,
-      value[0],
-      prefix(value[0]),
-      postfix(value[0]),
+      value: value[0],
+      prefix: prefix(value[0]),
+      postfix: postfix(value[0]),
       displayValue,
-    );
+    });
   }
 
   makeAction(value: number): Action {
@@ -123,14 +123,14 @@ class RightRangeSliderInputRange extends RangeSliderInputRange {
     const displayValue =
       fixedValues.length > 1 ? fixedValues[value[1]] : value[1];
 
-    this.elements.thumb.positioning(
+    this.elements.thumb.positioning({
       max,
       min,
-      value[1],
-      prefix(value[1]),
-      postfix(value[1]),
+      value: value[1],
+      prefix: prefix(value[1]),
+      postfix: postfix(value[1]),
       displayValue,
-    );
+    });
   }
 
   makeAction(value: number): Action {

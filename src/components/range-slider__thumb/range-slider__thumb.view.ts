@@ -2,20 +2,22 @@ import { View } from '../../core';
 
 import styles from '../../exports.scss';
 
+interface IThumbPositionParams {
+  min: number;
+  max: number;
+  value: number;
+  prefix: string;
+  postfix: string;
+  displayValue: string | number;
+}
+
 class Thumb extends View {
   hidingClassName = 'range-slider__thumb--hidden';
   focusClassName = 'range-slider__thumb--focused';
   hoverClassName = 'range-slider__thumb--hovered';
 
   marker!: ThumbMarker;
-  lastValues!: {
-    max: number;
-    min: number;
-    value: number;
-    prefix: string;
-    postfix: string;
-    displayValue: number | string;
-  };
+  cachedValues!: IThumbPositionParams;
   lastColor!: string;
   isFocused = false;
 
@@ -28,16 +30,10 @@ class Thumb extends View {
     this.marker = this.children[0] as ThumbMarker;
   }
 
-  positioning(
-    max: number,
-    min: number,
-    value: number,
-    prefix = '',
-    postfix = '',
-    displayValue?: number | string,
-  ): void {
-    displayValue = displayValue || value;
-    this.lastValues = { max, min, value, prefix, postfix, displayValue };
+  positioning(params: IThumbPositionParams): void {
+    this.cachedValues = params;
+
+    const { min, max, value, prefix, postfix, displayValue } = params;
 
     const thumbWidth =
       <number>this.element.clientWidth + parseInt(styles.thumbWidth);
@@ -65,8 +61,7 @@ class Thumb extends View {
   }
 
   positionCorrection(): void {
-    const { max, min, value, prefix, postfix, displayValue } = this.lastValues;
-    this.positioning(max, min, value, prefix, postfix, displayValue);
+    this.positioning(this.cachedValues);
   }
 
   onFocus(): void {
