@@ -1,5 +1,5 @@
 {
-  "name": "jquery-plugin-range-slider",
+  "name": "@unpredictable-username/jquery-plugin-range-slider",
   "sideEffect": false,
   "version": "0.1.0",
   "description": "jQuey slider",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gugfug/FSD-frontend-education-program.git"
+    "url": "git+https://github.com/unpredictable-username/jquery-plugin-range-slider.git"
   },
   "keywords": [
     "jquery",
@@ -25,12 +25,12 @@
     "slider",
     "typescript"
   ],
-  "author": "gugfug <gugfug1@gmail.com>",
+  "author": "unpredictable-username <gugfug1@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gugfug/FSD-frontend-education-program/issues"
+    "url": "https://github.com/unpredictable-username/jquery-plugin-range-slider/issues"
   },
-  "homepage": "https://github.com/gugfug/FSD-frontend-education-program#readme",
+  "homepage": "https://unpredictable-username.github.io/jquery-plugin-range-slider/",
   "devDependencies": {
     "@types/jest": "^26.0.5",
     "@types/jquery": "^3.5.1",
