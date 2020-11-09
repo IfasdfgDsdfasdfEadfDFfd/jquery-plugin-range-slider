@@ -44,7 +44,7 @@ $('#container-for-range-slider').rangeSlider({
 });
 ```
 
-that call return api object, for more information about it see Api documentation.
+that call return api object, for more information about it see [Api documentation](./docs/api.md).
 
 ## Development
 
@@ -105,6 +105,10 @@ run stylelint for scss files locate in src folder, run command with --fix postfi
 run prettier in write mode for all supported file types into ./src folder.
 
 ## Architecture
+
+This plugin implements classic [MVC design pattern](https://www.geeksforgeeks.org/mvc-design-pattern/) with some updates. So we have Model which presented as [Redux-like](https://redux.js.org/introduction/getting-started) store, [View](./docs/view.md) class that contain HTMLElements and manipulate DOM and Controller called as [Provider](./docs/provider.md) here and can pass data from [Store](./docs/store.md) (Model) to View and into backward direction from View (that in its turn from DOM events) into Store by dispatching some Actions.
+
+For detailed view see [documentation](./docs/index.md).
 
 ## Licence
 
