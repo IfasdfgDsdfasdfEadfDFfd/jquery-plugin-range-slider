@@ -19,7 +19,7 @@ describe('test view', () => {
 
   test('should have attrs', () => {
     const ATTRS = {
-      class: 'some-calss-name',
+      class: 'some-class-name',
     };
 
     const view = new View({
