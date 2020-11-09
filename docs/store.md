@@ -29,4 +29,87 @@ import { createStore } from './src/core/store.ts';
 
 [store data flow picture](./store-data-flow.svg)
 
+---
+
+## Examples
+
+### initState
+
+```javascript
+const initState = {
+  value: 0,
+  title: 'awesome title',
+};
+```
+
+### Actions
+
+```javascript
+const INCREMENT = {
+  name: '@INCREMENT',
+  value: null, // anyway should persist
+};
+```
+
+```javascript
+const CHANGE_TITLE = (nextTitle) => {
+  name: '@CHANGE_TITLE',
+  value: nextTitle,
+};
+```
+
+### Reducer
+
+```javascript
+const reducer = (state, action) => {
+  switch (action.name) {
+    case INCREMENT:
+      return { ...state, value: state.value + 1 };
+    case CHANGE_TITLE:
+      return { ...state, title: action.value };
+    default:
+      return state; // if unknown action name return prevision state
+  }
+};
+```
+
+### Validator
+
+```javascript
+const NotStringTitleValidator = (action) {
+  if (action.name === CHANGE_TITLE.name) {
+    if (typeof action.value !== 'string') {
+      return {
+        name: '@CATCH_NOT_STRING_TITLE',
+        value: action.value,
+      }
+    }
+    // Otherwise return unmodified action
+    return return action;
+  }
+}
+
+```
+
+### Create Store
+
+```javascript
+const store = createStore(initState, reducer, [NotStringTitleValidator]);
+```
+
+### Usage Store
+
+```javascript
+store.subscribe(state => state); // initState;
+
+store.coldStart(); // pass actual state to listeners
+store.dispatch(INCREMENT); // increment store.value;
+store.dispatch(CHANGE_TITLE('next title')); // change store.title;
+store.dispatch(CHANGE_TITLE(null)); // don't change state because NotStringTitleValidator catch that case;
+
+const state = store.getState(); // have no side effects, just return current state;
+```
+
+---
+
 Next reading [View](./view.md).
