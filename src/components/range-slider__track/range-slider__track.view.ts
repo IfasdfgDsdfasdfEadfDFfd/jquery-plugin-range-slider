@@ -145,13 +145,13 @@ class RangeSliderTrack extends Provider<
     } else {
       const prefix = makeValueLikeCallback(state.prefix);
       const postfix = makeValueLikeCallback(state.postfix);
-      this.lastSliderValues = this.getSliderValues(
-        min,
-        max,
+      this.lastSliderValues = this.getSliderValues({
+        from: min,
+        to: max,
         step,
         prefix,
         postfix,
-      );
+      });
     }
 
     this.elements.scale.update(this.lastSliderValues);
@@ -190,13 +190,19 @@ class RangeSliderTrack extends Provider<
     };
   }
 
-  getSliderValues(
-    from: number,
-    to: number,
-    step: number,
-    prefix: IRangeSliderState['prefix'],
-    postfix: IRangeSliderState['postfix'],
-  ): sliderValue[] {
+  getSliderValues({
+    from,
+    to,
+    step,
+    prefix,
+    postfix,
+  }: {
+    from: number;
+    to: number;
+    step: number;
+    prefix: IRangeSliderState['prefix'];
+    postfix: IRangeSliderState['postfix'];
+  }): sliderValue[] {
     const accuracy = (step.toString().split('.')[1] || '').length;
 
     const length = Math.round((to - from) / step + 1);
