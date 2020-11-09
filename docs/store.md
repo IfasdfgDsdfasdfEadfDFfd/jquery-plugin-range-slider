@@ -27,4 +27,4 @@ import { createStore } from './src/core/store.ts';
 - `dispatch(action: Action)` function that takes action as argument and pass it to reducer that on its own turn produce next value and that event generates calling listeners.
 - `coldStart()` simple helpful function its task to force store call every listener.
 
-Next reading [View](./view.md)
+Next reading [View](./view.md).
