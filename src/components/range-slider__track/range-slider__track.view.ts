@@ -145,7 +145,7 @@ class RangeSliderTrack extends Provider<
     } else {
       const prefix = makeValueLikeCallback(state.prefix);
       const postfix = makeValueLikeCallback(state.postfix);
-      this.lastSliderValues = this.getSliderValues({
+      this.lastSliderValues = this.getRange({
         from: min,
         to: max,
         step,
@@ -190,7 +190,7 @@ class RangeSliderTrack extends Provider<
     };
   }
 
-  getSliderValues({
+  getRange({
     from,
     to,
     step,
