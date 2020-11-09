@@ -1,5 +1,4 @@
 import { View } from '../../core';
-import { getOffset } from '../../core/utils';
 
 import styles from '../../exports.scss';
 
@@ -44,7 +43,13 @@ class Thumb extends View {
       <number>this.element.clientWidth + parseInt(styles.thumbWidth);
     const sliderWidth = <number>this.element.parentElement?.clientWidth;
 
-    const offset = getOffset(thumbWidth, sliderWidth, value, max, min);
+    const offset = this.getOffset({
+      selfWidth: thumbWidth,
+      parentWidth: sliderWidth,
+      value,
+      max,
+      min,
+    });
 
     this.element.style.setProperty('left', `${offset}%`);
 
@@ -86,6 +91,22 @@ class Thumb extends View {
       this.element.style.setProperty('background-color', this.lastColor);
       this.marker.element.style.setProperty('background-color', this.lastColor);
     }
+  }
+
+  getOffset({
+    selfWidth,
+    parentWidth,
+    value,
+    max,
+    min,
+  }: {
+    [key: string]: number;
+  }): number {
+    const ratio = (value - min) / (max - min);
+    const offsetPercent = 100 * ratio;
+    const selfPercent = (selfWidth / parentWidth) * 100 * ratio;
+
+    return offsetPercent - selfPercent;
   }
 }
 
