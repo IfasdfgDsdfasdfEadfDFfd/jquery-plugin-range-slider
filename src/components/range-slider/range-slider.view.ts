@@ -8,12 +8,17 @@ import { IRangeSliderState } from '../reducer';
 import { Provider, Store, View } from '../../core';
 
 class RangeSliderElement extends View {
-  constructor(
-    leftInput: LeftRangeSliderInputRange,
-    rightInput: RightRangeSliderInputRange,
-    track: RangeSliderTrack,
-    progress: RangeSliderProgress,
-  ) {
+  constructor({
+    leftInput,
+    rightInput,
+    track,
+    progress,
+  }: {
+    leftInput: LeftRangeSliderInputRange;
+    rightInput: RightRangeSliderInputRange;
+    track: RangeSliderTrack;
+    progress: RangeSliderProgress;
+  }) {
     super({
       tag: 'div',
       attrs: { class: 'range-slider' },
@@ -43,16 +48,17 @@ class RangeSlider extends Provider<
   }
 > {
   init(store: Store<IRangeSliderState>): void {
-    (this.elements.leftInput = new LeftRangeSliderInputRange(store)),
-      (this.elements.rightInput = new RightRangeSliderInputRange(store)),
-      (this.elements.track = new RangeSliderTrack(store)),
-      (this.elements.progress = new RangeSliderProgress(store)),
-      (this.elements.slider = new RangeSliderElement(
-        this.elements.leftInput,
-        this.elements.rightInput,
-        this.elements.track,
-        this.elements.progress,
-      ));
+    this.elements.leftInput = new LeftRangeSliderInputRange(store);
+    this.elements.rightInput = new RightRangeSliderInputRange(store);
+    this.elements.track = new RangeSliderTrack(store);
+    this.elements.progress = new RangeSliderProgress(store);
+
+    this.elements.slider = new RangeSliderElement({
+      leftInput: this.elements.leftInput,
+      rightInput: this.elements.rightInput,
+      track: this.elements.track,
+      progress: this.elements.progress,
+    });
 
     this.root = this.elements.slider;
 
