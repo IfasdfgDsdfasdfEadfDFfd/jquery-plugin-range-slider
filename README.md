@@ -12,13 +12,55 @@ Simple range slider with minimalistic design and fully featured api that allow y
 
 ## Usage
 
+After installation you need to import plugin
+
+```javascript
+import 'jquery-plugin-range-slider';
+```
+
+or if you prefer commonjs syntax
+
+```javascript
+require('jquery-plugin-range-slider');
+```
+
+now you can select an element that you want to be a container for range-slider
+
+```javascript
+$('#container-for-range-slider').rangeSlider({
+  min, // @number, start point for range slider
+  max, // @number, end point for range slider
+  step, // @number, step between two point of range slider track
+  from, // @number, when intervalMode enabled it will be value for left thumb else can be passed
+  to, // @number, default value for range slider thumb
+  values, // @Array<string|number>, (default []), fixed values list, can be passed
+  prefix, // @string or function(value as number) => string
+  postfix, // @string or function(value as number) => string
+  vertical, // @boolean (default false), switch to vertical layout
+  intervalMode, // @boolean (default true), enable interval mode, two thumbs will be displayed
+  markerVisibility, // @boolean (default true), should be thumb markers displayed?
+  trackScaleVisibility, // @boolean (default true), should be track scale displayed?
+  color, // @string (default #1565c0), hex primary color value
+});
+```
+
+that call return api object, for more information about it see Api documentation.
+
 ## Development
 
 ### Setup:
 
 first of all needs to install dependencies by running:
 
-`npm install` or `yarn` command
+```bash
+npm install
+```
+
+or
+
+```bash
+yarn
+```
 
 ### Create production build:
 
@@ -61,6 +103,8 @@ run stylelint for scss files locate in src folder, run command with --fix postfi
 `(npm|yarn) run prettify`
 
 run prettier in write mode for all supported file types into ./src folder.
+
+## Architecture
 
 ## Licence
 
