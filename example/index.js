@@ -7,32 +7,27 @@ window.addEventListener('load', () => {
     {
       index: 1,
       props: {
+        min: 0,
+        max: 1000,
         step: 10,
         from: 300,
         to: 700,
-        min: 0,
-        max: 1000,
         prefix: '$ ',
         color: '#7bc043',
-        markerVisibility: true,
-        trackScaleVisibility: true,
-        intervalMode: true,
       },
     },
     {
       index: 2,
       props: {
+        min: 1,
+        max: 6,
         step: 1,
         from: 1,
         to: 2,
-        min: 1,
-        max: 6,
         postfix: value => (value > 1 ? ' rooms' : ' room'),
         color: '#0392cf',
         markerVisibility: false,
-        trackScaleVisibility: true,
         intervalMode: false,
-        vertical: false,
       },
     },
     {
@@ -45,9 +40,6 @@ window.addEventListener('load', () => {
         to: 12.3,
         postfix: '°C',
         color: '#ffcc5c',
-        markerVisibility: true,
-        trackScaleVisibility: true,
-        intervalMode: true,
       },
     },
     {
@@ -57,9 +49,6 @@ window.addEventListener('load', () => {
         from: 'Tue',
         to: 'Fri',
         color: '#fe4a49',
-        markerVisibility: true,
-        trackScaleVisibility: true,
-        intervalMode: true,
       },
     },
     {
@@ -71,8 +60,6 @@ window.addEventListener('load', () => {
         to: 80,
         postfix: 'mm',
         color: '#8b9dc3',
-        markerVisibility: true,
-        trackScaleVisibility: true,
         intervalMode: false,
         vertical: true,
       },
@@ -87,92 +74,92 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
   (function (api) {
     const el = $(`#js-configuration-id-${index}`);
 
-    const fixedValues = el.find('.configuration__values');
+    const $fixedValues = el.find('.configuration__values');
 
-    const left = el.find('.configuration__value-left');
-    const right = el.find('.configuration__value-right');
+    const $left = el.find('.configuration__value-left');
+    const $right = el.find('.configuration__value-right');
 
-    const min = el.find('.configuration__min');
-    const max = el.find('.configuration__max');
-    const step = el.find('.configuration__step');
+    const $min = el.find('.configuration__min');
+    const $max = el.find('.configuration__max');
+    const $step = el.find('.configuration__step');
 
-    const prefix = el.find('.configuration__prefix');
-    const primaryColor = el.find('.configuration__primary-color');
-    const postfix = el.find('.configuration__postfix');
+    const $prefix = el.find('.configuration__prefix');
+    const $postfix = el.find('.configuration__postfix');
+    const $primaryColor = el.find('.configuration__primary-color');
 
-    const orient = el.find('.configuration__orient');
-    const intervalMode = el.find('.configuration__interval-mode');
-    const markerVisibility = el.find('.configuration__marker-visibility');
-    const trackScaleVisibility = el.find(
+    const $orient = el.find('.configuration__orient');
+    const $intervalMode = el.find('.configuration__interval-mode');
+    const $markerVisibility = el.find('.configuration__marker-visibility');
+    const $trackScaleVisibility = el.find(
       '.configuration__track-scale-visibility',
     );
 
     api.subscribe(state => {
-      fixedValues.val(state.fixedValues.toString().replaceAll(',', ' '));
+      $fixedValues.val(state.fixedValues.toString().replaceAll(',', ' '));
 
-      left.attr('disabled', state.fixedValues.length > 0);
-      right.attr('disabled', state.fixedValues.length > 0);
-      min.attr('disabled', state.fixedValues.length > 0);
-      max.attr('disabled', state.fixedValues.length > 0);
-      step.attr('disabled', state.fixedValues.length > 0);
+      $left.attr('disabled', state.fixedValues.length > 0);
+      $right.attr('disabled', state.fixedValues.length > 0);
+      $min.attr('disabled', state.fixedValues.length > 0);
+      $max.attr('disabled', state.fixedValues.length > 0);
+      $step.attr('disabled', state.fixedValues.length > 0);
 
-      left.val(state.value[0]);
-      right.val(state.value[1]);
+      $left.val(state.value[0]);
+      $right.val(state.value[1]);
 
-      min.val(state.min);
-      max.val(state.max);
-      step.val(state.step);
+      $min.val(state.min);
+      $max.val(state.max);
+      $step.val(state.step);
 
-      prefix.val(state.prefix);
-      postfix.val(state.postfix);
-      primaryColor.val(state.primaryColor);
+      $prefix.val(state.prefix);
+      $postfix.val(state.postfix);
+      $primaryColor.val(state.primaryColor);
 
-      orient.attr('checked', state.vertical);
-      intervalMode.attr('checked', state.intervalMode);
-      markerVisibility.attr('checked', state.markerVisibility);
-      trackScaleVisibility.attr('checked', state.trackScaleVisibility);
+      $orient.attr('checked', state.vertical);
+      $intervalMode.attr('checked', state.intervalMode);
+      $markerVisibility.attr('checked', state.markerVisibility);
+      $trackScaleVisibility.attr('checked', state.trackScaleVisibility);
     });
 
-    fixedValues.on('focusout', event =>
+    $fixedValues.on('focusout', event =>
       api.setFixedValues(
         event.target.value.split(' ').filter(value => value.trim()),
       ),
     );
 
-    left.on('focusout', event => api.setLeftValue(Number(event.target.value)));
-    right.on('focusout', event =>
+    $left.on('focusout', event => api.setLeftValue(Number(event.target.value)));
+    $right.on('focusout', event =>
       api.setRightValue(Number(event.target.value)),
     );
 
-    min.on('focusout', event => api.setMin(Number(event.target.value)));
-    max.on('focusout', event => api.setMax(Number(event.target.value)));
-    step.on('focusout', event => api.setStep(Number(event.target.value)));
+    $min.on('focusout', event => api.setMin(Number(event.target.value)));
+    $max.on('focusout', event => api.setMax(Number(event.target.value)));
+    $step.on('focusout', event => api.setStep(Number(event.target.value)));
 
-    prefix.on('focusout', event => {
+    $prefix.on('focusout', event => {
       api.setPrefix(event.target.value);
     });
 
-    postfix.on('focusout', event => {
+    $postfix.on('focusout', event => {
       api.setPostfix(event.target.value);
     });
 
-    orient.on('click', event =>
+    $orient.on('click', event =>
       api.setOrientVertical(!event.target.hasAttribute('checked')),
     );
 
-    intervalMode.on('click', event =>
+    $intervalMode.on('click', event =>
       api.setIntervalMode(!event.target.hasAttribute('checked')),
     );
 
-    markerVisibility.on('click', event =>
+    $markerVisibility.on('click', event =>
       api.setMarkerVisibility(!event.target.hasAttribute('checked')),
     );
 
-    trackScaleVisibility.on('click', event =>
+    $trackScaleVisibility.on('click', event =>
       api.setTrackScaleVisibility(!event.target.hasAttribute('checked')),
     );
 
-    primaryColor.on('focusout', event => {
+    $primaryColor.on('focusout', event => {
       api.setPrimaryColor(event.target.value);
     });
   })($(`#js-range-slider-id-${index}`).rangeSlider(props));
