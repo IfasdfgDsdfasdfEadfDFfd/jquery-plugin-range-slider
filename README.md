@@ -1,10 +1,16 @@
-# JQuery plugin --- Range Slider
+# JQuery plugin Range Slider
+
+## Setup:
+
+first of all needs to install dependencies by running:
+
+`npm install` or `yarn` command
 
 ## Create production build:
 
 `(npm|yarn) run prod`
 
-compile project into minimized bundle with example index.html page.
+compile project into minimized bundle with example index.html page located in dist folder.
 
 ## Start development server:
 
@@ -28,13 +34,13 @@ run jest (Testing framework) coverage.
 
 `(npm|yarn) run lint:ts`
 
-run eslint for ./src/\*_/_.ts files, run command with --fix postfix if you want auto fix some appeared problems.
+run eslint for ts files located in src folder, run command with --fix postfix if you want auto fix some appeared problems.
 
 ## Lint scss:
 
 `(npm|yarn) run lint:scss`
 
-run stylelint for ./src/\*_/_.scss files, run command with --fix postfix if you want auto fix some appeared problems.
+run stylelint for scss files locate in src folder, run command with --fix postfix if you want auto fix some appeared problems.
 
 ## Run prettier:
 
