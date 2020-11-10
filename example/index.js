@@ -95,16 +95,16 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
     );
 
     api.subscribe(state => {
-      $fixedValues.val(state.fixedValues.toString().replaceAll(',', ' '));
+      $fixedValues.val(state.values.toString().replaceAll(',', ' '));
 
-      $left.attr('disabled', state.fixedValues.length > 0);
-      $right.attr('disabled', state.fixedValues.length > 0);
-      $min.attr('disabled', state.fixedValues.length > 0);
-      $max.attr('disabled', state.fixedValues.length > 0);
-      $step.attr('disabled', state.fixedValues.length > 0);
+      $left.attr('disabled', state.values.length > 0);
+      $right.attr('disabled', state.values.length > 0);
+      $min.attr('disabled', state.values.length > 0);
+      $max.attr('disabled', state.values.length > 0);
+      $step.attr('disabled', state.values.length > 0);
 
-      $left.val(state.value[0]);
-      $right.val(state.value[1]);
+      $left.val(state.from);
+      $right.val(state.to);
 
       $min.val(state.min);
       $max.val(state.max);
@@ -112,7 +112,7 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
 
       $prefix.val(state.prefix);
       $postfix.val(state.postfix);
-      $primaryColor.val(state.primaryColor);
+      $primaryColor.val(state.color);
 
       $orient.attr('checked', state.vertical);
       $intervalMode.attr('checked', state.intervalMode);

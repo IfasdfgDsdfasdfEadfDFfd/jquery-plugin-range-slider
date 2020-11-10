@@ -7,7 +7,7 @@ import {
 import { makeValueLikeCallback, cb } from './core/utils';
 
 interface PluginApi {
-  subscribe(cb: (state: IRangeSliderState) => void): void;
+  subscribe(cb: (state: PluginProps) => void): void;
   setFixedValues(value: string[]): void;
   setLeftValue(value: number): void;
   setRightValue(value: number): void;
@@ -24,11 +24,11 @@ interface PluginApi {
 }
 
 interface PluginProps {
-  from: string | number;
-  to: string | number;
   min: number;
   max: number;
   step: number;
+  from: number;
+  to: number;
   values: Array<string | number>;
   prefix: string | cb;
   postfix: string | cb;
@@ -105,8 +105,38 @@ function rangeSlider(
   const componentStore = createRangeSlider(this.get(0), userDefinedProps);
 
   return {
-    subscribe(cb: (state: IRangeSliderState) => void) {
-      componentStore.subscribe(cb);
+    subscribe(cb: (state: PluginProps) => void) {
+      componentStore.subscribe(state => {
+        const {
+          min,
+          max,
+          step,
+          value,
+          fixedValues,
+          prefix,
+          postfix,
+          vertical,
+          intervalMode,
+          markerVisibility,
+          trackScaleVisibility,
+          primaryColor,
+        } = state;
+        cb({
+          min,
+          max,
+          step,
+          from: value[0],
+          to: value[1],
+          values: fixedValues,
+          prefix,
+          postfix,
+          vertical,
+          intervalMode,
+          markerVisibility,
+          trackScaleVisibility,
+          color: primaryColor,
+        });
+      });
     },
 
     setFixedValues(value) {

@@ -38,6 +38,10 @@ body {
 
 .configuration__tool--wide {
   grid-column: 1 / span 2;
+
+  input[type="text"] {
+    width: 80%;
+  }
 }
 
 .configuration__values {
@@ -51,6 +55,7 @@ label {
 }
 
 input[type="text"] {
+  width: 5rem;
   padding: 0.5rem 0.7rem;
   border: 0;
   border-radius: 0.2rem;
