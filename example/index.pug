@@ -13,55 +13,55 @@ html(lang="en")
           .configuration__tool
             -var id = 'left-value-' + index
             label(for=id)= 'left value:'
-            input(type='text', id=id).configuration__value-left
+            input(type='text', id=id).configuration__input.configuration__value-left
           .configuration__tool
             -var id = 'right-value-' + index
             label(for=id)= 'right value:'
-            input(type='text', id=id).configuration__value-right
+            input(type='text', id=id).configuration__input.configuration__value-right
           .configuration__tool
             -var id = 'min-' + index
             label(for=id)= 'min:'
-            input(type='text', id=id).configuration__min
+            input(type='text', id=id).configuration__input.configuration__min
           .configuration__tool
             -var id = 'max-' + index
             label(for=id)= 'max:'
-            input(type='text', id=id).configuration__max
+            input(type='text', id=id).configuration__input.configuration__max
           .configuration__tool
             -var id = 'step-' + index
             label(for=id)= 'step:'
-            input(type='text', id=id).configuration__step
+            input(type='text', id=id).configuration__input.configuration__step
           .configuration__tool
             -var id = 'primary-color-' + index
             label(for=id)= 'COLOR:'
-            input(type='text', id=id).configuration__primary-color
+            input(type='text', id=id).configuration__input.configuration__primary-color
           .configuration__tool
             -var id = 'prefix-' + index
             label(for=id)= 'PREFIX:'
-            input(type='text', id=id).configuration__prefix
+            input(type='text', id=id).configuration__input.configuration__prefix
           .configuration__tool
             -var id = 'postfix-' + index
             label(for=id)= 'POSTFIX:'
-            input(type='text', id=id).configuration__postfix
+            input(type='text', id=id).configuration__input.configuration__postfix
           .configuration__tool
             -var id = 'marker-visibility-' + index
             label(for=id)= 'MARKER:'
-            input(type='checkbox', id=id).configuration__marker-visibility
+            input(type='checkbox', id=id).configuration__checkbox.configuration__marker-visibility
           .configuration__tool
             -var id = 'interval-mode' + index
             label(for=id)= 'INTERVAL:'
-            input(type='checkbox', id=id).configuration__interval-mode
+            input(type='checkbox', id=id).configuration__checkbox.configuration__interval-mode
           .configuration__tool
             -var id = 'track-scale-visibility' + index
             label(for=id)= 'TRACK SCALE:'
-            input(type='checkbox', id=id).configuration__track-scale-visibility
+            input(type='checkbox', id=id).configuration__checkbox.configuration__track-scale-visibility
           .configuration__tool
             -var id = 'v-orient-' + index
             label(for=id)= 'vertical:'
-            input(type='checkbox', id=id).configuration__orient
+            input(type='checkbox', id=id).configuration__checkbox.configuration__orient
           .configuration__tool.configuration__tool--wide
             -var id = 'fixed-values-' + index
             label(for=id)= 'values:'
-            input(type='text', id=id).configuration__values
+            input(type='text', id=id).configuration__input.configuration__values
 
     each index in [1, 2, 3, 4, 5]
       +slider(index)
