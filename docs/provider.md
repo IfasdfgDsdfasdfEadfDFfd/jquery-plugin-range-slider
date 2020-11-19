@@ -2,7 +2,7 @@
 
 [source code](https://github.com/unpredictable-username/jquery-plugin-range-slider/blob/master/src/core/provider.ts)
 
-Provider is an abstract class that create bridge between data store and its representation.
+Provider is an [abstract class](https://www.typescriptlang.org/docs/handbook/classes.html#abstract-classes) that create bridge between data store and its representation.
 Inherit class should implement `init()` and `render()`.
 
 For example:
