@@ -123,8 +123,7 @@ run prettier in write mode for all supported file types into ./src folder.
 
 This plugin implements classic [MVC design pattern](https://www.geeksforgeeks.org/mvc-design-pattern/) with some updates. So we have Model which presented as [Redux-like](https://redux.js.org/introduction/getting-started) store, [View](https://unpredictable-username.github.io/jquery-plugin-range-slider/view.html) class that contain HTMLElements and manipulate DOM and Controller called as [Provider](https://unpredictable-username.github.io/jquery-plugin-range-slider/provider.html) here and can pass data from [Store](https://unpredictable-username.github.io/jquery-plugin-range-slider/store.html) (Model) to View and into backward direction from View (that in its turn from DOM events) into Store by dispatching some Actions.
 
-For detailed view see [architecture documentation](https://unpredictable-username.github.io/jquery-plugin-range-slider/architecture.html) or [architecture diagram](https://unpredictable-username.github.io/jquery-plugin-range-slider/diagram.svg).
-
+For detailed view see [architecture documentation](https://unpredictable-username.github.io/jquery-plugin-range-slider/architecture.html).
 ## Licence
 
 Licensed under the MIT license.
