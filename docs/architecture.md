@@ -1,1 +1,1 @@
-[architecture diagram](./architecture.svg)
+![architecture diagram](./architecture.svg)
