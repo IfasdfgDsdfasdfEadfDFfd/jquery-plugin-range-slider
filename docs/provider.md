@@ -7,7 +7,7 @@ Inherit class should implement `init()` and `render()`.
 
 For example:
 
-```javascript
+```typescript
 class ButtonProvider extends Provider<Store,
 { element1: View, element2: View }> {
   init(store: Store) {
