@@ -66,6 +66,7 @@ that call return api object, for more information about it see [Api documentatio
 
 first of all needs to install dependencies by running:
 
+(disclaimer, don't work on vscode remote docker development in cloned volume)
 ```bash
 npm install
 ```
