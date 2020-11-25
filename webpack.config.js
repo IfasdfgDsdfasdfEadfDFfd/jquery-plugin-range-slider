@@ -32,7 +32,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new CopyWebpackPlugin({
-      patterns: [{ from: './docs/**/*', to: './build/docs/' }],
+      patterns: [{ from: './docs/**/*' }],
     }),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
