@@ -80,7 +80,7 @@ yarn
 
 ### Create production build:
 
-`(npm|yarn) run prod`
+`(npm|yarn) run build`
 
 compile project into minimized bundle with example index.html page located in dist folder.
 
