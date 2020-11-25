@@ -58,7 +58,7 @@ $('#container-for-range-slider').rangeSlider({
 });
 ```
 
-that call return api object, for more information about it see [Api documentation](https://unpredictable-username.github.io/jquery-plugin-range-slider/api.html).
+that call return api object, for more information about it see [Api documentation](https://unpredictable-username.github.io/docs/jquery-plugin-range-slider/api.html).
 
 ## Development
 
@@ -67,6 +67,7 @@ that call return api object, for more information about it see [Api documentatio
 first of all needs to install dependencies by running:
 
 (disclaimer, don't work on vscode remote docker development in cloned volume)
+
 ```bash
 npm install
 ```
@@ -121,9 +122,10 @@ run prettier in write mode for all supported file types into ./src folder.
 
 ## Architecture
 
-This plugin implements classic [MVC design pattern](https://www.geeksforgeeks.org/mvc-design-pattern/) with some updates. So we have Model which presented as [Redux-like](https://redux.js.org/introduction/getting-started) store, [View](https://unpredictable-username.github.io/jquery-plugin-range-slider/view.html) class that contain HTMLElements and manipulate DOM and Controller called as [Provider](https://unpredictable-username.github.io/jquery-plugin-range-slider/provider.html) here and can pass data from [Store](https://unpredictable-username.github.io/jquery-plugin-range-slider/store.html) (Model) to View and into backward direction from View (that in its turn from DOM events) into Store by dispatching some Actions.
+This plugin implements classic [MVC design pattern](https://www.geeksforgeeks.org/mvc-design-pattern/) with some updates. So we have Model which presented as [Redux-like](https://redux.js.org/introduction/getting-started) store, [View](https://unpredictable-username.github.io/docs/jquery-plugin-range-slider/view.html) class that contain HTMLElements and manipulate DOM and Controller called as [Provider](https://unpredictable-username.github.io/docs/jquery-plugin-range-slider/provider.html) here and can pass data from [Store](https://unpredictable-username.github.io/docs/jquery-plugin-range-slider/store.html) (Model) to View and into backward direction from View (that in its turn from DOM events) into Store by dispatching some Actions.
 
-For detailed view see [architecture documentation](https://unpredictable-username.github.io/jquery-plugin-range-slider/architecture.html).
+For detailed view see [architecture documentation](https://unpredictable-username.github.io/docs/jquery-plugin-range-slider/architecture.html).
+
 ## Licence
 
 Licensed under the MIT license.
