@@ -43,6 +43,7 @@
     "autoprefixer": "^10.0.1",
     "awesome-typescript-loader": "^5.2.1",
     "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^6.3.2",
     "css-loader": "^3.6.0",
     "css-minimizer-webpack-plugin": "^1.1.5",
     "css-modules-typescript-loader": "^4.0.1",
@@ -80,7 +81,6 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "copy-webpack-plugin": "^6.3.2",
     "jquery": "^3.5.1",
     "jquery-plugin-range-slider": "file:./src"
   }
