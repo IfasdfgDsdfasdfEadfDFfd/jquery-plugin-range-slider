@@ -62,4 +62,88 @@ describe('test view', () => {
     expect(() => (view.focused = true)).toThrow();
     expect(() => (view.visible = true)).toThrow();
   });
+
+  test('register DOM & View event handlers', () => {
+    const view = new View({ tag: 'div', attrs: {}, children: [] });
+
+    const viewHandlerHoverChange = jest.fn();
+    const domHandlerMouseIn = jest.fn();
+    const domHandlerMouseOut = jest.fn();
+
+    const viewHandlerFocusChange = jest.fn();
+    const domHandlerFocusIn = jest.fn();
+    const domHandlerFocusOut = jest.fn();
+
+    const viewHandlerVisibleChange = jest.fn();
+
+    view.onHoverChange = viewHandlerHoverChange;
+    view.onMouseIn(domHandlerMouseIn);
+    view.onMouseOut(domHandlerMouseOut);
+
+    view.onFocusChange = viewHandlerFocusChange;
+    view.onFocusIn(domHandlerFocusIn);
+    view.onFocusOut(domHandlerFocusOut);
+
+    view.onVisibilityChange = viewHandlerVisibleChange;
+
+    view.hovered = true;
+    expect(view.isHovered).toBe(true);
+
+    expect(viewHandlerHoverChange).toHaveBeenCalled();
+    expect(domHandlerMouseIn).not.toHaveBeenCalled();
+    expect(domHandlerMouseOut).not.toHaveBeenCalled();
+
+    view.hovered = false;
+    expect(view.isHovered).toBe(false);
+
+    expect(viewHandlerHoverChange).toHaveBeenCalledTimes(2);
+    expect(domHandlerMouseIn).not.toHaveBeenCalled();
+    expect(domHandlerMouseOut).not.toHaveBeenCalled();
+
+    view.element.dispatchEvent(new Event('mouseenter'));
+
+    expect(viewHandlerHoverChange).toHaveBeenCalledTimes(2);
+    expect(domHandlerMouseIn).toHaveBeenCalledTimes(1);
+    expect(domHandlerMouseOut).not.toHaveBeenCalled();
+
+    view.element.dispatchEvent(new Event('mouseleave'));
+
+    expect(viewHandlerHoverChange).toHaveBeenCalledTimes(2);
+    expect(domHandlerMouseIn).toHaveBeenCalledTimes(1);
+    expect(domHandlerMouseOut).toHaveBeenCalledTimes(1);
+
+    view.focused = true;
+    expect(view.isFocused).toBe(true);
+
+    expect(viewHandlerHoverChange).toHaveBeenCalled();
+    expect(domHandlerFocusIn).not.toHaveBeenCalled();
+    expect(domHandlerFocusOut).not.toHaveBeenCalled();
+
+    view.focused = false;
+    expect(view.isFocused).toBe(false);
+
+    expect(viewHandlerHoverChange).toHaveBeenCalledTimes(2);
+    expect(domHandlerFocusIn).not.toHaveBeenCalled();
+    expect(domHandlerFocusOut).not.toHaveBeenCalled();
+
+    view.element.dispatchEvent(new Event('focusin'));
+
+    expect(viewHandlerFocusChange).toHaveBeenCalledTimes(2);
+    expect(domHandlerFocusIn).toHaveBeenCalledTimes(1);
+    expect(domHandlerFocusOut).not.toHaveBeenCalled();
+
+    view.element.dispatchEvent(new Event('focusout'));
+
+    expect(viewHandlerFocusChange).toHaveBeenCalledTimes(2);
+    expect(domHandlerFocusIn).toHaveBeenCalledTimes(1);
+    expect(domHandlerFocusOut).toHaveBeenCalledTimes(1);
+
+    view.visible = false;
+    expect(viewHandlerVisibleChange).toHaveBeenCalled();
+    expect(view.isVisible).toBe(false);
+
+    view.visible = true;
+    expect(viewHandlerVisibleChange).toHaveBeenCalledTimes(2);
+    expect(view.isVisible).toBe(true);
+  });
 });
