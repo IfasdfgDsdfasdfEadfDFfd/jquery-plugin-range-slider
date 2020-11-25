@@ -6,6 +6,7 @@ coverage
 
 # build stuff
 dist
+build
 
 # logs
 *.log
