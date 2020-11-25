@@ -80,6 +80,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "copy-webpack-plugin": "^6.3.2",
     "jquery": "^3.5.1",
     "jquery-plugin-range-slider": "file:./src"
   }

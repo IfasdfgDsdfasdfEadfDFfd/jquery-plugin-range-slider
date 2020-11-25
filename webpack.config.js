@@ -1,15 +1,16 @@
 const path = require('path');
 
 const webpack = require('webpack');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const SRC_DIR = path.resolve(path.join(process.cwd(), 'src'));
 const EXAMPLE_DIR = path.resolve(path.join(process.cwd(), 'example'));
-const DIST_DIR = path.resolve(path.join(process.cwd(), 'dist'));
+const BUILD_DIR = path.resolve(path.join(process.cwd(), 'build'));
 const IS_DEV_MODE = process.env.NODE_ENV === 'development';
 
 module.exports = {
@@ -18,7 +19,7 @@ module.exports = {
     example: { import: path.join(EXAMPLE_DIR, 'index.js'), dependOn: 'plugin' },
   },
   output: {
-    path: DIST_DIR,
+    path: BUILD_DIR,
     publicPath: '',
     filename: '[name].build.js',
   },
@@ -30,6 +31,7 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(),
+    new CopyWebpackPlugin([{ from: './docs/**/*', to: './build/docs/' }]),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(EXAMPLE_DIR, 'index.pug'),
@@ -46,7 +48,7 @@ module.exports = {
     rules: [
       {
         test: /\.pug$/,
-        use: { loader: 'pug-loader', options: { pretty: true } },
+        use: { loader: 'pug-loader', options: { pretty: IS_DEV_MODE } },
       },
       {
         test: /\.scss$/,
