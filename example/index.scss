@@ -123,3 +123,23 @@ input:focus {
     grid-column: 1;
   }
 }
+
+.documentation-link {
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 10px 15px;
+  background-color: #fff;
+  box-shadow: 0 0 5px 5px rgb(204, 204, 204);
+
+  a {
+    color: rgb(45, 206, 255);
+    font-weight: bold;
+    text-decoration: none;
+
+    &:focus,
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
