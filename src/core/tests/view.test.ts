@@ -18,7 +18,7 @@ describe('test view', () => {
   });
 
   test('should has children as View', () => {
-    const VIEW_PARAMS = {tag: 'div', attrs: {}, children: []}
+    const VIEW_PARAMS = { tag: 'div', attrs: {}, children: [] };
     const CHILDREN = new Array(3).fill(new View(VIEW_PARAMS));
     const NEW_CHILDREN = new Array(5).fill(new View(VIEW_PARAMS));
 
@@ -46,5 +46,20 @@ describe('test view', () => {
     });
 
     expect(view.attrs).toBe(ATTRS);
+  });
+
+  test('throw NotImplementedError', () => {
+    const view = new View({ tag: 'div', attrs: {}, children: [] });
+
+    // triggering event dispatchers has no effect
+    view.hovered = true;
+    view.focused = true;
+    view.visible = true;
+
+    view.throwErrorIfHookNotImplemented = true;
+
+    expect(() => (view.hovered = true)).toThrow();
+    expect(() => (view.focused = true)).toThrow();
+    expect(() => (view.visible = true)).toThrow();
   });
 });
