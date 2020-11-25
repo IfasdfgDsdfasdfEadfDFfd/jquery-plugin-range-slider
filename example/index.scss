@@ -105,6 +105,10 @@ input:focus {
   .configuration {
     margin-top: 3rem;
   }
+
+  .documentation-link {
+    display: none;
+  }
 }
 
 @media only screen and (max-width: $small-screen) {
@@ -129,11 +133,12 @@ input:focus {
   top: 0;
   right: 0;
   padding: 10px 15px;
+  border-radius: 0 0 0 5px;
   background-color: #fff;
   box-shadow: 0 0 5px 5px rgb(204, 204, 204);
 
   a {
-    color: rgb(45, 206, 255);
+    color: rgb(0, 156, 204);
     font-weight: bold;
     text-decoration: none;
 
