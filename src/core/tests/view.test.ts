@@ -1,9 +1,26 @@
 import { View } from '../view';
 
 describe('test view', () => {
-  test('should have children', () => {
+  test('should has children as string', () => {
     const CHILDREN = new Array(3).fill('some text data');
     const NEW_CHILDREN = new Array(5).fill('some text data');
+
+    const view = new View({
+      tag: 'div',
+      attrs: {},
+      children: CHILDREN,
+    });
+
+    expect(view.children?.length).toEqual(CHILDREN.length);
+
+    view.replaceChildren(NEW_CHILDREN);
+    expect(view.children?.length).toEqual(NEW_CHILDREN.length);
+  });
+
+  test('should has children as View', () => {
+    const VIEW_PARAMS = {tag: 'div', attrs: {}, children: []}
+    const CHILDREN = new Array(3).fill(new View(VIEW_PARAMS));
+    const NEW_CHILDREN = new Array(5).fill(new View(VIEW_PARAMS));
 
     const view = new View({
       tag: 'div',
