@@ -82,7 +82,7 @@ module.exports = {
   devtool: IS_DEV_MODE ? 'eval-cheap-module-source-map' : 'source-map',
 
   devServer: {
-    contentBase: DIST_DIR,
+    contentBase: BUILD_DIR,
     compress: true,
 
     host: '0.0.0.0',
