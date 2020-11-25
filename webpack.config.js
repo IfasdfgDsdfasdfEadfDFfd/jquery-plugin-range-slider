@@ -25,7 +25,7 @@ module.exports = {
   },
 
   externals: {
-    jquery: 'jquery',
+    jquery: 'jQuery',
   },
 
   // don't forget about dots...
