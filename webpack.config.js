@@ -31,7 +31,9 @@ module.exports = {
 
   plugins: [
     new CleanWebpackPlugin(),
-    new CopyWebpackPlugin([{ from: './docs/**/*', to: './build/docs/' }]),
+    new CopyWebpackPlugin({
+      patterns: [{ from: './docs/**/*', to: './build/docs/' }],
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: path.join(EXAMPLE_DIR, 'index.pug'),
