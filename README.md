@@ -58,7 +58,7 @@ $('#container-for-range-slider').rangeSlider({
 });
 ```
 
-that call return api object, for more information about it see [Api documentation](https://unpredictable-username.github.io/docs/jquery-plugin-range-slider/api.html).
+that call returns api object, for more information about it see [Api documentation](https://unpredictable-username.github.io/docs/jquery-plugin-range-slider/api.html).
 
 ## Development
 
