@@ -66,6 +66,10 @@ describe('test view', () => {
   test('register DOM & View event handlers', () => {
     const view = new View({ tag: 'div', attrs: {}, children: [] });
 
+    view.focusClassName = 'focus';
+    view.hoverClassName = 'hover';
+    view.hidingClassName = 'hide';
+
     const viewHandlerHoverChange = jest.fn();
     const domHandlerMouseIn = jest.fn();
     const domHandlerMouseOut = jest.fn();
@@ -88,6 +92,7 @@ describe('test view', () => {
 
     view.hovered = true;
     expect(view.isHovered).toBe(true);
+    expect(view.element.classList.contains(view.hoverClassName)).toBe(true);
 
     expect(viewHandlerHoverChange).toHaveBeenCalled();
     expect(domHandlerMouseIn).not.toHaveBeenCalled();
@@ -95,6 +100,7 @@ describe('test view', () => {
 
     view.hovered = false;
     expect(view.isHovered).toBe(false);
+    expect(view.element.classList.contains(view.hoverClassName)).toBe(false);
 
     expect(viewHandlerHoverChange).toHaveBeenCalledTimes(2);
     expect(domHandlerMouseIn).not.toHaveBeenCalled();
@@ -114,6 +120,7 @@ describe('test view', () => {
 
     view.focused = true;
     expect(view.isFocused).toBe(true);
+    expect(view.element.classList.contains(view.focusClassName)).toBe(true);
 
     expect(viewHandlerHoverChange).toHaveBeenCalled();
     expect(domHandlerFocusIn).not.toHaveBeenCalled();
@@ -121,6 +128,7 @@ describe('test view', () => {
 
     view.focused = false;
     expect(view.isFocused).toBe(false);
+    expect(view.element.classList.contains(view.focusClassName)).toBe(false);
 
     expect(viewHandlerHoverChange).toHaveBeenCalledTimes(2);
     expect(domHandlerFocusIn).not.toHaveBeenCalled();
@@ -139,10 +147,12 @@ describe('test view', () => {
     expect(domHandlerFocusOut).toHaveBeenCalledTimes(1);
 
     view.visible = false;
+    expect(view.element.classList.contains(view.hidingClassName)).toBe(false);
     expect(viewHandlerVisibleChange).toHaveBeenCalled();
     expect(view.isVisible).toBe(false);
 
     view.visible = true;
+    expect(view.element.classList.contains(view.hidingClassName)).toBe(true);
     expect(viewHandlerVisibleChange).toHaveBeenCalledTimes(2);
     expect(view.isVisible).toBe(true);
   });
