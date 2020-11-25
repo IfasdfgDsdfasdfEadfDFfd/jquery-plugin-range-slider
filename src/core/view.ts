@@ -16,7 +16,7 @@ class View {
 
   isFocused!: boolean;
   isHovered!: boolean;
-  isHidden!: boolean;
+  isVisible!: boolean;
 
   throwErrorIfHookNotImplemented = false;
 
@@ -77,34 +77,34 @@ class View {
     if (this.focusClassName)
       this.element.classList.toggle(this.focusClassName, value);
     this.isFocused = value;
-    this.onFocus();
+    this.onFocusChange();
   }
 
   set hovered(value: boolean) {
     if (this.hoverClassName)
       this.element.classList.toggle(this.hoverClassName, value);
     this.isHovered = value;
-    this.onHover();
+    this.onHoverChange();
   }
 
-  set hidden(value: boolean) {
+  set visible(value: boolean) {
     if (this.hidingClassName)
       this.element.classList.toggle(this.hidingClassName, value);
-    this.isHidden = value;
-    this.onHide();
+    this.isVisible = value;
+    this.onVisibilityChange();
   }
 
-  onFocus(): void {
+  onFocusChange(): void {
     if (this.throwErrorIfHookNotImplemented)
       throw new Error('Not Implemented!');
   }
 
-  onHover(): void {
+  onHoverChange(): void {
     if (this.throwErrorIfHookNotImplemented)
       throw new Error('Not Implemented!');
   }
 
-  onHide(): void {
+  onVisibilityChange(): void {
     if (this.throwErrorIfHookNotImplemented)
       throw new Error('Not Implemented!');
   }

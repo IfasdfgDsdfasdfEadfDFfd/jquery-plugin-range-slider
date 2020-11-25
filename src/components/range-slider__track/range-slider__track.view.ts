@@ -98,11 +98,11 @@ class TrackScaleItem extends View {
     this.resetColor();
   }
 
-  onFocus(): void {
+  onFocusChange(): void {
     this.resetColor();
   }
 
-  onHover(): void {
+  onHoverChange(): void {
     this.resetColor();
   }
 
@@ -155,7 +155,7 @@ class RangeSliderTrack extends Provider<
     }
 
     this.elements.scale.update(this.lastSliderValues);
-    this.elements.scale.hidden = !state.trackScaleVisibility;
+    this.elements.scale.visible = !state.trackScaleVisibility;
     this.elements.scale.activeColor = state.primaryColor;
   }
 

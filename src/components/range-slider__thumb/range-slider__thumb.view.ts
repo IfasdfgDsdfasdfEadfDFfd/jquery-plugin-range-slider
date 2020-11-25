@@ -64,11 +64,11 @@ class Thumb extends View {
     this.positioning(this.cachedValues);
   }
 
-  onFocus(): void {
+  onFocusChange(): void {
     this.colorReset();
   }
 
-  onHover(): void {
+  onHoverChange(): void {
     this.colorReset();
   }
 
