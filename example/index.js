@@ -74,24 +74,24 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
   (function (api) {
     const el = $(`#js-configuration-id-${index}`);
 
-    const $fixedValues = el.find('.configuration__values');
+    const $fixedValues = el.find('.js-configuration__values');
 
-    const $left = el.find('.configuration__value-left');
-    const $right = el.find('.configuration__value-right');
+    const $left = el.find('.js-configuration__value-left');
+    const $right = el.find('.js-configuration__value-right');
 
-    const $min = el.find('.configuration__min');
-    const $max = el.find('.configuration__max');
-    const $step = el.find('.configuration__step');
+    const $min = el.find('.js-configuration__min');
+    const $max = el.find('.js-configuration__max');
+    const $step = el.find('.js-configuration__step');
 
-    const $prefix = el.find('.configuration__prefix');
-    const $postfix = el.find('.configuration__postfix');
-    const $primaryColor = el.find('.configuration__primary-color');
+    const $prefix = el.find('.js-configuration__prefix');
+    const $postfix = el.find('.js-configuration__postfix');
+    const $primaryColor = el.find('.js-configuration__primary-color');
 
-    const $orient = el.find('.configuration__orient');
-    const $intervalMode = el.find('.configuration__interval-mode');
-    const $markerVisibility = el.find('.configuration__marker-visibility');
+    const $orient = el.find('.js-configuration__orient');
+    const $intervalMode = el.find('.js-configuration__interval-mode');
+    const $markerVisibility = el.find('.js-configuration__marker-visibility');
     const $trackScaleVisibility = el.find(
-      '.configuration__track-scale-visibility',
+      '.js-configuration__track-scale-visibility',
     );
 
     api.subscribe(state => {
