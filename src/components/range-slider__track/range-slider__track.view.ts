@@ -98,11 +98,11 @@ class TrackScaleItem extends View {
     this.resetColor();
   }
 
-  onFocusChange(): void {
+  handleFocusChange(): void {
     this.resetColor();
   }
 
-  onHoverChange(): void {
+  handleHoverChange(): void {
     this.resetColor();
   }
 

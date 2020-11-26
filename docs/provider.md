@@ -16,7 +16,7 @@ class ButtonProvider extends Provider<Store,
     this.elements.element2 = new View();
 
     // subscribe to DOM events
-    this.elements.onFocusChange(this.focusHandler);
+    this.elements.handleFocusChange(this.focusHandler);
   }
 
   // call every time when state was updated

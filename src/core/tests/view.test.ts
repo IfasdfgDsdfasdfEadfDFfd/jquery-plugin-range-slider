@@ -80,15 +80,15 @@ describe('test view', () => {
 
     const viewHandlerVisibleChange = jest.fn();
 
-    view.onHoverChange = viewHandlerHoverChange;
+    view.handleHoverChange = viewHandlerHoverChange;
     view.onMouseIn(domHandlerMouseIn);
     view.onMouseOut(domHandlerMouseOut);
 
-    view.onFocusChange = viewHandlerFocusChange;
+    view.handleFocusChange = viewHandlerFocusChange;
     view.onFocusIn(domHandlerFocusIn);
     view.onFocusOut(domHandlerFocusOut);
 
-    view.onVisibilityChange = viewHandlerVisibleChange;
+    view.handleVisibilityChange = viewHandlerVisibleChange;
 
     view.hovered = true;
     expect(view.isHovered).toBe(true);
