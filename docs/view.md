@@ -91,48 +91,48 @@ view.replaceChildren(['string', 'also string', ...]);
 
 Register handler for `focusin` html event.
 
-`onFocusIn(handler: function): void;`
+`handleViewFocusIn(handler: function): void;`
 
 ### Usage Example
 
 ```javascript
-view.onFocusIn(event => event.target.value);
+view.handleViewFocusIn(event => event.target.value);
 ```
 
 ### Definition
 
 Register handler for `focusout` html event.
 
-`onFocusOut(handler: function): void;`
+`handleViewFocusOut(handler: function): void;`
 
 ### Usage Example
 
 ```javascript
-view.onFocusOut(event => event.target.value);
+view.handleViewFocusOut(event => event.target.value);
 ```
 
 ### Definition
 
 Register handler for `mouseenter` html event.
 
-`onMouseIn(handler: function): void;`
+`handleViewMouseIn(handler: function): void;`
 
 ### Usage Example
 
 ```javascript
-view.onMouseIn(event => event.target.value);
+view.handleViewMouseIn(event => event.target.value);
 ```
 
 ### Definition
 
 Register handler for `mouseleave` html event.
 
-`onMouseIn(handler: function): void;`
+`handleViewMouseIn(handler: function): void;`
 
 ### Usage Example
 
 ```javascript
-view.onMouseOut(event => event.target.value);
+view.handleViewMouseOut(event => event.target.value);
 ```
 
 ---

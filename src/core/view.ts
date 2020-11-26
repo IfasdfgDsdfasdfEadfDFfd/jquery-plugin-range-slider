@@ -57,19 +57,19 @@ class View {
     this.children = children;
   }
 
-  onFocusIn(cb: EventCallback): void {
+  handleViewFocusIn(cb: EventCallback): void {
     this.element.addEventListener('focusin', cb);
   }
 
-  onFocusOut(cb: EventCallback): void {
+  handleViewFocusOut(cb: EventCallback): void {
     this.element.addEventListener('focusout', cb);
   }
 
-  onMouseIn(cb: EventCallback): void {
+  handleViewMouseIn(cb: EventCallback): void {
     this.element.addEventListener('mouseenter', cb);
   }
 
-  onMouseOut(cb: EventCallback): void {
+  handleViewMouseOut(cb: EventCallback): void {
     this.element.addEventListener('mouseleave', cb);
   }
 

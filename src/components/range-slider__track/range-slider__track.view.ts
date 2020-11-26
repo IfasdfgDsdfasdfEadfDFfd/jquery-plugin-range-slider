@@ -57,10 +57,10 @@ class TrackScale extends View {
       `${-(itemWidth / 2 - thumbWidth / 2 + thumbWidth * ratio)}px`,
     );
 
-    item.onMouseIn(() => (item.hovered = true));
-    item.onMouseOut(() => (item.hovered = false));
-    item.onFocusIn(() => (item.focused = true));
-    item.onFocusOut(() => (item.focused = false));
+    item.handleViewMouseIn(() => (item.hovered = true));
+    item.handleViewMouseOut(() => (item.hovered = false));
+    item.handleViewFocusIn(() => (item.focused = true));
+    item.handleViewFocusOut(() => (item.focused = false));
 
     return item;
   }
@@ -129,7 +129,7 @@ class RangeSliderTrack extends Provider<
 
     this.elements.scale.element.addEventListener(
       'click',
-      this.makeOnClickHandler(store),
+      this.makeRangeSliderTrackClickHandler(store),
     );
   }
 
@@ -159,7 +159,7 @@ class RangeSliderTrack extends Provider<
     this.elements.scale.activeColor = state.primaryColor;
   }
 
-  makeOnClickHandler(
+  makeRangeSliderTrackClickHandler(
     store: Store<IRangeSliderState>,
   ): (Event: MouseEvent) => void {
     return (event: MouseEvent) => {

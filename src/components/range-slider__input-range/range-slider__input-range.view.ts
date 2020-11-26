@@ -37,7 +37,7 @@ class InputRange extends View {
     this.element.classList.toggle(className, apply);
   }
 
-  onChange(cb: EventCallback): void {
+  handleInputRangeChange(cb: EventCallback): void {
     this.element.addEventListener('input', cb);
   }
 }
@@ -53,15 +53,23 @@ abstract class RangeSliderInputRange extends Provider<
     this.elements.input = new InputRange();
     this.elements.thumb = new Thumb();
 
-    this.elements.input.onChange(event => {
+    this.elements.input.handleInputRangeChange(event => {
       const target = event.target as HTMLInputElement;
       store.dispatch(this.makeAction(Number(target.value)));
     });
 
-    this.elements.input.onFocusIn(() => (this.elements.thumb.focused = true));
-    this.elements.input.onFocusOut(() => (this.elements.thumb.focused = false));
-    this.elements.input.onMouseIn(() => (this.elements.thumb.hovered = true));
-    this.elements.input.onMouseOut(() => (this.elements.thumb.hovered = false));
+    this.elements.input.handleViewFocusIn(
+      () => (this.elements.thumb.focused = true),
+    );
+    this.elements.input.handleViewFocusOut(
+      () => (this.elements.thumb.focused = false),
+    );
+    this.elements.input.handleViewMouseIn(
+      () => (this.elements.thumb.hovered = true),
+    );
+    this.elements.input.handleViewMouseOut(
+      () => (this.elements.thumb.hovered = false),
+    );
   }
 
   render(state: IRangeSliderState): void {

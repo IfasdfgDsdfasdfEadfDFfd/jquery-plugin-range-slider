@@ -81,12 +81,12 @@ describe('test view', () => {
     const viewHandlerVisibleChange = jest.fn();
 
     view.handleHoverChange = viewHandlerHoverChange;
-    view.onMouseIn(domHandlerMouseIn);
-    view.onMouseOut(domHandlerMouseOut);
+    view.handleViewMouseIn(domHandlerMouseIn);
+    view.handleViewMouseOut(domHandlerMouseOut);
 
     view.handleFocusChange = viewHandlerFocusChange;
-    view.onFocusIn(domHandlerFocusIn);
-    view.onFocusOut(domHandlerFocusOut);
+    view.handleViewFocusIn(domHandlerFocusIn);
+    view.handleViewFocusOut(domHandlerFocusOut);
 
     view.handleVisibilityChange = viewHandlerVisibleChange;
 
