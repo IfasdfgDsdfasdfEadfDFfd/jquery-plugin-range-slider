@@ -1,5 +1,7 @@
 # JQuery plugin Range Slider
 
+**[Example](https://unpredictable-username.github.io/jquery-plugin-range-slider)**
+
 ## About
 
 Simple range slider with minimalistic design and fully featured api that allow you to:
