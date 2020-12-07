@@ -89,7 +89,7 @@ module.exports = {
     contentBase: BUILD_DIR,
     compress: true,
 
-    host: '0.0.0.0',
+    host: 'localhost',
     port: 8080,
 
     inline: true,
