@@ -62,9 +62,9 @@ class RangeSlider extends Provider<
 
     this.root = this.elements.slider;
 
-    // eslint-disable-next-line fsd/no-function-declaration-in-event-listener
-    window.addEventListener('resize', () =>
-      this.handelRangeSliderWindowResize(store.getState()),
+    window.addEventListener(
+      'resize',
+      this.makeRangeSliderWindowResizeHandler(store.getState()),
     );
   }
 
@@ -73,10 +73,12 @@ class RangeSlider extends Provider<
     this.elements.slider.hasMarker = state.markerVisibility;
   }
 
-  handelRangeSliderWindowResize(state: IRangeSliderState): void {
-    this.elements.track.render(state);
-    this.elements.leftInput.elements.thumb.positionCorrection();
-    this.elements.rightInput.elements.thumb.positionCorrection();
+  makeRangeSliderWindowResizeHandler(state: IRangeSliderState): () => void {
+    return () => {
+      this.elements.track.render(state);
+      this.elements.leftInput.elements.thumb.positionCorrection();
+      this.elements.rightInput.elements.thumb.positionCorrection();
+    };
   }
 }
 
