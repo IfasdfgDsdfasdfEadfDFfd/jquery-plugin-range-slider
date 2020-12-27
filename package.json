@@ -1,5 +1,5 @@
 {
-  "name": "@unpredictable-username/jquery-plugin-range-slider",
+  "name": "@patchwork-body/jquery-plugin-range-slider",
   "sideEffect": false,
   "version": "0.1.0",
   "description": "jQuey slider",
@@ -17,7 +17,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/unpredictable-username/jquery-plugin-range-slider.git"
+    "url": "git+https://github.com/patchwork-body/jquery-plugin-range-slider.git"
   },
   "keywords": [
     "jquery",
@@ -25,12 +25,12 @@
     "slider",
     "typescript"
   ],
-  "author": "unpredictable-username <gugfug1@gmail.com>",
+  "author": "patchwork-body <gugfug1@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/unpredictable-username/jquery-plugin-range-slider/issues"
+    "url": "https://github.com/patchwork-body/jquery-plugin-range-slider/issues"
   },
-  "homepage": "https://unpredictable-username.github.io/jquery-plugin-range-slider/",
+  "homepage": "https://patchwork-body.github.io/jquery-plugin-range-slider/",
   "devDependencies": {
     "@types/jest": "^26.0.5",
     "@types/jquery": "^3.5.1",

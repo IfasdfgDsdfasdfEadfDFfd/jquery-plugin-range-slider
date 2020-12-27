@@ -1,6 +1,6 @@
 # Store
 
-[source code](https://github.com/unpredictable-username/jquery-plugin-range-slider/blob/master/src/core/store.ts)
+[source code](https://github.com/patchwork-body/jquery-plugin-range-slider/blob/master/src/core/store.ts)
 
 To create store you need to import
 
