@@ -1,6 +1,6 @@
 # View
 
-[source code](https://github.com/unpredictable-username/jquery-plugin-range-slider/blob/master/src/core/view.ts)
+[source code](https://github.com/patchwork-body/jquery-plugin-range-slider/blob/master/src/core/view.ts)
 
 ## Basic Usage
 
