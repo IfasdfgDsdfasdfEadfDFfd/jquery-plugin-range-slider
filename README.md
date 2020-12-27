@@ -60,16 +60,7 @@ $('#container-for-range-slider').rangeSlider({
 });
 ```
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-that call returns api object, for more information about it see [Api documentation](https://unpredictable-username.github.io/docs/jquery-plugin-range-slider/api.html).
-=======
 that call returns api object, for more information about it see [Api documentation](https://patchwork-body.github.io/jquery-plugin-range-slider/docs/api.html).
-
-> > > > > > > # Stashed changes
-> > > > > > >
-> > > > > > > that call returns api object, for more information about it see [Api documentation](https://patchwork-body.github.io/docs/jquery-plugin-range-slider/api.html).
-> > > > > > > 4a7200799ed2aed97185af3f9201bd5c6f658f60
 
 ## Development
 
