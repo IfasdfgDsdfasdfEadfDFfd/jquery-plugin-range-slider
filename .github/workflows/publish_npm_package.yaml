@@ -8,7 +8,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout
         uses: actions/checkout@v1
       - name: Setup Nodejs
         uses: actions/setup-node@v1
@@ -16,7 +16,7 @@ jobs:
           node-version: 14
       - name: Install dependencies
         run: npm install
-      - name: Publish 🚀
-        uses: JS-DevTools/npm-publish@v1
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish
+        run: npm publish 
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
