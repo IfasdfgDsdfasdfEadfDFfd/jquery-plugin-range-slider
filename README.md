@@ -1,6 +1,6 @@
 # JQuery plugin Range Slider
 
-**[Example](https://unpredictable-username.github.io/jquery-plugin-range-slider)**
+**[Example](https://patchwork-body.github.io/jquery-plugin-range-slider)**
 
 ## About
 
@@ -16,15 +16,15 @@ Simple range slider with minimalistic design and fully featured api that allow y
 
 Installation process as simple as it can be. You can do it with npm
 
-`npm install @unpredictable-username/jquery-plugin-range-slider@0.1.0`
+`npm install @patchwork-body/jquery-plugin-range-slider@0.1.0`
 
 or yarn
 
-`yarn add @unpredictable-username/jquery-plugin-range-slider@0.1.0`
+`yarn add @patchwork-body/jquery-plugin-range-slider@0.1.0`
 
 or just clone this repository
 
-`git clone https://github.com/unpredictable-username/jquery-plugin-range-slider.git`
+`git clone https://github.com/patchwork-body/jquery-plugin-range-slider.git`
 
 ## Usage
 
@@ -60,12 +60,16 @@ $('#container-for-range-slider').rangeSlider({
 });
 ```
 
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 that call returns api object, for more information about it see [Api documentation](https://unpredictable-username.github.io/docs/jquery-plugin-range-slider/api.html).
 =======
 that call returns api object, for more information about it see [Api documentation](https://patchwork-body.github.io/jquery-plugin-range-slider/docs/api.html).
 
-> > > > > > > Stashed changes
+> > > > > > > # Stashed changes
+> > > > > > >
+> > > > > > > that call returns api object, for more information about it see [Api documentation](https://patchwork-body.github.io/docs/jquery-plugin-range-slider/api.html).
+> > > > > > > 4a7200799ed2aed97185af3f9201bd5c6f658f60
 
 ## Development
 
@@ -129,9 +133,9 @@ run prettier in write mode for all supported file types into ./src folder.
 
 ## Architecture
 
-This plugin implements classic [MVC design pattern](https://www.geeksforgeeks.org/mvc-design-pattern/) with some updates. So we have Model which presented as [Redux-like](https://redux.js.org/introduction/getting-started) store, [View](https://patchwork-body.github.io/jquery-plugin-range-slider/docs/view.html) class that contain HTMLElements and manipulate DOM and Controller called as [Provider](https://patchwork-body.github.io/jquery-plugin-range-slider/docs/provider.html) here and can pass data from [Store](https://patchwork-body.github.io/jquery-plugin-range-slider/docs/store.html) (Model) to View and into backward direction from View (that in its turn from DOM events) into Store by dispatching some Actions.
+This plugin implements classic [MVC design pattern](https://www.geeksforgeeks.org/mvc-design-pattern/) with some updates. So we have Model which presented as [Redux-like](https://redux.js.org/introduction/getting-started) store, [View](https://patchwork-body.github.io/docs/jquery-plugin-range-slider/view.html) class that contain HTMLElements and manipulate DOM and Controller called as [Provider](https://patchwork-body.github.io/docs/jquery-plugin-range-slider/provider.html) here and can pass data from [Store](https://patchwork-body.github.io/docs/jquery-plugin-range-slider/store.html) (Model) to View and into backward direction from View (that in its turn from DOM events) into Store by dispatching some Actions.
 
-For detailed view see [architecture documentation](https://patchwork-body.github.io/jquery-plugin-range-slider/docs/architecture.html).
+For detailed view see [architecture documentation](https://patchwork-body.github.io/docs/jquery-plugin-range-slider/architecture.html).
 
 ## Licence
 
