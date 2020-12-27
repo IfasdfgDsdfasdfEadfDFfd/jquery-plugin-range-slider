@@ -68,7 +68,7 @@ that call returns api object, for more information about it see [Api documentati
 
 first of all needs to install dependencies by running:
 
-(disclaimer, don't work on vscode remote docker development in cloned volume)https://patchwork-body.github.io/jquery-plugin-range-slider/docs/
+(disclaimer, don't work on vscode remote docker development in cloned volume)
 
 ```bash
 npm install
@@ -131,4 +131,4 @@ For detailed view see [architecture documentation](https://patchwork-body.github
 ## Licence
 
 Licensed under the MIT license.
-https://patchwork-body.github.io/jquery-plugin-range-slider/docs/https://patchwork-body.github.io/jquery-plugin-range-slider/docs/https://patchwork-body.github.io/jquery-plugin-range-slider/docs/https://patchwork-body.github.io/jquery-plugin-range-slider/docs/
+
