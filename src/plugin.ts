@@ -1,9 +1,5 @@
 import { createRangeSlider } from './components';
-import {
-  actionNames,
-  defaultState,
-  IRangeSliderState,
-} from './components/reducer';
+import { actionNames, IRangeSliderState } from './components/reducer';
 import { makeValueLikeCallback, cb } from './core/utils';
 
 interface PluginApi {
@@ -33,73 +29,59 @@ interface PluginProps {
   prefix: string | cb;
   postfix: string | cb;
   vertical: boolean;
-  intervalMode: boolean;
-  markerVisibility: boolean;
-  trackScaleVisibility: boolean;
+  interval: boolean;
+  marker: boolean;
+  scale: boolean;
   color: string;
 }
 
 function rangeSlider(
   this: JQuery,
-  props: Partial<PluginProps> = {},
+  {
+    min = 1,
+    max = 10,
+    step = 1,
+    from = 3,
+    to = 7,
+    values = [],
+    prefix = '',
+    postfix = '',
+    vertical = false,
+    interval = true,
+    marker = true,
+    scale = true,
+    color = '#1565C0',
+  }: PluginProps,
 ): PluginApi {
-  let leftValue = defaultState.value[0];
-  let rightValue = defaultState.value[1];
-  let fixedValues = defaultState.fixedValues;
+  if (values.length !== 0) {
+    max = values.length - 1;
+    min = 0;
+    step = 1;
 
-  if (props.values && props.values?.length !== 0) {
-    fixedValues = props.values.map(String);
-    props.max = fixedValues.length - 1;
-    props.min = 0;
-    props.step = 1;
-
-    if (props.from && props.to) {
-      const leftValueIndex = props.values.indexOf(props.from);
-      const rightValueIndex = props.values.indexOf(props.to);
-      leftValue = leftValueIndex === -1 ? props.min : leftValueIndex;
-      rightValue = rightValueIndex === -1 ? props.max : rightValueIndex;
-    }
-  } else {
-    if (typeof props.from === 'number' && typeof props.to === 'number') {
-      leftValue = props.from;
-      rightValue = props.to;
+    if (from && to) {
+      const leftValueIndex = values.indexOf(from);
+      const rightValueIndex = values.indexOf(to);
+      min = leftValueIndex === -1 ? min : leftValueIndex;
+      max = rightValueIndex === -1 ? max : rightValueIndex;
     }
   }
 
-  let prefix = defaultState.prefix;
-  if (props.prefix) {
-    prefix = makeValueLikeCallback(props.prefix);
-  }
-
-  let postfix = defaultState.postfix;
-  if (props.postfix) {
-    postfix = makeValueLikeCallback(props.postfix);
-  }
+  prefix = makeValueLikeCallback(prefix);
+  postfix = makeValueLikeCallback(postfix);
 
   const userDefinedProps: IRangeSliderState = {
-    fixedValues,
-    value: [leftValue, rightValue],
-    min: props.min === undefined ? defaultState.min : props.min,
-    max: props.max === undefined ? defaultState.max : props.max,
-    step: props.step === undefined ? defaultState.step : props.step,
+    fixedValues: values.map(String),
+    value: [from, to],
+    min: min,
+    max: max,
+    step: step,
     prefix,
     postfix,
-    vertical:
-      props.vertical === undefined ? defaultState.vertical : props.vertical,
-    intervalMode:
-      props.intervalMode === undefined
-        ? defaultState.intervalMode
-        : props.intervalMode,
-    markerVisibility:
-      props.markerVisibility === undefined
-        ? defaultState.markerVisibility
-        : props.markerVisibility,
-    trackScaleVisibility:
-      props.trackScaleVisibility === undefined
-        ? defaultState.trackScaleVisibility
-        : props.trackScaleVisibility,
-    primaryColor:
-      props.color === undefined ? defaultState.primaryColor : props.color,
+    vertical,
+    intervalMode: interval,
+    markerVisibility: marker,
+    trackScaleVisibility: scale,
+    primaryColor: color,
   };
 
   const componentStore = createRangeSlider(this.get(0), userDefinedProps);
@@ -107,34 +89,20 @@ function rangeSlider(
   return {
     subscribe(cb: (state: PluginProps) => void) {
       componentStore.subscribe(state => {
-        const {
-          min,
-          max,
-          step,
-          value,
-          fixedValues,
-          prefix,
-          postfix,
-          vertical,
-          intervalMode,
-          markerVisibility,
-          trackScaleVisibility,
-          primaryColor,
-        } = state;
         cb({
-          min,
-          max,
-          step,
-          from: value[0],
-          to: value[1],
-          values: fixedValues,
-          prefix,
-          postfix,
-          vertical,
-          intervalMode,
-          markerVisibility,
-          trackScaleVisibility,
-          color: primaryColor,
+          min: state.min,
+          max: state.max,
+          step: state.step,
+          from: state.value[0],
+          to: state.value[1],
+          values: state.fixedValues,
+          prefix: state.prefix,
+          postfix: state.postfix,
+          vertical: state.vertical,
+          interval: state.intervalMode,
+          marker: state.markerVisibility,
+          scale: state.trackScaleVisibility,
+          color: state.primaryColor,
         });
       });
     },
