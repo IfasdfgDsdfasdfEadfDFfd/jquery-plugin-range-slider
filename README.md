@@ -44,19 +44,19 @@ now you can select an element that you want to be a container for range-slider
 
 ```javascript
 $('#container-for-range-slider').rangeSlider({
-  min, // @number, start point for range slider
-  max, // @number, end point for range slider
-  step, // @number, step between two point of range slider track
-  from, // @number, when intervalMode enabled it will be value for left thumb else can be passed
-  to, // @number, default value for range slider thumb
-  values, // @Array<string|number>, (default []), fixed values list, can be passed
-  prefix, // @string or function(value as number) => string
-  postfix, // @string or function(value as number) => string
-  vertical, // @boolean (default false), switch to vertical layout
-  intervalMode, // @boolean (default true), enable interval mode, two thumbs will be displayed
-  markerVisibility, // @boolean (default true), should be thumb markers displayed?
-  trackScaleVisibility, // @boolean (default true), should be track scale displayed?
-  color, // @string (default #1565c0), hex primary color value
+  min, // @number, start point for range slider - default: `1`
+  max, // @number, end point for range slider - default: `10`
+  step, // @number, step between two point of range slider track - default: `1`
+  from, // @number, when intervalMode enabled it will be value for left thumb have no effect - default: `7`
+  to, // @number, default value for right (or main if intervalMode disabled) range slider thumb - default: `3`
+  values, // @Array<string|number>, fixed values list - default: `[]`
+  prefix, // @string or function(value as number) => string - default: `''`
+  postfix, // @string or function(value as number) => string - default: `''`
+  vertical, // @boolean switch to vertical layout - default: `false`
+  intervalMode, // @boolean enable interval mode, two thumbs will be displayed - default: `true`
+  markerVisibility, // @boolean should be thumb markers displayed? - default: `true`
+  trackScaleVisibility, // @boolean should be track scale displayed? - default: `true`
+  color, // @string hex primary color value - default: `'#1565c0'`
 });
 ```
 
