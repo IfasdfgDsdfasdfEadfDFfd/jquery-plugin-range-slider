@@ -36,8 +36,8 @@ class Thumb extends View {
     const { min, max, value, prefix, postfix, displayValue } = params;
 
     const thumbWidth =
-      <number>this.element.clientWidth + parseInt(styles.thumbWidth);
-    const sliderWidth = <number>this.element.parentElement?.clientWidth;
+      <number>this.nativeElement.clientWidth + parseInt(styles.thumbWidth);
+    const sliderWidth = <number>this.nativeElement.parentElement?.clientWidth;
 
     const offset = this.getOffset({
       selfWidth: thumbWidth,
@@ -47,15 +47,15 @@ class Thumb extends View {
       min,
     });
 
-    this.element.style.setProperty('left', `${offset}%`);
+    this.nativeElement.style.setProperty('left', `${offset}%`);
 
     this.marker.value = `${prefix}${displayValue}${postfix}`;
   }
 
   set primaryColor(value: string) {
     if (value !== this.lastColor) {
-      this.element.style.setProperty('background-color', value);
-      this.marker.element.style.setProperty('background-color', value);
+      this.nativeElement.style.setProperty('background-color', value);
+      this.marker.nativeElement.style.setProperty('background-color', value);
       this.lastColor = value;
     }
   }
@@ -74,17 +74,23 @@ class Thumb extends View {
 
   colorReset(): void {
     if (this.isFocused || this.isHovered) {
-      this.element.style.removeProperty('background-color');
-      this.marker.element.style.removeProperty('background-color');
-      this.element.style.setProperty('border-color', this.lastColor);
-      this.marker.element.style.setProperty('color', this.lastColor);
-      this.marker.element.style.setProperty('border-color', this.lastColor);
+      this.nativeElement.style.removeProperty('background-color');
+      this.marker.nativeElement.style.removeProperty('background-color');
+      this.nativeElement.style.setProperty('border-color', this.lastColor);
+      this.marker.nativeElement.style.setProperty('color', this.lastColor);
+      this.marker.nativeElement.style.setProperty(
+        'border-color',
+        this.lastColor,
+      );
     } else {
-      this.element.style.removeProperty('border-color');
-      this.marker.element.style.removeProperty('border-color');
-      this.marker.element.style.removeProperty('color');
-      this.element.style.setProperty('background-color', this.lastColor);
-      this.marker.element.style.setProperty('background-color', this.lastColor);
+      this.nativeElement.style.removeProperty('border-color');
+      this.marker.nativeElement.style.removeProperty('border-color');
+      this.marker.nativeElement.style.removeProperty('color');
+      this.nativeElement.style.setProperty('background-color', this.lastColor);
+      this.marker.nativeElement.style.setProperty(
+        'background-color',
+        this.lastColor,
+      );
     }
   }
 
@@ -124,13 +130,13 @@ class ThumbMarker extends View {
       value.length * parseInt(styles.rootFontSize),
       parseInt(styles.minThumbMarkerWidth) * parseInt(styles.rootFontSize),
     );
-    this.element.style.setProperty('width', `${width}px`);
+    this.nativeElement.style.setProperty('width', `${width}px`);
 
     const offset = -(
-      (width - <number>this.element.parentElement?.clientWidth) /
+      (width - <number>this.nativeElement.parentElement?.clientWidth) /
       2
     );
-    this.element.style.setProperty('margin-left', `${offset}px`);
+    this.nativeElement.style.setProperty('margin-left', `${offset}px`);
 
     this._value = value;
   }
@@ -140,8 +146,8 @@ class ThumbMarker extends View {
   }
 
   setVerticalMargin() {
-    const offset = -this.element.clientWidth;
-    this.element.style.setProperty('margin-top', `${offset}px`);
+    const offset = -this.nativeElement.clientWidth;
+    this.nativeElement.style.setProperty('margin-top', `${offset}px`);
   }
 }
 

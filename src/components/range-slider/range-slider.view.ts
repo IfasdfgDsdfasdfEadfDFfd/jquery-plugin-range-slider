@@ -28,12 +28,12 @@ class RangeSliderElement extends View {
 
   set vertical(value: boolean) {
     const className = 'range-slider--vertical';
-    this.element.classList.toggle(className, value);
+    this.nativeElement.classList.toggle(className, value);
   }
 
   set hasMarker(value: boolean) {
     const className = 'range-slider--has-marker';
-    this.element.classList.toggle(className, value);
+    this.nativeElement.classList.toggle(className, value);
   }
 }
 

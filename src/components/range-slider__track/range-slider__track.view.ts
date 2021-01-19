@@ -50,9 +50,9 @@ class TrackScale extends View {
       parseFloat(styles.thumbWidth) * parseInt(styles.rootFontSize) -
       parseInt(styles.thumbBorderWidth);
 
-    item.element.style.setProperty('width', `${itemWidth}px`);
-    item.element.style.setProperty('left', `${percentOffset}%`);
-    item.element.style.setProperty(
+    item.nativeElement.style.setProperty('width', `${itemWidth}px`);
+    item.nativeElement.style.setProperty('left', `${percentOffset}%`);
+    item.nativeElement.style.setProperty(
       'margin-left',
       `${-(itemWidth / 2 - thumbWidth / 2 + thumbWidth * ratio)}px`,
     );
@@ -108,7 +108,7 @@ class TrackScaleItem extends View {
 
   resetColor(): void {
     if (this.isFocused || this.isHovered)
-      this.element.style.setProperty('color', this.lastColor);
+      this.nativeElement.style.setProperty('color', this.lastColor);
   }
 }
 
@@ -127,7 +127,7 @@ class RangeSliderTrack extends Provider<
 
     this.root = this.elements.track;
 
-    this.elements.scale.element.addEventListener(
+    this.elements.scale.nativeElement.addEventListener(
       'click',
       this.makeRangeSliderTrackClickHandler(store),
     );

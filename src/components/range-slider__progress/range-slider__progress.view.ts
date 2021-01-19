@@ -22,12 +22,12 @@ class Progress extends View {
     const leftOffset = ((value[0] - min) / (max - min)) * 100;
     const rightOffset = ((value[1] - min) / (max - min)) * 100;
 
-    this.element.style.left = `${leftOffset}%`;
-    this.element.style.right = `${100 - rightOffset}%`;
+    this.nativeElement.style.left = `${leftOffset}%`;
+    this.nativeElement.style.right = `${100 - rightOffset}%`;
   }
 
   set primaryColor(value: string) {
-    this.element.style.setProperty('background-color', value);
+    this.nativeElement.style.setProperty('background-color', value);
   }
 }
 
