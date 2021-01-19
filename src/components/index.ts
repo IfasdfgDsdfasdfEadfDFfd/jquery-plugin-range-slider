@@ -14,7 +14,7 @@ function createRangeSlider(
   );
 
   const rangeSlider = new RangeSlider(store);
-  root.appendChild(rangeSlider.root.element);
+  root.appendChild(rangeSlider.root.nativeElement);
 
   store.coldStart();
 

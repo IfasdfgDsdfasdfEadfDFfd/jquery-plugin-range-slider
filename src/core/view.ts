@@ -8,7 +8,7 @@ type EventCallback = (event: Event) => void;
 
 class View {
   readonly tag: string;
-  readonly element: HTMLElement;
+  readonly nativeElement: HTMLElement;
 
   focusClassName = '';
   hoverClassName = '';
@@ -27,13 +27,13 @@ class View {
     this.tag = tag || 'div';
     this.children = children;
     this.attrs = attrs;
-    this.element = document.createElement(this.tag);
+    this.nativeElement = document.createElement(this.tag);
 
     Object.keys(this.attrs).reduce((el, key) => {
       const value = this.attrs[key];
       el.setAttribute(key, value);
       return el;
-    }, this.element);
+    }, this.nativeElement);
 
     this.appendChildren(children);
   }
@@ -44,52 +44,52 @@ class View {
         const text = document.createTextNode(child);
         el.appendChild(text);
       } else {
-        el.appendChild(child.element);
+        el.appendChild(child.nativeElement);
       }
 
       return el;
-    }, this.element);
+    }, this.nativeElement);
   }
 
   replaceChildren(children: IViewProps['children']): void {
-    this.element.innerHTML = '';
+    this.nativeElement.innerHTML = '';
     this.appendChildren(children);
     this.children = children;
   }
 
   handleViewFocusIn(cb: EventCallback): void {
-    this.element.addEventListener('focusin', cb);
+    this.nativeElement.addEventListener('focusin', cb);
   }
 
   handleViewFocusOut(cb: EventCallback): void {
-    this.element.addEventListener('focusout', cb);
+    this.nativeElement.addEventListener('focusout', cb);
   }
 
   handleViewMouseIn(cb: EventCallback): void {
-    this.element.addEventListener('mouseenter', cb);
+    this.nativeElement.addEventListener('mouseenter', cb);
   }
 
   handleViewMouseOut(cb: EventCallback): void {
-    this.element.addEventListener('mouseleave', cb);
+    this.nativeElement.addEventListener('mouseleave', cb);
   }
 
   set focused(value: boolean) {
     if (this.focusClassName)
-      this.element.classList.toggle(this.focusClassName, value);
+      this.nativeElement.classList.toggle(this.focusClassName, value);
     this.isFocused = value;
     this.handleFocusChange();
   }
 
   set hovered(value: boolean) {
     if (this.hoverClassName)
-      this.element.classList.toggle(this.hoverClassName, value);
+      this.nativeElement.classList.toggle(this.hoverClassName, value);
     this.isHovered = value;
     this.handleHoverChange();
   }
 
   set visible(value: boolean) {
     if (this.hidingClassName)
-      this.element.classList.toggle(this.hidingClassName, value);
+      this.nativeElement.classList.toggle(this.hidingClassName, value);
     this.isVisible = value;
     this.handleVisibilityChange();
   }

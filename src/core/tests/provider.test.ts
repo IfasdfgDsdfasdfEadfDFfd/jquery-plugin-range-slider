@@ -1,6 +1,4 @@
-import { View } from '@core';
-import { Provider } from '@core';
-import { createStore, Store } from '@core';
+import { View, Provider, Store, createStore } from '@core';
 
 describe('test provider', () => {
   let STORE: Store<string>;
@@ -43,6 +41,6 @@ describe('test provider', () => {
     const provider = new SomeProvider(STORE);
 
     expect(provider.root).toBeInstanceOf(View);
-    expect(provider.root.element).toBeInstanceOf(HTMLDivElement);
+    expect(provider.root.nativeElement).toBeInstanceOf(HTMLDivElement);
   });
 });

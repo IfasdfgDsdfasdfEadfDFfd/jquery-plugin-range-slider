@@ -12,33 +12,33 @@ class InputRange extends View {
   }
 
   set value(nextValue: number) {
-    this.element.setAttribute('value', nextValue.toString());
-    (this.element as HTMLInputElement).value = nextValue.toString();
+    this.nativeElement.setAttribute('value', nextValue.toString());
+    (this.nativeElement as HTMLInputElement).value = nextValue.toString();
   }
 
   get value(): number {
-    return parseInt(<string>this.element.getAttribute('value'));
+    return parseInt(<string>this.nativeElement.getAttribute('value'));
   }
 
   set min(nextMin: number) {
-    this.element.setAttribute('min', nextMin.toString());
+    this.nativeElement.setAttribute('min', nextMin.toString());
   }
 
   set max(nextMax: number) {
-    this.element.setAttribute('max', nextMax.toString());
+    this.nativeElement.setAttribute('max', nextMax.toString());
   }
 
   set step(nextStep: number) {
-    this.element.setAttribute('step', nextStep.toString());
+    this.nativeElement.setAttribute('step', nextStep.toString());
   }
 
   set intervalMode(apply: boolean) {
     const className = 'range-slider__input--interval';
-    this.element.classList.toggle(className, apply);
+    this.nativeElement.classList.toggle(className, apply);
   }
 
   handleInputRangeChange(cb: EventCallback): void {
-    this.element.addEventListener('input', cb);
+    this.nativeElement.addEventListener('input', cb);
   }
 }
 
