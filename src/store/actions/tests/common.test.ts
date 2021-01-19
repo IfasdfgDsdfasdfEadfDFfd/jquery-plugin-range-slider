@@ -1,4 +1,4 @@
-import { makeValue } from './common';
+import { makeValue } from '../common';
 
 describe('makeValue().', () => {
   describe('multipleBy()', () => {

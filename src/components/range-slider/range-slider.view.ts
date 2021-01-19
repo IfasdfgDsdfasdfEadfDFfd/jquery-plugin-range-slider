@@ -4,7 +4,7 @@ import {
 } from '../range-slider__input-range';
 import { RangeSliderProgress } from '../range-slider__progress';
 import { RangeSliderTrack } from '../range-slider__track';
-import { IRangeSliderState } from '../reducer';
+import { IRangeSliderState } from '../../store';
 import { Provider, Store, View } from '../../core';
 
 class RangeSliderElement extends View {

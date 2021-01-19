@@ -1,6 +1,6 @@
 import { RangeSlider } from './range-slider';
 import { createStore, NaNValidator, Store } from '../core';
-import { IRangeSliderState, rangeSliderStoreReducer } from './reducer';
+import { IRangeSliderState, rangeSliderStoreReducer } from '../store';
 
 function createRangeSlider(
   root: HTMLElement,

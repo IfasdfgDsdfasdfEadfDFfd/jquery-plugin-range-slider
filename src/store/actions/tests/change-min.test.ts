@@ -1,4 +1,4 @@
-import { CHANGE_MIN, getMin } from './change-min';
+import { CHANGE_MIN, getMin } from '../change-min';
 
 describe(`${CHANGE_MIN} MAX: 100, STEP: 1`, () => {
   const MAX = 100;

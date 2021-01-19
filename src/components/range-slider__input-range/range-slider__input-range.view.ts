@@ -1,4 +1,4 @@
-import { IRangeSliderState, actionNames } from '../reducer';
+import { IRangeSliderState, actionNames } from '../../store';
 import { Thumb } from '../range-slider__thumb';
 import { View, Action, EventCallback, Provider, Store } from '../../core';
 

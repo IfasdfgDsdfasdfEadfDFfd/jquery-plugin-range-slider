@@ -1,4 +1,4 @@
-import { actionNames, IRangeSliderState } from '../reducer';
+import { actionNames, IRangeSliderState } from '../../store';
 import { Provider, Store, View } from '../../core';
 
 import styles from '../../exports.scss';

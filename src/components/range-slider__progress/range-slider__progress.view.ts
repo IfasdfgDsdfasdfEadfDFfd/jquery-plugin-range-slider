@@ -1,4 +1,4 @@
-import { IRangeSliderState } from '../reducer';
+import { IRangeSliderState } from '../../store';
 import { Provider, View } from '../../core';
 
 class Progress extends View {

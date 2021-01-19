@@ -1,5 +1,5 @@
 import { actionNames, getMax, getMin } from './actions';
-import { Action, Reducer } from '../../core';
+import { Action, Reducer } from '../core';
 import { getValue } from './actions/change-value';
 
 type cb<T> = (value: T) => string;

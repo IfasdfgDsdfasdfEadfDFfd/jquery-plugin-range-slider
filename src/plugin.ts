@@ -1,5 +1,5 @@
 import { createRangeSlider } from './components';
-import { actionNames, IRangeSliderState } from './components/reducer';
+import { actionNames, IRangeSliderState } from './store';
 import { makeValueLikeCallback, cb } from './core/utils';
 
 interface PluginApi {

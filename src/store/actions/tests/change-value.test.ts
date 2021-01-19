@@ -1,4 +1,4 @@
-import { actionNames, getValue } from './';
+import { actionNames, getValue } from '..';
 
 describe(actionNames.CHANGE_LEFT_VALUE, () => {
   describe('(MIN: 50, MAX: 100, RIGHT: 75, STEP: 5)', () => {
