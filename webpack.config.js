@@ -3,6 +3,7 @@ const path = require('path');
 const webpack = require('webpack');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
@@ -30,6 +31,7 @@ module.exports = {
 
   // don't forget about dots...
   resolve: {
+    plugins: [new TsconfigPathsPlugin({})],
     extensions: ['.ts', '.js', '.scss', '.pug', '.html', '.css'],
   },
 
