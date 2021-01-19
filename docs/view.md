@@ -47,8 +47,8 @@ class Link extends View {
   }
 
   onClick(clickHandler) {
-    // this.element always links to native HTMLElement
-    this.element.addEventListener('click', clickHandler);
+    // this.nativeElement always links to native HTMLElement
+    this.nativeElement.addEventListener('click', clickHandler);
   }
 }
 
