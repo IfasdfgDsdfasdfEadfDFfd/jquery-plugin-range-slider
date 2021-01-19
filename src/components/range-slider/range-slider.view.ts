@@ -1,11 +1,11 @@
+import { Provider, Store, View } from '@core';
+import { IRangeSliderState } from '@store';
 import {
   LeftRangeSliderInputRange,
   RightRangeSliderInputRange,
-} from '../range-slider__input-range';
-import { RangeSliderProgress } from '../range-slider__progress';
-import { RangeSliderTrack } from '../range-slider__track';
-import { IRangeSliderState } from '../../store';
-import { Provider, Store, View } from '../../core';
+} from 'components/range-slider__input-range';
+import { RangeSliderProgress } from 'components/range-slider__progress';
+import { RangeSliderTrack } from 'components/range-slider__track';
 
 class RangeSliderElement extends View {
   constructor({

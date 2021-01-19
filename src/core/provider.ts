@@ -1,5 +1,5 @@
-import { Store } from './';
-import { View } from './view';
+import { Store } from '@core';
+import { View } from '@core';
 
 abstract class Provider<TStore, TElements> {
   readonly elements = {} as TElements;

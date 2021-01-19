@@ -1,5 +1,5 @@
-import { IRangeSliderState } from '../../store';
-import { Provider, View } from '../../core';
+import { Provider, View } from '@core';
+import { IRangeSliderState } from '@store';
 
 class Progress extends View {
   constructor() {

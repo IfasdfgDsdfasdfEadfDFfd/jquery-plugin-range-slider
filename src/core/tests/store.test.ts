@@ -1,4 +1,4 @@
-import { createStore, NaNValidator } from '../store';
+import { createStore, NaNValidator } from '@core';
 
 describe('store test', () => {
   const INIT_STATE = 'INIT_STATE';

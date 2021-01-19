@@ -1,4 +1,4 @@
-import { View } from '../view';
+import { View } from '@core';
 
 describe('test view', () => {
   test('should has children as string', () => {

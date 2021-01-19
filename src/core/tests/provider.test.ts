@@ -1,6 +1,6 @@
-import { View } from '..';
-import { Provider } from '../provider';
-import { createStore, Store } from '../store';
+import { View } from '@core';
+import { Provider } from '@core';
+import { createStore, Store } from '@core';
 
 describe('test provider', () => {
   let STORE: Store<string>;

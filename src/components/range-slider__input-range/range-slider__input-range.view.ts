@@ -1,6 +1,6 @@
-import { IRangeSliderState, actionNames } from '../../store';
-import { Thumb } from '../range-slider__thumb';
-import { View, Action, EventCallback, Provider, Store } from '../../core';
+import { View, Action, EventCallback, Provider, Store } from '@core';
+import { IRangeSliderState, actionNames } from '@store';
+import { Thumb } from 'components/range-slider__thumb';
 
 class InputRange extends View {
   constructor() {

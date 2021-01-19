@@ -1,8 +1,8 @@
-import { actionNames, IRangeSliderState } from '../../store';
-import { Provider, Store, View } from '../../core';
+import { Provider, Store, View } from '@core';
+import { makeValueLikeCallback } from 'core/utils';
+import { actionNames, IRangeSliderState } from '@store';
 
 import styles from '../../exports.scss';
-import { makeValueLikeCallback } from '../../core/utils';
 
 class Track extends View {
   constructor(scale: TrackScale) {
