@@ -17,6 +17,10 @@ jobs:
           registry-url: 'https://npm.pkg.github.com'
       - name: Install dependencies
         run: npm install
+      - name: 'Increment npm package version'
+        uses: 'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish
         run: npm publish 
         env:
