@@ -1,7 +1,7 @@
 {
   "name": "@patchwork-body/jquery-plugin-range-slider",
   "sideEffect": false,
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "jQuey slider",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
