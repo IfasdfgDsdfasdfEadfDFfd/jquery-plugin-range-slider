@@ -59,10 +59,8 @@ function rangeSlider(
     step = 1;
 
     if (from && to) {
-      const leftValueIndex = values.indexOf(from);
-      const rightValueIndex = values.indexOf(to);
-      min = leftValueIndex === -1 ? min : leftValueIndex;
-      max = rightValueIndex === -1 ? max : rightValueIndex;
+      from = values.indexOf(from);
+      to = values.indexOf(to);
     }
   }
 

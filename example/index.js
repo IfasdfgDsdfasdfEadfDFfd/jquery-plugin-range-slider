@@ -23,7 +23,7 @@ window.addEventListener('load', () => {
         max: 6,
         step: 1,
         from: 1,
-        to: 2,
+        to: 3,
         postfix: value => (value > 1 ? ' rooms' : ' room'),
         color: '#0392cf',
         markerVisibility: false,
