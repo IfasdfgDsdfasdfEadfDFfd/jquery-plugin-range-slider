@@ -80,7 +80,6 @@ abstract class RangeSliderInputRange extends Provider<
 
     this.elements.thumb.primaryColor = state.primaryColor;
     this.elements.thumb.marker.visible = !state.markerVisibility;
-    if (state.vertical) this.elements.thumb.marker.setVerticalMargin();
   }
 
   abstract makeAction(value: number): Action;
@@ -98,7 +97,7 @@ class LeftRangeSliderInputRange extends RangeSliderInputRange {
 
     this.elements.input.value = state.value[0];
 
-    const { max, min, value, prefix, postfix, fixedValues } = state;
+    const { max, min, value, prefix, postfix, fixedValues, vertical } = state;
 
     const displayValue =
       fixedValues.length > 1 ? fixedValues[value[0]] : value[0];
@@ -110,6 +109,7 @@ class LeftRangeSliderInputRange extends RangeSliderInputRange {
       prefix: prefix(value[0]),
       postfix: postfix(value[0]),
       displayValue,
+      vertical,
     });
   }
 
@@ -126,7 +126,7 @@ class RightRangeSliderInputRange extends RangeSliderInputRange {
     super.render(state);
     this.elements.input.value = state.value[1];
 
-    const { max, min, value, prefix, postfix, fixedValues } = state;
+    const { max, min, value, prefix, postfix, fixedValues, vertical } = state;
 
     const displayValue =
       fixedValues.length > 1 ? fixedValues[value[1]] : value[1];
@@ -138,6 +138,7 @@ class RightRangeSliderInputRange extends RangeSliderInputRange {
       prefix: prefix(value[1]),
       postfix: postfix(value[1]),
       displayValue,
+      vertical,
     });
   }
 

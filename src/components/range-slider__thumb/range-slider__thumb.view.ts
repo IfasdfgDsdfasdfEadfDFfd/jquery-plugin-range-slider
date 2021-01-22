@@ -9,6 +9,7 @@ interface IThumbPositionParams {
   prefix: string;
   postfix: string;
   displayValue: string | number;
+  vertical: boolean;
 }
 
 class Thumb extends View {
@@ -33,7 +34,7 @@ class Thumb extends View {
   positioning(params: IThumbPositionParams): void {
     this.cachedValues = params;
 
-    const { min, max, value, prefix, postfix, displayValue } = params;
+    const { min, max, value, prefix, postfix, displayValue, vertical } = params;
 
     const thumbWidth =
       <number>this.nativeElement.clientWidth + parseInt(styles.thumbWidth);
@@ -50,6 +51,7 @@ class Thumb extends View {
     this.nativeElement.style.setProperty('left', `${offset}%`);
 
     this.marker.value = `${prefix}${displayValue}${postfix}`;
+    if (vertical) this.marker.setVerticalMargin();
   }
 
   set primaryColor(value: string) {
@@ -113,6 +115,7 @@ class Thumb extends View {
 
 class ThumbMarker extends View {
   hidingClassName = 'range-slider__thumb__marker--hidden';
+  width: number = 0;
   _value!: string;
 
   constructor() {
@@ -126,14 +129,15 @@ class ThumbMarker extends View {
   set value(value: string) {
     this.replaceChildren([value]);
 
-    const width = Math.max(
-      value.length * parseInt(styles.rootFontSize),
-      parseInt(styles.minThumbMarkerWidth) * parseInt(styles.rootFontSize),
+    const multiplier = parseInt(styles.rootFontSize);
+    this.width = Math.max(
+      value.length * multiplier,
+      parseInt(styles.minThumbMarkerWidth) * multiplier,
     );
-    this.nativeElement.style.setProperty('width', `${width}px`);
+    this.nativeElement.style.setProperty('width', `${this.width}px`);
 
     const offset = -(
-      (width - <number>this.nativeElement.parentElement?.clientWidth) /
+      (this.width - <number>this.nativeElement.parentElement?.clientWidth) /
       2
     );
     this.nativeElement.style.setProperty('margin-left', `${offset}px`);
@@ -146,8 +150,10 @@ class ThumbMarker extends View {
   }
 
   setVerticalMargin() {
-    const offset = -this.nativeElement.clientWidth;
-    this.nativeElement.style.setProperty('margin-top', `${offset}px`);
+    this.nativeElement.style.setProperty(
+      'margin-top',
+      `${-this.width / 2 - 20}px`,
+    );
   }
 }
 

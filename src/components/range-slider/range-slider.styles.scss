@@ -26,6 +26,8 @@
   }
 
   .range-slider__track-scale__button {
+    overflow: visible;
+
     &::after {
       top: 45%;
       width: 1rem;

@@ -33,7 +33,12 @@ class TrackScale extends View {
       const min = 0;
       const ratio = (index - min) / (max - min);
 
-      return this.createItem(displayValue, percent, ratio);
+      return this.createItem(
+        displayValue,
+        percent,
+        ratio,
+        Math.round(this.nativeElement.clientWidth / values.length),
+      );
     });
 
     this.replaceChildren(items);
@@ -43,9 +48,13 @@ class TrackScale extends View {
     value: string,
     percentOffset: number,
     ratio: number,
+    maxWidth: number,
   ): TrackScaleItem {
     const item = new TrackScaleItem(value);
-    const itemWidth = value.length * parseInt(styles.rootFontSize);
+    const itemWidth = Math.min(
+      value.length * (parseInt(styles.rootFontSize) * 0.5),
+      maxWidth,
+    );
     const thumbWidth =
       parseFloat(styles.thumbWidth) * parseInt(styles.rootFontSize) -
       parseInt(styles.thumbBorderWidth);
