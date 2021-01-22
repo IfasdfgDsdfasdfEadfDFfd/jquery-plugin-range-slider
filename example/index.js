@@ -115,9 +115,9 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
       $primaryColor.val(state.color);
 
       $orient.attr('checked', state.vertical);
-      $intervalMode.attr('checked', state.intervalMode);
-      $markerVisibility.attr('checked', state.markerVisibility);
-      $trackScaleVisibility.attr('checked', state.trackScaleVisibility);
+      $intervalMode.attr('checked', state.interval);
+      $markerVisibility.attr('checked', state.marker);
+      $trackScaleVisibility.attr('checked', state.scale);
     });
 
     $fixedValues.on('focusout', event =>
