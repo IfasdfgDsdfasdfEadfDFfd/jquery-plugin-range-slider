@@ -119,8 +119,8 @@ class Thumb extends View {
 
 class ThumbMarker extends View {
   hidingClassName = 'range-slider__thumb__marker--hidden';
-  width: number = 0;
-  _value!: string;
+  width = 0;
+  cachedValue = '';
 
   constructor() {
     super({
@@ -134,8 +134,9 @@ class ThumbMarker extends View {
     this.replaceChildren([value]);
 
     const multiplier = parseInt(styles.rootFontSize);
+
     this.width = Math.max(
-      value.length * multiplier,
+      value.split(' ').join('').split('.').join('').length * multiplier,
       parseInt(styles.minThumbMarkerWidth) * multiplier,
     );
     this.nativeElement.style.setProperty('width', `${this.width}px`);
@@ -146,11 +147,11 @@ class ThumbMarker extends View {
     );
     this.nativeElement.style.setProperty('margin-left', `${offset}px`);
 
-    this._value = value;
+    this.cachedValue = value;
   }
 
   positionCorrection() {
-    this.value = this._value;
+    this.value = this.cachedValue;
   }
 
   setVerticalMargin() {
