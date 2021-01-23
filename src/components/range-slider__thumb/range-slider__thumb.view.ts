@@ -51,7 +51,11 @@ class Thumb extends View {
     this.nativeElement.style.setProperty('left', `${offset}%`);
 
     this.marker.value = `${prefix}${displayValue}${postfix}`;
-    if (vertical) this.marker.setVerticalMargin();
+    if (vertical) {
+      this.marker.setVerticalMargin();
+    } else {
+      this.marker.resetMargin();
+    }
   }
 
   set primaryColor(value: string) {
@@ -152,8 +156,12 @@ class ThumbMarker extends View {
   setVerticalMargin() {
     this.nativeElement.style.setProperty(
       'margin-top',
-      `${-this.width / 2 - 20}px`,
+      `${-this.width / 2 - 25}px`,
     );
+  }
+
+  resetMargin() {
+    this.nativeElement.style.removeProperty('margin-top');
   }
 }
 
