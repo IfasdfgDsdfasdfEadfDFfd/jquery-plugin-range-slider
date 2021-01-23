@@ -33,34 +33,41 @@ class TrackScale extends View {
       const min = 0;
       const ratio = (index - min) / (max - min);
 
-      return this.createItem(
-        displayValue,
-        percent,
+      return this.createItem({
         ratio,
-        Math.round(this.nativeElement.clientWidth / values.length),
-      );
+        value: displayValue,
+        offsetInPercentages: percent,
+        maxWidthInPixels: Math.round(
+          this.nativeElement.clientWidth / values.length,
+        ),
+      });
     });
 
     this.replaceChildren(items);
   }
 
-  createItem(
-    value: string,
-    percentOffset: number,
-    ratio: number,
-    maxWidth: number,
-  ): TrackScaleItem {
+  createItem({
+    value,
+    ratio,
+    maxWidthInPixels,
+    offsetInPercentages,
+  }: {
+    value: string;
+    ratio: number;
+    maxWidthInPixels: number;
+    offsetInPercentages: number;
+  }): TrackScaleItem {
     const item = new TrackScaleItem(value);
     const itemWidth = Math.min(
       value.length * (parseInt(styles.rootFontSize) * 0.5),
-      maxWidth,
+      maxWidthInPixels,
     );
     const thumbWidth =
       parseFloat(styles.thumbWidth) * parseInt(styles.rootFontSize) -
       parseInt(styles.thumbBorderWidth);
 
     item.nativeElement.style.setProperty('width', `${itemWidth}px`);
-    item.nativeElement.style.setProperty('left', `${percentOffset}%`);
+    item.nativeElement.style.setProperty('left', `${offsetInPercentages}%`);
     item.nativeElement.style.setProperty(
       'margin-left',
       `${-(itemWidth / 2 - thumbWidth / 2 + thumbWidth * ratio)}px`,
