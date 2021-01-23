@@ -90,6 +90,4 @@ describe('RangeSliderTrack provider', () => {
     delimiter = rangeSliderTrack.getDelimiter(11, [3, 5]);
     expect(delimiter).toEqual(5);
   });
-
-  test('', () => {});
 });
