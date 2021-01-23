@@ -25,7 +25,6 @@ window.addEventListener('load', () => {
         to: 2,
         postfix: value => (value > 1 ? ' rooms' : ' room'),
         color: '#0392cf',
-        marker: false,
         interval: false,
       },
     },
