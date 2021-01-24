@@ -81,7 +81,7 @@ describe('RangeSliderTrack provider', () => {
     rangeSliderTrack = new RangeSliderTrack(store);
   });
 
-  test('track scale visibility', () => {
+  test('track scale change visibility', () => {
     expect(rangeSliderTrack.elements.scale.visible).toBeFalsy();
 
     store.dispatch({
@@ -90,6 +90,18 @@ describe('RangeSliderTrack provider', () => {
     });
 
     expect(rangeSliderTrack.elements.scale.isVisible).toBeTruthy();
+  });
+
+  test('track scale change color', () => {
+    const blackColor = '#000';
+    // expect(rangeSliderTrack.elements.scale).toBeFalsy();
+
+    store.dispatch({
+      name: actionNames.CHANGE_PRIMARY_COLOR,
+      value: blackColor,
+    });
+
+    // expect(rangeSliderTrack.elements.scale.isVisible).toBeTruthy();
   });
 
   test('getDelimiter()', () => {

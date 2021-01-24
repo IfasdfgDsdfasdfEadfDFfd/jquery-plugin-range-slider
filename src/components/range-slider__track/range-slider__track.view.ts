@@ -1,6 +1,6 @@
 import { Provider, Store, View } from '@core';
 import { actionNames, IRangeSliderStoreState } from '@store';
-import { makeValueLikeCallback, memo } from 'core/utils';
+import { makeValueLikeCallback } from 'core/utils';
 
 import styles from '../../exports.scss';
 
@@ -148,10 +148,20 @@ class RangeSliderTrack extends Provider<
       this.makeRangeSliderTrackClickHandler(store),
     );
 
-    store.subscribe(
-      memo(({ trackScaleVisibility }: IRangeSliderStoreState) => {
-        this.elements.scale.visible = trackScaleVisibility;
-      }),
+    this.useStore(
+      store,
+      ({ trackScaleVisibility }) => trackScaleVisibility,
+      isVisible => {
+        this.elements.scale.visible = isVisible;
+      },
+    );
+
+    this.useStore(
+      store,
+      ({ primaryColor }) => primaryColor,
+      color => {
+        this.elements.scale.activeColor = color;
+      },
     );
   }
 
@@ -178,7 +188,6 @@ class RangeSliderTrack extends Provider<
     }
 
     this.elements.scale.update(this.cachedSliderValues);
-    this.elements.scale.activeColor = state.primaryColor;
   }
 
   makeRangeSliderTrackClickHandler(
