@@ -1,5 +1,5 @@
 import { Provider, Store, View } from '@core';
-import { IRangeSliderState } from '@store';
+import { IRangeSliderStoreState } from '@store';
 import {
   LeftRangeSliderInputRange,
   RightRangeSliderInputRange,
@@ -38,7 +38,7 @@ class RangeSliderElement extends View {
 }
 
 class RangeSlider extends Provider<
-  IRangeSliderState,
+  IRangeSliderStoreState,
   {
     slider: RangeSliderElement;
     leftInput: LeftRangeSliderInputRange;
@@ -47,7 +47,7 @@ class RangeSlider extends Provider<
     progress: RangeSliderProgress;
   }
 > {
-  init(store: Store<IRangeSliderState>): void {
+  init(store: Store<IRangeSliderStoreState>): void {
     this.elements.leftInput = new LeftRangeSliderInputRange(store);
     this.elements.rightInput = new RightRangeSliderInputRange(store);
     this.elements.track = new RangeSliderTrack(store);
@@ -68,12 +68,14 @@ class RangeSlider extends Provider<
     );
   }
 
-  render(state: IRangeSliderState): void {
+  render(state: IRangeSliderStoreState): void {
     this.elements.slider.vertical = state.vertical;
     this.elements.slider.hasMarker = state.markerVisibility;
   }
 
-  makeRangeSliderWindowResizeHandler(state: IRangeSliderState): () => void {
+  makeRangeSliderWindowResizeHandler(
+    state: IRangeSliderStoreState,
+  ): () => void {
     return () => {
       this.elements.track.render(state);
       this.elements.leftInput.elements.thumb.positionCorrection();

@@ -5,7 +5,7 @@ import { getValue } from './actions/change-value';
 
 type cb<T> = (value: T) => string;
 
-interface IRangeSliderState {
+interface IRangeSliderStoreState {
   min: number;
   max: number;
   value: [number, number];
@@ -20,10 +20,10 @@ interface IRangeSliderState {
   fixedValues: string[];
 }
 
-const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
+const rangeSliderStoreReducer: Reducer<IRangeSliderStoreState> = (
   action: Action,
-  state: IRangeSliderState,
-): IRangeSliderState => {
+  state: IRangeSliderStoreState,
+): IRangeSliderStoreState => {
   let min, max, step: number;
 
   switch (action.name) {
@@ -125,4 +125,4 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderState> = (
   }
 };
 
-export { cb, IRangeSliderState, rangeSliderStoreReducer, actionNames };
+export { cb, IRangeSliderStoreState, rangeSliderStoreReducer, actionNames };

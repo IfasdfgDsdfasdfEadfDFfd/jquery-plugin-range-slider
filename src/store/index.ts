@@ -1,5 +1,5 @@
 export {
   rangeSliderStoreReducer,
   actionNames,
-  IRangeSliderState,
+  IRangeSliderStoreState,
 } from './reducer';

@@ -1,5 +1,5 @@
 import { createRangeSlider } from './components';
-import { actionNames, IRangeSliderState } from './store';
+import { actionNames, IRangeSliderStoreState } from './store';
 import { makeValueLikeCallback, cb } from './core/utils';
 
 interface PluginApi {
@@ -67,7 +67,7 @@ function rangeSlider(
   prefix = makeValueLikeCallback(prefix);
   postfix = makeValueLikeCallback(postfix);
 
-  const userDefinedProps: IRangeSliderState = {
+  const userDefinedProps: IRangeSliderStoreState = {
     fixedValues: values.map(String),
     value: [from, to],
     min: min,

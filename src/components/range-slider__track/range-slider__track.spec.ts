@@ -1,7 +1,7 @@
 import { createStore, NaNValidator } from '@core';
 import {
   actionNames,
-  IRangeSliderState,
+  IRangeSliderStoreState,
   rangeSliderStoreReducer,
 } from '@store';
 import {
@@ -57,7 +57,7 @@ describe('TrackScale view', () => {
 });
 
 describe('RangeSliderTrack provider', () => {
-  const store = createStore<IRangeSliderState>(
+  const store = createStore<IRangeSliderStoreState>(
     {
       min: 0,
       max: 10,
@@ -81,7 +81,7 @@ describe('RangeSliderTrack provider', () => {
     rangeSliderTrack = new RangeSliderTrack(store);
   });
 
-  test('', () => {
+  test('track scale visibility', () => {
     expect(rangeSliderTrack.elements.scale.visible).toBeFalsy();
 
     store.dispatch({

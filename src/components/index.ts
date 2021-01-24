@@ -1,13 +1,13 @@
 import { createStore, NaNValidator, Store } from '@core';
-import { IRangeSliderState, rangeSliderStoreReducer } from '@store';
+import { IRangeSliderStoreState, rangeSliderStoreReducer } from '@store';
 
 import { RangeSlider } from './range-slider';
 
 function createRangeSlider(
   root: HTMLElement,
-  initStoreValue: IRangeSliderState,
-): Store<IRangeSliderState> {
-  const store = createStore<IRangeSliderState>(
+  initStoreValue: IRangeSliderStoreState,
+): Store<IRangeSliderStoreState> {
+  const store = createStore<IRangeSliderStoreState>(
     initStoreValue,
     rangeSliderStoreReducer,
     [NaNValidator],

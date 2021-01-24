@@ -1,6 +1,6 @@
 import { Provider, Store, View } from '@core';
-import { actionNames, IRangeSliderState } from '@store';
-import { makeValueLikeCallback } from 'core/utils';
+import { actionNames, IRangeSliderStoreState } from '@store';
+import { makeValueLikeCallback, memo } from 'core/utils';
 
 import styles from '../../exports.scss';
 
@@ -129,7 +129,7 @@ class TrackScaleItem extends View {
 }
 
 class RangeSliderTrack extends Provider<
-  IRangeSliderState,
+  IRangeSliderStoreState,
   {
     track: Track;
     scale: TrackScale;
@@ -137,7 +137,7 @@ class RangeSliderTrack extends Provider<
 > {
   cachedSliderValues: sliderValue[] = [];
 
-  init(store: Store<IRangeSliderState>): void {
+  init(store: Store<IRangeSliderStoreState>): void {
     this.elements.scale = new TrackScale();
     this.elements.track = new Track(this.elements.scale);
 
@@ -149,12 +149,13 @@ class RangeSliderTrack extends Provider<
     );
 
     store.subscribe(
-      ({ trackScaleVisibility }) =>
-        (this.elements.scale.visible = trackScaleVisibility),
+      memo(({ trackScaleVisibility }: IRangeSliderStoreState) => {
+        this.elements.scale.visible = trackScaleVisibility;
+      }),
     );
   }
 
-  render(state: IRangeSliderState): void {
+  render(state: IRangeSliderStoreState): void {
     const { min, max, step, fixedValues } = state;
 
     if (fixedValues.length > 0) {
@@ -181,7 +182,7 @@ class RangeSliderTrack extends Provider<
   }
 
   makeRangeSliderTrackClickHandler(
-    store: Store<IRangeSliderState>,
+    store: Store<IRangeSliderStoreState>,
   ): (Event: MouseEvent) => void {
     return (event: MouseEvent) => {
       const target = event?.target as HTMLElement;
@@ -221,8 +222,8 @@ class RangeSliderTrack extends Provider<
     from: number;
     to: number;
     step: number;
-    prefix: IRangeSliderState['prefix'];
-    postfix: IRangeSliderState['postfix'];
+    prefix: IRangeSliderStoreState['prefix'];
+    postfix: IRangeSliderStoreState['postfix'];
   }): sliderValue[] {
     const accuracy = (step.toString().split('.')[1] || '').length;
 

@@ -3,10 +3,19 @@ const makeValueLikeCallback = (value: string | cb): cb => {
   return typeof value === 'function' ? value : () => value;
 };
 
-const memo = (fn: Function, args: any[]) => {
-  return (...newArgs: any[]) => {
-    if (args.some(value => !newArgs.includes(value))) {
-      fn(newArgs);
+const memo = (fn: Function) => {
+  let prevArgs: any[] = [];
+  return (...nextArgs: any[]) => {
+    if (nextArgs.length) {
+      if (nextArgs.some(value => !prevArgs.includes(value))) {
+        prevArgs = nextArgs;
+        fn(...nextArgs);
+      }
+    } else {
+      if (prevArgs.length) {
+        prevArgs = nextArgs;
+        fn();
+      }
     }
   };
 };
