@@ -1,7 +1,5 @@
 import { Store } from '@core';
 import { View } from '@core';
-import { Listener } from './store';
-import { memo } from './utils';
 
 abstract class Provider<TStoreState, TElements> {
   readonly elements = {} as TElements;
@@ -21,18 +19,6 @@ abstract class Provider<TStoreState, TElements> {
       this._root ||
       new View({ attrs: {}, children: Object.values(this.elements) })
     );
-  }
-
-  useStore(
-    store: Store<TStoreState>,
-    destructor: (state: TStoreState) => any,
-    listener: Listener<any>,
-  ) {
-    const memoFn = memo(listener);
-    store.subscribe(state => {
-      const value = destructor(state);
-      memoFn(value);
-    });
   }
 
   abstract init(store: Store<TStoreState>): void;

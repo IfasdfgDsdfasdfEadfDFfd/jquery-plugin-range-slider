@@ -1,6 +1,6 @@
 import { Provider, Store, View } from '@core';
 import { actionNames, IRangeSliderStoreState } from '@store';
-import { makeValueLikeCallback } from 'core/utils';
+import { useMemo } from 'core/utils';
 
 import styles from '../../exports.scss';
 
@@ -148,47 +148,64 @@ class RangeSliderTrack extends Provider<
       this.makeRangeSliderTrackClickHandler(store),
     );
 
-    this.useStore(
-      store,
-      ({ trackScaleVisibility }) => trackScaleVisibility,
-      isVisible => {
-        this.elements.scale.visible = isVisible;
-      },
+    store.subscribe(
+      useMemo(
+        ({ trackScaleVisibility }) => trackScaleVisibility,
+        isVisible => {
+          this.elements.scale.visible = isVisible;
+        },
+      ),
     );
 
-    this.useStore(
-      store,
-      ({ primaryColor }) => primaryColor,
-      color => {
-        this.elements.scale.activeColor = color;
-      },
+    store.subscribe(
+      useMemo(
+        ({ primaryColor }) => primaryColor,
+        color => {
+          this.elements.scale.activeColor = color;
+        },
+      ),
+    );
+
+    store.subscribe(
+      useMemo(
+        ({ fixedValues }) => fixedValues,
+        fixedValues => {
+          this.cachedSliderValues = fixedValues.slice().map((value, index) => ({
+            index,
+            rawValue: index,
+            displayValue: value,
+          }));
+
+          this.elements.scale.update(this.cachedSliderValues);
+        },
+      ),
+    );
+
+    store.subscribe(
+      useMemo<IRangeSliderStoreState, any>(
+        ({ min, max, step, prefix, postfix }) => ({
+          from: min,
+          to: max,
+          step,
+          prefix,
+          postfix,
+        }),
+        ({ from, to, step, prefix, postfix }) => {
+          this.cachedSliderValues = this.getRange({
+            from,
+            to,
+            step,
+            prefix,
+            postfix,
+          });
+
+          this.elements.scale.update(this.cachedSliderValues);
+        },
+      ),
     );
   }
 
-  render(state: IRangeSliderStoreState): void {
-    const { min, max, step, fixedValues } = state;
-
-    if (fixedValues.length > 0) {
-      this.cachedSliderValues = fixedValues.slice().map((value, index) => ({
-        index,
-        rawValue: index,
-        displayValue: value,
-      }));
-    } else {
-      const prefix = makeValueLikeCallback(state.prefix);
-      const postfix = makeValueLikeCallback(state.postfix);
-
-      this.cachedSliderValues = this.getRange({
-        from: min,
-        to: max,
-        step,
-        prefix,
-        postfix,
-      });
-    }
-
-    this.elements.scale.update(this.cachedSliderValues);
-  }
+  render(_: IRangeSliderStoreState): void {}
 
   makeRangeSliderTrackClickHandler(
     store: Store<IRangeSliderStoreState>,

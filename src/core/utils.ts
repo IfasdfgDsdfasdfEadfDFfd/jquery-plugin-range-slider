@@ -20,4 +20,15 @@ const memo = (fn: Function) => {
   };
 };
 
-export { makeValueLikeCallback, memo, cb };
+function useMemo<TValue, TResult>(
+  destructor: (value: TValue) => TResult,
+  callback: (value: TResult) => void,
+) {
+  const memoFn = memo(callback);
+  return (value: TValue) => {
+    const result = destructor(value);
+    memoFn(result);
+  };
+}
+
+export { makeValueLikeCallback, memo, useMemo, cb };

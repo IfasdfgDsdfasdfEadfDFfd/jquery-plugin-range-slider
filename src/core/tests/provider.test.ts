@@ -6,32 +6,6 @@ describe('test provider', () => {
     STORE = createStore<string>('', action => action.value);
   });
 
-  test('call listener if value updated', () => {
-    const onStoreUpdate = jest.fn();
-
-    class SomeProvider extends Provider<string, unknown> {
-      init() {
-        this.useStore(STORE, x => x, onStoreUpdate);
-      }
-      render() {}
-    }
-
-    new SomeProvider(STORE);
-
-    expect(onStoreUpdate.mock.calls.length).toEqual(1);
-
-    const updateAction = {
-      name: 'update',
-      value: 'update',
-    };
-
-    STORE.dispatch(updateAction);
-    expect(onStoreUpdate.mock.calls.length).toEqual(2);
-
-    STORE.dispatch(updateAction);
-    expect(onStoreUpdate.mock.calls.length).toEqual(2);
-  });
-
   test('call render every time store updated', () => {
     const renderHandler = jest.fn();
     const initHandler = jest.fn();
