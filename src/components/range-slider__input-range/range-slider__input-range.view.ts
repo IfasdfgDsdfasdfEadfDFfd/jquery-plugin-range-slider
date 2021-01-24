@@ -79,7 +79,7 @@ abstract class RangeSliderInputRange extends Provider<
     this.elements.input.intervalMode = state.intervalMode;
 
     this.elements.thumb.primaryColor = state.primaryColor;
-    this.elements.thumb.marker.visible = !state.markerVisibility;
+    this.elements.thumb.marker.visible = state.markerVisibility;
   }
 
   abstract makeAction(value: number): Action;
@@ -93,7 +93,7 @@ class LeftRangeSliderInputRange extends RangeSliderInputRange {
       this.elements.input.value = state.min;
     }
 
-    this.elements.thumb.visible = !state.intervalMode;
+    this.elements.thumb.visible = state.intervalMode;
 
     this.elements.input.value = state.value[0];
 

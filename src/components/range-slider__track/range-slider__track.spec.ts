@@ -1,10 +1,14 @@
+import { createStore, NaNValidator } from '@core';
+import {
+  actionNames,
+  IRangeSliderState,
+  rangeSliderStoreReducer,
+} from '@store';
 import {
   RangeSliderTrack,
   TrackScale,
   TrackScaleItem,
 } from './range-slider__track.view';
-import { createStore, NaNValidator } from '@core';
-import { IRangeSliderState, rangeSliderStoreReducer } from '@store';
 
 describe('TrackScaleItem view', () => {
   let trackScaleItem: TrackScaleItem;
@@ -62,9 +66,9 @@ describe('RangeSliderTrack provider', () => {
       prefix: () => '',
       postfix: () => '',
       vertical: false,
-      intervalMode: true,
-      markerVisibility: true,
-      trackScaleVisibility: true,
+      intervalMode: false,
+      markerVisibility: false,
+      trackScaleVisibility: false,
       primaryColor: '#fff',
       fixedValues: [],
     },
@@ -75,6 +79,17 @@ describe('RangeSliderTrack provider', () => {
 
   beforeEach(() => {
     rangeSliderTrack = new RangeSliderTrack(store);
+  });
+
+  test('', () => {
+    expect(rangeSliderTrack.elements.scale.visible).toBeFalsy();
+
+    store.dispatch({
+      name: actionNames.CHANGE_TRACK_SCALE_VISIBILITY,
+      value: true,
+    });
+
+    expect(rangeSliderTrack.elements.scale.isVisible).toBeTruthy();
   });
 
   test('getDelimiter()', () => {

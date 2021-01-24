@@ -156,14 +156,14 @@ describe('test view', () => {
 
     view.visible = false;
     expect(view.nativeElement.classList.contains(view.hidingClassName)).toBe(
-      false,
+      true,
     );
     expect(viewHandlerVisibleChange).toHaveBeenCalled();
     expect(view.isVisible).toBe(false);
 
     view.visible = true;
     expect(view.nativeElement.classList.contains(view.hidingClassName)).toBe(
-      true,
+      false,
     );
     expect(viewHandlerVisibleChange).toHaveBeenCalledTimes(2);
     expect(view.isVisible).toBe(true);

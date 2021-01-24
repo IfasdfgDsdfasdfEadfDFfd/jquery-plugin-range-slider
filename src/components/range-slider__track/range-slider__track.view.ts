@@ -147,6 +147,11 @@ class RangeSliderTrack extends Provider<
       'click',
       this.makeRangeSliderTrackClickHandler(store),
     );
+
+    store.subscribe(
+      ({ trackScaleVisibility }) =>
+        (this.elements.scale.visible = trackScaleVisibility),
+    );
   }
 
   render(state: IRangeSliderState): void {
@@ -172,7 +177,6 @@ class RangeSliderTrack extends Provider<
     }
 
     this.elements.scale.update(this.cachedSliderValues);
-    this.elements.scale.visible = !state.trackScaleVisibility;
     this.elements.scale.activeColor = state.primaryColor;
   }
 

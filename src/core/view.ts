@@ -89,7 +89,7 @@ class View {
 
   set visible(value: boolean) {
     if (this.hidingClassName)
-      this.nativeElement.classList.toggle(this.hidingClassName, value);
+      this.nativeElement.classList.toggle(this.hidingClassName, !value);
     this.isVisible = value;
     this.handleVisibilityChange();
   }

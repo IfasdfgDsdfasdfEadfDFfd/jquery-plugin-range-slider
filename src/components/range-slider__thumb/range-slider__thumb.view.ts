@@ -41,11 +41,11 @@ class Thumb extends View {
     const sliderWidth = <number>this.nativeElement.parentElement?.clientWidth;
 
     const offset = this.getOffset({
+      min,
+      max,
+      value,
       selfWidth: thumbWidth,
       parentWidth: sliderWidth,
-      value,
-      max,
-      min,
     });
 
     this.nativeElement.style.setProperty('left', `${offset}%`);
