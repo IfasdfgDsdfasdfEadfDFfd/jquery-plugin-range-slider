@@ -1,4 +1,4 @@
-# JQuery plugin Range Slider
+# jQuery plugin Range Slider
 
 **[Example](https://patchwork-body.github.io/jquery-plugin-range-slider)**
 
