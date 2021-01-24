@@ -3,4 +3,12 @@ const makeValueLikeCallback = (value: string | cb): cb => {
   return typeof value === 'function' ? value : () => value;
 };
 
-export { makeValueLikeCallback, cb };
+const memo = (fn: Function, args: any[]) => {
+  return (...newArgs: any[]) => {
+    if (args.some(value => !newArgs.includes(value))) {
+      fn(newArgs);
+    }
+  };
+};
+
+export { makeValueLikeCallback, memo, cb };

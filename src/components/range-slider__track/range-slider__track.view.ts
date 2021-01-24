@@ -1,6 +1,6 @@
 import { Provider, Store, View } from '@core';
-import { makeValueLikeCallback } from 'core/utils';
 import { actionNames, IRangeSliderState } from '@store';
+import { makeValueLikeCallback } from 'core/utils';
 
 import styles from '../../exports.scss';
 
