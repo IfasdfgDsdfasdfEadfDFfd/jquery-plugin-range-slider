@@ -1,13 +1,15 @@
 import { Store } from '@core';
 import { View } from '@core';
+import { Listener } from './store';
+import { memo } from './utils';
 
-abstract class Provider<TStore, TElements> {
+abstract class Provider<TStoreState, TElements> {
   readonly elements = {} as TElements;
   private _root: View | undefined;
 
-  constructor(store: Store<TStore>) {
+  constructor(store: Store<TStoreState>) {
     this.init(store);
-    store.subscribe((state: TStore) => this.render(state));
+    store.subscribe((state: TStoreState) => this.render(state));
   }
 
   set root(view: View) {
@@ -21,8 +23,12 @@ abstract class Provider<TStore, TElements> {
     );
   }
 
-  abstract init(store: Store<TStore>): void;
-  abstract render(state: TStore): void;
+  useStore(store: Store<TStoreState>, listener: Listener<TStoreState>) {
+    store.subscribe(memo(listener));
+  }
+
+  abstract init(store: Store<TStoreState>): void;
+  abstract render(state: TStoreState): void;
 }
 
 export { Provider };
