@@ -1,1 +1,3 @@
 *.scss.d.ts
+tsconfig.json
+tsconfig.test.json

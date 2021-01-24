@@ -33,34 +33,41 @@ class TrackScale extends View {
       const min = 0;
       const ratio = (index - min) / (max - min);
 
-      return this.createItem(
-        displayValue,
-        percent,
+      return this.createItem({
         ratio,
-        Math.round(this.nativeElement.clientWidth / values.length),
-      );
+        value: displayValue,
+        offsetInPercentages: percent,
+        maxWidthInPixels: Math.round(
+          this.nativeElement.clientWidth / values.length,
+        ),
+      });
     });
 
     this.replaceChildren(items);
   }
 
-  createItem(
-    value: string,
-    percentOffset: number,
-    ratio: number,
-    maxWidth: number,
-  ): TrackScaleItem {
+  createItem({
+    value,
+    ratio,
+    maxWidthInPixels,
+    offsetInPercentages,
+  }: {
+    value: string;
+    ratio: number;
+    maxWidthInPixels: number;
+    offsetInPercentages: number;
+  }): TrackScaleItem {
     const item = new TrackScaleItem(value);
     const itemWidth = Math.min(
       value.length * (parseInt(styles.rootFontSize) * 0.5),
-      maxWidth,
+      maxWidthInPixels,
     );
     const thumbWidth =
       parseFloat(styles.thumbWidth) * parseInt(styles.rootFontSize) -
       parseInt(styles.thumbBorderWidth);
 
     item.nativeElement.style.setProperty('width', `${itemWidth}px`);
-    item.nativeElement.style.setProperty('left', `${percentOffset}%`);
+    item.nativeElement.style.setProperty('left', `${offsetInPercentages}%`);
     item.nativeElement.style.setProperty(
       'margin-left',
       `${-(itemWidth / 2 - thumbWidth / 2 + thumbWidth * ratio)}px`,
@@ -128,7 +135,7 @@ class RangeSliderTrack extends Provider<
     scale: TrackScale;
   }
 > {
-  lastSliderValues: sliderValue[] = [];
+  cachedSliderValues: sliderValue[] = [];
 
   init(store: Store<IRangeSliderState>): void {
     this.elements.scale = new TrackScale();
@@ -146,7 +153,7 @@ class RangeSliderTrack extends Provider<
     const { min, max, step, fixedValues } = state;
 
     if (fixedValues.length > 0) {
-      this.lastSliderValues = fixedValues.slice().map((value, index) => ({
+      this.cachedSliderValues = fixedValues.slice().map((value, index) => ({
         index,
         rawValue: index,
         displayValue: value,
@@ -154,7 +161,8 @@ class RangeSliderTrack extends Provider<
     } else {
       const prefix = makeValueLikeCallback(state.prefix);
       const postfix = makeValueLikeCallback(state.postfix);
-      this.lastSliderValues = this.getRange({
+
+      this.cachedSliderValues = this.getRange({
         from: min,
         to: max,
         step,
@@ -163,7 +171,7 @@ class RangeSliderTrack extends Provider<
       });
     }
 
-    this.elements.scale.update(this.lastSliderValues);
+    this.elements.scale.update(this.cachedSliderValues);
     this.elements.scale.visible = !state.trackScaleVisibility;
     this.elements.scale.activeColor = state.primaryColor;
   }
@@ -176,8 +184,8 @@ class RangeSliderTrack extends Provider<
       const text = target.textContent || '';
       const { value, intervalMode } = store.getState();
 
-      let nextValue = this.lastSliderValues[0].rawValue;
-      for (const sliderValue of this.lastSliderValues) {
+      let nextValue = this.cachedSliderValues[0].rawValue;
+      for (const sliderValue of this.cachedSliderValues) {
         if (sliderValue.displayValue === text) {
           nextValue = sliderValue.rawValue;
           break;
