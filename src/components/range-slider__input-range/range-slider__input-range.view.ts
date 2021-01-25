@@ -50,7 +50,7 @@ class RangeSliderInput extends Provider<
     thumb: Thumb;
   }
 > {
-  storeActionName: string = '';
+  storeActionName = '';
 
   init(store: Store<IRangeSliderStoreState>): void {
     this.elements.input = new InputRange();
