@@ -6,7 +6,6 @@ const makeValueLikeCallback = (value: string | cb): cb => {
 const memo = (fn: Function) => {
   let prevArgs: any[] = [];
   return (...nextArgs: any[]) => {
-    // console.log(nextArgs, prevArgs, deepEqual(nextArgs, prevArgs));
     if (!deepEqual(nextArgs, prevArgs)) {
       prevArgs = nextArgs;
       fn(...nextArgs);
