@@ -1,3 +1,5 @@
+import { isArray } from 'jquery';
+
 type cb = (value: number) => string;
 const makeValueLikeCallback = (value: string | cb): cb => {
   return typeof value === 'function' ? value : () => value;
@@ -31,4 +33,16 @@ function useMemo<TValue, TResult>(
   };
 }
 
-export { makeValueLikeCallback, memo, useMemo, cb };
+const deepEqual = (elm1: any, elm2: any): boolean => {
+  if (typeof elm1 !== typeof elm2) return false;
+
+  if (['boolean', 'string', 'number'].includes(typeof elm1)) {
+    return elm1 === elm2;
+  }
+
+  if (Array.isArray(elm1)) {
+    return elm1.every((val, index) => deepEqual(val, elm2[index]));
+  }
+};
+
+export { makeValueLikeCallback, memo, useMemo, deepEqual, cb };

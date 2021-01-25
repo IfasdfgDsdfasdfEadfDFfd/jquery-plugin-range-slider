@@ -183,23 +183,26 @@ class RangeSliderTrack extends Provider<
 
     store.subscribe(
       useMemo<IRangeSliderStoreState, any>(
-        ({ min, max, step, prefix, postfix }) => ({
+        ({ min, max, step, prefix, postfix, fixedValues }) => ({
           from: min,
           to: max,
           step,
           prefix,
           postfix,
+          fixedValues,
         }),
-        ({ from, to, step, prefix, postfix }) => {
-          this.cachedSliderValues = this.getRange({
-            from,
-            to,
-            step,
-            prefix,
-            postfix,
-          });
+        ({ from, to, step, prefix, postfix, fixedValues }) => {
+          if (!fixedValues.length) {
+            this.cachedSliderValues = this.getRange({
+              from,
+              to,
+              step,
+              prefix,
+              postfix,
+            });
 
-          this.elements.scale.update(this.cachedSliderValues);
+            this.elements.scale.update(this.cachedSliderValues);
+          }
         },
       ),
     );
