@@ -30,49 +30,46 @@ class Thumb extends View {
     this.marker = this.children[0] as ThumbMarker;
   }
 
-  positioning(params: IThumbPositionParams): void {
-    this.cachedValues = params;
+  get selfWidth(): number {
+    return <number>this.nativeElement.clientWidth + parseInt(styles.thumbWidth);
+  }
 
-    const { min, max, value, prefix, postfix, displayValue, vertical } = params;
+  get parentWidth(): number {
+    return <number>this.nativeElement.parentElement?.clientWidth;
+  }
 
-    const thumbWidth =
-      <number>this.nativeElement.clientWidth + parseInt(styles.thumbWidth);
-    const sliderWidth = <number>this.nativeElement.parentElement?.clientWidth;
+  setPrimaryColor(value: string) {
+    this.nativeElement.style.setProperty('background-color', value);
+    this.marker.nativeElement.style.setProperty('background-color', value);
+    this.lastColor = value;
+  }
 
-    const offset = this.getOffset({
-      min,
-      max,
-      value,
-      selfWidth: thumbWidth,
-      parentWidth: sliderWidth,
-    });
+  setMarkerText(value: string | number, prefix?: string, postfix?: string) {
+    this.marker.value = `${prefix}${value}${postfix}`;
+  }
 
-    this.nativeElement.style.setProperty('left', `${offset}%`);
-
-    this.marker.value = `${prefix}${displayValue}${postfix}`;
-    if (vertical) {
+  setMarkerPosition(isVertical: boolean) {
+    if (isVertical) {
       this.marker.setVerticalMargin();
     } else {
       this.marker.resetMargin();
     }
   }
 
-  set primaryColor(value: string) {
-    this.nativeElement.style.setProperty('background-color', value);
-    this.marker.nativeElement.style.setProperty('background-color', value);
-    this.lastColor = value;
-  }
+  positioning(params: IThumbPositionParams): void {
+    this.cachedValues = params;
 
-  positionCorrection(): void {
-    this.positioning(this.cachedValues);
-  }
+    const { min, max, value, prefix, postfix, displayValue, vertical } = params;
 
-  handleFocusChange(): void {
-    this.colorReset();
-  }
+    const offset = this.calcOffset({
+      min,
+      max,
+      value,
+    });
+    this.nativeElement.style.setProperty('left', `${offset}%`);
 
-  handleHoverChange(): void {
-    this.colorReset();
+    this.setMarkerText(displayValue, prefix, postfix);
+    this.setMarkerPosition(vertical);
   }
 
   colorReset(): void {
@@ -97,20 +94,24 @@ class Thumb extends View {
     }
   }
 
-  getOffset({
-    selfWidth,
-    parentWidth,
-    value,
-    max,
-    min,
-  }: {
-    [key: string]: number;
-  }): number {
+  calcOffset({ value, max, min }: { [key: string]: number }): number {
     const ratio = (value - min) / (max - min);
     const offsetPercent = 100 * ratio;
-    const selfPercent = (selfWidth / parentWidth) * 100 * ratio;
+    const selfPercent = (this.selfWidth / this.parentWidth) * 100 * ratio;
 
     return offsetPercent - selfPercent;
+  }
+
+  positionCorrection(): void {
+    this.positioning(this.cachedValues);
+  }
+
+  handleFocusChange(): void {
+    this.colorReset();
+  }
+
+  handleHoverChange(): void {
+    this.colorReset();
   }
 }
 

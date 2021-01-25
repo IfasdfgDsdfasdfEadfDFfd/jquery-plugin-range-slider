@@ -4,11 +4,15 @@ import {
   IRangeSliderStoreState,
   rangeSliderStoreReducer,
 } from '@store';
-import { RangeSliderInput } from './range-slider__input-range.view';
+import {
+  RangeSliderInput,
+  RangeSliderLeftInput,
+  // RangeSliderRightInput,
+} from './range-slider__input-range.view';
 
 describe('RangeSliderInput provider', () => {
   let store: Store<IRangeSliderStoreState>;
-  let rangeSliderTrack: RangeSliderInput;
+  let rangeSliderInput: RangeSliderInput;
 
   beforeEach(() => {
     store = createStore<IRangeSliderStoreState>(
@@ -29,13 +33,13 @@ describe('RangeSliderInput provider', () => {
       rangeSliderStoreReducer,
       [NaNValidator],
     );
-    rangeSliderTrack = new RangeSliderInput(store);
+    rangeSliderInput = new RangeSliderInput(store);
   });
 
   test('min value changing', () => {
     const defaultMin = store.getState().min;
     expect(
-      rangeSliderTrack.elements.input.nativeElement.getAttribute('min'),
+      rangeSliderInput.elements.input.nativeElement.getAttribute('min'),
     ).toEqual(defaultMin.toString());
 
     const nextMin = 10;
@@ -45,14 +49,14 @@ describe('RangeSliderInput provider', () => {
     });
 
     expect(
-      rangeSliderTrack.elements.input.nativeElement.getAttribute('min'),
+      rangeSliderInput.elements.input.nativeElement.getAttribute('min'),
     ).toEqual(nextMin.toString());
   });
 
   test('max value changing', () => {
     const defaultMax = store.getState().max;
     expect(
-      rangeSliderTrack.elements.input.nativeElement.getAttribute('max'),
+      rangeSliderInput.elements.input.nativeElement.getAttribute('max'),
     ).toEqual(defaultMax.toString());
 
     const nextMax = 100;
@@ -62,14 +66,14 @@ describe('RangeSliderInput provider', () => {
     });
 
     expect(
-      rangeSliderTrack.elements.input.nativeElement.getAttribute('max'),
+      rangeSliderInput.elements.input.nativeElement.getAttribute('max'),
     ).toEqual(nextMax.toString());
   });
 
   test('step value changing', () => {
     const defaultStep = store.getState().step;
     expect(
-      rangeSliderTrack.elements.input.nativeElement.getAttribute('step'),
+      rangeSliderInput.elements.input.nativeElement.getAttribute('step'),
     ).toEqual(defaultStep.toString());
 
     const nextStep = 5;
@@ -79,13 +83,13 @@ describe('RangeSliderInput provider', () => {
     });
 
     expect(
-      rangeSliderTrack.elements.input.nativeElement.getAttribute('step'),
+      rangeSliderInput.elements.input.nativeElement.getAttribute('step'),
     ).toEqual(nextStep.toString());
   });
 
   test('intervalMode value changing', () => {
     expect(
-      rangeSliderTrack.elements.input.nativeElement.classList.contains(
+      rangeSliderInput.elements.input.nativeElement.classList.contains(
         'range-slider__input--interval',
       ),
     ).toBeFalsy();
@@ -96,7 +100,7 @@ describe('RangeSliderInput provider', () => {
     });
 
     expect(
-      rangeSliderTrack.elements.input.nativeElement.classList.contains(
+      rangeSliderInput.elements.input.nativeElement.classList.contains(
         'range-slider__input--interval',
       ),
     ).toBeTruthy();
@@ -105,12 +109,12 @@ describe('RangeSliderInput provider', () => {
   test('primaryColor value changing', () => {
     const defaultColor = store.getState().primaryColor;
     expect(
-      rangeSliderTrack.elements.thumb.nativeElement.style.getPropertyValue(
+      rangeSliderInput.elements.thumb.nativeElement.style.getPropertyValue(
         'background-color',
       ),
     ).toEqual(defaultColor);
     expect(
-      rangeSliderTrack.elements.thumb.marker.nativeElement.style.getPropertyValue(
+      rangeSliderInput.elements.thumb.marker.nativeElement.style.getPropertyValue(
         'background-color',
       ),
     ).toEqual(defaultColor);
@@ -122,27 +126,74 @@ describe('RangeSliderInput provider', () => {
     });
 
     expect(
-      rangeSliderTrack.elements.thumb.nativeElement.style.getPropertyValue(
+      rangeSliderInput.elements.thumb.nativeElement.style.getPropertyValue(
         'background-color',
       ),
     ).toEqual(nextColor);
     expect(
-      rangeSliderTrack.elements.thumb.marker.nativeElement.style.getPropertyValue(
+      rangeSliderInput.elements.thumb.marker.nativeElement.style.getPropertyValue(
         'background-color',
       ),
     ).toEqual(nextColor);
   });
 
   test('markerVisibility value changing', () => {
-    expect(rangeSliderTrack.elements.thumb.marker.isVisible).toBeFalsy();
+    expect(rangeSliderInput.elements.thumb.marker.isVisible).toBeFalsy();
     store.dispatch({
       name: actionNames.CHANGE_MARKER_VISIBILITY,
       value: true,
     });
-    expect(rangeSliderTrack.elements.thumb.marker.isVisible).toBeTruthy();
+    expect(rangeSliderInput.elements.thumb.marker.isVisible).toBeTruthy();
   });
 });
 
 describe('RangeSliderLeftInput provider', () => {
-  test('', () => {});
+  let store: Store<IRangeSliderStoreState>;
+  let rangeSliderLeftInput: RangeSliderLeftInput;
+
+  beforeEach(() => {
+    store = createStore<IRangeSliderStoreState>(
+      {
+        min: 0,
+        max: 10,
+        step: 1,
+        value: [3, 10],
+        prefix: () => '',
+        postfix: () => '',
+        vertical: false,
+        intervalMode: false,
+        markerVisibility: false,
+        trackScaleVisibility: false,
+        primaryColor: 'rgb(255, 255, 255)',
+        fixedValues: [],
+      },
+      rangeSliderStoreReducer,
+      [NaNValidator],
+    );
+    rangeSliderLeftInput = new RangeSliderLeftInput(store);
+  });
+
+  test('thumb visibility changing', () => {
+    expect(rangeSliderLeftInput.elements.thumb.isVisible).toBeFalsy();
+
+    store.dispatch({
+      name: actionNames.CHANGE_INTERVAL_MODE,
+      value: true,
+    });
+
+    expect(rangeSliderLeftInput.elements.thumb.isVisible).toBeTruthy();
+  });
+
+  test('input value changing', () => {
+    const initValue = store.getState().value[0];
+    expect(rangeSliderLeftInput.elements.input.value).toEqual(initValue);
+
+    const nextValue = initValue + 5;
+    store.dispatch({
+      name: actionNames.CHANGE_LEFT_VALUE,
+      value: nextValue,
+    });
+
+    expect(rangeSliderLeftInput.elements.input.value).toEqual(nextValue);
+  });
 });

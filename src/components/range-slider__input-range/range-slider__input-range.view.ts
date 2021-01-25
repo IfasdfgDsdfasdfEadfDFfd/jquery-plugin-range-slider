@@ -58,6 +58,7 @@ class RangeSliderInput extends Provider<
 
     this.elements.input.handleInputRangeChange(event => {
       const target = event.target as HTMLInputElement;
+
       store.dispatch({
         name: this.storeActionName,
         value: Number(target.value),
@@ -107,15 +108,15 @@ class RangeSliderInput extends Provider<
 
     store.subscribe(
       useMemo(
-        ({ primaryColor }) => primaryColor,
-        color => (this.elements.thumb.primaryColor = color),
+        ({ markerVisibility }) => markerVisibility,
+        value => (this.elements.thumb.marker.visible = value),
       ),
     );
 
     store.subscribe(
       useMemo(
-        ({ markerVisibility }) => markerVisibility,
-        value => (this.elements.thumb.marker.visible = value),
+        ({ primaryColor }) => primaryColor,
+        color => this.elements.thumb.setPrimaryColor(color),
       ),
     );
   }
@@ -128,23 +129,29 @@ class RangeSliderLeftInput extends RangeSliderInput {
 
   init(store: Store<IRangeSliderStoreState>): void {
     super.init(store);
+
+    store.subscribe(
+      useMemo(
+        ({ intervalMode }) => intervalMode,
+        value => (this.elements.thumb.visible = value),
+      ),
+    );
+
+    store.subscribe(
+      useMemo(
+        ({ value }) => value[0],
+        value => (this.elements.input.value = value),
+      ),
+    );
   }
 
   render(state: IRangeSliderStoreState): void {
     super.render(state);
 
-    if (!state.intervalMode) {
-      this.elements.input.value = state.min;
-    }
-
-    this.elements.thumb.visible = state.intervalMode;
-
-    this.elements.input.value = state.value[0];
-
     const { max, min, value, prefix, postfix, fixedValues, vertical } = state;
 
     const displayValue =
-      fixedValues.length > 1 ? fixedValues[value[0]] : value[0];
+      fixedValues.length > 0 ? fixedValues[value[0]] : value[0];
 
     this.elements.thumb.positioning({
       max,
