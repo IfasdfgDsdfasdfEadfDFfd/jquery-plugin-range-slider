@@ -57,5 +57,54 @@ describe('utils module', () => {
       expect(deepEqual(false, true)).toBeFalsy();
       expect(deepEqual(true, false)).toBeFalsy();
     });
+
+    test('array equality', () => {
+      expect(deepEqual([], [])).toBeTruthy();
+      expect(deepEqual([], [1, 2, 3])).toBeFalsy();
+      expect(deepEqual([1, 2, 3], [1, 2, 3])).toBeTruthy();
+      expect(deepEqual([true, false], [true, false])).toBeTruthy();
+      expect(deepEqual(['string'], ['string'])).toBeTruthy();
+      expect(deepEqual([true, false, 'string'], [1, 2, 3])).toBeFalsy();
+    });
+
+    test('null equality', () => {
+      expect(deepEqual(null, null)).toBeTruthy();
+      expect(deepEqual(null, 'string')).toBeFalsy();
+      expect(deepEqual(null, {})).toBeFalsy();
+    });
+
+    test('undefined values', () => {
+      expect(deepEqual(undefined, undefined)).toBeTruthy();
+      expect(deepEqual(undefined, null)).toBeFalsy();
+      expect(deepEqual(undefined, 'undefined')).toBeFalsy();
+    });
+
+    test('object equality', () => {
+      expect(deepEqual({}, {})).toBeTruthy();
+      expect(deepEqual({}, { a: 'string' })).toBeFalsy();
+      expect(deepEqual({ a: 'string' }, {})).toBeFalsy();
+
+      expect(deepEqual({ a: 1 }, { a: 1 })).toBeTruthy();
+      expect(deepEqual({ a: 1 }, { b: 1 })).toBeFalsy();
+
+      expect(
+        deepEqual({ a: [true, false] }, { a: [true, false] }),
+      ).toBeTruthy();
+      expect(deepEqual({ a: [false, true] }, { a: [true, false] })).toBeFalsy();
+
+      expect(
+        deepEqual(
+          { a: [{ a: true }, 'string', 123] },
+          { a: [{ a: true }, 'string', 123] },
+        ),
+      ).toBeTruthy();
+
+      expect(
+        deepEqual(
+          { a: [{ a: true }, 'string', 123] },
+          { a: [{ a: false }, 'another string', 321] },
+        ),
+      ).toBeFalsy();
+    });
   });
 });
