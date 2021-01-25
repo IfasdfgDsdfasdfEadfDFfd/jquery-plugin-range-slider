@@ -8,7 +8,8 @@ module.exports = {
     '^.+\\.(scss)$': 'identity-obj-proxy',
     '@core': '<rootDir>/src/core',
     'core/utils': '<rootDir>/src/core/utils',
-    '@component': '<rootDir>/src/component',
+    '@components': '<rootDir>/src/components',
+    'components/(.*)': '<rootDir>/src/components/$1',
     '@store': '<rootDir>/src/store',
   },
 };

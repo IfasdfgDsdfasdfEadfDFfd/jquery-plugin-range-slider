@@ -58,11 +58,9 @@ class Thumb extends View {
   }
 
   set primaryColor(value: string) {
-    if (value !== this.lastColor) {
-      this.nativeElement.style.setProperty('background-color', value);
-      this.marker.nativeElement.style.setProperty('background-color', value);
-      this.lastColor = value;
-    }
+    this.nativeElement.style.setProperty('background-color', value);
+    this.marker.nativeElement.style.setProperty('background-color', value);
+    this.lastColor = value;
   }
 
   positionCorrection(): void {

@@ -83,20 +83,52 @@ class RangeSliderInput extends Provider<
         min => (this.elements.input.min = min),
       ),
     );
+
+    store.subscribe(
+      useMemo(
+        ({ max }) => max,
+        max => (this.elements.input.max = max),
+      ),
+    );
+
+    store.subscribe(
+      useMemo(
+        ({ step }) => step,
+        step => (this.elements.input.step = step),
+      ),
+    );
+
+    store.subscribe(
+      useMemo(
+        ({ intervalMode }) => intervalMode,
+        value => (this.elements.input.intervalMode = value),
+      ),
+    );
+
+    store.subscribe(
+      useMemo(
+        ({ primaryColor }) => primaryColor,
+        color => (this.elements.thumb.primaryColor = color),
+      ),
+    );
+
+    store.subscribe(
+      useMemo(
+        ({ markerVisibility }) => markerVisibility,
+        value => (this.elements.thumb.marker.visible = value),
+      ),
+    );
   }
 
-  render(state: IRangeSliderStoreState): void {
-    this.elements.input.max = state.max;
-    this.elements.input.step = state.step;
-    this.elements.input.intervalMode = state.intervalMode;
-
-    this.elements.thumb.primaryColor = state.primaryColor;
-    this.elements.thumb.marker.visible = state.markerVisibility;
-  }
+  render(_: IRangeSliderStoreState): void {}
 }
 
 class RangeSliderLeftInput extends RangeSliderInput {
   storeActionName: string = actionNames.CHANGE_LEFT_VALUE;
+
+  init(store: Store<IRangeSliderStoreState>): void {
+    super.init(store);
+  }
 
   render(state: IRangeSliderStoreState): void {
     super.render(state);
