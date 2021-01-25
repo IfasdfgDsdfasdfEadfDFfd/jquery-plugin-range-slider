@@ -1,8 +1,8 @@
 import { Provider, Store, View } from '@core';
 import { IRangeSliderStoreState } from '@store';
 import {
-  LeftRangeSliderInputRange,
-  RightRangeSliderInputRange,
+  RangeSliderLeftInput,
+  RangeSliderRightInput,
 } from 'components/range-slider__input-range';
 import { RangeSliderProgress } from 'components/range-slider__progress';
 import { RangeSliderTrack } from 'components/range-slider__track';
@@ -14,8 +14,8 @@ class RangeSliderElement extends View {
     track,
     progress,
   }: {
-    leftInput: LeftRangeSliderInputRange;
-    rightInput: RightRangeSliderInputRange;
+    leftInput: RangeSliderLeftInput;
+    rightInput: RangeSliderRightInput;
     track: RangeSliderTrack;
     progress: RangeSliderProgress;
   }) {
@@ -41,15 +41,15 @@ class RangeSlider extends Provider<
   IRangeSliderStoreState,
   {
     slider: RangeSliderElement;
-    leftInput: LeftRangeSliderInputRange;
-    rightInput: RightRangeSliderInputRange;
+    leftInput: RangeSliderLeftInput;
+    rightInput: RangeSliderRightInput;
     track: RangeSliderTrack;
     progress: RangeSliderProgress;
   }
 > {
   init(store: Store<IRangeSliderStoreState>): void {
-    this.elements.leftInput = new LeftRangeSliderInputRange(store);
-    this.elements.rightInput = new RightRangeSliderInputRange(store);
+    this.elements.leftInput = new RangeSliderLeftInput(store);
+    this.elements.rightInput = new RangeSliderRightInput(store);
     this.elements.track = new RangeSliderTrack(store);
     this.elements.progress = new RangeSliderProgress(store);
 

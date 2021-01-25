@@ -1,6 +1,7 @@
 import { View, Action, EventCallback, Provider, Store } from '@core';
 import { IRangeSliderStoreState, actionNames } from '@store';
 import { Thumb } from 'components/range-slider__thumb';
+import { useMemo } from 'core/utils';
 
 class InputRange extends View {
   constructor() {
@@ -42,7 +43,7 @@ class InputRange extends View {
   }
 }
 
-abstract class RangeSliderInputRange extends Provider<
+abstract class AbstractRangeSliderInput extends Provider<
   IRangeSliderStoreState,
   {
     input: InputRange;
@@ -70,10 +71,16 @@ abstract class RangeSliderInputRange extends Provider<
     this.elements.input.handleViewMouseOut(
       () => (this.elements.thumb.hovered = false),
     );
+
+    store.subscribe(
+      useMemo(
+        ({ min }) => min,
+        min => (this.elements.input.min = min),
+      ),
+    );
   }
 
   render(state: IRangeSliderStoreState): void {
-    this.elements.input.min = state.min;
     this.elements.input.max = state.max;
     this.elements.input.step = state.step;
     this.elements.input.intervalMode = state.intervalMode;
@@ -85,7 +92,7 @@ abstract class RangeSliderInputRange extends Provider<
   abstract makeAction(value: number): Action;
 }
 
-class LeftRangeSliderInputRange extends RangeSliderInputRange {
+class RangeSliderLeftInput extends AbstractRangeSliderInput {
   render(state: IRangeSliderStoreState): void {
     super.render(state);
 
@@ -121,7 +128,7 @@ class LeftRangeSliderInputRange extends RangeSliderInputRange {
   }
 }
 
-class RightRangeSliderInputRange extends RangeSliderInputRange {
+class RangeSliderRightInput extends AbstractRangeSliderInput {
   render(state: IRangeSliderStoreState): void {
     super.render(state);
     this.elements.input.value = state.value[1];
@@ -150,4 +157,9 @@ class RightRangeSliderInputRange extends RangeSliderInputRange {
   }
 }
 
-export { InputRange, LeftRangeSliderInputRange, RightRangeSliderInputRange };
+export {
+  InputRange,
+  AbstractRangeSliderInput,
+  RangeSliderLeftInput,
+  RangeSliderRightInput,
+};

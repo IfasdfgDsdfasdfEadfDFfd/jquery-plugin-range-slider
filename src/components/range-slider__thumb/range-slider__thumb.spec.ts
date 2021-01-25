@@ -1,0 +1,3 @@
+describe('Thumb view', () => {
+  test('', () => {});
+});

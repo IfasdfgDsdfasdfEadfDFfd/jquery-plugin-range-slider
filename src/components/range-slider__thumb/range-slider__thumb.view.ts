@@ -20,7 +20,6 @@ class Thumb extends View {
   marker!: ThumbMarker;
   cachedValues!: IThumbPositionParams;
   lastColor!: string;
-  isFocused = false;
 
   constructor() {
     super({
