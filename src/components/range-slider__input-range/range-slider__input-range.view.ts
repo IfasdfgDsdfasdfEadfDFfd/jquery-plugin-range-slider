@@ -1,4 +1,4 @@
-import { View, Action, EventCallback, Provider, Store } from '@core';
+import { View, EventCallback, Provider, Store } from '@core';
 import { IRangeSliderStoreState, actionNames } from '@store';
 import { Thumb } from 'components/range-slider__thumb';
 import { useMemo } from 'core/utils';
@@ -43,20 +43,25 @@ class InputRange extends View {
   }
 }
 
-abstract class AbstractRangeSliderInput extends Provider<
+class RangeSliderInput extends Provider<
   IRangeSliderStoreState,
   {
     input: InputRange;
     thumb: Thumb;
   }
 > {
+  storeActionName: string = '';
+
   init(store: Store<IRangeSliderStoreState>): void {
     this.elements.input = new InputRange();
     this.elements.thumb = new Thumb();
 
     this.elements.input.handleInputRangeChange(event => {
       const target = event.target as HTMLInputElement;
-      store.dispatch(this.makeAction(Number(target.value)));
+      store.dispatch({
+        name: this.storeActionName,
+        value: Number(target.value),
+      });
     });
 
     this.elements.input.handleViewFocusIn(
@@ -88,11 +93,11 @@ abstract class AbstractRangeSliderInput extends Provider<
     this.elements.thumb.primaryColor = state.primaryColor;
     this.elements.thumb.marker.visible = state.markerVisibility;
   }
-
-  abstract makeAction(value: number): Action;
 }
 
-class RangeSliderLeftInput extends AbstractRangeSliderInput {
+class RangeSliderLeftInput extends RangeSliderInput {
+  storeActionName: string = actionNames.CHANGE_LEFT_VALUE;
+
   render(state: IRangeSliderStoreState): void {
     super.render(state);
 
@@ -119,16 +124,11 @@ class RangeSliderLeftInput extends AbstractRangeSliderInput {
       vertical,
     });
   }
-
-  makeAction(value: number): Action {
-    return {
-      name: actionNames.CHANGE_LEFT_VALUE,
-      value,
-    };
-  }
 }
 
-class RangeSliderRightInput extends AbstractRangeSliderInput {
+class RangeSliderRightInput extends RangeSliderInput {
+  storeActionName: string = actionNames.CHANGE_RIGHT_VALUE;
+
   render(state: IRangeSliderStoreState): void {
     super.render(state);
     this.elements.input.value = state.value[1];
@@ -148,18 +148,11 @@ class RangeSliderRightInput extends AbstractRangeSliderInput {
       vertical,
     });
   }
-
-  makeAction(value: number): Action {
-    return {
-      name: actionNames.CHANGE_RIGHT_VALUE,
-      value,
-    };
-  }
 }
 
 export {
   InputRange,
-  AbstractRangeSliderInput,
+  RangeSliderInput,
   RangeSliderLeftInput,
   RangeSliderRightInput,
 };
