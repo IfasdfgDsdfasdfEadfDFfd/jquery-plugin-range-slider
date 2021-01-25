@@ -82,15 +82,11 @@ class TrackScale extends View {
   }
 
   set activeColor(value: string) {
-    this.children.forEach(child => {
-      (child as TrackScaleItem).color = value;
-    });
+    this.nativeElement.style.setProperty('color', value);
   }
 }
 
 class TrackScaleItem extends View {
-  lastColor: string;
-
   constructor(value = '') {
     const button = new View({
       tag: 'button',
@@ -106,25 +102,6 @@ class TrackScaleItem extends View {
     });
 
     this.hidingClassName = 'range-slider__track-scale__item--hidden';
-    this.lastColor = '';
-  }
-
-  set color(value: string) {
-    this.lastColor = value;
-    this.resetColor();
-  }
-
-  handleFocusChange(): void {
-    this.resetColor();
-  }
-
-  handleHoverChange(): void {
-    this.resetColor();
-  }
-
-  resetColor(): void {
-    if (this.isFocused || this.isHovered)
-      this.nativeElement.style.setProperty('color', this.lastColor);
   }
 }
 
@@ -167,32 +144,25 @@ class RangeSliderTrack extends Provider<
     );
 
     store.subscribe(
-      useMemo(
-        ({ fixedValues }) => fixedValues,
-        fixedValues => {
-          this.cachedSliderValues = fixedValues.slice().map((value, index) => ({
-            index,
-            rawValue: index,
-            displayValue: value,
-          }));
-
-          this.elements.scale.update(this.cachedSliderValues);
-        },
-      ),
-    );
-
-    store.subscribe(
       useMemo<IRangeSliderStoreState, any>(
-        ({ min, max, step, prefix, postfix, fixedValues }) => ({
-          from: min,
-          to: max,
-          step,
-          prefix,
-          postfix,
-          fixedValues,
+        state => ({
+          from: state.min,
+          to: state.max,
+          step: state.step,
+          prefix: state.prefix,
+          postfix: state.postfix,
+          fixedValues: state.fixedValues,
         }),
         ({ from, to, step, prefix, postfix, fixedValues }) => {
-          if (!fixedValues.length) {
+          if (fixedValues.length) {
+            this.cachedSliderValues = fixedValues
+              .slice()
+              .map((value: any, index: number) => ({
+                index,
+                rawValue: index,
+                displayValue: value,
+              }));
+          } else {
             this.cachedSliderValues = this.getRange({
               from,
               to,
@@ -200,9 +170,9 @@ class RangeSliderTrack extends Provider<
               prefix,
               postfix,
             });
-
-            this.elements.scale.update(this.cachedSliderValues);
           }
+
+          this.elements.scale.update(this.cachedSliderValues);
         },
       ),
     );

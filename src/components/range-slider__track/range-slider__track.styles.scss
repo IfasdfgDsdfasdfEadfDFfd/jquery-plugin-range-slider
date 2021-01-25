@@ -14,6 +14,7 @@
   justify-content: space-between;
   margin-top: 1.4rem;
   padding: 0;
+  color: $primary-color;
   list-style: none;
 }
 
@@ -24,7 +25,13 @@
 
 .range-slider__track-scale__item {
   position: absolute;
-  color: $primary-color;
+  color: rgba(#000, 0.3);
+
+  &:hover,
+  &:focus,
+  &:active {
+    color: inherit;
+  }
 }
 
 .range-slider__track-scale__item--hidden {
@@ -38,7 +45,7 @@
   padding: 0;
   border: 0;
   background-color: transparent;
-  color: rgba(#000, 0.3);
+  color: inherit;
   font-weight: bold;
   font-size: 80%;
   white-space: nowrap;

@@ -4,39 +4,7 @@ import {
   IRangeSliderStoreState,
   rangeSliderStoreReducer,
 } from '@store';
-import {
-  RangeSliderTrack,
-  TrackScale,
-  TrackScaleItem,
-} from './range-slider__track.view';
-
-describe('TrackScaleItem view', () => {
-  let trackScaleItem: TrackScaleItem;
-
-  beforeEach(() => {
-    trackScaleItem = new TrackScaleItem();
-  });
-
-  test('resetColor()', () => {
-    const whiteColor = 'rgb(255, 255, 255)';
-
-    expect(trackScaleItem.lastColor).toEqual('');
-    trackScaleItem.color = whiteColor;
-    expect(trackScaleItem.lastColor).toEqual(whiteColor);
-
-    let color = trackScaleItem.nativeElement.style.getPropertyValue('color');
-    expect(color).toEqual('');
-
-    trackScaleItem.resetColor();
-    color = trackScaleItem.nativeElement.style.getPropertyValue('color');
-    expect(color).toEqual('');
-
-    trackScaleItem.focused = true;
-    trackScaleItem.resetColor();
-    color = trackScaleItem.nativeElement.style.getPropertyValue('color');
-    expect(color).toEqual(whiteColor);
-  });
-});
+import { RangeSliderTrack, TrackScale } from './range-slider__track.view';
 
 describe('TrackScale view', () => {
   let trackScale: TrackScale;
@@ -69,7 +37,7 @@ describe('RangeSliderTrack provider', () => {
       intervalMode: false,
       markerVisibility: false,
       trackScaleVisibility: false,
-      primaryColor: '#fff',
+      primaryColor: 'rgb(255, 255, 255)',
       fixedValues: [],
     },
     rangeSliderStoreReducer,
@@ -93,15 +61,24 @@ describe('RangeSliderTrack provider', () => {
   });
 
   test('track scale change color', () => {
-    const blackColor = '#000';
-    // expect(rangeSliderTrack.elements.scale).toBeFalsy();
+    const { primaryColor } = store.getState();
+
+    let color = rangeSliderTrack.elements.scale.nativeElement.style.getPropertyValue(
+      'color',
+    );
+    expect(color).toEqual(primaryColor);
+
+    const blackColor = 'rgb(0, 0, 0)';
 
     store.dispatch({
       name: actionNames.CHANGE_PRIMARY_COLOR,
       value: blackColor,
     });
 
-    // expect(rangeSliderTrack.elements.scale.isVisible).toBeTruthy();
+    color = rangeSliderTrack.elements.scale.nativeElement.style.getPropertyValue(
+      'color',
+    );
+    expect(color).toEqual(blackColor);
   });
 
   test('getDelimiter()', () => {
