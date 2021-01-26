@@ -28,8 +28,7 @@
   color: rgba(#000, 0.3);
 
   &:hover,
-  &:focus,
-  &:active {
+  &:focus-within {
     color: inherit;
   }
 }
@@ -61,7 +60,8 @@
   }
 
   &:hover,
-  &:focus {
+  &:focus,
+  &:active {
     color: inherit;
     outline: none;
 
