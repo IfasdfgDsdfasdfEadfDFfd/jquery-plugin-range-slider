@@ -83,8 +83,6 @@ class RangeSlider extends Provider<
     );
   }
 
-  render(_: IRangeSliderStoreState): void {}
-
   makeRangeSliderWindowResizeHandler(
     store: Store<IRangeSliderStoreState>,
   ): () => void {

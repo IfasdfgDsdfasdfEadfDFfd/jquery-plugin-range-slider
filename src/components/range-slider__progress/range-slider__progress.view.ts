@@ -61,8 +61,6 @@ class RangeSliderProgress extends Provider<IRangeSliderStoreState, TElements> {
       ),
     );
   }
-
-  render(_: IRangeSliderStoreState): void {}
 }
 
 export { Progress, RangeSliderProgress };

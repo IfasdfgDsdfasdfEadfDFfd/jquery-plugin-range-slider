@@ -178,8 +178,6 @@ class RangeSliderTrack extends Provider<
     );
   }
 
-  render(_: IRangeSliderStoreState): void {}
-
   makeRangeSliderTrackClickHandler(
     store: Store<IRangeSliderStoreState>,
   ): (Event: MouseEvent) => void {

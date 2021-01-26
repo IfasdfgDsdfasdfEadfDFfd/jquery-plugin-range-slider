@@ -130,8 +130,6 @@ class RangeSliderInput extends Provider<
       ),
     );
   }
-
-  render(_: IRangeSliderStoreState): void {}
 }
 
 class RangeSliderLeftInput extends RangeSliderInput {
@@ -177,8 +175,6 @@ class RangeSliderLeftInput extends RangeSliderInput {
       ),
     );
   }
-
-  render(_: IRangeSliderStoreState): void {}
 }
 
 class RangeSliderRightInput extends RangeSliderInput {
@@ -217,8 +213,6 @@ class RangeSliderRightInput extends RangeSliderInput {
       ),
     );
   }
-
-  render(_: IRangeSliderStoreState): void {}
 }
 
 export {
