@@ -65,7 +65,7 @@ class RangeSlider extends Provider<
 
     window.addEventListener(
       'resize',
-      this.makeRangeSliderWindowResizeHandler(store.getState()),
+      this.makeRangeSliderWindowResizeHandler(store),
     );
 
     store.subscribe(
@@ -86,11 +86,11 @@ class RangeSlider extends Provider<
   render(_: IRangeSliderStoreState): void {}
 
   makeRangeSliderWindowResizeHandler(
-    state: IRangeSliderStoreState,
+    store: Store<IRangeSliderStoreState>,
   ): () => void {
     return () => {
-      this.elements.track.render(state);
-      const { min, max, value } = state;
+      const { min, max, value } = store.getState();
+
       this.elements.leftInput.elements.thumb.setOffset({
         min,
         max,

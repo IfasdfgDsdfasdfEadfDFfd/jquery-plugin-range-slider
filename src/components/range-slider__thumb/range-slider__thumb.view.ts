@@ -83,8 +83,9 @@ class Thumb extends View {
 
 class ThumbMarker extends View {
   hidingClassName = 'range-slider__thumb__marker--hidden';
+  minVerticalMargin = 25;
+  isVertical = false;
   width = 0;
-  cachedValue = '';
 
   constructor() {
     super({
@@ -94,7 +95,13 @@ class ThumbMarker extends View {
     });
   }
 
+  get parentWidth(): number {
+    return this.nativeElement.parentElement?.clientWidth as number;
+  }
+
   set vertical(isVertical: boolean) {
+    this.isVertical = isVertical;
+
     if (isVertical) {
       this.setVerticalMargin();
     } else {
@@ -106,30 +113,23 @@ class ThumbMarker extends View {
     this.replaceChildren([value]);
 
     const multiplier = parseInt(styles.rootFontSize);
+    const calculatedValue =
+      value.split(' ').join('').split('.').join('').length * multiplier;
+    const minPossibleWidth = parseInt(styles.minThumbMarkerWidth) * multiplier;
 
-    this.width = Math.max(
-      value.split(' ').join('').split('.').join('').length * multiplier,
-      parseInt(styles.minThumbMarkerWidth) * multiplier,
-    );
+    this.width = Math.max(calculatedValue, minPossibleWidth);
     this.nativeElement.style.setProperty('width', `${this.width}px`);
 
-    const offset = -(
-      (this.width - <number>this.nativeElement.parentElement?.clientWidth) /
-      2
-    );
+    const offset = -((this.width - this.parentWidth) / 2);
     this.nativeElement.style.setProperty('margin-left', `${offset}px`);
 
-    this.cachedValue = value;
-  }
-
-  positionCorrection() {
-    this.text = this.cachedValue;
+    this.vertical = this.isVertical;
   }
 
   setVerticalMargin() {
     this.nativeElement.style.setProperty(
       'margin-top',
-      `${-this.width / 2 - 25}px`,
+      `${-this.width / 2 - this.minVerticalMargin}px`,
     );
   }
 
@@ -138,4 +138,4 @@ class ThumbMarker extends View {
   }
 }
 
-export { Thumb };
+export { Thumb, ThumbMarker };

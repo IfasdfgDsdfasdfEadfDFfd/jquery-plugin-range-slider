@@ -171,6 +171,7 @@ describe('RangeSliderLeftInput provider', () => {
       [NaNValidator],
     );
     rangeSliderLeftInput = new RangeSliderLeftInput(store);
+    store.coldStart();
   });
 
   test('thumb visibility changing', () => {

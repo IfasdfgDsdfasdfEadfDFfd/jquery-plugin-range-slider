@@ -4,6 +4,8 @@ import { Thumb } from 'components/range-slider__thumb';
 import { useMemo } from 'core/utils';
 
 class InputRange extends View {
+  cachedValue!: number;
+
   constructor() {
     super({
       tag: 'input',
@@ -13,12 +15,13 @@ class InputRange extends View {
   }
 
   set value(nextValue: number) {
+    this.cachedValue = nextValue;
     this.nativeElement.setAttribute('value', nextValue.toString());
     (this.nativeElement as HTMLInputElement).value = nextValue.toString();
   }
 
   get value(): number {
-    return parseInt(<string>this.nativeElement.getAttribute('value'));
+    return this.cachedValue;
   }
 
   set min(nextMin: number) {
@@ -140,7 +143,9 @@ class RangeSliderLeftInput extends RangeSliderInput {
     store.subscribe(
       useMemo(
         ({ value }) => value[0],
-        value => (this.elements.input.value = value),
+        value => {
+          this.elements.input.value = value;
+        },
       ),
     );
 
