@@ -78,8 +78,8 @@ class RangeSlider extends Provider<
   ): () => void {
     return () => {
       this.elements.track.render(state);
-      this.elements.leftInput.elements.thumb.positionCorrection();
-      this.elements.rightInput.elements.thumb.positionCorrection();
+      // this.elements.leftInput.elements.thumb.positionCorrection();
+      // this.elements.rightInput.elements.thumb.positionCorrection();
     };
   }
 }

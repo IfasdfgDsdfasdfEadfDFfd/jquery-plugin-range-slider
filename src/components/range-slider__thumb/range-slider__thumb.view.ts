@@ -2,23 +2,12 @@ import { View } from '@core';
 
 import styles from '../../exports.scss';
 
-interface IThumbPositionParams {
-  min: number;
-  max: number;
-  value: number;
-  prefix: string;
-  postfix: string;
-  displayValue: string | number;
-  vertical: boolean;
-}
-
 class Thumb extends View {
   hidingClassName = 'range-slider__thumb--hidden';
   focusClassName = 'range-slider__thumb--focused';
   hoverClassName = 'range-slider__thumb--hovered';
 
   marker!: ThumbMarker;
-  cachedValues!: IThumbPositionParams;
   lastColor!: string;
 
   constructor() {
@@ -44,32 +33,24 @@ class Thumb extends View {
     this.lastColor = value;
   }
 
-  setMarkerText(value: string | number, prefix?: string, postfix?: string) {
-    this.marker.value = `${prefix}${value}${postfix}`;
-  }
-
-  setMarkerPosition(isVertical: boolean) {
-    if (isVertical) {
-      this.marker.setVerticalMargin();
-    } else {
-      this.marker.resetMargin();
-    }
-  }
-
-  positioning(params: IThumbPositionParams): void {
-    this.cachedValues = params;
-
-    const { min, max, value, prefix, postfix, displayValue, vertical } = params;
-
+  setOffset({ min, max, value }: { min: number; max: number; value: number }) {
     const offset = this.calcOffset({
       min,
       max,
       value,
     });
+    console.log('new offset', offset);
     this.nativeElement.style.setProperty('left', `${offset}%`);
+  }
 
-    this.setMarkerText(displayValue, prefix, postfix);
-    this.setMarkerPosition(vertical);
+  calcOffset({ value, max, min }: { [key: string]: number }): number {
+    const ratio = (value - min) / (max - min);
+    const offsetPercent = 100 * ratio;
+    const selfPercent = (this.selfWidth / this.parentWidth) * 100 * ratio;
+
+    console.log('parentWidth', this.parentWidth);
+
+    return offsetPercent - selfPercent;
   }
 
   colorReset(): void {
@@ -94,18 +75,6 @@ class Thumb extends View {
     }
   }
 
-  calcOffset({ value, max, min }: { [key: string]: number }): number {
-    const ratio = (value - min) / (max - min);
-    const offsetPercent = 100 * ratio;
-    const selfPercent = (this.selfWidth / this.parentWidth) * 100 * ratio;
-
-    return offsetPercent - selfPercent;
-  }
-
-  positionCorrection(): void {
-    this.positioning(this.cachedValues);
-  }
-
   handleFocusChange(): void {
     this.colorReset();
   }
@@ -128,7 +97,15 @@ class ThumbMarker extends View {
     });
   }
 
-  set value(value: string) {
+  set vertical(isVertical: boolean) {
+    if (isVertical) {
+      this.setVerticalMargin();
+    } else {
+      this.resetMargin();
+    }
+  }
+
+  set text(value: string) {
     this.replaceChildren([value]);
 
     const multiplier = parseInt(styles.rootFontSize);
@@ -149,7 +126,7 @@ class ThumbMarker extends View {
   }
 
   positionCorrection() {
-    this.value = this.cachedValue;
+    this.text = this.cachedValue;
   }
 
   setVerticalMargin() {

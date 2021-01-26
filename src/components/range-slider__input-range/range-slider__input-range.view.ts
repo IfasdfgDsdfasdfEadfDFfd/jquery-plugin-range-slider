@@ -115,6 +115,13 @@ class RangeSliderInput extends Provider<
 
     store.subscribe(
       useMemo(
+        ({ vertical }) => vertical,
+        isVertical => (this.elements.thumb.marker.vertical = isVertical),
+      ),
+    );
+
+    store.subscribe(
+      useMemo(
         ({ primaryColor }) => primaryColor,
         color => this.elements.thumb.setPrimaryColor(color),
       ),
@@ -132,61 +139,82 @@ class RangeSliderLeftInput extends RangeSliderInput {
 
     store.subscribe(
       useMemo(
-        ({ intervalMode }) => intervalMode,
-        value => (this.elements.thumb.visible = value),
+        ({ value }) => value[0],
+        value => (this.elements.input.value = value),
       ),
     );
 
     store.subscribe(
       useMemo(
-        ({ value }) => value[0],
-        value => (this.elements.input.value = value),
+        ({ intervalMode }) => intervalMode,
+        isVisible => (this.elements.thumb.visible = isVisible),
+      ),
+    );
+
+    store.subscribe(
+      useMemo(
+        ({ min, max, value }) => ({ min, max, value: value[0] }),
+        params => this.elements.thumb.setOffset(params),
+      ),
+    );
+
+    store.subscribe(
+      useMemo(
+        ({ fixedValues, value, prefix, postfix }) => {
+          const displayValue =
+            fixedValues.length > 0 ? fixedValues[value[0]] : value[0];
+
+          return `${prefix(displayValue)}${displayValue}${postfix(
+            displayValue,
+          )}`;
+        },
+        text => (this.elements.thumb.marker.text = text),
       ),
     );
   }
 
-  render(state: IRangeSliderStoreState): void {
-    super.render(state);
-
-    const { max, min, value, prefix, postfix, fixedValues, vertical } = state;
-
-    const displayValue =
-      fixedValues.length > 0 ? fixedValues[value[0]] : value[0];
-
-    this.elements.thumb.positioning({
-      max,
-      min,
-      value: value[0],
-      prefix: prefix(value[0]),
-      postfix: postfix(value[0]),
-      displayValue,
-      vertical,
-    });
-  }
+  render(_: IRangeSliderStoreState): void {}
 }
 
 class RangeSliderRightInput extends RangeSliderInput {
   storeActionName: string = actionNames.CHANGE_RIGHT_VALUE;
 
-  render(state: IRangeSliderStoreState): void {
-    super.render(state);
-    this.elements.input.value = state.value[1];
+  init(store: Store<IRangeSliderStoreState>): void {
+    super.init(store);
 
-    const { max, min, value, prefix, postfix, fixedValues, vertical } = state;
+    store.subscribe(
+      useMemo(
+        ({ value }) => value[1],
+        value => (this.elements.input.value = value),
+      ),
+    );
 
-    const displayValue =
-      fixedValues.length > 1 ? fixedValues[value[1]] : value[1];
+    store.subscribe(
+      useMemo(
+        ({ min, max, value }) => ({ min, max, value: value[1] }),
+        params => {
+          console.log('right thumb', params);
+          this.elements.thumb.setOffset(params);
+        },
+      ),
+    );
 
-    this.elements.thumb.positioning({
-      max,
-      min,
-      value: value[1],
-      prefix: prefix(value[1]),
-      postfix: postfix(value[1]),
-      displayValue,
-      vertical,
-    });
+    store.subscribe(
+      useMemo(
+        ({ fixedValues, value, prefix, postfix }) => {
+          const displayValue =
+            fixedValues.length > 0 ? fixedValues[value[1]] : value[1];
+
+          return `${prefix(displayValue)}${displayValue}${postfix(
+            displayValue,
+          )}`;
+        },
+        text => (this.elements.thumb.marker.text = text),
+      ),
+    );
   }
+
+  render(_: IRangeSliderStoreState): void {}
 }
 
 export {

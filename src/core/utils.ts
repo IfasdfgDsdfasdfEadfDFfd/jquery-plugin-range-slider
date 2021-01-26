@@ -1,4 +1,4 @@
-type cb = (value: number) => string;
+type cb = (value: string | number) => string;
 const makeValueLikeCallback = (value: string | cb): cb => {
   return typeof value === 'function' ? value : () => value;
 };

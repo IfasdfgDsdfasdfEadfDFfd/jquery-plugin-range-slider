@@ -103,6 +103,23 @@ function rangeSlider(
           color: state.primaryColor,
         });
       });
+
+      const state = componentStore.getState();
+      cb({
+        min: state.min,
+        max: state.max,
+        step: state.step,
+        from: state.value[0],
+        to: state.value[1],
+        values: state.fixedValues,
+        prefix: state.prefix,
+        postfix: state.postfix,
+        vertical: state.vertical,
+        interval: state.intervalMode,
+        marker: state.markerVisibility,
+        scale: state.trackScaleVisibility,
+        color: state.primaryColor,
+      });
     },
 
     setFixedValues(value) {

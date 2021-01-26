@@ -46,7 +46,6 @@ function createStore<TState>(
 
   const subscribe = (listener: Listener<TState>) => {
     const index = listeners.push(listener) - 1;
-    listener(getState());
     // unsubscribe
     return () => listeners.splice(index, 1);
   };

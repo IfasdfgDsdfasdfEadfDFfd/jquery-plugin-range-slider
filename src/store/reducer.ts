@@ -1,17 +1,16 @@
 import { Action, Reducer } from '@core';
+import { cb } from 'core/utils';
 
 import { actionNames, getMax, getMin } from './actions';
 import { getValue } from './actions/change-value';
-
-type cb<T> = (value: T) => string;
 
 interface IRangeSliderStoreState {
   min: number;
   max: number;
   value: [number, number];
   step: number;
-  prefix: cb<number>;
-  postfix: cb<number>;
+  prefix: cb;
+  postfix: cb;
   vertical: boolean;
   intervalMode: boolean;
   markerVisibility: boolean;
