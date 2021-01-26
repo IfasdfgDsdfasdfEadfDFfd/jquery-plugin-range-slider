@@ -38,6 +38,10 @@ class View {
     this.appendChildren(children);
   }
 
+  get selfWidth(): number {
+    return <number>this.nativeElement.clientWidth;
+  }
+
   get parentWidth(): number {
     return <number>this.nativeElement.parentElement?.clientWidth;
   }

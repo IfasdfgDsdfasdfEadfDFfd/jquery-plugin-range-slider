@@ -19,10 +19,6 @@ class Thumb extends View {
     this.marker = this.children[0] as ThumbMarker;
   }
 
-  get selfWidth(): number {
-    return <number>this.nativeElement.clientWidth + parseInt(styles.thumbWidth);
-  }
-
   setPrimaryColor(value: string) {
     this.nativeElement.style.setProperty('background-color', value);
     this.marker.nativeElement.style.setProperty('background-color', value);
