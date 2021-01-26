@@ -39,7 +39,6 @@ class Thumb extends View {
       max,
       value,
     });
-    console.log('new offset', offset);
     this.nativeElement.style.setProperty('left', `${offset}%`);
   }
 
@@ -47,8 +46,6 @@ class Thumb extends View {
     const ratio = (value - min) / (max - min);
     const offsetPercent = 100 * ratio;
     const selfPercent = (this.selfWidth / this.parentWidth) * 100 * ratio;
-
-    console.log('parentWidth', this.parentWidth);
 
     return offsetPercent - selfPercent;
   }

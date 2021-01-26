@@ -6,6 +6,7 @@ import {
 } from 'components/range-slider__input-range';
 import { RangeSliderProgress } from 'components/range-slider__progress';
 import { RangeSliderTrack } from 'components/range-slider__track';
+import { useMemo } from 'core/utils';
 
 class RangeSliderElement extends View {
   constructor({
@@ -66,20 +67,40 @@ class RangeSlider extends Provider<
       'resize',
       this.makeRangeSliderWindowResizeHandler(store.getState()),
     );
+
+    store.subscribe(
+      useMemo(
+        ({ vertical }) => vertical,
+        isVertical => (this.elements.slider.vertical = isVertical),
+      ),
+    );
+
+    store.subscribe(
+      useMemo(
+        ({ markerVisibility }) => markerVisibility,
+        hasMarker => (this.elements.slider.hasMarker = hasMarker),
+      ),
+    );
   }
 
-  render(state: IRangeSliderStoreState): void {
-    this.elements.slider.vertical = state.vertical;
-    this.elements.slider.hasMarker = state.markerVisibility;
-  }
+  render(_: IRangeSliderStoreState): void {}
 
   makeRangeSliderWindowResizeHandler(
     state: IRangeSliderStoreState,
   ): () => void {
     return () => {
       this.elements.track.render(state);
-      // this.elements.leftInput.elements.thumb.positionCorrection();
-      // this.elements.rightInput.elements.thumb.positionCorrection();
+      const { min, max, value } = state;
+      this.elements.leftInput.elements.thumb.setOffset({
+        min,
+        max,
+        value: value[0],
+      });
+      this.elements.rightInput.elements.thumb.setOffset({
+        min,
+        max,
+        value: value[1],
+      });
     };
   }
 }

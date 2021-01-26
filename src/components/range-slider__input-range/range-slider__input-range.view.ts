@@ -193,7 +193,6 @@ class RangeSliderRightInput extends RangeSliderInput {
       useMemo(
         ({ min, max, value }) => ({ min, max, value: value[1] }),
         params => {
-          console.log('right thumb', params);
           this.elements.thumb.setOffset(params);
         },
       ),
