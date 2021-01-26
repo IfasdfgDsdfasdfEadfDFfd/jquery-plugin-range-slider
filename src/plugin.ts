@@ -70,9 +70,9 @@ function rangeSlider(
   const userDefinedProps: IRangeSliderStoreState = {
     fixedValues: values.map(String),
     value: [from, to],
-    min: min,
-    max: max,
-    step: step,
+    min,
+    max,
+    step,
     prefix,
     postfix,
     vertical,
