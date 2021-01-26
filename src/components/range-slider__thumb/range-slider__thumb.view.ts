@@ -91,16 +91,6 @@ class ThumbMarker extends View {
     });
   }
 
-  set vertical(isVertical: boolean) {
-    this.isVertical = isVertical;
-
-    if (isVertical) {
-      this.setVerticalMargin();
-    } else {
-      this.resetMargin();
-    }
-  }
-
   set text(value: string) {
     this.replaceChildren([value]);
 
@@ -115,7 +105,20 @@ class ThumbMarker extends View {
     const offset = -((this.width - this.parentWidth) / 2);
     this.nativeElement.style.setProperty('margin-left', `${offset}px`);
 
-    this.vertical = this.isVertical;
+    this.positionCorrection();
+  }
+
+  set vertical(isVertical: boolean) {
+    this.isVertical = isVertical;
+    this.positionCorrection();
+  }
+
+  positionCorrection() {
+    if (this.isVertical) {
+      this.setVerticalMargin();
+    } else {
+      this.resetMargin();
+    }
   }
 
   setVerticalMargin() {
