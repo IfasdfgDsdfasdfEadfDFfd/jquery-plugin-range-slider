@@ -31,24 +31,15 @@ describe('store test', () => {
     expect(store.getState()).toEqual(NEXT_STATE);
   });
 
-  test('listener will be called immediately after subscribe', () => {
-    const store = createStore(INIT_STATE, REDUCER);
-    const LISTENER = jest.fn(x => x);
-
-    store.subscribe(LISTENER);
-
-    expect(LISTENER.mock.calls.length).toEqual(1);
-  });
-
   test('all listeners should be called every time dispatch was called', () => {
     const store = createStore(INIT_STATE, REDUCER);
     const LISTENER = jest.fn(x => x);
 
     store.subscribe(LISTENER);
-    expect(LISTENER.mock.calls.length).toEqual(1);
+    expect(LISTENER.mock.calls.length).toEqual(0);
 
     store.dispatch(ACTION());
-    expect(LISTENER.mock.calls.length).toEqual(2);
+    expect(LISTENER.mock.calls.length).toEqual(1);
   });
 
   describe('test store validators', () => {
@@ -64,7 +55,7 @@ describe('store test', () => {
       store.subscribe(LISTENER);
 
       store.dispatch(ACTION_NAN_VALUE);
-      expect(LISTENER.mock.calls[1][0].from).toEqual(ACTION_NAN_VALUE.name);
+      expect(LISTENER.mock.calls[0][0].from).toEqual(ACTION_NAN_VALUE.name);
     });
   });
 });

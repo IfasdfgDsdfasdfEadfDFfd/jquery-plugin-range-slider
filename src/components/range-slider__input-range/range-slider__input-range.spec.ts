@@ -7,7 +7,6 @@ import {
 import {
   RangeSliderInput,
   RangeSliderLeftInput,
-  // RangeSliderRightInput,
 } from './range-slider__input-range.view';
 
 describe('RangeSliderInput provider', () => {
@@ -34,6 +33,7 @@ describe('RangeSliderInput provider', () => {
       [NaNValidator],
     );
     rangeSliderInput = new RangeSliderInput(store);
+    store.coldStart();
   });
 
   test('min value changing', () => {

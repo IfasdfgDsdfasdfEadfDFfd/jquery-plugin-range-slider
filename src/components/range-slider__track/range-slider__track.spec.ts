@@ -1,4 +1,4 @@
-import { createStore, NaNValidator } from '@core';
+import { createStore, NaNValidator, Store } from '@core';
 import {
   actionNames,
   IRangeSliderStoreState,
@@ -25,28 +25,30 @@ describe('TrackScale view', () => {
 });
 
 describe('RangeSliderTrack provider', () => {
-  const store = createStore<IRangeSliderStoreState>(
-    {
-      min: 0,
-      max: 10,
-      step: 1,
-      value: [3, 5],
-      prefix: () => '',
-      postfix: () => '',
-      vertical: false,
-      intervalMode: false,
-      markerVisibility: false,
-      trackScaleVisibility: false,
-      primaryColor: 'rgb(255, 255, 255)',
-      fixedValues: [],
-    },
-    rangeSliderStoreReducer,
-    [NaNValidator],
-  );
+  let store: Store<IRangeSliderStoreState>;
   let rangeSliderTrack: RangeSliderTrack;
 
   beforeEach(() => {
+    store = createStore<IRangeSliderStoreState>(
+      {
+        min: 0,
+        max: 10,
+        step: 1,
+        value: [3, 5],
+        prefix: () => '',
+        postfix: () => '',
+        vertical: false,
+        intervalMode: false,
+        markerVisibility: false,
+        trackScaleVisibility: false,
+        primaryColor: 'rgb(255, 255, 255)',
+        fixedValues: [],
+      },
+      rangeSliderStoreReducer,
+      [NaNValidator],
+    );
     rangeSliderTrack = new RangeSliderTrack(store);
+    store.coldStart();
   });
 
   test('track scale change visibility', () => {
