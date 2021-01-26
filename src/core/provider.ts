@@ -7,7 +7,6 @@ abstract class Provider<TStoreState, TElements> {
 
   constructor(store: Store<TStoreState>) {
     this.init(store);
-    store.subscribe((state: TStoreState) => this.render(state));
   }
 
   set root(view: View) {
@@ -22,7 +21,6 @@ abstract class Provider<TStoreState, TElements> {
   }
 
   abstract init(store: Store<TStoreState>): void;
-  abstract render(state: TStoreState): void;
 }
 
 export { Provider };
