@@ -38,6 +38,31 @@ class View {
     this.appendChildren(children);
   }
 
+  get parentWidth(): number {
+    return <number>this.nativeElement.parentElement?.clientWidth;
+  }
+
+  set focused(value: boolean) {
+    if (this.focusClassName)
+      this.nativeElement.classList.toggle(this.focusClassName, value);
+    this.isFocused = value;
+    this.handleFocusChange();
+  }
+
+  set hovered(value: boolean) {
+    if (this.hoverClassName)
+      this.nativeElement.classList.toggle(this.hoverClassName, value);
+    this.isHovered = value;
+    this.handleHoverChange();
+  }
+
+  set visible(value: boolean) {
+    if (this.hidingClassName)
+      this.nativeElement.classList.toggle(this.hidingClassName, !value);
+    this.isVisible = value;
+    this.handleVisibilityChange();
+  }
+
   appendChildren(children: IViewProps['children']): void {
     children?.reduce((el, child) => {
       if (typeof child === 'string') {
@@ -71,27 +96,6 @@ class View {
 
   handleViewMouseOut(cb: EventCallback): void {
     this.nativeElement.addEventListener('mouseleave', cb);
-  }
-
-  set focused(value: boolean) {
-    if (this.focusClassName)
-      this.nativeElement.classList.toggle(this.focusClassName, value);
-    this.isFocused = value;
-    this.handleFocusChange();
-  }
-
-  set hovered(value: boolean) {
-    if (this.hoverClassName)
-      this.nativeElement.classList.toggle(this.hoverClassName, value);
-    this.isHovered = value;
-    this.handleHoverChange();
-  }
-
-  set visible(value: boolean) {
-    if (this.hidingClassName)
-      this.nativeElement.classList.toggle(this.hidingClassName, !value);
-    this.isVisible = value;
-    this.handleVisibilityChange();
   }
 
   handleFocusChange(): void {

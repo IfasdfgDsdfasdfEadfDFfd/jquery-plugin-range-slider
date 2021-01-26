@@ -23,10 +23,6 @@ class Thumb extends View {
     return <number>this.nativeElement.clientWidth + parseInt(styles.thumbWidth);
   }
 
-  get parentWidth(): number {
-    return <number>this.nativeElement.parentElement?.clientWidth;
-  }
-
   setPrimaryColor(value: string) {
     this.nativeElement.style.setProperty('background-color', value);
     this.marker.nativeElement.style.setProperty('background-color', value);
@@ -93,10 +89,6 @@ class ThumbMarker extends View {
       attrs: { class: 'range-slider__thumb__marker' },
       children: [],
     });
-  }
-
-  get parentWidth(): number {
-    return this.nativeElement.parentElement?.clientWidth as number;
   }
 
   set vertical(isVertical: boolean) {
