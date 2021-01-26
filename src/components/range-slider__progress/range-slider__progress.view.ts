@@ -1,5 +1,6 @@
-import { Provider, View } from '@core';
+import { Provider, Store, View } from '@core';
 import { IRangeSliderStoreState } from '@store';
+import { useMemo } from 'core/utils';
 
 class Progress extends View {
   constructor() {
@@ -10,7 +11,7 @@ class Progress extends View {
     });
   }
 
-  set value({
+  set values({
     min,
     max,
     value,
@@ -36,22 +37,32 @@ interface TElements {
 }
 
 class RangeSliderProgress extends Provider<IRangeSliderStoreState, TElements> {
-  init(): void {
+  init(store: Store<IRangeSliderStoreState>): void {
     this.elements.progress = new Progress();
     this.root = this.elements.progress;
+
+    store.subscribe(
+      useMemo(
+        ({ min, max, value, intervalMode }) => {
+          if (!intervalMode) {
+            value = [min, value[1]];
+          }
+
+          return { min, max, value };
+        },
+        props => (this.elements.progress.values = props),
+      ),
+    );
+
+    store.subscribe(
+      useMemo(
+        ({ primaryColor }) => primaryColor,
+        color => (this.elements.progress.primaryColor = color),
+      ),
+    );
   }
 
-  render(state: IRangeSliderStoreState): void {
-    const { min, max } = state;
-    let { value } = state;
-
-    if (!state.intervalMode) {
-      value = [min, value[1]];
-    }
-
-    this.elements.progress.value = { min, max, value };
-    this.elements.progress.primaryColor = state.primaryColor;
-  }
+  render(_: IRangeSliderStoreState): void {}
 }
 
 export { Progress, RangeSliderProgress };
