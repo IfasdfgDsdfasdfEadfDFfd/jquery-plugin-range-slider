@@ -36,6 +36,105 @@ describe('Thumb view', () => {
       thumb.nativeElement.style.getPropertyValue('background-color'),
     ).toEqual(blackColor);
   });
+
+  test('chooseColors()', () => {
+    const thumbInvertMock = jest.fn();
+    const markerInvertMock = jest.fn();
+    const thumbResetMock = jest.fn();
+    const markerResetMock = jest.fn();
+
+    thumb.invertColors = thumbInvertMock;
+    thumb.resetColors = thumbResetMock;
+    thumb.marker.invertColors = markerInvertMock;
+    thumb.marker.resetColors = markerResetMock;
+
+    expect(thumbInvertMock.mock.calls.length).toEqual(0);
+    expect(thumbResetMock.mock.calls.length).toEqual(0);
+    expect(markerInvertMock.mock.calls.length).toEqual(0);
+    expect(markerResetMock.mock.calls.length).toEqual(0);
+
+    thumb.chooseColors();
+
+    expect(thumbInvertMock.mock.calls.length).toEqual(0);
+    expect(thumbResetMock.mock.calls.length).toEqual(1);
+    expect(markerInvertMock.mock.calls.length).toEqual(0);
+    expect(markerResetMock.mock.calls.length).toEqual(1);
+
+    thumb.hovered = true;
+
+    expect(thumbInvertMock.mock.calls.length).toEqual(1);
+    expect(thumbResetMock.mock.calls.length).toEqual(1);
+    expect(markerInvertMock.mock.calls.length).toEqual(1);
+    expect(markerResetMock.mock.calls.length).toEqual(1);
+
+    thumb.focused = true;
+
+    expect(thumbInvertMock.mock.calls.length).toEqual(2);
+    expect(thumbResetMock.mock.calls.length).toEqual(1);
+    expect(markerInvertMock.mock.calls.length).toEqual(2);
+    expect(markerResetMock.mock.calls.length).toEqual(1);
+
+    thumb.hovered = false;
+
+    expect(thumbInvertMock.mock.calls.length).toEqual(3);
+    expect(thumbResetMock.mock.calls.length).toEqual(1);
+    expect(markerInvertMock.mock.calls.length).toEqual(3);
+    expect(markerResetMock.mock.calls.length).toEqual(1);
+
+    thumb.focused = false;
+
+    expect(thumbInvertMock.mock.calls.length).toEqual(3);
+    expect(thumbResetMock.mock.calls.length).toEqual(2);
+    expect(markerInvertMock.mock.calls.length).toEqual(3);
+    expect(markerResetMock.mock.calls.length).toEqual(2);
+  });
+
+  test('invertColors()', () => {
+    const color = 'rgb(255, 255, 133)';
+    thumb.setPrimaryColor(color);
+
+    expect(
+      thumb.nativeElement.style.getPropertyValue('background-color'),
+    ).toEqual(color);
+
+    expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual(
+      '',
+    );
+
+    thumb.invertColors();
+
+    expect(
+      thumb.nativeElement.style.getPropertyValue('background-color'),
+    ).toEqual('');
+
+    expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual(
+      color,
+    );
+  });
+
+  test('resetColors', () => {
+    const color = 'rgb(133, 255, 255)';
+    thumb.setPrimaryColor(color);
+    thumb.invertColors();
+
+    expect(
+      thumb.nativeElement.style.getPropertyValue('background-color'),
+    ).toEqual('');
+
+    expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual(
+      color,
+    );
+
+    thumb.resetColors();
+
+    expect(
+      thumb.nativeElement.style.getPropertyValue('background-color'),
+    ).toEqual(color);
+
+    expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual(
+      '',
+    );
+  });
 });
 
 describe('ThumbMarker view', () => {
@@ -45,5 +144,31 @@ describe('ThumbMarker view', () => {
     marker = new ThumbMarker();
   });
 
-  test('', () => {});
+  test('set text', () => {});
+  test('set vertical orientation', () => {});
+  test('positionCorrection()', () => {});
+  test('setPrimaryColor()', () => {});
+  test('invertColors()', () => {});
+  test('resetColors()', () => {});
+  test('setVerticalMargin()', () => {
+    expect(marker.nativeElement.style.getPropertyValue('margin-top')).toEqual(
+      '',
+    );
+
+    marker.setVerticalMargin();
+    expect(
+      marker.nativeElement.style.getPropertyValue('margin-top'),
+    ).not.toEqual('');
+  });
+  test('resetMargin()', () => {
+    marker.setVerticalMargin();
+    expect(
+      marker.nativeElement.style.getPropertyValue('margin-top'),
+    ).not.toEqual('');
+
+    marker.resetMargin();
+    expect(marker.nativeElement.style.getPropertyValue('margin-top')).toEqual(
+      '',
+    );
+  });
 });
