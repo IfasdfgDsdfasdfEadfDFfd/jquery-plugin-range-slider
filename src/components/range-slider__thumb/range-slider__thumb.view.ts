@@ -118,8 +118,8 @@ class ThumbMarker extends View {
   }
 
   setPrimaryColor(value: string) {
-    this.nativeElement.style.setProperty('background-color', value);
     this.color = value;
+    this.resetColors();
   }
 
   invertColors() {

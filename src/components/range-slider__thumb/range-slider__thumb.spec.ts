@@ -145,11 +145,89 @@ describe('ThumbMarker view', () => {
   });
 
   test('set text', () => {});
-  test('set vertical orientation', () => {});
-  test('positionCorrection()', () => {});
-  test('setPrimaryColor()', () => {});
-  test('invertColors()', () => {});
-  test('resetColors()', () => {});
+  test('set vertical orientation', () => {
+    const positionCorrectionMock = jest.fn();
+    marker.positionCorrection = positionCorrectionMock;
+
+    expect(marker.isVertical).toBeFalsy();
+    expect(positionCorrectionMock.mock.calls.length).toEqual(0);
+
+    marker.vertical = true;
+
+    expect(marker.isVertical).toBeTruthy();
+    expect(positionCorrectionMock.mock.calls.length).toEqual(1);
+  });
+  test('positionCorrection()', () => {
+    const resetMarginMock = jest.fn();
+    const setVerticalMarginMock = jest.fn();
+
+    marker.resetMargin = resetMarginMock;
+    marker.setVerticalMargin = setVerticalMarginMock;
+
+    expect(resetMarginMock.mock.calls.length).toEqual(0);
+    expect(setVerticalMarginMock.mock.calls.length).toEqual(0);
+
+    marker.vertical = true;
+
+    expect(resetMarginMock.mock.calls.length).toEqual(0);
+    expect(setVerticalMarginMock.mock.calls.length).toEqual(1);
+
+    marker.vertical = false;
+
+    expect(resetMarginMock.mock.calls.length).toEqual(1);
+    expect(setVerticalMarginMock.mock.calls.length).toEqual(1);
+  });
+  test('setPrimaryColor()', () => {
+    const color = 'rgb(255, 255, 133)';
+    expect(marker.color).toEqual('');
+
+    marker.setPrimaryColor(color);
+
+    expect(marker.color).toEqual(color);
+    expect(marker.nativeElement.style.getPropertyValue('border-color')).toEqual(
+      '',
+    );
+    expect(marker.nativeElement.style.getPropertyValue('color')).toEqual('');
+    expect(
+      marker.nativeElement.style.getPropertyValue('background-color'),
+    ).toEqual(color);
+  });
+  test('invertColors()', () => {
+    const color = 'rgb(255, 255, 133)';
+    marker.setPrimaryColor(color);
+    marker.invertColors();
+
+    expect(
+      marker.nativeElement.style.getPropertyValue('background-color'),
+    ).toEqual('');
+    expect(marker.nativeElement.style.getPropertyValue('border-color')).toEqual(
+      color,
+    );
+    expect(marker.nativeElement.style.getPropertyValue('color')).toEqual(color);
+  });
+  test('resetColors()', () => {
+    const color = 'rgb(255, 255, 133)';
+    marker.setPrimaryColor(color);
+    marker.invertColors();
+
+    expect(
+      marker.nativeElement.style.getPropertyValue('border-color'),
+    ).not.toEqual('');
+    expect(marker.nativeElement.style.getPropertyValue('color')).not.toEqual(
+      '',
+    );
+
+    marker.resetColors();
+
+    expect(marker.nativeElement.style.getPropertyValue('border-color')).toEqual(
+      '',
+    );
+    expect(marker.nativeElement.style.getPropertyValue('color')).toEqual('');
+    expect(
+      marker.nativeElement.style.getPropertyValue('background-color'),
+    ).toEqual(color);
+  });
+
   test('setVerticalMargin()', () => {
     expect(marker.nativeElement.style.getPropertyValue('margin-top')).toEqual(
       '',
