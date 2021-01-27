@@ -16,9 +16,11 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: fit-content;
   min-width: $min-thumb-marker-width;
   margin: auto;
   margin-top: -2.7rem;
+  padding: 0 0.4rem;
   border: $thumb-border-width solid #fff;
   border-radius: $border-radius;
   background-color: $primary-color;
