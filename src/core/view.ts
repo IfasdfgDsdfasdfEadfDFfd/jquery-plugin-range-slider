@@ -39,11 +39,11 @@ class View {
   }
 
   get selfWidth(): number {
-    return <number>this.nativeElement.clientWidth;
+    return this.nativeElement.clientWidth;
   }
 
   get parentWidth(): number {
-    return <number>this.nativeElement.parentElement?.clientWidth;
+    return this.nativeElement.parentElement?.clientWidth || 0;
   }
 
   set focused(value: boolean) {

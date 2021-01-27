@@ -1,6 +1,20 @@
 import { View } from '@core';
 
 describe('test view', () => {
+  beforeEach(() => (document.body.innerHTML = ''));
+  test('view selfWidth', () => {
+    const view = new View({ tag: 'div', attrs: {}, children: [] });
+    expect(view.selfWidth).toBeDefined();
+    expect(view.selfWidth).not.toBeNaN();
+  });
+
+  test('view parentWidth', () => {
+    const view = new View({ tag: 'div', attrs: {}, children: [] });
+    expect(view.parentWidth).toBeDefined();
+    expect(view.parentWidth).toEqual(0);
+    expect(view.parentWidth).not.toBeNaN();
+  });
+
   test('should has children as string', () => {
     const CHILDREN = new Array(3).fill('some text data');
     const NEW_CHILDREN = new Array(5).fill('some text data');
