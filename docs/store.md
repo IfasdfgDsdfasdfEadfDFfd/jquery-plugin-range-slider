@@ -22,7 +22,7 @@ import { createStore } from './src/core/store.ts';
 
 `createStore` function return object that expose some api to communicate with store:
 
-- first of all `getStore()` function obviously return current store state and that all.
+- first of all `getStore()` function obviously return current store state and that's all.
 - `subscribe(cb: Listener) => unsubscribe()` to get actual data every time state has been updated you should subscribe to store and pass callback as argument, also subscribe return function its calling remove your callback from store.
 - `dispatch(action: Action)` function that takes action as argument and pass it to reducer that on its own turn produce next value and that event generates calling listeners.
 - `coldStart()` simple helpful function its task to force store call every listener.
@@ -100,9 +100,9 @@ const store = createStore(initState, reducer, [NotStringTitleValidator]);
 ### Usage Store
 
 ```javascript
-store.subscribe(state => state); // initState;
+store.subscribe(state => state); // pass next state when change happening;
 
-store.coldStart(); // pass actual state to listeners
+store.coldStart(); // force pass current state to listeners
 store.dispatch(INCREMENT); // increment store.value;
 store.dispatch(CHANGE_TITLE('next title')); // change store.title;
 store.dispatch(CHANGE_TITLE(null)); // don't change state because NotStringTitleValidator catch that case;
