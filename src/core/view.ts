@@ -37,6 +37,11 @@ class View<TParent extends View = any> {
     }, this.nativeElement);
 
     this.appendChildren(children);
+
+    this.nativeElement.addEventListener('focusin', () => (this.focused = true));
+    this.nativeElement.addEventListener('focusout', () => (this.focused = false));
+    this.nativeElement.addEventListener('mouseenter', () => (this.hovered = true));
+    this.nativeElement.addEventListener('mouseleave', () => (this.hovered = false));
   }
 
   get selfWidth(): number {
@@ -48,22 +53,19 @@ class View<TParent extends View = any> {
   }
 
   set focused(value: boolean) {
-    if (this.focusClassName)
-      this.nativeElement.classList.toggle(this.focusClassName, value);
+    if (this.focusClassName) this.nativeElement.classList.toggle(this.focusClassName, value);
     this.isFocused = value;
     this.handleFocusChange();
   }
 
   set hovered(value: boolean) {
-    if (this.hoverClassName)
-      this.nativeElement.classList.toggle(this.hoverClassName, value);
+    if (this.hoverClassName) this.nativeElement.classList.toggle(this.hoverClassName, value);
     this.isHovered = value;
     this.handleHoverChange();
   }
 
   set visible(value: boolean) {
-    if (this.hidingClassName)
-      this.nativeElement.classList.toggle(this.hidingClassName, !value);
+    if (this.hidingClassName) this.nativeElement.classList.toggle(this.hidingClassName, !value);
     this.isVisible = value;
     this.handleVisibilityChange();
   }
@@ -88,35 +90,16 @@ class View<TParent extends View = any> {
     this.children = children;
   }
 
-  handleViewFocusIn(cb: EventCallback): void {
-    this.nativeElement.addEventListener('focusin', cb);
-  }
-
-  handleViewFocusOut(cb: EventCallback): void {
-    this.nativeElement.addEventListener('focusout', cb);
-  }
-
-  handleViewMouseIn(cb: EventCallback): void {
-    this.nativeElement.addEventListener('mouseenter', cb);
-  }
-
-  handleViewMouseOut(cb: EventCallback): void {
-    this.nativeElement.addEventListener('mouseleave', cb);
-  }
-
   handleFocusChange(): void {
-    if (this.throwErrorIfHookNotImplemented)
-      throw new Error('Not Implemented!');
+    if (this.throwErrorIfHookNotImplemented) throw new Error('Not Implemented!');
   }
 
   handleHoverChange(): void {
-    if (this.throwErrorIfHookNotImplemented)
-      throw new Error('Not Implemented!');
+    if (this.throwErrorIfHookNotImplemented) throw new Error('Not Implemented!');
   }
 
   handleVisibilityChange(): void {
-    if (this.throwErrorIfHookNotImplemented)
-      throw new Error('Not Implemented!');
+    if (this.throwErrorIfHookNotImplemented) throw new Error('Not Implemented!');
   }
 }
 

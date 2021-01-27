@@ -29,25 +29,13 @@ const rangeSliderStoreReducer: Reducer<IRangeSliderStoreState> = (
     case actionNames.CHANGE_LEFT_VALUE:
       return {
         ...state,
-        value: getValue(
-          action.value,
-          state.value[1],
-          state.min,
-          state.max,
-          state.step,
-        ),
+        value: getValue(action.value, state.value[1], state.min, state.max, state.step),
       };
 
     case actionNames.CHANGE_RIGHT_VALUE:
       return {
         ...state,
-        value: getValue(
-          state.value[0],
-          action.value,
-          state.min,
-          state.max,
-          state.step,
-        ),
+        value: getValue(state.value[0], action.value, state.min, state.max, state.step),
       };
 
     case actionNames.CHANGE_MIN:

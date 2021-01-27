@@ -1,5 +1,1 @@
-export {
-  rangeSliderStoreReducer,
-  actionNames,
-  IRangeSliderStoreState,
-} from './reducer';
+export { rangeSliderStoreReducer, actionNames, IRangeSliderStoreState } from './reducer';

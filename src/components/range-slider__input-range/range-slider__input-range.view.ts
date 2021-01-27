@@ -80,19 +80,6 @@ class RangeSliderInput extends Provider<
       });
     });
 
-    this.elements.input.handleViewFocusIn(
-      () => (this.elements.thumb.focused = true),
-    );
-    this.elements.input.handleViewFocusOut(
-      () => (this.elements.thumb.focused = false),
-    );
-    this.elements.input.handleViewMouseIn(
-      () => (this.elements.thumb.hovered = true),
-    );
-    this.elements.input.handleViewMouseOut(
-      () => (this.elements.thumb.hovered = false),
-    );
-
     store.subscribe(
       useMemo(
         ({ min }) => min,
@@ -179,12 +166,9 @@ class RangeSliderLeftInput extends RangeSliderInput {
     store.subscribe(
       useMemo(
         ({ fixedValues, value, prefix, postfix }) => {
-          const displayValue =
-            fixedValues.length > 0 ? fixedValues[value[0]] : value[0];
+          const displayValue = fixedValues.length > 0 ? fixedValues[value[0]] : value[0];
 
-          return `${prefix(displayValue)}${displayValue}${postfix(
-            displayValue,
-          )}`;
+          return `${prefix(displayValue)}${displayValue}${postfix(displayValue)}`;
         },
         text => (this.elements.thumb.marker.text = text),
       ),
@@ -217,12 +201,9 @@ class RangeSliderRightInput extends RangeSliderInput {
     store.subscribe(
       useMemo(
         ({ fixedValues, value, prefix, postfix }) => {
-          const displayValue =
-            fixedValues.length > 0 ? fixedValues[value[1]] : value[1];
+          const displayValue = fixedValues.length > 0 ? fixedValues[value[1]] : value[1];
 
-          return `${prefix(displayValue)}${displayValue}${postfix(
-            displayValue,
-          )}`;
+          return `${prefix(displayValue)}${displayValue}${postfix(displayValue)}`;
         },
         text => (this.elements.thumb.marker.text = text),
       ),
@@ -230,9 +211,4 @@ class RangeSliderRightInput extends RangeSliderInput {
   }
 }
 
-export {
-  InputRange,
-  RangeSliderInput,
-  RangeSliderLeftInput,
-  RangeSliderRightInput,
-};
+export { InputRange, RangeSliderInput, RangeSliderLeftInput, RangeSliderRightInput };

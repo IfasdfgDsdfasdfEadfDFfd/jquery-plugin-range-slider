@@ -29,8 +29,7 @@ class Thumb extends View {
   calcOffset({ value, max, min }: { [key: string]: number }): number {
     const ratio = (value - min) / (max - min);
     const offsetPercent = 100 * ratio;
-    const selfPercent =
-      (this.nativeElement.clientWidth / this.parentWidth || 1) * 100 * ratio;
+    const selfPercent = (this.nativeElement.clientWidth / this.parentWidth || 1) * 100 * ratio;
 
     return offsetPercent - selfPercent;
   }

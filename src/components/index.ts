@@ -7,11 +7,9 @@ function createRangeSlider(
   root: HTMLElement,
   initStoreValue: IRangeSliderStoreState,
 ): Store<IRangeSliderStoreState> {
-  const store = createStore<IRangeSliderStoreState>(
-    initStoreValue,
-    rangeSliderStoreReducer,
-    [NaNValidator],
-  );
+  const store = createStore<IRangeSliderStoreState>(initStoreValue, rangeSliderStoreReducer, [
+    NaNValidator,
+  ]);
 
   const rangeSlider = new RangeSlider(store);
   root.appendChild(rangeSlider.root.nativeElement);

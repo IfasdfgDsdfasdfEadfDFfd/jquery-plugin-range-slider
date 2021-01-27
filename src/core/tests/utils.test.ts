@@ -87,16 +87,11 @@ describe('utils module', () => {
       expect(deepEqual({ a: 1 }, { a: 1 })).toBeTruthy();
       expect(deepEqual({ a: 1 }, { b: 1 })).toBeFalsy();
 
-      expect(
-        deepEqual({ a: [true, false] }, { a: [true, false] }),
-      ).toBeTruthy();
+      expect(deepEqual({ a: [true, false] }, { a: [true, false] })).toBeTruthy();
       expect(deepEqual({ a: [false, true] }, { a: [true, false] })).toBeFalsy();
 
       expect(
-        deepEqual(
-          { a: [{ a: true }, 'string', 123] },
-          { a: [{ a: true }, 'string', 123] },
-        ),
+        deepEqual({ a: [{ a: true }, 'string', 123] }, { a: [{ a: true }, 'string', 123] }),
       ).toBeTruthy();
 
       expect(

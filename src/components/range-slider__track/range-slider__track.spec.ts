@@ -1,9 +1,5 @@
 import { createStore, NaNValidator, Store } from '@core';
-import {
-  actionNames,
-  IRangeSliderStoreState,
-  rangeSliderStoreReducer,
-} from '@store';
+import { actionNames, IRangeSliderStoreState, rangeSliderStoreReducer } from '@store';
 import { RangeSliderTrack, TrackScale } from './range-slider__track.view';
 
 describe('TrackScale view', () => {
@@ -65,9 +61,7 @@ describe('RangeSliderTrack provider', () => {
   test('track scale change color', () => {
     const { primaryColor } = store.getState();
 
-    let color = rangeSliderTrack.elements.scale.nativeElement.style.getPropertyValue(
-      'color',
-    );
+    let color = rangeSliderTrack.elements.scale.nativeElement.style.getPropertyValue('color');
     expect(color).toEqual(primaryColor);
 
     const blackColor = 'rgb(0, 0, 0)';
@@ -77,9 +71,7 @@ describe('RangeSliderTrack provider', () => {
       value: blackColor,
     });
 
-    color = rangeSliderTrack.elements.scale.nativeElement.style.getPropertyValue(
-      'color',
-    );
+    color = rangeSliderTrack.elements.scale.nativeElement.style.getPropertyValue('color');
     expect(color).toEqual(blackColor);
   });
 

@@ -1,9 +1,6 @@
 import { Provider, Store, View } from '@core';
 import { IRangeSliderStoreState } from '@store';
-import {
-  RangeSliderLeftInput,
-  RangeSliderRightInput,
-} from 'components/range-slider__input-range';
+import { RangeSliderLeftInput, RangeSliderRightInput } from 'components/range-slider__input-range';
 import { RangeSliderProgress } from 'components/range-slider__progress';
 import { RangeSliderTrack } from 'components/range-slider__track';
 import { useMemo } from 'core/utils';
@@ -63,10 +60,7 @@ class RangeSlider extends Provider<
 
     this.root = this.elements.slider;
 
-    window.addEventListener(
-      'resize',
-      this.makeRangeSliderWindowResizeHandler(store),
-    );
+    window.addEventListener('resize', this.makeRangeSliderWindowResizeHandler(store));
 
     store.subscribe(
       useMemo(
@@ -83,9 +77,7 @@ class RangeSlider extends Provider<
     );
   }
 
-  makeRangeSliderWindowResizeHandler(
-    store: Store<IRangeSliderStoreState>,
-  ): () => void {
+  makeRangeSliderWindowResizeHandler(store: Store<IRangeSliderStoreState>): () => void {
     return () => {
       const { min, max, value } = store.getState();
 

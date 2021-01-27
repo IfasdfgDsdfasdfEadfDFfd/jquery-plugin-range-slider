@@ -11,15 +11,7 @@ class Progress extends View {
     });
   }
 
-  set values({
-    min,
-    max,
-    value,
-  }: {
-    min: number;
-    max: number;
-    value: [number, number];
-  }) {
+  set values({ min, max, value }: { min: number; max: number; value: [number, number] }) {
     const leftOffset = ((value[0] - min) / (max - min)) * 100;
     const rightOffset = ((value[1] - min) / (max - min)) * 100;
 

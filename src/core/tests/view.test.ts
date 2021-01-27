@@ -85,100 +85,52 @@ describe('test view', () => {
     view.hidingClassName = 'hide';
 
     const viewHandlerHoverChange = jest.fn();
-    const domHandlerMouseIn = jest.fn();
-    const domHandlerMouseOut = jest.fn();
-
     const viewHandlerFocusChange = jest.fn();
-    const domHandlerFocusIn = jest.fn();
-    const domHandlerFocusOut = jest.fn();
-
     const viewHandlerVisibleChange = jest.fn();
 
     view.handleHoverChange = viewHandlerHoverChange;
-    view.handleViewMouseIn(domHandlerMouseIn);
-    view.handleViewMouseOut(domHandlerMouseOut);
-
     view.handleFocusChange = viewHandlerFocusChange;
-    view.handleViewFocusIn(domHandlerFocusIn);
-    view.handleViewFocusOut(domHandlerFocusOut);
-
     view.handleVisibilityChange = viewHandlerVisibleChange;
 
     view.hovered = true;
     expect(view.isHovered).toBe(true);
-    expect(view.nativeElement.classList.contains(view.hoverClassName)).toBe(
-      true,
-    );
-
+    expect(view.nativeElement.classList.contains(view.hoverClassName)).toBe(true);
     expect(viewHandlerHoverChange).toHaveBeenCalled();
-    expect(domHandlerMouseIn).not.toHaveBeenCalled();
-    expect(domHandlerMouseOut).not.toHaveBeenCalled();
 
     view.hovered = false;
     expect(view.isHovered).toBe(false);
-    expect(view.nativeElement.classList.contains(view.hoverClassName)).toBe(
-      false,
-    );
-
+    expect(view.nativeElement.classList.contains(view.hoverClassName)).toBe(false);
     expect(viewHandlerHoverChange).toHaveBeenCalledTimes(2);
-    expect(domHandlerMouseIn).not.toHaveBeenCalled();
-    expect(domHandlerMouseOut).not.toHaveBeenCalled();
 
     view.nativeElement.dispatchEvent(new Event('mouseenter'));
-
-    expect(viewHandlerHoverChange).toHaveBeenCalledTimes(2);
-    expect(domHandlerMouseIn).toHaveBeenCalledTimes(1);
-    expect(domHandlerMouseOut).not.toHaveBeenCalled();
+    expect(viewHandlerHoverChange).toHaveBeenCalledTimes(3);
 
     view.nativeElement.dispatchEvent(new Event('mouseleave'));
-
-    expect(viewHandlerHoverChange).toHaveBeenCalledTimes(2);
-    expect(domHandlerMouseIn).toHaveBeenCalledTimes(1);
-    expect(domHandlerMouseOut).toHaveBeenCalledTimes(1);
+    expect(viewHandlerHoverChange).toHaveBeenCalledTimes(4);
 
     view.focused = true;
     expect(view.isFocused).toBe(true);
-    expect(view.nativeElement.classList.contains(view.focusClassName)).toBe(
-      true,
-    );
-
-    expect(viewHandlerHoverChange).toHaveBeenCalled();
-    expect(domHandlerFocusIn).not.toHaveBeenCalled();
-    expect(domHandlerFocusOut).not.toHaveBeenCalled();
+    expect(view.nativeElement.classList.contains(view.focusClassName)).toBe(true);
+    expect(viewHandlerFocusChange).toHaveBeenCalled();
 
     view.focused = false;
     expect(view.isFocused).toBe(false);
-    expect(view.nativeElement.classList.contains(view.focusClassName)).toBe(
-      false,
-    );
-
-    expect(viewHandlerHoverChange).toHaveBeenCalledTimes(2);
-    expect(domHandlerFocusIn).not.toHaveBeenCalled();
-    expect(domHandlerFocusOut).not.toHaveBeenCalled();
+    expect(view.nativeElement.classList.contains(view.focusClassName)).toBe(false);
+    expect(viewHandlerFocusChange).toHaveBeenCalledTimes(2);
 
     view.nativeElement.dispatchEvent(new Event('focusin'));
-
-    expect(viewHandlerFocusChange).toHaveBeenCalledTimes(2);
-    expect(domHandlerFocusIn).toHaveBeenCalledTimes(1);
-    expect(domHandlerFocusOut).not.toHaveBeenCalled();
+    expect(viewHandlerFocusChange).toHaveBeenCalledTimes(3);
 
     view.nativeElement.dispatchEvent(new Event('focusout'));
-
-    expect(viewHandlerFocusChange).toHaveBeenCalledTimes(2);
-    expect(domHandlerFocusIn).toHaveBeenCalledTimes(1);
-    expect(domHandlerFocusOut).toHaveBeenCalledTimes(1);
+    expect(viewHandlerFocusChange).toHaveBeenCalledTimes(4);
 
     view.visible = false;
-    expect(view.nativeElement.classList.contains(view.hidingClassName)).toBe(
-      true,
-    );
+    expect(view.nativeElement.classList.contains(view.hidingClassName)).toBe(true);
     expect(viewHandlerVisibleChange).toHaveBeenCalled();
     expect(view.isVisible).toBe(false);
 
     view.visible = true;
-    expect(view.nativeElement.classList.contains(view.hidingClassName)).toBe(
-      false,
-    );
+    expect(view.nativeElement.classList.contains(view.hidingClassName)).toBe(false);
     expect(viewHandlerVisibleChange).toHaveBeenCalledTimes(2);
     expect(view.isVisible).toBe(true);
   });

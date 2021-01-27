@@ -32,9 +32,7 @@ describe('Thumb view', () => {
 
     thumb.setPrimaryColor(blackColor);
     expect(thumb.color).toEqual(blackColor);
-    expect(
-      thumb.nativeElement.style.getPropertyValue('background-color'),
-    ).toEqual(blackColor);
+    expect(thumb.nativeElement.style.getPropertyValue('background-color')).toEqual(blackColor);
   });
 
   test('chooseColors()', () => {
@@ -93,23 +91,15 @@ describe('Thumb view', () => {
     const color = 'rgb(255, 255, 133)';
     thumb.setPrimaryColor(color);
 
-    expect(
-      thumb.nativeElement.style.getPropertyValue('background-color'),
-    ).toEqual(color);
+    expect(thumb.nativeElement.style.getPropertyValue('background-color')).toEqual(color);
 
-    expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual(
-      '',
-    );
+    expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual('');
 
     thumb.invertColors();
 
-    expect(
-      thumb.nativeElement.style.getPropertyValue('background-color'),
-    ).toEqual('');
+    expect(thumb.nativeElement.style.getPropertyValue('background-color')).toEqual('');
 
-    expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual(
-      color,
-    );
+    expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual(color);
   });
 
   test('resetColors', () => {
@@ -117,23 +107,15 @@ describe('Thumb view', () => {
     thumb.setPrimaryColor(color);
     thumb.invertColors();
 
-    expect(
-      thumb.nativeElement.style.getPropertyValue('background-color'),
-    ).toEqual('');
+    expect(thumb.nativeElement.style.getPropertyValue('background-color')).toEqual('');
 
-    expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual(
-      color,
-    );
+    expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual(color);
 
     thumb.resetColors();
 
-    expect(
-      thumb.nativeElement.style.getPropertyValue('background-color'),
-    ).toEqual(color);
+    expect(thumb.nativeElement.style.getPropertyValue('background-color')).toEqual(color);
 
-    expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual(
-      '',
-    );
+    expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual('');
   });
 });
 
@@ -198,12 +180,8 @@ describe('ThumbMarker view', () => {
     marker.parent.setPrimaryColor(color);
     marker.invertColors();
 
-    expect(
-      marker.nativeElement.style.getPropertyValue('background-color'),
-    ).toEqual('');
-    expect(marker.nativeElement.style.getPropertyValue('border-color')).toEqual(
-      color,
-    );
+    expect(marker.nativeElement.style.getPropertyValue('background-color')).toEqual('');
+    expect(marker.nativeElement.style.getPropertyValue('border-color')).toEqual(color);
     expect(marker.nativeElement.style.getPropertyValue('color')).toEqual(color);
   });
   test('resetColors()', () => {
@@ -211,43 +189,27 @@ describe('ThumbMarker view', () => {
     marker.parent.setPrimaryColor(color);
     marker.invertColors();
 
-    expect(
-      marker.nativeElement.style.getPropertyValue('border-color'),
-    ).not.toEqual('');
-    expect(marker.nativeElement.style.getPropertyValue('color')).not.toEqual(
-      '',
-    );
+    expect(marker.nativeElement.style.getPropertyValue('border-color')).not.toEqual('');
+    expect(marker.nativeElement.style.getPropertyValue('color')).not.toEqual('');
 
     marker.resetColors();
 
-    expect(marker.nativeElement.style.getPropertyValue('border-color')).toEqual(
-      '',
-    );
+    expect(marker.nativeElement.style.getPropertyValue('border-color')).toEqual('');
     expect(marker.nativeElement.style.getPropertyValue('color')).toEqual('');
-    expect(
-      marker.nativeElement.style.getPropertyValue('background-color'),
-    ).toEqual(color);
+    expect(marker.nativeElement.style.getPropertyValue('background-color')).toEqual(color);
   });
 
   test('setVerticalMargin()', () => {
-    expect(marker.nativeElement.style.getPropertyValue('margin-top')).toEqual(
-      '',
-    );
+    expect(marker.nativeElement.style.getPropertyValue('margin-top')).toEqual('');
 
     marker.setVerticalMargin();
-    expect(
-      marker.nativeElement.style.getPropertyValue('margin-top'),
-    ).not.toEqual('');
+    expect(marker.nativeElement.style.getPropertyValue('margin-top')).not.toEqual('');
   });
   test('resetMargin()', () => {
     marker.setVerticalMargin();
-    expect(
-      marker.nativeElement.style.getPropertyValue('margin-top'),
-    ).not.toEqual('');
+    expect(marker.nativeElement.style.getPropertyValue('margin-top')).not.toEqual('');
 
     marker.resetMargin();
-    expect(marker.nativeElement.style.getPropertyValue('margin-top')).toEqual(
-      '',
-    );
+    expect(marker.nativeElement.style.getPropertyValue('margin-top')).toEqual('');
   });
 });

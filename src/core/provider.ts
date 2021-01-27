@@ -14,10 +14,7 @@ abstract class Provider<TStoreState, TElements> {
   }
 
   get root(): View {
-    return (
-      this._root ||
-      new View({ attrs: {}, children: Object.values(this.elements) })
-    );
+    return this._root || new View({ attrs: {}, children: Object.values(this.elements) });
   }
 
   abstract init(store: Store<TStoreState>): void;

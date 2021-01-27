@@ -37,9 +37,7 @@ class TrackScale extends View {
         ratio,
         value: displayValue,
         offsetInPercentages: percent,
-        maxWidthInPixels: Math.round(
-          this.nativeElement.clientWidth / values.length,
-        ),
+        maxWidthInPixels: Math.round(this.nativeElement.clientWidth / values.length),
       });
     });
 
@@ -72,11 +70,6 @@ class TrackScale extends View {
       'margin-left',
       `${-(itemWidth / 2 - thumbWidth / 2 + thumbWidth * ratio)}px`,
     );
-
-    item.handleViewMouseIn(() => (item.hovered = true));
-    item.handleViewMouseOut(() => (item.hovered = false));
-    item.handleViewFocusIn(() => (item.focused = true));
-    item.handleViewFocusOut(() => (item.focused = false));
 
     return item;
   }
@@ -155,13 +148,11 @@ class RangeSliderTrack extends Provider<
         }),
         ({ from, to, step, prefix, postfix, fixedValues }) => {
           if (fixedValues.length) {
-            this.cachedSliderValues = fixedValues
-              .slice()
-              .map((value: any, index: number) => ({
-                index,
-                rawValue: index,
-                displayValue: value,
-              }));
+            this.cachedSliderValues = fixedValues.slice().map((value: any, index: number) => ({
+              index,
+              rawValue: index,
+              displayValue: value,
+            }));
           } else {
             this.cachedSliderValues = this.getRange({
               from,
@@ -236,10 +227,7 @@ class RangeSliderTrack extends Provider<
 
     const values = new Array(Math.ceil(length / multiplier))
       .fill(null)
-      .map((_, index) => [
-        index,
-        Number((step * index * multiplier + from).toFixed(accuracy)),
-      ])
+      .map((_, index) => [index, Number((step * index * multiplier + from).toFixed(accuracy))])
       .map(([index, value]) => ({
         index,
         rawValue: value,

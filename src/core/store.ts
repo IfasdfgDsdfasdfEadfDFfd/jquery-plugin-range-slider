@@ -36,10 +36,7 @@ function createStore<TState>(
 
   const dispatch = (action: Action) => {
     const prevState = getState();
-    const validatedAction = validators.reduce(
-      (action, validator) => validator(action),
-      action,
-    );
+    const validatedAction = validators.reduce((action, validator) => validator(action), action);
     setNextState(reducer(validatedAction, prevState));
     listeners.forEach(listener => listener(getState()));
   };
@@ -77,12 +74,4 @@ function NaNValidator(action: Action): Action {
   return action;
 }
 
-export {
-  Listener,
-  Action,
-  Reducer,
-  Store,
-  Validator,
-  createStore,
-  NaNValidator,
-};
+export { Listener, Action, Reducer, Store, Validator, createStore, NaNValidator };

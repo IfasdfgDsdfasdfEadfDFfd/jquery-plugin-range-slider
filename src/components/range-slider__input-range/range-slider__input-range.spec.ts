@@ -1,13 +1,6 @@
 import { createStore, NaNValidator, Store } from '@core';
-import {
-  actionNames,
-  IRangeSliderStoreState,
-  rangeSliderStoreReducer,
-} from '@store';
-import {
-  RangeSliderInput,
-  RangeSliderLeftInput,
-} from './range-slider__input-range.view';
+import { actionNames, IRangeSliderStoreState, rangeSliderStoreReducer } from '@store';
+import { RangeSliderInput, RangeSliderLeftInput } from './range-slider__input-range.view';
 
 describe('RangeSliderInput provider', () => {
   let store: Store<IRangeSliderStoreState>;
@@ -38,9 +31,9 @@ describe('RangeSliderInput provider', () => {
 
   test('min value changing', () => {
     const defaultMin = store.getState().min;
-    expect(
-      rangeSliderInput.elements.input.nativeElement.getAttribute('min'),
-    ).toEqual(defaultMin.toString());
+    expect(rangeSliderInput.elements.input.nativeElement.getAttribute('min')).toEqual(
+      defaultMin.toString(),
+    );
 
     const nextMin = 10;
     store.dispatch({
@@ -48,16 +41,16 @@ describe('RangeSliderInput provider', () => {
       value: nextMin,
     });
 
-    expect(
-      rangeSliderInput.elements.input.nativeElement.getAttribute('min'),
-    ).toEqual(nextMin.toString());
+    expect(rangeSliderInput.elements.input.nativeElement.getAttribute('min')).toEqual(
+      nextMin.toString(),
+    );
   });
 
   test('max value changing', () => {
     const defaultMax = store.getState().max;
-    expect(
-      rangeSliderInput.elements.input.nativeElement.getAttribute('max'),
-    ).toEqual(defaultMax.toString());
+    expect(rangeSliderInput.elements.input.nativeElement.getAttribute('max')).toEqual(
+      defaultMax.toString(),
+    );
 
     const nextMax = 100;
     store.dispatch({
@@ -65,16 +58,16 @@ describe('RangeSliderInput provider', () => {
       value: nextMax,
     });
 
-    expect(
-      rangeSliderInput.elements.input.nativeElement.getAttribute('max'),
-    ).toEqual(nextMax.toString());
+    expect(rangeSliderInput.elements.input.nativeElement.getAttribute('max')).toEqual(
+      nextMax.toString(),
+    );
   });
 
   test('step value changing', () => {
     const defaultStep = store.getState().step;
-    expect(
-      rangeSliderInput.elements.input.nativeElement.getAttribute('step'),
-    ).toEqual(defaultStep.toString());
+    expect(rangeSliderInput.elements.input.nativeElement.getAttribute('step')).toEqual(
+      defaultStep.toString(),
+    );
 
     const nextStep = 5;
     store.dispatch({
@@ -82,9 +75,9 @@ describe('RangeSliderInput provider', () => {
       value: nextStep,
     });
 
-    expect(
-      rangeSliderInput.elements.input.nativeElement.getAttribute('step'),
-    ).toEqual(nextStep.toString());
+    expect(rangeSliderInput.elements.input.nativeElement.getAttribute('step')).toEqual(
+      nextStep.toString(),
+    );
   });
 
   test('intervalMode value changing', () => {
@@ -109,9 +102,7 @@ describe('RangeSliderInput provider', () => {
   test('primaryColor value changing', () => {
     const defaultColor = store.getState().primaryColor;
     expect(
-      rangeSliderInput.elements.thumb.nativeElement.style.getPropertyValue(
-        'background-color',
-      ),
+      rangeSliderInput.elements.thumb.nativeElement.style.getPropertyValue('background-color'),
     ).toEqual(defaultColor);
     expect(
       rangeSliderInput.elements.thumb.marker.nativeElement.style.getPropertyValue(
@@ -126,9 +117,7 @@ describe('RangeSliderInput provider', () => {
     });
 
     expect(
-      rangeSliderInput.elements.thumb.nativeElement.style.getPropertyValue(
-        'background-color',
-      ),
+      rangeSliderInput.elements.thumb.nativeElement.style.getPropertyValue('background-color'),
     ).toEqual(nextColor);
     expect(
       rangeSliderInput.elements.thumb.marker.nativeElement.style.getPropertyValue(

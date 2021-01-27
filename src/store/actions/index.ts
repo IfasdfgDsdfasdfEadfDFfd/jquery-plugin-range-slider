@@ -1,8 +1,4 @@
-import {
-  CHANGE_LEFT_VALUE,
-  CHANGE_RIGHT_VALUE,
-  getValue,
-} from './change-value';
+import { CHANGE_LEFT_VALUE, CHANGE_RIGHT_VALUE, getValue } from './change-value';
 import { CHANGE_MIN, getMin } from './change-min';
 import { CHANGE_MAX, getMax } from './change-max';
 import { CHANGE_STEP } from './change-step';

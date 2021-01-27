@@ -13,10 +13,7 @@ const getValue = (
   const nextLeftValue = parseLeftValue(leftValue, min, rightValue);
   const nextRightValue = parseRightValue(rightValue, leftValue, max);
 
-  return [
-    makeValue(nextLeftValue).multipleBy(step),
-    makeValue(nextRightValue).multipleBy(step),
-  ];
+  return [makeValue(nextLeftValue).multipleBy(step), makeValue(nextRightValue).multipleBy(step)];
 };
 
 const parseLeftValue = (value: number, min: number, max: number) =>
