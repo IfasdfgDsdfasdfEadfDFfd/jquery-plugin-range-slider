@@ -30,8 +30,8 @@
   transition: all 0.2s ease;
 }
 
-.range-slider__thumb--hovered,
-.range-slider__thumb--focused {
+.range-slider__thumb_hovered,
+.range-slider__thumb_focused {
   z-index: 2;
   border-color: $primary-color;
   background-color: $white-color;
@@ -47,10 +47,10 @@
   }
 }
 
-.range-slider__thumb--hidden {
+.range-slider__thumb_hidden {
   opacity: 0;
 }
 
-.range-slider__thumb__marker--hidden {
+.range-slider__thumb__marker_hidden {
   opacity: 0;
 }

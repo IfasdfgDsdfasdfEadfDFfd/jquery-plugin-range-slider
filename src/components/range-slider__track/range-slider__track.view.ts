@@ -15,7 +15,7 @@ class Track extends View {
 }
 
 class TrackScale extends View {
-  hidingClassName = 'range-slider__track-scale--hidden';
+  hidingClassName = 'range-slider__track-scale_hidden';
 
   constructor() {
     super({
@@ -101,7 +101,7 @@ class TrackScaleItem extends View {
       children: [button],
     });
 
-    this.hidingClassName = 'range-slider__track-scale__item--hidden';
+    this.hidingClassName = 'range-slider__track-scale__item_hidden';
   }
 }
 
