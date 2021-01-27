@@ -144,7 +144,22 @@ describe('ThumbMarker view', () => {
     marker = new ThumbMarker();
   });
 
-  test('set text', () => {});
+  test('set text as child element', () => {
+    const text = 'text';
+    const anotherText = 'another text';
+
+    expect(marker.children.length).toEqual(0);
+    expect(marker.width).toEqual(0);
+    expect(marker.nativeElement.style.getPropertyValue('width')).toEqual('');
+
+    marker.text = text;
+    expect(marker.children.length).toEqual(1);
+    expect(marker.children[0]).toEqual(text);
+
+    marker.text = anotherText;
+    expect(marker.children.length).toEqual(1);
+    expect(marker.children[0]).toEqual(anotherText);
+  });
   test('set vertical orientation', () => {
     const positionCorrectionMock = jest.fn();
     marker.positionCorrection = positionCorrectionMock;
