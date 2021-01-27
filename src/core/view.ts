@@ -43,7 +43,7 @@ class View {
   }
 
   get parentWidth(): number {
-    return this.nativeElement.parentElement?.offsetWidth || 0;
+    return this.nativeElement.parentElement?.clientWidth || 0;
   }
 
   set focused(value: boolean) {
