@@ -46,6 +46,11 @@ body {
   font-size: 0.8rem;
   font-family: "Arial", "Helvetica", sans-serif;
   text-align: center;
+
+  &:disabled {
+    background-color: #fafafa;
+    box-shadow: none;
+  }
 }
 
 .configuration__checkbox {
@@ -58,9 +63,15 @@ body {
 
   &:checked {
     background-image: url("./check_mark.svg");
-    background-position: center;
+    background-position-x: 5px;
+    background-position-y: 5px;
     background-size: 70%;
     background-repeat: no-repeat;
+  }
+
+  &:disabled {
+    background-color: #fafafa;
+    box-shadow: none;
   }
 }
 

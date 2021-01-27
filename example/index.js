@@ -22,6 +22,7 @@ window.addEventListener('load', () => {
         min: 1,
         max: 6,
         step: 1,
+        from: 1,
         to: 2,
         postfix: value => (value > 1 ? ' rooms' : ' room'),
         color: '#0392cf',
@@ -96,7 +97,7 @@ const attachConfigurationPanelToRangeSlider = (index, props) => {
     api.subscribe(state => {
       $fixedValues.val(state.values.toString().replaceAll(',', ' '));
 
-      $left.attr('disabled', state.values.length > 0);
+      $left.attr('disabled', state.values.length > 0 || !state.interval);
       $right.attr('disabled', state.values.length > 0);
       $min.attr('disabled', state.values.length > 0);
       $max.attr('disabled', state.values.length > 0);

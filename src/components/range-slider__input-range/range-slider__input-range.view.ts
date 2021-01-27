@@ -9,7 +9,11 @@ class InputRange extends View {
   constructor() {
     super({
       tag: 'input',
-      attrs: { type: 'range', name: 'range', class: 'range-slider__input' },
+      attrs: {
+        type: 'range',
+        name: 'range',
+        class: 'range-slider__input',
+      },
       children: [],
     });
   }
@@ -43,6 +47,14 @@ class InputRange extends View {
 
   handleInputRangeChange(cb: EventCallback): void {
     this.nativeElement.addEventListener('input', cb);
+  }
+
+  handleVisibilityChange() {
+    if (this.isVisible) {
+      this.nativeElement.removeAttribute('tabindex');
+    } else {
+      this.nativeElement.setAttribute('tabindex', '-1');
+    }
   }
 }
 
@@ -150,7 +162,10 @@ class RangeSliderLeftInput extends RangeSliderInput {
     store.subscribe(
       useMemo(
         ({ intervalMode }) => intervalMode,
-        isVisible => (this.elements.thumb.visible = isVisible),
+        isVisible => {
+          this.elements.input.visible = isVisible;
+          this.elements.thumb.visible = isVisible;
+        },
       ),
     );
 
