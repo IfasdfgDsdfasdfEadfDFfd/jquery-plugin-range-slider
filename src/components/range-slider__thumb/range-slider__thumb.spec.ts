@@ -8,17 +8,6 @@ describe('Thumb view', () => {
     document.body.innerHTML = '';
   });
 
-  test('setPrimaryColor()', () => {
-    const blackColor = 'rgb(0, 0, 0)';
-    expect(thumb.lastColor).toBeUndefined();
-
-    thumb.setPrimaryColor(blackColor);
-    expect(thumb.lastColor).toEqual(blackColor);
-    expect(
-      thumb.nativeElement.style.getPropertyValue('background-color'),
-    ).toEqual(blackColor);
-  });
-
   test('calcOffset()', () => {
     const min = 0;
     const max = 10;
@@ -35,6 +24,17 @@ describe('Thumb view', () => {
     expect(thumb.nativeElement.style.getPropertyValue('left')).toEqual('');
     thumb.setOffset({ min, max, value });
     expect(thumb.nativeElement.style.getPropertyValue('left')).not.toEqual('');
+  });
+
+  test('setPrimaryColor()', () => {
+    const blackColor = 'rgb(0, 0, 0)';
+    expect(thumb.color).toEqual('');
+
+    thumb.setPrimaryColor(blackColor);
+    expect(thumb.color).toEqual(blackColor);
+    expect(
+      thumb.nativeElement.style.getPropertyValue('background-color'),
+    ).toEqual(blackColor);
   });
 });
 

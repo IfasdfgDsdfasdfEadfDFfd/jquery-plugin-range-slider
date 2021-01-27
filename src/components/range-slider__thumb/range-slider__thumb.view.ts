@@ -8,7 +8,7 @@ class Thumb extends View {
   hoverClassName = 'range-slider__thumb--hovered';
 
   marker!: ThumbMarker;
-  lastColor!: string;
+  color = '';
 
   constructor() {
     super({
@@ -17,12 +17,6 @@ class Thumb extends View {
       children: [new ThumbMarker()],
     });
     this.marker = this.children[0] as ThumbMarker;
-  }
-
-  setPrimaryColor(value: string) {
-    this.nativeElement.style.setProperty('background-color', value);
-    this.marker.nativeElement.style.setProperty('background-color', value);
-    this.lastColor = value;
   }
 
   setOffset({ min, max, value }: { min: number; max: number; value: number }) {
@@ -42,34 +36,39 @@ class Thumb extends View {
     return offsetPercent - selfPercent;
   }
 
-  colorReset(): void {
+  setPrimaryColor(value: string) {
+    this.nativeElement.style.setProperty('background-color', value);
+    this.color = value;
+
+    this.marker.setPrimaryColor(value);
+  }
+
+  chooseColors(): void {
     if (this.isFocused || this.isHovered) {
-      this.nativeElement.style.removeProperty('background-color');
-      this.marker.nativeElement.style.removeProperty('background-color');
-      this.nativeElement.style.setProperty('border-color', this.lastColor);
-      this.marker.nativeElement.style.setProperty('color', this.lastColor);
-      this.marker.nativeElement.style.setProperty(
-        'border-color',
-        this.lastColor,
-      );
+      this.invertColors();
+      this.marker.invertColors();
     } else {
-      this.nativeElement.style.removeProperty('border-color');
-      this.marker.nativeElement.style.removeProperty('border-color');
-      this.marker.nativeElement.style.removeProperty('color');
-      this.nativeElement.style.setProperty('background-color', this.lastColor);
-      this.marker.nativeElement.style.setProperty(
-        'background-color',
-        this.lastColor,
-      );
+      this.resetColors();
+      this.marker.resetColors();
     }
   }
 
+  invertColors() {
+    this.nativeElement.style.removeProperty('background-color');
+    this.nativeElement.style.setProperty('border-color', this.color);
+  }
+
+  resetColors() {
+    this.nativeElement.style.removeProperty('border-color');
+    this.nativeElement.style.setProperty('background-color', this.color);
+  }
+
   handleFocusChange(): void {
-    this.colorReset();
+    this.chooseColors();
   }
 
   handleHoverChange(): void {
-    this.colorReset();
+    this.chooseColors();
   }
 }
 
@@ -77,6 +76,7 @@ class ThumbMarker extends View {
   hidingClassName = 'range-slider__thumb__marker--hidden';
   minVerticalMargin = 25;
   isVertical = false;
+  color = '';
   width = 0;
 
   constructor() {
@@ -115,6 +115,23 @@ class ThumbMarker extends View {
     } else {
       this.resetMargin();
     }
+  }
+
+  setPrimaryColor(value: string) {
+    this.nativeElement.style.setProperty('background-color', value);
+    this.color = value;
+  }
+
+  invertColors() {
+    this.nativeElement.style.removeProperty('background-color');
+    this.nativeElement.style.setProperty('color', this.color);
+    this.nativeElement.style.setProperty('border-color', this.color);
+  }
+
+  resetColors() {
+    this.nativeElement.style.removeProperty('border-color');
+    this.nativeElement.style.removeProperty('color');
+    this.nativeElement.style.setProperty('background-color', this.color);
   }
 
   setVerticalMargin() {
