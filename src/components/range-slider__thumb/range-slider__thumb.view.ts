@@ -1,9 +1,9 @@
 import { View } from '@core';
 
 class Thumb extends View {
-  hidingClassName = 'range-slider__thumb--hidden';
-  focusClassName = 'range-slider__thumb--focused';
-  hoverClassName = 'range-slider__thumb--hovered';
+  hidingClassName = 'range-slider__thumb_hidden';
+  focusClassName = 'range-slider__thumb_focused';
+  hoverClassName = 'range-slider__thumb_hovered';
 
   marker!: ThumbMarker;
   color = '';
@@ -70,7 +70,7 @@ class Thumb extends View {
 }
 
 class ThumbMarker extends View<Thumb> {
-  hidingClassName = 'range-slider__thumb__marker--hidden';
+  hidingClassName = 'range-slider__thumb__marker_hidden';
   minVerticalMargin = 25;
   isVertical = false;
   width = 0;

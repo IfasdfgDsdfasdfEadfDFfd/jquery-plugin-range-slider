@@ -41,7 +41,7 @@ class InputRange extends View {
   }
 
   set intervalMode(apply: boolean) {
-    const className = 'range-slider__input--interval';
+    const className = 'range-slider__input_interval';
     this.nativeElement.classList.toggle(className, apply);
   }
 

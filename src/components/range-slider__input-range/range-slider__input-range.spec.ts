@@ -90,7 +90,7 @@ describe('RangeSliderInput provider', () => {
   test('intervalMode value changing', () => {
     expect(
       rangeSliderInput.elements.input.nativeElement.classList.contains(
-        'range-slider__input--interval',
+        'range-slider__input_interval',
       ),
     ).toBeFalsy();
 
@@ -101,7 +101,7 @@ describe('RangeSliderInput provider', () => {
 
     expect(
       rangeSliderInput.elements.input.nativeElement.classList.contains(
-        'range-slider__input--interval',
+        'range-slider__input_interval',
       ),
     ).toBeTruthy();
   });
