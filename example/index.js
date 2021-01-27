@@ -7,7 +7,7 @@ window.addEventListener('load', () => {
     {
       index: 1,
       props: {
-        min: 100,
+        min: 0,
         max: 1000,
         step: 10,
         from: 300,

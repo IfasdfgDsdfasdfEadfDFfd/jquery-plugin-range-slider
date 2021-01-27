@@ -88,8 +88,6 @@ class ThumbMarker extends View {
   }
 
   set text(value: string) {
-    this.replaceChildren([value]);
-
     const multiplier = parseInt(styles.rootFontSize);
     const calculatedValue =
       value.split(' ').join('').split('.').join('').length * multiplier;
@@ -101,6 +99,7 @@ class ThumbMarker extends View {
     const offset = -((this.width - this.parentWidth) / 2);
     this.nativeElement.style.setProperty('margin-left', `${offset}px`);
 
+    this.replaceChildren([value]);
     this.positionCorrection();
   }
 
