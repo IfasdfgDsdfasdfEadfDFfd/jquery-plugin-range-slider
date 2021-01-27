@@ -142,6 +142,7 @@ describe('ThumbMarker view', () => {
 
   beforeEach(() => {
     marker = new ThumbMarker();
+    marker.parent = new Thumb();
   });
 
   test('set text as child element', () => {
@@ -192,24 +193,9 @@ describe('ThumbMarker view', () => {
     expect(resetMarginMock.mock.calls.length).toEqual(1);
     expect(setVerticalMarginMock.mock.calls.length).toEqual(1);
   });
-  test('setPrimaryColor()', () => {
-    const color = 'rgb(255, 255, 133)';
-    expect(marker.color).toEqual('');
-
-    marker.setPrimaryColor(color);
-
-    expect(marker.color).toEqual(color);
-    expect(marker.nativeElement.style.getPropertyValue('border-color')).toEqual(
-      '',
-    );
-    expect(marker.nativeElement.style.getPropertyValue('color')).toEqual('');
-    expect(
-      marker.nativeElement.style.getPropertyValue('background-color'),
-    ).toEqual(color);
-  });
   test('invertColors()', () => {
     const color = 'rgb(255, 255, 133)';
-    marker.setPrimaryColor(color);
+    marker.parent.setPrimaryColor(color);
     marker.invertColors();
 
     expect(
@@ -222,7 +208,7 @@ describe('ThumbMarker view', () => {
   });
   test('resetColors()', () => {
     const color = 'rgb(255, 255, 133)';
-    marker.setPrimaryColor(color);
+    marker.parent.setPrimaryColor(color);
     marker.invertColors();
 
     expect(

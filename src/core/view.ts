@@ -6,7 +6,7 @@ interface IViewProps {
 
 type EventCallback = (event: Event) => void;
 
-class View {
+class View<TParent extends View = any> {
   readonly tag: string;
   readonly nativeElement: HTMLElement;
 
@@ -20,6 +20,7 @@ class View {
 
   throwErrorIfHookNotImplemented = false;
 
+  parent!: TParent;
   children: IViewProps['children'];
   attrs: IViewProps['attrs'];
 
@@ -73,6 +74,7 @@ class View {
         const text = document.createTextNode(child);
         el.appendChild(text);
       } else {
+        child.parent = this;
         el.appendChild(child.nativeElement);
       }
 

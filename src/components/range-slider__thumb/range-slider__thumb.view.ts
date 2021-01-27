@@ -36,10 +36,8 @@ class Thumb extends View {
   }
 
   setPrimaryColor(value: string) {
-    this.nativeElement.style.setProperty('background-color', value);
     this.color = value;
-
-    this.marker.setPrimaryColor(value);
+    this.chooseColors();
   }
 
   chooseColors(): void {
@@ -71,11 +69,10 @@ class Thumb extends View {
   }
 }
 
-class ThumbMarker extends View {
+class ThumbMarker extends View<Thumb> {
   hidingClassName = 'range-slider__thumb__marker--hidden';
   minVerticalMargin = 25;
   isVertical = false;
-  color = '';
   width = 0;
 
   constructor() {
@@ -108,21 +105,16 @@ class ThumbMarker extends View {
     }
   }
 
-  setPrimaryColor(value: string) {
-    this.color = value;
-    this.resetColors();
-  }
-
   invertColors() {
     this.nativeElement.style.removeProperty('background-color');
-    this.nativeElement.style.setProperty('color', this.color);
-    this.nativeElement.style.setProperty('border-color', this.color);
+    this.nativeElement.style.setProperty('color', this.parent.color);
+    this.nativeElement.style.setProperty('border-color', this.parent.color);
   }
 
   resetColors() {
     this.nativeElement.style.removeProperty('border-color');
     this.nativeElement.style.removeProperty('color');
-    this.nativeElement.style.setProperty('background-color', this.color);
+    this.nativeElement.style.setProperty('background-color', this.parent.color);
   }
 
   setVerticalMargin() {
