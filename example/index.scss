@@ -75,7 +75,7 @@ body {
   }
 }
 
-.configuration__tool--wide {
+.configuration__tool_wide {
   grid-column: 1 / span 2;
 
   .configuration__input {
@@ -134,7 +134,7 @@ input:focus {
     padding: 2rem 1rem;
   }
 
-  .configuration__tool--wide {
+  .configuration__tool_wide {
     grid-column: 1;
   }
 }
