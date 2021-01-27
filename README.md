@@ -108,13 +108,13 @@ run jest (Testing framework) coverage.
 
 `(npm|yarn) run lint:ts`
 
-run eslint for ts files located in src folder, run command with --fix postfix if you want auto fix some appeared problems.
+run eslint for ts files located in src folder, run command with --fix parameter if you want auto fix some appeared problems.
 
 ### Lint scss:
 
 `(npm|yarn) run lint:scss`
 
-run stylelint for scss files locate in src folder, run command with --fix postfix if you want auto fix some appeared problems.
+run stylelint for scss files locate in src folder, run command with --fix parameter if you want auto fix some appeared problems.
 
 ### Run prettier:
 
