@@ -1,4 +1,3 @@
-import { Store } from '@core';
 import { View } from '@core';
 
 abstract class Provider<TStoreState, TElements> {

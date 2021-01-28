@@ -1,4 +1,4 @@
-import { memo, deepEqual } from 'core/utils';
+import { memo, deepEqual, Observer } from 'core/utils';
 
 describe('utils module', () => {
   test('memo()', () => {
@@ -100,6 +100,40 @@ describe('utils module', () => {
           { a: [{ a: false }, 'another string', 321] },
         ),
       ).toBeFalsy();
+    });
+  });
+
+  describe('Observer', () => {
+    const initState = 'init state';
+    let observer: ObserverInterface<string>;
+
+    beforeEach(() => {
+      observer = Observer(initState);
+    });
+
+    test('get current state', () => {
+      observer.subscribe(state => {
+        expect(state).toEqual(initState);
+      });
+      observer.idleCrank();
+    });
+
+    test('calls listener when new state arrived', () => {
+      const listener = jest.fn();
+      observer.subscribe(listener);
+
+      expect(listener.mock.calls.length).toEqual(0);
+      observer.idleCrank();
+      expect(listener.mock.calls.length).toEqual(1);
+    });
+
+    test('push next state', () => {
+      const nextState = 'next state';
+
+      observer.subscribe(state => {
+        expect(state).toEqual(nextState);
+      });
+      observer.push(nextState);
     });
   });
 });

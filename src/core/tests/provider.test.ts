@@ -1,4 +1,4 @@
-import { View, Provider, Store, createStore } from '@core';
+import { View, Provider, createStore } from '@core';
 
 describe('test provider', () => {
   let STORE: Store<string>;

@@ -1,4 +1,4 @@
-import { createStore, NaNValidator, Store } from '@core';
+import { createStore, NaNValidator } from '@core';
 import { actionNames, IRangeSliderStoreState, rangeSliderStoreReducer } from '@store';
 import { RangeSliderTrack, TrackScale } from './range-slider__track.view';
 

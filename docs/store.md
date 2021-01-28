@@ -24,7 +24,7 @@ import { createStore } from './src/core/store.ts';
 
 - first of all `getStore()` function obviously return current store state and that's all.
 - `subscribe(cb: Listener) => unsubscribe()` to get actual data every time state has been updated you should subscribe to store and pass callback as argument, also subscribe return function its calling remove your callback from store.
-- `dispatch(action: Action)` function that takes action as argument and pass it to reducer that on its own turn produce next value and that event generates calling listeners.
+- `dispatch(action: StoreAction)` function that takes action as argument and pass it to reducer that on its own turn produce next value and that event generates calling listeners.
 - `coldStart()` simple helpful function its task to force store call every listener.
 
 ![store data flow picture](./store-data-flow.svg)

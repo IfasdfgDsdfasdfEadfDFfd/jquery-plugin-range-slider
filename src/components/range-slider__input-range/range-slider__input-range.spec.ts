@@ -1,4 +1,4 @@
-import { createStore, NaNValidator, Store } from '@core';
+import { createStore, NaNValidator } from '@core';
 import { actionNames, IRangeSliderStoreState, rangeSliderStoreReducer } from '@store';
 import { RangeSliderInput, RangeSliderLeftInput } from './range-slider__input-range.view';
 

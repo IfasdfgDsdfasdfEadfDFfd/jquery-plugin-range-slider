@@ -1,4 +1,3 @@
-import { Action, Reducer } from '@core';
 import { cb } from 'core/utils';
 
 import { actionNames, getMax, getMin } from './actions';
@@ -19,8 +18,8 @@ interface IRangeSliderStoreState {
   fixedValues: string[];
 }
 
-const rangeSliderStoreReducer: Reducer<IRangeSliderStoreState> = (
-  action: Action,
+const rangeSliderStoreReducer: StoreReducer<IRangeSliderStoreState> = (
+  action: StoreAction,
   state: IRangeSliderStoreState,
 ): IRangeSliderStoreState => {
   let min, max, step: number;

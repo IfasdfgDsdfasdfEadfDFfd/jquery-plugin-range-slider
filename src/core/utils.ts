@@ -47,4 +47,28 @@ const deepEqual = (elm1: any, elm2: any): boolean => {
   return false;
 };
 
-export { makeValueLikeCallback, memo, useMemo, deepEqual, cb };
+function Observer<T>(initState: T): ObserverInterface<T> {
+  let currentState: T = initState;
+  const listeners: ObserverListener<T>[] = [];
+
+  return {
+    push(nextState) {
+      currentState = nextState;
+      listeners.forEach(listener => {
+        listener(nextState);
+      });
+    },
+
+    subscribe(listener) {
+      const index = listeners.push(listener) - 1;
+      // unsubscribe
+      return () => listeners.splice(index, 1);
+    },
+
+    idleCrank() {
+      this.push(currentState);
+    },
+  };
+}
+
+export { makeValueLikeCallback, memo, useMemo, deepEqual, cb, Observer };

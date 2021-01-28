@@ -6,25 +6,26 @@ describe('store test', () => {
 
   const REDUCER = jest.fn(x => x.value);
   const ACTION = jest.fn();
+  const LISTENER = jest.fn(x => x);
+
   ACTION.mockReturnValue({
     name: 'action_name',
     value: NEXT_STATE,
   });
+  let store: Store<string>;
+
+  beforeEach(() => {
+    store = createStore(INIT_STATE, REDUCER, [NaNValidator]);
+    store.coldStart();
+  });
 
   test('reducer should be called once for every dispatch call', () => {
-    const store = createStore(INIT_STATE, REDUCER);
-    store.dispatch(ACTION());
-
     expect(REDUCER.mock.calls.length).toEqual(1);
-
     store.dispatch(ACTION());
-    store.dispatch(ACTION());
-
-    expect(REDUCER.mock.calls.length).toEqual(3);
+    expect(REDUCER.mock.calls.length).toEqual(2);
   });
 
   test('getStore() return new state after dispatch has been called', () => {
-    const store = createStore(INIT_STATE, REDUCER);
     expect(store.getState()).toEqual(INIT_STATE);
 
     store.dispatch(ACTION());
@@ -32,7 +33,6 @@ describe('store test', () => {
   });
 
   test('all listeners should be called every time dispatch was called', () => {
-    const store = createStore(INIT_STATE, REDUCER);
     const LISTENER = jest.fn(x => x);
 
     store.subscribe(LISTENER);
@@ -48,10 +48,6 @@ describe('store test', () => {
         name: 'ACTION_NAME',
         value: NaN,
       };
-      const LISTENER = jest.fn(x => x);
-
-      const store = createStore(INIT_STATE, REDUCER, [NaNValidator]);
-
       store.subscribe(LISTENER);
 
       store.dispatch(ACTION_NAN_VALUE);

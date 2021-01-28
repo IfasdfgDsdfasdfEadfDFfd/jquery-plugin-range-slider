@@ -1,4 +1,4 @@
-import { View, EventCallback, Provider, Store } from '@core';
+import { View, EventCallback, Provider } from '@core';
 import { IRangeSliderStoreState, actionNames } from '@store';
 import { Thumb } from 'components/range-slider__thumb';
 import { useMemo } from 'core/utils';
