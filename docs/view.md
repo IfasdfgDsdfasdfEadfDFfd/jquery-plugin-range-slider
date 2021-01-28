@@ -59,77 +59,111 @@ link.onClick(event => {
 });
 ```
 
+## Getters & Setters
+
+Get DOM element clientWidth.
+
+`get selfWidth(): number;`
+
+Get DOM parent element clientWidth.
+
+`get parentWidth(): number;`
+
+Set element focused state by storing value to `isFocused` prop if `focusClassName` property was provided toggle that css class on current DOM element then trigger (`handleFocusChange`) function.
+
+`set focused(value: boolean);`
+
+Set element hovered state by storing value to `isHovered` prop if `hoverClassName` property was provided toggle that css class on current DOM element then trigger (`handleHoverChange`) function.
+
+`set hovered(value: boolean);`
+
+Set element visibility state by storing value to `isVisible` prop if `hidingClassName` property was provided toggle that css class on current DOM element then trigger (`handleVisibilityChange`) function.
+
+`set visible(value: boolean);`
+
 ## View class API
 
-### Definition
+### Add new children
+
+**Definition**
 
 Append children to existing.
 
 `appendChildren(children: [View or string]): void;`
 
-### Usage Example
+**Usage Example**
 
 ```javascript
 view.appendChildren([view1, view2, viewN, ...]);
 view.appendChildren(['string', 'also string', ...]);
 ```
 
-### Definition
+### Replace children
+
+**Definition**
 
 Replace existing children.
 
 `replaceChildren(children: [View or string]): void;`
 
-### Usage Example
+**Usage Example**
 
 ```javascript
 view.replaceChildren([view1, view2, viewN, ...]);
 view.replaceChildren(['string', 'also string', ...]);
 ```
 
-### Definition
+### Focus in handle
+
+**Definition**
 
 Register handler for `focusin` html event.
 
 `handleViewFocusIn(handler: function): void;`
 
-### Usage Example
+**Usage Example**
 
 ```javascript
 view.handleViewFocusIn(event => event.target.value);
 ```
 
-### Definition
+### Focus leave handle
+
+**Definition**
 
 Register handler for `focusout` html event.
 
 `handleViewFocusOut(handler: function): void;`
 
-### Usage Example
+**Usage Example**
 
 ```javascript
 view.handleViewFocusOut(event => event.target.value);
 ```
 
-### Definition
+### Mouse enter handle
+
+**Definition**
 
 Register handler for `mouseenter` html event.
 
 `handleViewMouseIn(handler: function): void;`
 
-### Usage Example
+**Usage Example**
 
 ```javascript
 view.handleViewMouseIn(event => event.target.value);
 ```
 
-### Definition
+### Mouse leave handle
+
+**Definition**
 
 Register handler for `mouseleave` html event.
 
-`handleViewMouseIn(handler: function): void;`
+`handleViewMouseOut(handler: function): void;`
 
-### Usage Example
+**Usage Example**
 
 ```javascript
 view.handleViewMouseOut(event => event.target.value);
