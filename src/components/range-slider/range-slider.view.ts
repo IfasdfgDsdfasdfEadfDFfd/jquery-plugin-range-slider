@@ -1,4 +1,4 @@
-import { Provider, Store, View } from '@core';
+import { Provider, View } from '@core';
 import { IRangeSliderStoreState } from '@store';
 import { RangeSliderLeftInput, RangeSliderRightInput } from 'components/range-slider__input-range';
 import { RangeSliderProgress } from 'components/range-slider__progress';

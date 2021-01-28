@@ -1,4 +1,4 @@
-import { Provider, Store, View } from '@core';
+import { Provider, View } from '@core';
 import { actionNames, IRangeSliderStoreState } from '@store';
 import { useMemo } from 'core/utils';
 
