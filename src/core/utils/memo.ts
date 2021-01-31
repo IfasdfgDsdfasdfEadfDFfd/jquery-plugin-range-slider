@@ -1,6 +1,6 @@
+/* eslint-disable fsd/hof-name-prefix */
 import { deepEqual } from './deepEqual';
 
-// eslint-disable-next-line fsd/hof-name-prefix
 function memo<TArg, TResult>(targetFn: (arg: TArg) => TResult): MemoFunc<TArg, TResult> {
   let prevArg: TArg;
   let prevResult: TResult;
@@ -15,4 +15,13 @@ function memo<TArg, TResult>(targetFn: (arg: TArg) => TResult): MemoFunc<TArg, T
   };
 }
 
-export { memo };
+function memoDecor(
+  _targetFn: unknown,
+  _propertyKey: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  descriptor: TypedPropertyDescriptor<any>,
+): void {
+  descriptor.value = memo(descriptor.value);
+}
+
+export { memo, memoDecor };

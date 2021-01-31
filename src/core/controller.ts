@@ -7,9 +7,9 @@ class Controller implements ControllerInterface {
     return {};
   }
 
-  listen(store: ModelInterface, view: ViewInterface): void {
-    store.subscribe(data => {
-      view.render({ ...this.mapState(data), ...this.mapDispatch(store.dispatch) });
+  listen(model: ModelInterface, view: ViewInterface): void {
+    model.subscribe(data => {
+      view.render({ ...this.mapState(data), ...this.mapDispatch(model.dispatch) });
     });
   }
 }
