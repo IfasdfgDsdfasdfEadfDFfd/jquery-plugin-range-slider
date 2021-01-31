@@ -61,10 +61,7 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          IS_DEV_MODE
-            ? { loader: 'style-loader' }
-            : MiniCssExtractPlugin.loader,
-          { loader: 'css-modules-typescript-loader' },
+          IS_DEV_MODE ? { loader: 'style-loader' } : MiniCssExtractPlugin.loader,
           { loader: 'css-loader' },
           { loader: 'postcss-loader' },
           { loader: 'sass-loader' },
