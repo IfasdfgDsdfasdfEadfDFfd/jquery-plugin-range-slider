@@ -49,7 +49,7 @@ class InputRange extends View {
     this.nativeElement.addEventListener('input', cb);
   }
 
-  handleVisibilityChange() {
+  handleVisibilityChange(): void {
     if (this.isVisible) {
       this.nativeElement.removeAttribute('tabindex');
     } else {

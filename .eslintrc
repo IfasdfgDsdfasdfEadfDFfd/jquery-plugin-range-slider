@@ -6,6 +6,13 @@
     "ecmaVersion": 6,
     "sourceType": "module"
   },
+  "settings": {
+    "import/resolver": {
+      "typescript": {
+        "project": "./"
+      }
+    }
+  },
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
