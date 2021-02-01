@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Track Views TrackScaleItemButton button snapshot 1`] = `"<button type=\\"button\\" class=\\"range-slider__track-scale__item-button\\">button text</button>"`;

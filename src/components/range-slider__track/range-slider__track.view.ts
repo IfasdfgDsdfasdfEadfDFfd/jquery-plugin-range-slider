@@ -31,6 +31,10 @@ class TrackScaleItem extends View<TrackScaleItemProps> {
   children = {
     button: new TrackScaleItemButton(),
   };
+
+  update({ buttonText }: TrackScaleItemProps): void {
+    this.children.button.update({ text: buttonText });
+  }
 }
 
 class TrackScaleItemButton extends View<TrackScaleItemButtonProps> {
