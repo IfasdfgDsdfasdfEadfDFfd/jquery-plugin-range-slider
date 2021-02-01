@@ -1,27 +1,25 @@
 /* eslint-disable fsd/hof-name-prefix */
 import { deepEqual } from './deepEqual';
 
-function memo<TArg, TResult>(targetFn: (arg: TArg) => TResult): MemoFunc<TArg, TResult> {
-  let prevArg: TArg;
-  let prevResult: TResult;
+function memo(
+  _target: unknown,
+  _propertyKey: string,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  descriptor: TypedPropertyDescriptor<any>,
+): void {
+  let prevArgs: unknown;
+  let prevResult: unknown;
 
-  return (arg: TArg): TResult => {
-    if (!deepEqual(arg, prevArg)) {
-      prevArg = arg;
-      prevResult = targetFn(arg);
+  const method = descriptor.value;
+
+  descriptor.value = function (...args: unknown[]): unknown {
+    if (!deepEqual(args, prevArgs)) {
+      prevArgs = args;
+      prevResult = method.apply(this, args);
     }
 
     return prevResult;
   };
 }
 
-function memoDecor(
-  _targetFn: unknown,
-  _propertyKey: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  descriptor: TypedPropertyDescriptor<any>,
-): void {
-  descriptor.value = memo(descriptor.value);
-}
-
-export { memo, memoDecor };
+export { memo };

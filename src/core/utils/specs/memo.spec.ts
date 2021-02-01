@@ -1,35 +1,45 @@
 import { memo } from 'core/utils';
 
-describe('memo func', () => {
-  let testFn: jest.Mock;
-  let memoFn: MemoFunc<unknown, unknown>;
+describe('memo decorator', () => {
+  let spyFn: jest.Mock;
+
+  class Test {
+    property = 111;
+
+    @memo
+    method(...args: unknown[]): number {
+      spyFn(...args);
+      return this.property;
+    }
+  }
+
+  let testClass: Test;
 
   beforeEach(() => {
-    testFn = jest.fn();
-    testFn.mockReturnValue('return value');
-    memoFn = memo(testFn);
+    spyFn = jest.fn();
+    testClass = new Test();
   });
 
-  const testMemoFn = (arg: unknown) => {
-    const result = memoFn(arg);
-    const callTimes = testFn.mock.calls.length;
-    expect(testFn).toHaveBeenLastCalledWith(arg);
+  const testMemo = (arg: unknown) => {
+    const result = testClass.method(arg);
+    const callTimes = spyFn.mock.calls.length;
+    expect(spyFn).toHaveBeenLastCalledWith(arg);
 
     // check that calling func again has no effect
-    const memoResult = memoFn(arg);
-    expect(testFn).toHaveBeenCalledTimes(callTimes);
+    const memoResult = testClass.method(arg);
+    expect(spyFn).toHaveBeenCalledTimes(callTimes);
     expect(memoResult).toEqual(result);
   };
 
-  test('creating memoFn does not calling its', () => {
-    expect(testFn).not.toHaveBeenCalled();
+  test('creating memo method does not calling its', () => {
+    expect(spyFn).not.toHaveBeenCalled();
   });
 
-  test('memorize target with args', () => {
-    testMemoFn('string');
-    testMemoFn(123);
-    testMemoFn(true);
-    testMemoFn(undefined);
-    testMemoFn([true, 123, 'string', null, { a: 'some thing' }]);
+  test('memorize target method args', () => {
+    testMemo('string');
+    testMemo(123);
+    testMemo(true);
+    testMemo(undefined);
+    testMemo([true, 123, 'string', null, { a: 'some thing' }]);
   });
 });
