@@ -4,15 +4,13 @@ class Component implements ComponentInterface {
   controller!: ControllerInterface;
 
   attachChildComponents(components: ComponentInterface[]): void {
-    const childViews: ViewInterface[] = [];
+    this.view.init();
 
     for (const component of components) {
       this.model.link(component.model);
+      component.view.init(this.view.nativeElement);
       component.controller.listen(this.model, component.view);
-      childViews.push(component.view);
     }
-
-    this.view.attachChildren(childViews);
   }
 
   attachToDocument(root: HTMLElement): void {

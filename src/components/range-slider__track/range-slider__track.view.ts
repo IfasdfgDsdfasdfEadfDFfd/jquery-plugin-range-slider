@@ -32,8 +32,8 @@ class TrackScaleItem extends View<TrackScaleItemProps> {
     button: new TrackScaleItemButton(),
   };
 
-  update({ buttonText }: TrackScaleItemProps): void {
-    this.children.button.update({ text: buttonText });
+  render({ buttonText }: TrackScaleItemProps): void {
+    this.children.button.render({ text: buttonText });
   }
 }
 
@@ -43,14 +43,12 @@ class TrackScaleItemButton extends View<TrackScaleItemButtonProps> {
     type: 'button',
     class: 'range-slider__track-scale__item-button',
   };
-  children = { text: '' };
 
-  update({ text }: TrackScaleItemButtonProps): void {
+  render({ text }: TrackScaleItemButtonProps): void {
     this.updateText(text);
   }
 
   updateText(newText: string): void {
-    this.children.text = newText;
     this.nativeElement.textContent = newText;
   }
 }

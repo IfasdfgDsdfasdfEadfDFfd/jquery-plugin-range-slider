@@ -2,47 +2,25 @@ class View<TProps extends ViewProps> implements ViewInterface {
   nativeElement!: HTMLElement;
 
   tag = 'div';
-  attrs = {};
-  children = {};
+  attrs: ViewAttrs = {};
+  children: ViewChildren = {};
 
-  initialized = false;
-
-  init(): void {
+  init(parentNode?: Node): void {
     this.nativeElement = document.createElement(this.tag);
-
     this.attachAttrs(this.attrs);
-    this.attachChildren(Object.values(this.children));
 
-    this.initialized = true;
+    Object.values(this.children).forEach(child => child.init(this.nativeElement));
+    if (parentNode) parentNode.appendChild(this.nativeElement);
   }
 
-  update(_props: TProps): void {
+  render(_props: TProps): void {
     throw new Error('Method not implemented.');
-  }
-
-  render(props: TProps): void {
-    this.initialized || this.init();
-    this.update(props);
   }
 
   attachAttrs(attrs: ViewAttrs): void {
     Object.entries(attrs).forEach(([name, value]) => {
       this.nativeElement.setAttribute(name, value);
     });
-  }
-
-  attachChildren(children: ViewInterface[]): void {
-    for (const child of children) {
-      let childNode: Node;
-
-      if (typeof child === 'string') {
-        childNode = document.createTextNode(child);
-      } else {
-        childNode = child.nativeElement;
-      }
-
-      this.nativeElement.appendChild(childNode);
-    }
   }
 }
 
