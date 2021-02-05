@@ -1,13 +1,24 @@
-import { TrackScaleItem, TrackScaleItemButton } from '../range-slider__track.view';
+import { TrackScale, TrackScaleItem, TrackScaleItemButton } from '../range-slider__track.view';
 
 describe('Track Views', () => {
-  // describe('TrackScale', () => {
-  //   let scale: TrackScale;
+  describe('TrackScale', () => {
+    let scale: TrackScale;
+    const scaleValues = ['first', 'second', 'third'];
 
-  //   beforeEach(() => {
+    beforeEach(() => {
+      scale = new TrackScale();
+      scale.init();
+      scale.updateScaleItems(scaleValues);
+    });
 
-  //   });
-  // });
+    test('update scale values', () => {
+      expect(scale.nativeElement.children.length).toEqual(scaleValues.length);
+    });
+
+    test('scale snapshot matching', () => {
+      expect(scale.nativeElement).toMatchSnapshot();
+    });
+  });
 
   describe('TrackScaleItem', () => {
     let item: TrackScaleItem;
@@ -19,8 +30,8 @@ describe('Track Views', () => {
       item.render({ buttonText });
     });
 
-    test('item snapshot', () => {
-      expect(item.nativeElement.outerHTML).toMatchSnapshot();
+    test('item snapshot matching', () => {
+      expect(item.nativeElement).toMatchSnapshot();
     });
   });
 
@@ -34,8 +45,18 @@ describe('Track Views', () => {
       button.render({ text });
     });
 
-    test('button snapshot', () => {
-      expect(button.nativeElement.outerHTML).toMatchSnapshot();
+    test('update text content', () => {
+      expect(button.nativeElement.textContent).toEqual(text);
+
+      const newText = 'new text';
+      expect(newText).not.toEqual(text);
+
+      button.updateText(newText);
+      expect(button.nativeElement.textContent).toEqual(newText);
+    });
+
+    test('button snapshot matching', () => {
+      expect(button.nativeElement).toMatchSnapshot();
     });
   });
 });
