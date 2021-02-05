@@ -1,4 +1,4 @@
-import './range-slider__track.styles.scss';
+import './styles/index.scss';
 
 export * from './range-slider__track.view';
 export * from './range-slider__track.model';
