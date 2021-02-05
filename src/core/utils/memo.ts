@@ -1,24 +1,38 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable fsd/hof-name-prefix */
 import { deepEqual } from './deepEqual';
 
-function memo(
-  _target: unknown,
-  _propertyKey: string,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  descriptor: TypedPropertyDescriptor<any>,
-): void {
-  let prevArgs: unknown;
-  let prevResult: unknown;
+function memo(methods: string[]) {
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  return function <T extends { new (...args: any[]): {} }>(constructor: T): T {
+    methods.forEach(methodName => {
+      const originalMethod = constructor.prototype[methodName];
 
-  const method = descriptor.value;
+      // create memo version of the original method
+      Object.defineProperty(constructor.prototype, methodName, {
+        value: function (...args: any[]) {
+          if (!deepEqual(this.memos[methodName].prevArgs, args)) {
+            this.memos[methodName].prevArgs = args;
+            this.memos[methodName].prevResult = originalMethod.apply(this, args);
+          }
 
-  descriptor.value = function (...args: unknown[]): unknown {
-    if (!deepEqual(args, prevArgs)) {
-      prevArgs = args;
-      prevResult = method.apply(this, args);
-    }
+          return this.memos[methodName].prevResult;
+        },
+      });
+    });
 
-    return prevResult;
+    // return mixin class with cached values
+    return class extends constructor {
+      memos = methods.reduce((memos, methodName) => {
+        return {
+          ...memos,
+          [methodName]: {
+            prevArgs: undefined,
+            prevResult: undefined,
+          },
+        };
+      }, {});
+    };
   };
 }
 

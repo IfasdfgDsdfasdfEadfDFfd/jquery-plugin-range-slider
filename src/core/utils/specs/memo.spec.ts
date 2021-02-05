@@ -1,45 +1,58 @@
 import { memo } from 'core/utils';
 
-describe('memo decorator', () => {
-  let spyFn: jest.Mock;
+describe('memo class decorator', () => {
+  const testArg = 'awesome stuff';
+  let testInstance: TestClass;
 
-  class Test {
-    property = 111;
+  let memoSpy: jest.Mock;
+  let ordinarySpy: jest.Mock;
 
-    @memo
-    method(...args: unknown[]): number {
-      spyFn(...args);
-      return this.property;
+  @memo(['memoMethod'])
+  class TestClass {
+    constructor(public memoSpy: jest.Mock, public ordinarySpy: jest.Mock) {}
+
+    memoMethod(arg: unknown) {
+      this.memoSpy();
+      return arg;
+    }
+
+    ordinaryMethod(arg: unknown) {
+      this.ordinarySpy();
+      return arg;
     }
   }
 
-  let testClass: Test;
-
   beforeEach(() => {
-    spyFn = jest.fn();
-    testClass = new Test();
+    memoSpy = jest.fn();
+    ordinarySpy = jest.fn();
+
+    testInstance = new TestClass(memoSpy, ordinarySpy);
+    // call both methods
+    testInstance.memoMethod(testArg);
+    testInstance.ordinaryMethod(testArg);
   });
 
-  const testMemo = (arg: unknown) => {
-    const result = testClass.method(arg);
-    const callTimes = spyFn.mock.calls.length;
-    expect(spyFn).toHaveBeenLastCalledWith(arg);
+  test("don't call memoMethod with same args", () => {
+    expect(memoSpy).toHaveBeenCalledTimes(1);
+    testInstance.memoMethod(testArg);
+    expect(memoSpy).toHaveBeenCalledTimes(1);
+  });
 
-    // check that calling func again has no effect
-    const memoResult = testClass.method(arg);
-    expect(spyFn).toHaveBeenCalledTimes(callTimes);
-    expect(memoResult).toEqual(result);
-  };
-
-  test('creating memo method does not calling its', () => {
-    expect(spyFn).not.toHaveBeenCalled();
+  test("don't call memoMethod with same args", () => {
+    expect(ordinarySpy).toHaveBeenCalledTimes(1);
+    testInstance.ordinaryMethod(testArg);
+    expect(ordinarySpy).toHaveBeenCalledTimes(2);
   });
 
   test('memorize target method args', () => {
-    testMemo('string');
-    testMemo(123);
-    testMemo(true);
-    testMemo(undefined);
-    testMemo([true, 123, 'string', null, { a: 'some thing' }]);
+    const prevArgs = Object.getOwnPropertyDescriptor(testInstance, 'memos')?.value['memoMethod']
+      .prevArgs;
+    expect(prevArgs).toEqual([testArg]);
+  });
+
+  test('memorize target method result', () => {
+    const prevResult = Object.getOwnPropertyDescriptor(testInstance, 'memos')?.value['memoMethod']
+      .prevResult;
+    expect(prevResult).toEqual(testArg);
   });
 });
