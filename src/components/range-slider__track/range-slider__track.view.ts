@@ -9,6 +9,11 @@ class Track extends View<TrackProps> {
     progress: new TrackProgress(),
     scale: new TrackScale(),
   };
+
+  render({ scaleProps, progressProps }: TrackProps): void {
+    this.children.scale.render(scaleProps);
+    this.children.progress.render(progressProps);
+  }
 }
 
 @memo(['updateLeftOffset', 'updateRightOffset'])

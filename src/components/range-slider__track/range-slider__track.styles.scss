@@ -1,0 +1,19 @@
+@import "../../vars";
+
+.range-slider__track {
+  width: 100%;
+
+  &-progress {
+    background-color: $default-color;
+  }
+
+  &-scale {
+    &__item {
+      color: $gray-color;
+    }
+
+    &__item-button {
+      color: inherit;
+    }
+  }
+}
