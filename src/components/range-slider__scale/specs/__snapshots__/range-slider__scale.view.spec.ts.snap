@@ -2,33 +2,33 @@
 
 exports[`Scale to match snapshot 1`] = `
 <ul
-  class="range-slider__track-scale"
+  class="range-slider__scale"
 >
   <li
-    class="range-slider__track-scale__item"
+    class="range-slider__scale__item"
   >
     <button
-      class="range-slider__track-scale__item-button"
+      class="range-slider__scale__item-button"
       type="button"
     >
       first
     </button>
   </li>
   <li
-    class="range-slider__track-scale__item"
+    class="range-slider__scale__item"
   >
     <button
-      class="range-slider__track-scale__item-button"
+      class="range-slider__scale__item-button"
       type="button"
     >
       second
     </button>
   </li>
   <li
-    class="range-slider__track-scale__item"
+    class="range-slider__scale__item"
   >
     <button
-      class="range-slider__track-scale__item-button"
+      class="range-slider__scale__item-button"
       type="button"
     >
       third
@@ -39,10 +39,10 @@ exports[`Scale to match snapshot 1`] = `
 
 exports[`ScaleItem to match snapshot 1`] = `
 <li
-  class="range-slider__track-scale__item"
+  class="range-slider__scale__item"
 >
   <button
-    class="range-slider__track-scale__item-button"
+    class="range-slider__scale__item-button"
     type="button"
   >
     button text
@@ -52,7 +52,7 @@ exports[`ScaleItem to match snapshot 1`] = `
 
 exports[`ScaleItemButton to match snapshot 1`] = `
 <button
-  class="range-slider__track-scale__item-button"
+  class="range-slider__scale__item-button"
   type="button"
 >
   button text

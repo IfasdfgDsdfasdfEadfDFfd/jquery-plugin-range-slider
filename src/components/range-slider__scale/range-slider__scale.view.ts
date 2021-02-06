@@ -5,7 +5,7 @@ import { memo } from 'core/utils';
 class Scale extends View<ScaleProps> {
   tag = 'ul';
   attrs = {
-    class: 'range-slider__track-scale',
+    class: 'range-slider__scale',
   };
 
   render({ items }: ScaleProps): void {
@@ -29,7 +29,7 @@ class Scale extends View<ScaleProps> {
 class ScaleItem extends View<ScaleItemProps> {
   tag = 'li';
   attrs = {
-    class: 'range-slider__track-scale__item',
+    class: 'range-slider__scale__item',
   };
   children = {
     button: new ScaleItemButton(),
@@ -45,7 +45,7 @@ class ScaleItemButton extends View<ScaleItemButtonProps> {
   tag = 'button';
   attrs = {
     type: 'button',
-    class: 'range-slider__track-scale__item-button',
+    class: 'range-slider__scale__item-button',
   };
 
   render({ text }: ScaleItemButtonProps): void {
