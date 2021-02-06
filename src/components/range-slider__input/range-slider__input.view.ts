@@ -39,8 +39,8 @@ class InputItemElement extends View<InputItemElementProps> {
 
   render({ min, max, value, valueChangeHandler }: InputItemElementProps): void {
     this.updateMin(min);
-    this.updateMin(max);
-    this.updateMin(value);
+    this.updateMax(max);
+    this.updateValue(value);
 
     this.onValueChange(valueChangeHandler);
   }
