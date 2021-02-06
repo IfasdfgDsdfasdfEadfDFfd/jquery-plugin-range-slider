@@ -8,3 +8,5 @@ interface RangeSliderModelData extends ModelData {
   track: TrackModelData;
   scale: ScaleModelData;
 }
+
+type RangeSliderProps = ViewProps;
