@@ -31,6 +31,17 @@ class Model implements ModelInterface {
   subscribe(listener: ModelListener): void {
     this.listeners.push(listener);
   }
+
+  coldStart(): void {
+    this.dispatch(gigletAction());
+  }
 }
+
+const gigletAction = (): ModelAction<null> => {
+  return {
+    type: '@GIGLET_ACTION',
+    payload: null,
+  };
+};
 
 export { Model };

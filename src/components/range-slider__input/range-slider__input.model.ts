@@ -5,8 +5,8 @@ class InputModel extends Model {
 
   data = {
     min: 0,
-    max: 0,
-    values: [],
+    max: 10,
+    values: [5],
   };
 }
 

@@ -15,7 +15,8 @@ interface ModelInterface {
   listeners: ModelListener[];
   getData(): ModelData;
   link(model: ChildModel): void;
+  reducer(data: ModelData, action: ModelAction<unknown>): ModelData;
   dispatch: ModelDispatch;
   subscribe(listener: ModelListener): void;
-  reducer(data: ModelData, action: ModelAction<unknown>): ModelData;
+  coldStart(): void;
 }

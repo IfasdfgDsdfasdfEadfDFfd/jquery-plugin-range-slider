@@ -9,4 +9,6 @@ interface RangeSliderModelData extends ModelData {
   scale: ScaleModelData;
 }
 
-type RangeSliderProps = ViewProps;
+interface RangeSliderProps extends ViewProps {
+  windowResizeHandler: EventListener;
+}

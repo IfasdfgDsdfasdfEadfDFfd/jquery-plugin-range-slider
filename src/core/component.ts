@@ -16,6 +16,7 @@ class Component implements ComponentInterface {
   attachToDocument(root: HTMLElement): void {
     root.appendChild(this.view.nativeElement);
     this.controller.listen(this.model, this.view);
+    this.model.coldStart();
   }
 }
 

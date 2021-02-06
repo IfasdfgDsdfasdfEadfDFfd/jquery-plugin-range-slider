@@ -1,9 +1,20 @@
 import { Controller } from '@core';
 
 class InputController extends Controller {
-  mapState({ common }: RangeSliderModelData): Partial<InputProps> {
+  mapState({ common, input }: RangeSliderModelData): DeepPartial<InputProps> {
     return {
-      color: common.color,
+      itemProps: {
+        elementProps: {
+          min: input.min,
+          max: input.max,
+          value: input.values[0],
+        },
+
+        thumbProps: {
+          color: common.color,
+          markerText: 'marker text',
+        },
+      },
     };
   }
 

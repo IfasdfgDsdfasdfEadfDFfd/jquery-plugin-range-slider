@@ -1,8 +1,10 @@
 import { Model } from '@core';
 
 class TrackModel extends Model {
-  leftOffset = '';
-  rightOffset = '';
+  name = 'track';
+
+  leftOffset = '25%';
+  rightOffset = '75%';
 }
 
 export { TrackModel };
