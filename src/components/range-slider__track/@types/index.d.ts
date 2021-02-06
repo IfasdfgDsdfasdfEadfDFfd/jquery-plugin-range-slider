@@ -1,3 +1,8 @@
+interface TrackModelData extends ModelData {
+  leftOffset: string;
+  rightOffset: string;
+}
+
 interface TrackProps extends ViewProps {
   progressProps: TrackProgressProps;
 }
