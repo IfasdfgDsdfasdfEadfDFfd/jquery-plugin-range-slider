@@ -1,5 +1,64 @@
-import { InputItemThumb, InputItemThumbMarker } from 'components/range-slider__input';
-import { InputItemElement } from '../range-slider__input.view';
+import {
+  Input,
+  InputItem,
+  InputItemElement,
+  InputItemThumb,
+  InputItemThumbMarker,
+} from 'components/range-slider__input';
+
+describe('Input', () => {
+  let input: Input;
+
+  const elementProps = {
+    min: 0,
+    max: 10,
+    value: 5,
+    valueChangeHandler: jest.fn(),
+  };
+  const thumbProps = {
+    markerText: 'marker text',
+    color: 'rgb(133, 133, 133)',
+  };
+  const itemProps = {
+    elementProps,
+    thumbProps,
+  };
+
+  beforeEach(() => {
+    input = new Input();
+    input.init();
+    input.render({ itemProps });
+  });
+
+  test('to match snapshot', () => {
+    expect(input.nativeElement).toMatchSnapshot();
+  });
+});
+
+describe('InputItem', () => {
+  let item: InputItem;
+
+  const elementProps = {
+    min: 0,
+    max: 10,
+    value: 5,
+    valueChangeHandler: jest.fn(),
+  };
+  const thumbProps = {
+    markerText: 'marker text',
+    color: 'rgb(133, 133, 133)',
+  };
+
+  beforeEach(() => {
+    item = new InputItem();
+    item.init();
+    item.render({ elementProps, thumbProps });
+  });
+
+  test('to match snapshot', () => {
+    expect(item.nativeElement).toMatchSnapshot();
+  });
+});
 
 describe('InputItemElement', () => {
   let element: InputItemElement;

@@ -1,5 +1,59 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Input to match snapshot 1`] = `
+<div
+  class="range-slider__input"
+>
+  <div
+    class="range-slider__input__item"
+  >
+    <input
+      class="range-slider__input__item__element"
+      max="10"
+      min="0"
+      type="range"
+      value="5"
+    />
+    <div
+      class="range-slider__input__item__thumb"
+      style="border-color: rgb(133, 133, 133);"
+    >
+      <div
+        class="range-slider__input__item__thumb__marker"
+        style="color: rgb(133, 133, 133);"
+      >
+        marker text
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`InputItem to match snapshot 1`] = `
+<div
+  class="range-slider__input__item"
+>
+  <input
+    class="range-slider__input__item__element"
+    max="10"
+    min="0"
+    type="range"
+    value="5"
+  />
+  <div
+    class="range-slider__input__item__thumb"
+    style="border-color: rgb(133, 133, 133);"
+  >
+    <div
+      class="range-slider__input__item__thumb__marker"
+      style="color: rgb(133, 133, 133);"
+    >
+      marker text
+    </div>
+  </div>
+</div>
+`;
+
 exports[`InputItemElement to match snapshot 1`] = `
 <input
   class="range-slider__input__item__element"

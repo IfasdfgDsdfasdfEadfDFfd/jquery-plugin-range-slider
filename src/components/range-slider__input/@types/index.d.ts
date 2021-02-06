@@ -6,7 +6,6 @@ interface InputModelData extends ModelData {
 
 interface InputProps extends ViewProps {
   itemProps: InputItemProps;
-  color: string;
 }
 
 interface InputItemProps extends ViewProps {
