@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputItemThumbMarker to match snapshot 1`] = `
+<div
+  class="range-slider__input__item__thumb__marker"
+  style="color: rgb(133, 133, 133);"
+>
+  marker text
+</div>
+`;
