@@ -1,4 +1,5 @@
 import { Component } from '@core';
+
 import { TrackController } from './range-slider__track.controller';
 import { TrackModel } from './range-slider__track.model';
 import { Track } from './range-slider__track.view';
