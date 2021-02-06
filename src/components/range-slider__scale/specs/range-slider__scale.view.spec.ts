@@ -1,5 +1,34 @@
 import { ScaleItemButton } from 'components/range-slider__scale';
-import { ScaleItem } from '../range-slider__scale.view';
+import { Scale, ScaleItem } from '../range-slider__scale.view';
+
+describe('Scale', () => {
+  let scale: Scale;
+  const items = ['first', 'second', 'third'];
+
+  beforeEach(() => {
+    scale = new Scale();
+    scale.init();
+    scale.render({ items });
+  });
+
+  test('updateItems()', () => {
+    expect(Object.keys(scale.children).length).toEqual(items.length);
+
+    const newItems = ['alpha', 'beta', 'delta', 'gamma'];
+    expect(newItems.length).not.toEqual(items.length);
+
+    scale.updateItems(newItems);
+    expect(Object.keys(scale.children).length).toEqual(newItems.length);
+
+    for (const [index, child] of Object.entries(scale.children)) {
+      expect(child.nativeElement.innerHTML.includes(newItems[+index])).toBeTruthy;
+    }
+  });
+
+  test('to match snapshot', () => {
+    expect(scale.nativeElement).toMatchSnapshot();
+  });
+});
 
 describe('ScaleItem', () => {
   let item: ScaleItem;
@@ -16,7 +45,7 @@ describe('ScaleItem', () => {
   });
 });
 
-describe('ScaleItemButton view', () => {
+describe('ScaleItemButton', () => {
   let button: ScaleItemButton;
   const text = 'button text';
 

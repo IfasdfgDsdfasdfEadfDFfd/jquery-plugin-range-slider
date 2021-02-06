@@ -1,7 +1,7 @@
 import { View } from '@core';
 import { memo } from 'core/utils';
 
-@memo(['updateScaleItems'])
+@memo(['updateItems'])
 class Scale extends View<ScaleProps> {
   tag = 'ul';
   attrs = {
@@ -9,10 +9,10 @@ class Scale extends View<ScaleProps> {
   };
 
   render({ items }: ScaleProps): void {
-    this.updateScaleItems(items);
+    this.updateItems(items);
   }
 
-  updateScaleItems(newItems: string[]): void {
+  updateItems(newItems: string[]): void {
     this.nativeElement.innerHTML = '';
 
     this.children = newItems.reduce((newChildren, value, index) => {
