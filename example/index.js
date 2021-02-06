@@ -1,6 +1,6 @@
 // const $ = require('jquery');
 // require('jquery-plugin-range-slider');
-require('./index.scss');
+// require('./index.scss');
 
 // window.addEventListener('load', () => {
 //   const parameters = [];
