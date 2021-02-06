@@ -30,12 +30,12 @@ class TrackProgress extends View<TrackProgressProps> {
     this.nativeElement.style.setProperty('background-color', newColor);
   }
 
-  updateLeftOffset(value: number): void {
-    this.nativeElement.style.setProperty('left', `${value}%`);
+  updateLeftOffset(value: string): void {
+    this.nativeElement.style.setProperty('left', value);
   }
 
-  updateRightOffset(value: number): void {
-    this.nativeElement.style.setProperty('right', `${value}%`);
+  updateRightOffset(value: string): void {
+    this.nativeElement.style.setProperty('right', value);
   }
 }
 

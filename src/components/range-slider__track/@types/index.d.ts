@@ -3,7 +3,7 @@ interface TrackProps extends ViewProps {
 }
 
 interface TrackProgressProps extends ViewProps {
-  leftOffset: number;
-  rightOffset: number;
+  leftOffset: string;
+  rightOffset: string;
   color: string;
 }
