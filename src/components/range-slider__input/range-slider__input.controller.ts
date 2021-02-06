@@ -1,13 +1,15 @@
 import { Controller } from '@core';
 
 class InputController extends Controller {
-  mapState({ min, max, value }: InputModelData): Partial<InputProps> {
-    return { data: { min, max, value } };
+  mapState({ common }: RangeSliderModelData): Partial<InputProps> {
+    return {
+      color: common.color,
+    };
   }
 
   mapDispatch(dispatch: ModelDispatch): Partial<InputProps> {
     return {
-      valueChangeHandler(event) {
+      valueChangeHandler(event: InputEvent) {
         const { value } = event.target as HTMLInputElement;
         // placeholder
         dispatch({ type: 'change', payload: value });
