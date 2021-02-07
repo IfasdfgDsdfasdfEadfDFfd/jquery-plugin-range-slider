@@ -9,6 +9,7 @@ class Model implements ModelInterface {
       return { ...data, [name]: model.getData() };
     }, {});
 
+    console.log(this.name, this.data);
     return {
       ...this.data,
       ...linkedData,

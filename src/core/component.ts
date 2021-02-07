@@ -29,11 +29,10 @@ class Component implements ComponentInterface {
   }
 
   attachToDocument(root: HTMLElement): void {
-    root.appendChild(this.view.nativeElement);
-
     this.init();
     this.addSubscriber(this);
     this.model.coldStart();
+    root.appendChild(this.view.nativeElement);
   }
 }
 

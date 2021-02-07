@@ -1,10 +1,11 @@
 import { Controller } from '@core';
 
 class TrackController extends Controller {
-  mapState({ common, track }: RangeSliderModelData): Partial<TrackProps> {
+  mapState(data: RangeSliderModelData): Partial<TrackProps> {
+    console.log(data);
     return {
-      color: common.color,
-      bars: track.bars,
+      color: data.common.color,
+      bars: data.track.bars,
     };
   }
 }
