@@ -1,33 +1,19 @@
-import {
-  Input,
-  InputItem,
-  InputItemElement,
-  InputItemThumb,
-  InputItemThumbMarker,
-} from 'components/range-slider__input';
+import { Input, InputElement } from 'components/range-slider__input';
 
 describe('Input', () => {
   let input: Input;
 
-  const elementProps = {
+  const props = {
     min: 0,
     max: 10,
-    value: 5,
+    values: [1, 2, 3, 4],
     valueChangeHandler: jest.fn(),
-  };
-  const thumbProps = {
-    markerText: 'marker text',
-    color: 'rgb(133, 133, 133)',
-  };
-  const itemProps = {
-    elementProps,
-    thumbProps,
   };
 
   beforeEach(() => {
     input = new Input();
     input.init();
-    input.render({ itemProps });
+    input.render(props);
   });
 
   test('to match snapshot', () => {
@@ -35,141 +21,41 @@ describe('Input', () => {
   });
 });
 
-describe('InputItem', () => {
-  let item: InputItem;
+describe('InputElement', () => {
+  let inputElement: InputElement;
 
-  const elementProps = {
+  const props = {
     min: 0,
     max: 10,
     value: 5,
     valueChangeHandler: jest.fn(),
   };
-  const thumbProps = {
-    markerText: 'marker text',
-    color: 'rgb(133, 133, 133)',
-  };
 
   beforeEach(() => {
-    item = new InputItem();
-    item.init();
-    item.render({ elementProps, thumbProps });
-  });
-
-  test('to match snapshot', () => {
-    expect(item.nativeElement).toMatchSnapshot();
-  });
-});
-
-describe('InputItemElement', () => {
-  let element: InputItemElement;
-  let valueChangeHandler: jest.Mock;
-
-  const min = 0;
-  const max = 10;
-  const value = 5;
-
-  beforeEach(() => {
-    valueChangeHandler = jest.fn();
-    element = new InputItemElement();
-    element.init();
-    element.render({ min, max, value, valueChangeHandler });
+    inputElement = new InputElement();
+    inputElement.init();
+    inputElement.render(props);
   });
 
   test('updateMin()', () => {
-    expect(element.nativeElement.getAttribute('min')).toEqual(min.toString());
-
-    const newMin = 3;
-    expect(newMin).not.toEqual(min);
-
-    element.updateMin(newMin);
-    expect(element.nativeElement.getAttribute('min')).toEqual(newMin.toString());
+    const nextMin = 3;
+    inputElement.updateMin(nextMin);
+    expect(inputElement.nativeElement.getAttribute('min')).toEqual(nextMin.toString());
   });
 
   test('updateMax()', () => {
-    expect(element.nativeElement.getAttribute('max')).toEqual(max.toString());
-
-    const newMax = 13;
-    expect(newMax).not.toEqual(max);
-
-    element.updateMax(newMax);
-    expect(element.nativeElement.getAttribute('max')).toEqual(newMax.toString());
+    const nextMax = 13;
+    inputElement.updateMax(nextMax);
+    expect(inputElement.nativeElement.getAttribute('max')).toEqual(nextMax.toString());
   });
 
   test('updateValue()', () => {
-    expect(element.nativeElement.getAttribute('value')).toEqual(value.toString());
-
-    const newValue = 8;
-    expect(newValue).not.toEqual(value);
-
-    element.updateValue(newValue);
-    expect(element.nativeElement.getAttribute('value')).toEqual(newValue.toString());
+    const nextValue = 7;
+    inputElement.updateValue(nextValue);
+    expect(inputElement.nativeElement.getAttribute('value')).toEqual(nextValue.toString());
   });
 
   test('to match snapshot', () => {
-    expect(element.nativeElement).toMatchSnapshot();
-  });
-});
-
-describe('InputItemThumb', () => {
-  let thumb: InputItemThumb;
-
-  const markerText = 'marker text';
-  const color = 'rgb(133, 133, 133)';
-
-  beforeEach(() => {
-    thumb = new InputItemThumb();
-    thumb.init();
-    thumb.render({ markerText, color });
-  });
-
-  test('updateColor()', () => {
-    expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual(color);
-
-    const newColor = 'rgb(255, 255, 255)';
-    expect(newColor).not.toEqual(color);
-
-    thumb.updateColor(newColor);
-    expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual(newColor);
-  });
-
-  test('to match snapshot', () => {
-    expect(thumb.nativeElement).toMatchSnapshot();
-  });
-});
-
-describe('InputItemThumbMarker', () => {
-  let marker: InputItemThumbMarker;
-
-  const text = 'marker text';
-  const color = 'rgb(133, 133, 133)';
-
-  beforeEach(() => {
-    marker = new InputItemThumbMarker();
-    marker.init();
-    marker.render({ text, color });
-  });
-
-  test('updateText()', () => {
-    expect(marker.nativeElement.textContent).toEqual(text);
-
-    const newText = 'new marker text';
-    expect(newText).not.toEqual(text);
-
-    marker.updateText(newText);
-    expect(marker.nativeElement.textContent).toEqual(newText);
-  });
-
-  test('updateColor()', () => {
-    expect(marker.nativeElement.style.getPropertyValue('color')).toEqual(color);
-
-    const newColor = 'rgb(255, 255, 255)';
-    expect(newColor).not.toEqual(color);
-
-    marker.updateColor(newColor);
-    expect(marker.nativeElement.style.getPropertyValue('color')).toEqual(newColor);
-  });
-
-  test('to match snapshot', () => {
-    expect(marker.nativeElement).toMatchSnapshot();
+    expect(inputElement.nativeElement).toMatchSnapshot();
   });
 });

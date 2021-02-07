@@ -4,7 +4,7 @@ import { memo } from 'core/utils';
 @memo(['updateColor'])
 class Thumb extends View<ThumbProps> {
   attrs = {
-    class: 'range-slider__input__item__thumb',
+    class: 'range-slider__thumb',
   };
   children = {
     marker: new ThumbMarker(),
@@ -24,7 +24,7 @@ class Thumb extends View<ThumbProps> {
 @memo(['updateText', 'updateColor'])
 class ThumbMarker extends View<ThumbMarkerProps> {
   attrs = {
-    class: 'range-slider__input__item__thumb__marker',
+    class: 'range-slider__thumb__marker',
   };
 
   render({ text, color }: ThumbMarkerProps): void {

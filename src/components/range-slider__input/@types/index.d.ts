@@ -5,17 +5,15 @@ interface InputModelData extends ModelData {
 }
 
 interface InputProps extends ViewProps {
-  itemProps: InputItemProps;
+  min: number;
+  max: number;
+  values: number[];
+  valueChangeHandler: (index: number, value: number) => void;
 }
 
-interface InputItemProps extends ViewProps {
-  elementProps: InputItemElementProps;
-  thumbProps: InputItemThumbProps;
-}
-
-interface InputItemElementProps extends ViewProps {
+interface InputElementProps extends ViewProps {
   min: number;
   max: number;
   value: number;
-  valueChangeHandler: EventListener;
+  valueChangeHandler: (index: number, value: number) => void;
 }
