@@ -21,12 +21,12 @@ describe('Model', () => {
     childModel.data = childData;
   });
 
-  test('getData() without linked models', () => {
-    expect(model.getData()).toEqual(rootData);
+  test('aggregateData() without linked models', () => {
+    expect(model.aggregateData()).toEqual(rootData);
   });
 
-  test('getData() with linked models', () => {
+  test('aggregateData() with linked models', () => {
     model.linkModel(childModel);
-    expect(model.getData()[childModel.name]).toEqual(childData);
+    expect(model.aggregateData()[childModel.name]).toEqual(childData);
   });
 });

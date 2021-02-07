@@ -4,11 +4,12 @@ class Model implements ModelInterface {
   linkedModels: ModelLinkedModels = {};
   listeners: ModelListener[] = [];
 
-  getData(): ModelData {
+  aggregateData(): ModelData {
     const linkedData = Object.entries(this.linkedModels).reduce((data, [name, model]) => {
-      return { ...data, [name]: model.getData() };
+      return { ...data, [name]: model.aggregateData() };
     }, {});
 
+    console.log(this.name, 'agg');
     return {
       ...this.data,
       ...linkedData,
@@ -25,7 +26,8 @@ class Model implements ModelInterface {
 
   dispatch<T>(action: ModelAction<T>): void {
     this.data = this.reducer(this.data, action);
-    this.listeners.forEach(listener => listener(this.getData()));
+    const aggregatedData = this.aggregateData();
+    this.listeners.forEach(listener => listener(aggregatedData));
   }
 
   subscribe(listener: ModelListener): void {
