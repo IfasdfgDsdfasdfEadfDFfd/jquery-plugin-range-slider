@@ -19,13 +19,3 @@ interface InputItemElementProps extends ViewProps {
   value: number;
   valueChangeHandler: EventListener;
 }
-
-interface InputItemThumbProps extends ViewProps {
-  markerText: string;
-  color: string;
-}
-
-interface InputItemThumbMarkerProps extends ViewProps {
-  text: string;
-  color: string;
-}
