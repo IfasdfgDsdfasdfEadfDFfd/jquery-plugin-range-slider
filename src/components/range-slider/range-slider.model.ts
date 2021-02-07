@@ -1,12 +1,10 @@
 import { Model } from '@core';
 
-class RangeSliderModel extends Model {
+class RangeSliderModel extends Model<RootModelData> {
   name = 'root';
 
   data = {
-    common: {
-      color: '#178fff',
-    },
+    color: '',
   };
 }
 

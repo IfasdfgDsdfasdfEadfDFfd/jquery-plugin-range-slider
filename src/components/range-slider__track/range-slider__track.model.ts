@@ -1,10 +1,10 @@
 import { Model } from '@core';
 
-class TrackModel extends Model {
+class TrackModel extends Model<TrackModelData> {
   name = 'track';
 
   data = {
-    bars: [{ leftOffset: '25%', rightOffset: '75%' }],
+    bars: [],
   };
 }
 

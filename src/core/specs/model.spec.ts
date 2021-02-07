@@ -1,8 +1,8 @@
 import { Model } from '@core';
 
 describe('Model', () => {
-  let model: Model;
-  let childModel: Model;
+  let model: Model<ModelData>;
+  let childModel: Model<ModelData>;
 
   const rootData = {
     value: 'root value',
@@ -22,11 +22,11 @@ describe('Model', () => {
   });
 
   test('aggregateData() without linked models', () => {
-    expect(model.aggregateData()).toEqual(rootData);
+    expect(model.aggregateData()).toEqual({ root: rootData });
   });
 
   test('aggregateData() with linked models', () => {
     model.linkModel(childModel);
-    expect(model.aggregateData()[childModel.name]).toEqual(childData);
+    expect(model.aggregateData()).toEqual({ root: rootData, child: childData });
   });
 });

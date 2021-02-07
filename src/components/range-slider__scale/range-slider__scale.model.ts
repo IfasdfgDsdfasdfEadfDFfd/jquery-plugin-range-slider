@@ -1,6 +1,6 @@
 import { Model } from '@core';
 
-class ScaleModel extends Model {
+class ScaleModel extends Model<ScaleModelData> {
   name = 'scale';
 
   data = {

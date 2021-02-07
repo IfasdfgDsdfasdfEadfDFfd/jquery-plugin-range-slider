@@ -1,22 +1,25 @@
-class Model implements ModelInterface {
+class Model<TData extends ModelData> implements ModelInterface {
   name = '';
-  data: ModelData = {};
+  data = {} as TData;
   linkedModels: ModelLinkedModels = {};
   listeners: ModelListener[] = [];
 
+  init(initData: TData): void {
+    this.data = initData;
+  }
+
   aggregateData(): ModelData {
-    const linkedData = Object.entries(this.linkedModels).reduce((data, [name, model]) => {
-      return { ...data, [name]: model.aggregateData() };
+    const linkedData = Object.values(this.linkedModels).reduce((data, model) => {
+      return { ...data, ...model.aggregateData() };
     }, {});
 
-    console.log(this.name, 'agg');
     return {
-      ...this.data,
+      [this.name]: this.data,
       ...linkedData,
     };
   }
 
-  reducer(data: ModelData, _action: ModelAction<unknown>): ModelData {
+  reducer(data: TData, _action: ModelAction<unknown>): TData {
     return data;
   }
 

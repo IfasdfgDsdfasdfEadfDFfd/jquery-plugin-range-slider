@@ -1,9 +1,9 @@
-interface CommonModelData extends ModelData {
+interface RootModelData extends ModelData {
   color: string;
 }
 
-interface RangeSliderModelData extends ModelData {
-  common: CommonModelData;
+interface RangeSliderModelData extends Record<string, ModelData> {
+  root: RootModelData;
   input: InputModelData;
   track: TrackModelData;
   scale: ScaleModelData;

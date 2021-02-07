@@ -13,6 +13,7 @@ interface ModelInterface {
   data: ModelData;
   linkedModels: ModelLinkedModels;
   listeners: ModelListener[];
+  init(initData: ModelData): void;
   aggregateData(): ModelData;
   linkModel(model: ChildModel): void;
   reducer(data: ModelData, action: ModelAction<unknown>): ModelData;

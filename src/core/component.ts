@@ -5,10 +5,12 @@ class Component implements ComponentInterface {
 
   childComponents: ComponentInterface[] = [];
 
-  init(): void {
+  init(initData: Record<string, ModelData>): void {
+    this.model.init(initData[this.model.name]);
     this.view.init();
 
     for (const component of this.childComponents) {
+      component.model.init(initData[component.model.name]);
       this.model.linkModel(component.model);
       component.view.init(this.view.nativeElement);
       this.addSubscriber(component);
@@ -28,8 +30,8 @@ class Component implements ComponentInterface {
     });
   }
 
-  attachToDocument(root: HTMLElement): void {
-    this.init();
+  attachToDocument(root: HTMLElement, initData: Record<string, ModelData>): void {
+    this.init(initData);
     this.addSubscriber(this);
     this.model.coldStart();
     root.appendChild(this.view.nativeElement);
