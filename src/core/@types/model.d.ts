@@ -5,7 +5,7 @@ type ModelAction<TActionPayload> = {
   type: string;
   payload: TActionPayload;
 };
-type ModelDispatch = (action: ModelAction<unknown>) => void;
+type ModelDispatch = (action: ModelAction) => void;
 type ModelListener = (state: ModelData) => void;
 
 interface ModelInterface {
@@ -14,7 +14,7 @@ interface ModelInterface {
   linkedModels: ModelLinkedModels;
   listeners: ModelListener[];
   getData(): ModelData;
-  link(model: ChildModel): void;
+  linkModel(model: ChildModel): void;
   reducer(data: ModelData, action: ModelAction<unknown>): ModelData;
   dispatch: ModelDispatch;
   subscribe(listener: ModelListener): void;

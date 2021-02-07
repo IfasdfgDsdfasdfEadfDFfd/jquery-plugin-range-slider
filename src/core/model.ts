@@ -1,5 +1,5 @@
 class Model implements ModelInterface {
-  name = this.constructor.name.toLowerCase();
+  name = '';
   data: ModelData = {};
   linkedModels: ModelLinkedModels = {};
   listeners: ModelListener[] = [];
@@ -15,15 +15,15 @@ class Model implements ModelInterface {
     };
   }
 
-  reducer(data: ModelData, _action: ModelAction<unknown>): ModelData {
-    return data;
+  reducer(data: ModelData, action: ModelAction<unknown>): ModelData {
+    return { data, action };
   }
 
-  link(model: ModelInterface): void {
+  linkModel(model: ModelInterface): void {
     this.linkedModels[model.name] = model;
   }
 
-  dispatch(action: ModelAction<unknown>): void {
+  dispatch<T>(action: ModelAction<T>): void {
     this.data = this.reducer(this.data, action);
     this.listeners.forEach(listener => listener(this.getData()));
   }

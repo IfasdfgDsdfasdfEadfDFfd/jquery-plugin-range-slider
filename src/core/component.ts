@@ -7,15 +7,24 @@ class Component implements ComponentInterface {
     this.view.init();
 
     for (const component of components) {
-      this.model.link(component.model);
+      this.model.linkModel(component.model);
       component.view.init(this.view.nativeElement);
-      component.controller.listen(this.model, component.view);
+      this.addSubscriber(component);
     }
+  }
+
+  addSubscriber(component: ComponentInterface): void {
+    this.model.subscribe(data => {
+      component.view.render({
+        ...component.controller.mapState(data),
+        ...component.controller.mapDispatch(component.model.dispatch),
+      });
+    });
   }
 
   attachToDocument(root: HTMLElement): void {
     root.appendChild(this.view.nativeElement);
-    this.controller.listen(this.model, this.view);
+    this.addSubscriber(this);
     this.model.coldStart();
   }
 }
