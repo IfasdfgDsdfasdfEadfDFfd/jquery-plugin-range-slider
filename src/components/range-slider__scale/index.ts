@@ -1,4 +1,4 @@
-import './styles/index.scss';
+import './styles/index.css';
 
 export * from './range-slider__scale.view';
 export * from './range-slider__scale.model';

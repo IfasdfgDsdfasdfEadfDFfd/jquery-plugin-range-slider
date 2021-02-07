@@ -1,4 +1,4 @@
-import './styles/index.scss';
+import './styles/index.css';
 
 export * from './range-slider__input.view';
 export * from './range-slider__input.model';

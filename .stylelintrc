@@ -10,15 +10,6 @@
   ],
   "ignoreFiles": "./dist/**/*.css",
   "rules": {
-    "selector-class-pattern": null,
-    "selector-pseudo-class-no-unknown": [
-      true,
-      {
-        "ignorePseudoClasses": [
-          "export"
-        ]
-      }
-    ],
     "order/properties-alphabetical-order": null,
     "indentation": 2,
     "max-nesting-depth": 2,

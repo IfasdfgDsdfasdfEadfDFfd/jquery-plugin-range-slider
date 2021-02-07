@@ -59,12 +59,11 @@ module.exports = {
         use: { loader: 'pug-loader', options: { pretty: IS_DEV_MODE } },
       },
       {
-        test: /\.scss$/,
+        test: /\.css$/,
         use: [
           IS_DEV_MODE ? { loader: 'style-loader' } : MiniCssExtractPlugin.loader,
           { loader: 'css-loader' },
           { loader: 'postcss-loader' },
-          { loader: 'sass-loader' },
         ],
       },
       {

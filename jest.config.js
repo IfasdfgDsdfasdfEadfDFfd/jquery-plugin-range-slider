@@ -5,7 +5,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts'],
   moduleNameMapper: {
-    '\\.scss$': 'identity-obj-proxy',
+    '\\.css$': 'identity-obj-proxy',
     '@core': '<rootDir>/src/core',
     'core/utils': '<rootDir>/src/core/utils/',
     '@components': '<rootDir>/src/components',
