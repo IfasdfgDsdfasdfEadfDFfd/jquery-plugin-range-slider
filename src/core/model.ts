@@ -9,15 +9,14 @@ class Model implements ModelInterface {
       return { ...data, [name]: model.getData() };
     }, {});
 
-    console.log(this.name, this.data);
     return {
       ...this.data,
       ...linkedData,
     };
   }
 
-  reducer(data: ModelData, action: ModelAction<unknown>): ModelData {
-    return { data, action };
+  reducer(data: ModelData, _action: ModelAction<unknown>): ModelData {
+    return data;
   }
 
   linkModel(model: ModelInterface): void {
