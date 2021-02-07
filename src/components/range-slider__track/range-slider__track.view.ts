@@ -5,12 +5,18 @@ class Track extends View<TrackProps> {
   attrs = {
     class: 'range-slider__track',
   };
-  children = {
-    item: new TrackProgress(),
-  };
 
-  render({ progressProps }: TrackProps): void {
-    this.children.item.render(progressProps);
+  render({ bars, color }: TrackProps): void {
+    bars.forEach((value, index) => {
+      const props = { ...value, color };
+
+      if (!this.children[index]) {
+        this.children[index] = new TrackProgress();
+        this.children[index].init(this.nativeElement);
+      }
+
+      this.children[index].render(props);
+    });
   }
 }
 

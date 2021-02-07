@@ -7,16 +7,24 @@ describe('Track', () => {
   const leftOffset = '25%';
   const rightOffset = '75%';
 
-  const progressProps = {
+  const props = {
     color,
-    leftOffset,
-    rightOffset,
+    bars: [
+      {
+        leftOffset,
+        rightOffset,
+      },
+      {
+        leftOffset,
+        rightOffset,
+      },
+    ],
   };
 
   beforeEach(() => {
     track = new Track();
     track.init();
-    track.render({ progressProps });
+    track.render(props);
   });
 
   test('to match snapshot', () => {

@@ -1,10 +1,10 @@
 interface TrackModelData extends ModelData {
-  leftOffset: string;
-  rightOffset: string;
+  bars: Array<{ leftOffset: string; rightOffset: string }>;
 }
 
 interface TrackProps extends ViewProps {
-  progressProps: TrackProgressProps;
+  color: string;
+  bars: Array<{ leftOffset: string; rightOffset: string }>;
 }
 
 interface TrackProgressProps extends ViewProps {
