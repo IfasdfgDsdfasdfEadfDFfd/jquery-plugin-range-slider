@@ -1,11 +1,9 @@
 {
   "extends": [
     "stylelint-config-standard",
-    "stylelint-config-sass-guidelines",
     "stylelint-config-hudochenkov/full"
   ],
   "plugins": [
-    "stylelint-scss",
     "stylelint-order"
   ],
   "ignoreFiles": "./dist/**/*.css",
