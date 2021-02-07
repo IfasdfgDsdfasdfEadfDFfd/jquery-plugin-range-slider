@@ -3,14 +3,20 @@ class Component implements ComponentInterface {
   model!: ModelInterface;
   controller!: ControllerInterface;
 
-  attachChildComponents(components: ComponentInterface[]): void {
+  childComponents: ComponentInterface[] = [];
+
+  init(): void {
     this.view.init();
 
-    for (const component of components) {
+    for (const component of this.childComponents) {
       this.model.linkModel(component.model);
       component.view.init(this.view.nativeElement);
       this.addSubscriber(component);
     }
+  }
+
+  attachChildComponents(components: ComponentInterface[]): void {
+    this.childComponents.concat(components);
   }
 
   addSubscriber(component: ComponentInterface): void {
@@ -24,6 +30,8 @@ class Component implements ComponentInterface {
 
   attachToDocument(root: HTMLElement): void {
     root.appendChild(this.view.nativeElement);
+
+    this.init();
     this.addSubscriber(this);
     this.model.coldStart();
   }
