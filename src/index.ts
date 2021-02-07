@@ -1,3 +1,5 @@
+import './vars.css';
+
 import { RangeSliderComponent } from 'components/range-slider';
 
 const initData: RangeSliderModelData = {

@@ -1,6 +1,7 @@
 .range-slider__input {
   position: relative;
   width: 100%;
+  height: var(--track-height);
 }
 
 .range-slider__input__element {
