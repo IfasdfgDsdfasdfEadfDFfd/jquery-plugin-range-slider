@@ -17,6 +17,8 @@ class Input extends View<InputProps> {
 
       this.children[index].render(childProps);
     });
+
+    this.nativeElement.classList.toggle(`${this.attrs.class}_interval`, values.length > 1);
   }
 }
 

@@ -9,4 +9,14 @@
   width: 100%;
   height: 100%;
   margin: 0;
+
+  &::-webkit-slider-thumb {
+    pointer-events: all;
+  }
+}
+
+.range-slider__input_interval {
+  .range-slider__input__element {
+    pointer-events: none;
+  }
 }
