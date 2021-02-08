@@ -8,7 +8,7 @@ class Input extends View<InputProps> {
 
   render({ min, max, values, valueChangeHandler }: InputProps): void {
     values.forEach((value, index) => {
-      const childProps = { min, max, value, valueChangeHandler };
+      const childProps = { min, max, value, index, valueChangeHandler };
 
       if (!this.children[index]) {
         this.children[index] = new InputElement();
@@ -30,10 +30,11 @@ class InputElement extends View<InputElementProps> {
     class: 'range-slider__input__element',
   };
 
-  render({ min, max, value }: InputElementProps): void {
+  render({ min, max, value, index, valueChangeHandler }: InputElementProps): void {
     this.updateMin(min);
     this.updateMax(max);
     this.updateValue(value);
+    this.updateInputHandler(value => valueChangeHandler(index, value));
   }
 
   updateMin(value: number): void {
@@ -46,6 +47,13 @@ class InputElement extends View<InputElementProps> {
 
   updateValue(value: number): void {
     this.nativeElement.setAttribute('value', value.toString());
+  }
+
+  updateInputHandler(handler: (value: number) => void): void {
+    this.nativeElement.oninput = event => {
+      const { value } = event.target as HTMLInputElement;
+      handler(parseFloat(value));
+    };
   }
 }
 

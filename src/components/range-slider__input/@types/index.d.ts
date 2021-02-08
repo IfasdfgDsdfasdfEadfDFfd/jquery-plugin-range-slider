@@ -15,5 +15,6 @@ interface InputElementProps extends ViewProps {
   min: number;
   max: number;
   value: number;
+  index: number;
   valueChangeHandler: (index: number, value: number) => void;
 }

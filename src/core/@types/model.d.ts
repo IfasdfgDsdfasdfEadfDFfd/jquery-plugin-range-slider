@@ -6,18 +6,21 @@ type ModelAction<TActionPayload> = {
   payload: TActionPayload;
 };
 type ModelDispatch = (action: ModelAction) => void;
-type ModelListener = (state: ModelData) => void;
+type ModelListener = (data: ModelData) => void;
+type ModelReducerCase<TData, TPayload> = (data: TData, payload: TPayload) => TData;
 
 interface ModelInterface {
   name: string;
   data: ModelData;
-  linkedModels: ModelLinkedModels;
   listeners: ModelListener[];
+  linkedModels: ModelLinkedModels;
+  reducerCases: Record<string, ModelReducer>;
+
   init(initData: ModelData): void;
   aggregateData(): ModelData;
   linkModel(model: ChildModel): void;
-  reducer(data: ModelData, action: ModelAction<unknown>): ModelData;
   dispatch: ModelDispatch;
+  reducer(data: ModelData, action: ModelAction<unknown>): ModelData;
   subscribe(listener: ModelListener): void;
   coldStart(): void;
 }

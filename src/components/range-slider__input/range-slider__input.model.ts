@@ -1,5 +1,17 @@
 import { Model } from '@core';
 
+enum INPUT_ACTIONS {
+  CHANGE_VALUE = '@CHANGE_VALUE',
+}
+
+const changeInputValue: ModelReducerCase<InputModelData, { index: number; value: number }> = (
+  data,
+  { index, value },
+) => {
+  data.values[index] = value;
+  return data;
+};
+
 class InputModel extends Model<InputModelData> {
   name = 'input';
 
@@ -8,6 +20,10 @@ class InputModel extends Model<InputModelData> {
     max: 0,
     values: [],
   };
+
+  reducerCases = {
+    [INPUT_ACTIONS.CHANGE_VALUE]: changeInputValue,
+  };
 }
 
-export { InputModel };
+export { InputModel, INPUT_ACTIONS };

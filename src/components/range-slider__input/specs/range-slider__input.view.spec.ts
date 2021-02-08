@@ -28,6 +28,7 @@ describe('InputElement', () => {
     min: 0,
     max: 10,
     value: 5,
+    index: 0,
     valueChangeHandler: jest.fn(),
   };
 

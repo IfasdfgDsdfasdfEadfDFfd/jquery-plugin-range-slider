@@ -3,6 +3,8 @@ class Model<TData extends ModelData> implements ModelInterface {
   data = {} as TData;
   linkedModels: ModelLinkedModels = {};
   listeners: ModelListener[] = [];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  reducerCases = {} as Record<string, ModelReducerCase<TData, any>>;
 
   init(initData: TData): void {
     this.data = initData;
@@ -19,15 +21,16 @@ class Model<TData extends ModelData> implements ModelInterface {
     };
   }
 
-  reducer(data: TData, _action: ModelAction<unknown>): TData {
-    return data;
+  reducer(data: TData, action: ModelAction<unknown>): TData {
+    const reducerCase = this.reducerCases[action.type];
+    return reducerCase ? reducerCase(data, action.payload) : data;
   }
 
   linkModel(model: ModelInterface): void {
     this.linkedModels[model.name] = model;
   }
 
-  dispatch<T>(action: ModelAction<T>): void {
+  dispatch(action: ModelAction<unknown>): void {
     this.data = this.reducer(this.data, action);
     const aggregatedData = this.aggregateData();
     this.listeners.forEach(listener => listener(aggregatedData));

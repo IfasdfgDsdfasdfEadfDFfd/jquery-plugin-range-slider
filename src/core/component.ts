@@ -25,7 +25,7 @@ class Component implements ComponentInterface {
     this.model.subscribe(data => {
       component.view.render({
         ...component.controller.mapState(data),
-        ...component.controller.mapDispatch(component.model.dispatch),
+        ...component.controller.mapDispatch(component.model.dispatch.bind(component.model)),
       });
     });
   }
