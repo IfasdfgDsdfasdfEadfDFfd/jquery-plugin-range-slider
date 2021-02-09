@@ -1,0 +1,11 @@
+.range-slider__track {
+  position: relative;
+  width: 100%;
+  height: var(--track-height);
+  background-color: var(--gray-color);
+}
+
+.range-slider__track__progress {
+  position: absolute;
+  height: 100%;
+}
