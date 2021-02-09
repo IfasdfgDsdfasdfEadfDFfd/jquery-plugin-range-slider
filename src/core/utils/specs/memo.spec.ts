@@ -7,7 +7,7 @@ describe('memo class decorator', () => {
   let memoSpy: jest.Mock;
   let ordinarySpy: jest.Mock;
 
-  @memo(['memoMethod'])
+  @memo({ methods: ['memoMethod'], cacheSize: Infinity })
   class TestClass {
     constructor(public memoSpy: jest.Mock, public ordinarySpy: jest.Mock) {}
 

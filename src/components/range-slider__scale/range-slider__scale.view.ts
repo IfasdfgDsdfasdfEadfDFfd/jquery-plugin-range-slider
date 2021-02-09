@@ -1,7 +1,7 @@
 import { View } from '@core';
 import { memo } from 'core/utils';
 
-@memo(['updateItems'])
+@memo({ methods: ['updateItems'] })
 class Scale extends View<ScaleProps> {
   tag = 'ul';
   attrs = {
@@ -40,7 +40,7 @@ class ScaleItem extends View<ScaleItemProps> {
   }
 }
 
-@memo(['updateText'])
+@memo({ methods: ['updateText'] })
 class ScaleItemButton extends View<ScaleItemButtonProps> {
   tag = 'button';
   attrs = {

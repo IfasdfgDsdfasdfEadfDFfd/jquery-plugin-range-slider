@@ -1,7 +1,7 @@
 import { View } from '@core';
 import { memo } from 'core/utils';
 
-@memo(['updateColor'])
+@memo({ methods: ['updateColor'] })
 class Thumb extends View<ThumbProps> {
   attrs = {
     class: 'range-slider__thumb',
@@ -21,7 +21,7 @@ class Thumb extends View<ThumbProps> {
   }
 }
 
-@memo(['updateText', 'updateColor'])
+@memo({ methods: ['updateText', 'updateColor'] })
 class ThumbMarker extends View<ThumbMarkerProps> {
   attrs = {
     class: 'range-slider__thumb__marker',

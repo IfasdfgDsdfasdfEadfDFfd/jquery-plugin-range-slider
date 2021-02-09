@@ -2,7 +2,7 @@
 /* eslint-disable fsd/hof-name-prefix */
 import { deepEqual } from './deepEqual';
 
-function memo(methods: string[]) {
+function memo({ methods, cacheSize = 1 }: { methods: string[]; cacheSize?: number }) {
   // eslint-disable-next-line @typescript-eslint/ban-types
   return function <T extends { new (...newArgs: any[]): {} }>(constructor: T): T {
     methods.forEach(methodName => {
@@ -11,18 +11,24 @@ function memo(methods: string[]) {
       // create memo version of the original method
       Object.defineProperty(constructor.prototype, methodName, {
         value: function (...newArgs: any[]) {
-          let index = this.memos[methodName].prevArgs.findIndex((prev: any) =>
-            deepEqual(prev, newArgs),
-          );
+          const prevArgs = this.memos[methodName].prevArgs;
+          const prevResults = this.memos[methodName].prevResults;
+
+          let index = prevArgs.findIndex((prev: any) => deepEqual(prev, newArgs));
 
           // caching new newArgs and result
           if (index === -1) {
-            this.memos[methodName].prevArgs.push(newArgs);
+            if (prevArgs.length === cacheSize) {
+              prevArgs.splice(0, 1);
+              prevResults.splice(0, 1);
+            }
+
+            prevArgs.push(newArgs);
             const newResult = originalMethod.apply(this, newArgs);
-            index = this.memos[methodName].prevResults.push(newResult) - 1;
+            index = prevResults.push(newResult) - 1;
           }
 
-          return this.memos[methodName].prevResults[index];
+          return prevResults[index];
         },
       });
     });

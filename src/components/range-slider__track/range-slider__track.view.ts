@@ -20,7 +20,7 @@ class Track extends View<TrackProps> {
   }
 }
 
-@memo(['updateColor', 'updateLeftOffset', 'updateRightOffset'])
+@memo({ methods: ['updateColor', 'updateLeftOffset', 'updateRightOffset'] })
 class TrackProgress extends View<TrackProgressProps> {
   attrs = {
     class: 'range-slider__track__progress',

@@ -1,7 +1,7 @@
 import { Controller } from '@core';
 import { memo } from 'core/utils';
 
-@memo(['calcOffset', 'calcOffsets', 'createOffsetPairs'])
+@memo({ methods: ['calcOffset', 'calcOffsets', 'createOffsetPairs'], cacheSize: Infinity })
 class TrackController extends Controller {
   mapState({ root, input }: RangeSliderModelData): Partial<TrackProps> {
     const offsets = this.calcOffsets({

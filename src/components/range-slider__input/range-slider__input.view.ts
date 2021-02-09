@@ -22,7 +22,7 @@ class Input extends View<InputProps> {
   }
 }
 
-@memo(['updateMin', 'updateMax', 'updateValue'])
+@memo({ methods: ['updateMin', 'updateMax', 'updateValue'] })
 class InputElement extends View<InputElementProps> {
   tag = 'input';
   attrs = {
