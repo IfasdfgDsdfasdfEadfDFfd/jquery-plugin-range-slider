@@ -47,6 +47,7 @@ class InputElement extends View<InputElementProps> {
 
   updateValue(value: number): void {
     this.nativeElement.setAttribute('value', value.toString());
+    (this.nativeElement as HTMLInputElement).value = value.toString();
   }
 
   updateInputHandler(handler: (value: number) => void): void {
