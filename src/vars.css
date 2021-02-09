@@ -1,5 +1,6 @@
 :root {
-  --primary-color: rgb(50, 147, 238);
+  --primary-color: #3293ee;
+  --gray-color: #dfdfdf;
   --track-height: 1.6rem;
   --thumb-width: 1.2rem;
   --thumb-height: 1.2rem;
