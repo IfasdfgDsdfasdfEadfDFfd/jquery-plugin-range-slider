@@ -28,16 +28,21 @@ class Model<TData extends ModelData> implements ModelInterface {
 
   linkModel(model: ModelInterface): void {
     this.linkedModels[model.name] = model;
+    model.subscribe(() => this.passDataToListeners());
   }
 
   dispatch(action: ModelAction<unknown>): void {
     this.data = this.reducer(this.data, action);
-    const aggregatedData = this.aggregateData();
-    this.listeners.forEach(listener => listener(aggregatedData));
+    this.passDataToListeners();
   }
 
   subscribe(listener: ModelListener): void {
     this.listeners.push(listener);
+  }
+
+  passDataToListeners(): void {
+    const aggregatedData = this.aggregateData();
+    this.listeners.forEach(listener => listener(aggregatedData));
   }
 
   coldStart(): void {
