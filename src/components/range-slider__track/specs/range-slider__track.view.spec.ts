@@ -4,19 +4,19 @@ describe('Track', () => {
   let track: Track;
 
   const color = 'rgb(133, 133, 133)';
-  const leftOffset = '25%';
-  const rightOffset = '75%';
+  const leftOffset = 25;
+  const rightOffset = 75;
 
   const props = {
     color,
-    bars: [
+    offsetPairs: [
       {
-        leftOffset,
-        rightOffset,
+        left: leftOffset,
+        right: rightOffset,
       },
       {
-        leftOffset,
-        rightOffset,
+        left: leftOffset,
+        right: rightOffset,
       },
     ],
   };
@@ -36,8 +36,8 @@ describe('TrackProgress', () => {
   let progress: TrackProgress;
 
   const color = 'rgb(133, 133, 133)';
-  const leftOffset = '25%';
-  const rightOffset = '75%';
+  const leftOffset = 25;
+  const rightOffset = 75;
 
   beforeEach(() => {
     progress = new TrackProgress();
@@ -56,23 +56,28 @@ describe('TrackProgress', () => {
   });
 
   test('updateLeftOffset()', () => {
-    expect(progress.nativeElement.style.getPropertyValue('left')).toEqual(leftOffset);
+    let receivedOffset = parseFloat(progress.nativeElement.style.getPropertyValue('left'));
+    expect(receivedOffset).toEqual(leftOffset);
 
-    const newOffset = '30%';
+    const newOffset = 30;
     expect(newOffset).not.toEqual(leftOffset);
 
     progress.updateLeftOffset(newOffset);
-    expect(progress.nativeElement.style.getPropertyValue('left')).toEqual(newOffset);
+    receivedOffset = parseFloat(progress.nativeElement.style.getPropertyValue('left'));
+    expect(receivedOffset).toEqual(newOffset);
   });
 
   test('updateRightOffset()', () => {
-    expect(progress.nativeElement.style.getPropertyValue('right')).toEqual(rightOffset);
+    let receivedOffset = parseFloat(progress.nativeElement.style.getPropertyValue('right'));
+    expect(receivedOffset).toEqual(100 - rightOffset);
 
-    const newOffset = '80%';
+    const newOffset = 80;
     expect(newOffset).not.toEqual(rightOffset);
 
     progress.updateRightOffset(newOffset);
-    expect(progress.nativeElement.style.getPropertyValue('right')).toEqual(newOffset);
+
+    receivedOffset = parseFloat(progress.nativeElement.style.getPropertyValue('right'));
+    expect(receivedOffset).toEqual(100 - newOffset);
   });
 
   test('to match snapshot', () => {

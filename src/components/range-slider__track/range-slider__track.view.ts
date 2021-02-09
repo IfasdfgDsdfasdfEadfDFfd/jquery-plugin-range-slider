@@ -6,9 +6,9 @@ class Track extends View<TrackProps> {
     class: 'range-slider__track',
   };
 
-  render({ bars, color }: TrackProps): void {
-    bars.forEach((value, index) => {
-      const props = { ...value, color };
+  render({ offsetPairs, color }: TrackProps): void {
+    offsetPairs.forEach((pair, index) => {
+      const props = { leftOffset: pair.left, rightOffset: pair.right, color };
 
       if (!this.children[index]) {
         this.children[index] = new TrackProgress();
@@ -36,12 +36,12 @@ class TrackProgress extends View<TrackProgressProps> {
     this.nativeElement.style.setProperty('background-color', newColor);
   }
 
-  updateLeftOffset(value: string): void {
-    this.nativeElement.style.setProperty('left', value);
+  updateLeftOffset(value: number): void {
+    this.nativeElement.style.setProperty('left', `${value}%`);
   }
 
-  updateRightOffset(value: string): void {
-    this.nativeElement.style.setProperty('right', value);
+  updateRightOffset(value: number): void {
+    this.nativeElement.style.setProperty('right', `${100 - value}%`);
   }
 }
 

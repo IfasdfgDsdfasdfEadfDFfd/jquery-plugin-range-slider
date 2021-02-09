@@ -3,9 +3,7 @@ import { Model } from '@core';
 class TrackModel extends Model<TrackModelData> {
   name = 'track';
 
-  data = {
-    bars: [],
-  };
+  data = {};
 }
 
 export { TrackModel };
