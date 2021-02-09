@@ -37,14 +37,6 @@ if (process.env.NODE_ENV === 'development') {
   console.log('logger attached!');
 
   rootComponent.model.subscribe(data => {
-    console.debug(`root changed:`, data);
-  });
-
-  Object.values(rootComponent.model.linkedModels).forEach(model => {
-    console.log(`${model.name} logger attached!`);
-
-    model.subscribe(data => {
-      console.debug(`${model.name} changed:`, data);
-    });
+    console.log(data);
   });
 }
