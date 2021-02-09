@@ -11,6 +11,13 @@ describe('Model', () => {
     value: 'child value',
   };
 
+  const testAction = () => {
+    return {
+      type: 'action type',
+      payload: 'action payload',
+    };
+  };
+
   beforeEach(() => {
     model = new Model();
     model.name = 'root';
@@ -22,11 +29,23 @@ describe('Model', () => {
   });
 
   test('aggregateData() without linked models', () => {
-    expect(model.aggregateData()).toEqual({ root: rootData });
+    expect(model.aggregateData()).toEqual({ [model.name]: rootData });
   });
 
   test('aggregateData() with linked models', () => {
     model.linkModel(childModel);
-    expect(model.aggregateData()).toEqual({ root: rootData, child: childData });
+    expect(model.aggregateData()).toEqual({ [model.name]: rootData, [childModel.name]: childData });
+  });
+
+  test('should subscribe listener', () => {
+    const listener = jest.fn();
+
+    model.subscribe(listener);
+    expect(listener).not.toHaveBeenCalled();
+
+    model.dispatch(testAction());
+
+    expect(listener).toHaveBeenCalledTimes(1);
+    expect(listener).toHaveBeenCalledWith({ [model.name]: rootData });
   });
 });
