@@ -20,6 +20,13 @@ describe('deepEqual', () => {
     expect(deepEqual(true, false)).toBeFalsy();
   });
 
+  test('comparison funcs', () => {
+    const func = () => 'some value';
+    const funcRef = func;
+    expect(deepEqual(func, func)).toBeTruthy();
+    expect(deepEqual(func, funcRef)).toBeTruthy();
+  });
+
   test('comparison NaN values', () => {
     expect(deepEqual(NaN, NaN)).toBeTruthy();
     expect(deepEqual(NaN, 123)).toBeFalsy();

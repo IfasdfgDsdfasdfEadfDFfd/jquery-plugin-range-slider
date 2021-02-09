@@ -4,19 +4,25 @@ import { deepEqual } from './deepEqual';
 
 function memo(methods: string[]) {
   // eslint-disable-next-line @typescript-eslint/ban-types
-  return function <T extends { new (...args: any[]): {} }>(constructor: T): T {
+  return function <T extends { new (...newArgs: any[]): {} }>(constructor: T): T {
     methods.forEach(methodName => {
       const originalMethod = constructor.prototype[methodName];
 
       // create memo version of the original method
       Object.defineProperty(constructor.prototype, methodName, {
-        value: function (...args: any[]) {
-          if (!deepEqual(this.memos[methodName].prevArgs, args)) {
-            this.memos[methodName].prevArgs = args;
-            this.memos[methodName].prevResult = originalMethod.apply(this, args);
+        value: function (...newArgs: any[]) {
+          let index = this.memos[methodName].prevArgs.findIndex((prev: any) =>
+            deepEqual(prev, newArgs),
+          );
+
+          // caching new newArgs and result
+          if (index === -1) {
+            this.memos[methodName].prevArgs.push(newArgs);
+            const newResult = originalMethod.apply(this, newArgs);
+            index = this.memos[methodName].prevResults.push(newResult) - 1;
           }
 
-          return this.memos[methodName].prevResult;
+          return this.memos[methodName].prevResults[index];
         },
       });
     });
@@ -27,8 +33,8 @@ function memo(methods: string[]) {
         return {
           ...memos,
           [methodName]: {
-            prevArgs: undefined,
-            prevResult: undefined,
+            prevArgs: [],
+            prevResults: [],
           },
         };
       }, {});

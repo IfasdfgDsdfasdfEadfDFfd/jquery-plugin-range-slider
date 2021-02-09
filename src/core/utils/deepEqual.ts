@@ -4,7 +4,7 @@ function deepEqual(elm1: unknown, elm2: unknown): boolean {
 
   if (elm1Type !== elm2Type) {
     return false;
-  } else if (['undefined', 'string', 'number', 'boolean'].includes(elm1Type)) {
+  } else if (['undefined', 'string', 'number', 'boolean', 'function'].includes(elm1Type)) {
     if (Number.isNaN(elm1) && Number.isNaN(elm2)) {
       return true;
     } else {

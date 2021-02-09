@@ -46,13 +46,33 @@ describe('memo class decorator', () => {
 
   test('memorize target method args', () => {
     const prevArgs = Object.getOwnPropertyDescriptor(testInstance, 'memos')?.value['memoMethod']
-      .prevArgs;
+      .prevArgs[0];
     expect(prevArgs).toEqual([testArg]);
   });
 
   test('memorize target method result', () => {
     const prevResult = Object.getOwnPropertyDescriptor(testInstance, 'memos')?.value['memoMethod']
-      .prevResult;
+      .prevResults[0];
     expect(prevResult).toEqual(testArg);
+  });
+
+  test('repetitive calls', () => {
+    const first = 'first';
+    const second = 'second';
+
+    const firstResult = testInstance.memoMethod(first);
+    expect(memoSpy).toHaveBeenCalledTimes(2);
+
+    const secondResult = testInstance.memoMethod(second);
+    expect(memoSpy).toHaveBeenCalledTimes(3);
+    expect(firstResult).not.toEqual(secondResult);
+
+    const cachedFirstResult = testInstance.memoMethod(first);
+    expect(memoSpy).toHaveBeenCalledTimes(3);
+    expect(firstResult).toEqual(cachedFirstResult);
+
+    const cachedSecondResult = testInstance.memoMethod(second);
+    expect(memoSpy).toHaveBeenCalledTimes(3);
+    expect(secondResult).toEqual(cachedSecondResult);
   });
 });
