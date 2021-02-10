@@ -8,6 +8,7 @@ exports[`Input to match snapshot 1`] = `
     class="range-slider__input__element"
     max="10"
     min="0"
+    step="1"
     type="range"
     value="1"
   />
@@ -15,6 +16,7 @@ exports[`Input to match snapshot 1`] = `
     class="range-slider__input__element"
     max="10"
     min="0"
+    step="1"
     type="range"
     value="2"
   />
@@ -22,6 +24,7 @@ exports[`Input to match snapshot 1`] = `
     class="range-slider__input__element"
     max="10"
     min="0"
+    step="1"
     type="range"
     value="3"
   />
@@ -29,6 +32,7 @@ exports[`Input to match snapshot 1`] = `
     class="range-slider__input__element"
     max="10"
     min="0"
+    step="1"
     type="range"
     value="4"
   />
@@ -40,6 +44,7 @@ exports[`InputElement to match snapshot 1`] = `
   class="range-slider__input__element"
   max="10"
   min="0"
+  step="1"
   type="range"
   value="5"
 />

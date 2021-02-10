@@ -9,8 +9,9 @@ const initData: RangeSliderModelData = {
   },
   input: {
     min: 0,
-    max: 9,
-    values: [0, 5, 9],
+    max: 16,
+    step: 2,
+    values: [6, 10],
   },
   track: {},
   scale: {

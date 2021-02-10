@@ -6,9 +6,9 @@ class Input extends View<InputProps> {
     class: 'range-slider__input',
   };
 
-  render({ min, max, values, valueChangeHandler }: InputProps): void {
+  render({ min, max, step, values, valueChangeHandler }: InputProps): void {
     values.forEach((value, index) => {
-      const childProps = { min, max, value, index, valueChangeHandler };
+      const childProps = { min, max, step, value, index, valueChangeHandler };
 
       if (!this.children[index]) {
         this.children[index] = new InputElement();
@@ -22,7 +22,7 @@ class Input extends View<InputProps> {
   }
 }
 
-@memo({ methods: ['updateMin', 'updateMax', 'updateValue'] })
+@memo({ methods: ['updateMin', 'updateMax', 'updateStep', 'updateValue'] })
 class InputElement extends View<InputElementProps> {
   tag = 'input';
   attrs = {
@@ -30,9 +30,10 @@ class InputElement extends View<InputElementProps> {
     class: 'range-slider__input__element',
   };
 
-  render({ min, max, value, index, valueChangeHandler }: InputElementProps): void {
+  render({ min, max, step, value, index, valueChangeHandler }: InputElementProps): void {
     this.updateMin(min);
     this.updateMax(max);
+    this.updateStep(step);
     this.updateValue(value);
     this.updateInputHandler(value => valueChangeHandler(index, value));
   }
@@ -43,6 +44,10 @@ class InputElement extends View<InputElementProps> {
 
   updateMax(value: number): void {
     this.nativeElement.setAttribute('max', value.toString());
+  }
+
+  updateStep(value: number): void {
+    this.nativeElement.setAttribute('step', value.toString());
   }
 
   updateValue(value: number): void {

@@ -6,6 +6,7 @@ describe('Input', () => {
   const props = {
     min: 0,
     max: 10,
+    step: 1,
     values: [1, 2, 3, 4],
     valueChangeHandler: jest.fn(),
   };
@@ -27,6 +28,7 @@ describe('InputElement', () => {
   const props = {
     min: 0,
     max: 10,
+    step: 1,
     value: 5,
     index: 0,
     valueChangeHandler: jest.fn(),
@@ -48,6 +50,12 @@ describe('InputElement', () => {
     const nextMax = 13;
     inputElement.updateMax(nextMax);
     expect(inputElement.nativeElement.getAttribute('max')).toEqual(nextMax.toString());
+  });
+
+  test('updateStep()', () => {
+    const nextStep = 5;
+    inputElement.updateStep(nextStep);
+    expect(inputElement.nativeElement.getAttribute('step')).toEqual(nextStep.toString());
   });
 
   test('updateValue()', () => {
