@@ -32,9 +32,10 @@ class Component implements ComponentInterface {
 
   attachToDocument(root: HTMLElement, initData: Record<string, ModelData>): void {
     this.init(initData);
+    root.appendChild(this.view.nativeElement);
+
     this.addSubscriber(this);
     this.model.coldStart();
-    root.appendChild(this.view.nativeElement);
   }
 }
 

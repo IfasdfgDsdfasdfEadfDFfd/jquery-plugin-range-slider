@@ -5,6 +5,7 @@ describe('Thumb', () => {
   const props: ThumbProps = {
     color: 'rgb(255, 255, 255)',
     markerText: 'marker text',
+    positionOffset: 0,
   };
 
   beforeEach(() => {
@@ -13,6 +14,13 @@ describe('Thumb', () => {
     thumb.render(props);
   });
 
+  test('updatePosition()', () => {
+    const newPositionOffset = 10;
+
+    thumb.updatePosition(newPositionOffset);
+    const elementOffset = parseFloat(thumb.nativeElement.style.getPropertyValue('left'));
+    expect(elementOffset).toEqual(newPositionOffset);
+  });
   test('updateColor()', () => {
     const newColor = 'rgb(133, 133, 133)';
     expect(newColor).not.toEqual(props.color);

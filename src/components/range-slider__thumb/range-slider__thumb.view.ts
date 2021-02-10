@@ -1,7 +1,7 @@
 import { View } from '@core';
 import { memo } from 'core/utils';
 
-@memo({ methods: ['updateColor'] })
+@memo({ methods: ['updateColor', 'updatePosition'] })
 class Thumb extends View<ThumbProps> {
   attrs = {
     class: 'range-slider__thumb',
@@ -10,9 +10,19 @@ class Thumb extends View<ThumbProps> {
     marker: new ThumbMarker(),
   };
 
-  render({ markerText, color }: ThumbProps): void {
+  render({ positionOffset, markerText, color }: ThumbProps): void {
+    this.updatePosition(positionOffset);
     this.updateColor(color);
     this.children.marker.render({ text: markerText, color });
+  }
+
+  getSelfWidth(): number {
+    return this.nativeElement.offsetWidth / (this.nativeElement.parentElement?.offsetWidth || 1);
+  }
+
+  updatePosition(offset: number): void {
+    const selfOffset = this.getSelfWidth() * offset;
+    this.nativeElement.style.setProperty('left', `${offset - selfOffset}%`);
   }
 
   updateColor(newColor: string): void {

@@ -1,0 +1,6 @@
+.range-slider__thumb {
+  position: absolute;
+  width: var(--thumb-width);
+  height: var(--thumb-height);
+  background-color: var(--primary-color);
+}

@@ -3,7 +3,7 @@
 exports[`Thumb to match snapshot 1`] = `
 <div
   class="range-slider__thumb"
-  style="border-color: rgb(255, 255, 255);"
+  style="left: 0%; border-color: rgb(255, 255, 255);"
 >
   <div
     class="range-slider__thumb__marker"

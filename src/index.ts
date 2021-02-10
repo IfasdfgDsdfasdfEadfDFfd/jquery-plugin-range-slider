@@ -14,6 +14,7 @@ const initData: RangeSliderModelData = {
     values: [6, 10],
   },
   track: {},
+  thumb: {},
   scale: {
     values: Array(10)
       .fill(null)
