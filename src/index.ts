@@ -1,3 +1,4 @@
+import './index.css';
 import './vars.css';
 
 import { RangeSliderComponent } from 'components/range-slider';
