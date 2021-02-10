@@ -12,7 +12,6 @@ class Thumb extends View<ThumbProps> {
 
   render({ markerText, color }: ThumbProps): void {
     this.updateColor(color);
-
     this.children.marker.render({ text: markerText, color });
   }
 

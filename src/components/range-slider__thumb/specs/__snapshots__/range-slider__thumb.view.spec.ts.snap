@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Thumb to match snapshot 1`] = `
+<div
+  class="range-slider__thumb"
+  style="border-color: rgb(255, 255, 255);"
+>
+  <div
+    class="range-slider__thumb__marker"
+    style="color: rgb(255, 255, 255);"
+  >
+    marker text
+  </div>
+</div>
+`;
+
+exports[`ThumbMarker to match snapshot 1`] = `
+<div
+  class="range-slider__thumb__marker"
+  style="color: rgb(255, 255, 255);"
+>
+  marker text
+</div>
+`;
