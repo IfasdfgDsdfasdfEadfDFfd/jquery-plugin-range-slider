@@ -9,20 +9,9 @@ const initData: RangeSliderModelData = {
   input: {
     min: 0,
     max: 9,
-    values: [0, 9],
+    values: [0, 5, 9],
   },
-  track: {
-    bars: [
-      {
-        leftOffset: '25%',
-        rightOffset: '75%',
-      },
-      {
-        leftOffset: '30%',
-        rightOffset: '80%',
-      },
-    ],
-  },
+  track: {},
   scale: {
     values: Array(10)
       .fill(null)
