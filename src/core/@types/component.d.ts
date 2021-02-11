@@ -7,8 +7,7 @@ interface ComponentInterface {
 
   childComponents: ComponentInterface[];
 
-  init(initData: ModelData): void;
+  init(initData: ModelData, parentView?: ViewInterface): void;
   addSubscriber(component: ComponentInterface): void;
-  attachChildComponents(components: ChildComponents): void;
   attachToDocument(root: HTMLElement, initData: ModelData): void;
 }

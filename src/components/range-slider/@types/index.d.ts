@@ -6,7 +6,6 @@ interface RangeSliderModelData extends Record<string, ModelData> {
   root: RootModelData;
   input: InputModelData;
   track: TrackModelData;
-  thumb: ThumbModelData;
   scale: ScaleModelData;
 }
 
