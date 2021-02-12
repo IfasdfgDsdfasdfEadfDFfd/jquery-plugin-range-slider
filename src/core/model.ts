@@ -1,3 +1,5 @@
+import { gigletAction } from 'core/utils';
+
 class Model<TData extends ModelData> implements ModelInterface {
   name = '';
   data = {} as TData;
@@ -49,12 +51,5 @@ class Model<TData extends ModelData> implements ModelInterface {
     this.dispatch(gigletAction());
   }
 }
-
-const gigletAction = (): ModelAction<null> => {
-  return {
-    type: '@GIGLET_ACTION',
-    payload: null,
-  };
-};
 
 export { Model };
