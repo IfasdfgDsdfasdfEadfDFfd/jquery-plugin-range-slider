@@ -3,6 +3,7 @@ type TrackModelData = ModelData;
 interface TrackProps extends ViewProps {
   color: string;
   progressSegments: ProgressProps['segments'];
+  thumbItems: ThumbProps['thumbs'];
 }
 
 interface ProgressProps extends ViewProps {
@@ -20,12 +21,20 @@ interface ProgressSegmentProps extends ViewProps {
 }
 
 interface ThumbProps extends ViewProps {
+  thumbs: Array<{
+    positionOffset: number;
+    markerText: string;
+  }>;
+  color: string;
+}
+
+interface ThumbItemProps extends ViewProps {
   positionOffset: number;
   markerText: string;
   color: string;
 }
 
-interface ThumbMarkerProps extends ViewProps {
+interface ThumbItemMarkerProps extends ViewProps {
   text: string;
   color: string;
 }

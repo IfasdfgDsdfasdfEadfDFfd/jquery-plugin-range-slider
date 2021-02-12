@@ -5,7 +5,7 @@ import { RangeSliderComponent } from 'components/range-slider';
 
 const initData: RangeSliderModelData = {
   root: {
-    color: '#FFEE33',
+    color: '#FF9933',
   },
   input: {
     min: 0,

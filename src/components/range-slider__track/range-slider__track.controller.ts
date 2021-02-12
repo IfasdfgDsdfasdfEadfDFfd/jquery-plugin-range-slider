@@ -11,10 +11,12 @@ class TrackController extends Controller {
     });
 
     const progressSegments = this.createProgressSegments(offsets);
+    const thumbItems = this.createThumbPositions(input.values, offsets);
 
     return {
       color: root.color,
       progressSegments,
+      thumbItems,
     };
   }
 
@@ -38,6 +40,13 @@ class TrackController extends Controller {
     }
 
     return segments;
+  }
+
+  createThumbPositions(values: number[], offsets: number[]): ThumbProps['thumbs'] {
+    return values.map((value, index) => ({
+      positionOffset: offsets[index],
+      markerText: value.toString(),
+    }));
   }
 
   calcOffsets({ min, max, values }: { min: number; max: number; values: number[] }): number[] {

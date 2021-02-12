@@ -7,10 +7,12 @@ class Track extends View<TrackProps> {
   };
   children = {
     progress: new Progress(),
+    thumb: new Thumb(),
   };
 
-  render({ color, progressSegments: segments }: TrackProps): void {
+  render({ color, progressSegments: segments, thumbItems: thumbs }: TrackProps): void {
     this.children.progress.render({ color, segments });
+    this.children.thumb.render({ color, thumbs });
   }
 }
 
@@ -22,10 +24,7 @@ class Progress extends ContainerView<ProgressProps> {
   childViewClass = ProgressSegment;
 
   getProps({ segments: iterator, ...restProps }: ProgressProps): ContainerViewProps {
-    return {
-      iterator,
-      restProps,
-    };
+    return { iterator, restProps };
   }
 }
 
@@ -54,16 +53,28 @@ class ProgressSegment extends View<ProgressSegmentProps> {
   }
 }
 
-@memo({ methods: ['updateColor', 'updatePosition'] })
-class Thumb extends View<ThumbProps> {
+class Thumb extends ContainerView<ThumbProps> {
   attrs = {
     class: 'range-slider__thumb',
   };
+
+  childViewClass = ThumbItem;
+
+  getProps({ thumbs: iterator, ...restProps }: ThumbProps): ContainerViewProps {
+    return { iterator, restProps };
+  }
+}
+
+@memo({ methods: ['updateColor', 'updatePosition'] })
+class ThumbItem extends View<ThumbItemProps> {
+  attrs = {
+    class: 'range-slider__thumb__item',
+  };
   children = {
-    marker: new ThumbMarker(),
+    marker: new ThumbItemMarker(),
   };
 
-  render({ positionOffset, markerText, color }: ThumbProps): void {
+  render({ positionOffset, markerText, color }: ThumbItemProps): void {
     this.updatePosition(positionOffset);
     this.updateColor(color);
     this.children.marker.render({ text: markerText, color });
@@ -79,17 +90,17 @@ class Thumb extends View<ThumbProps> {
   }
 
   updateColor(newColor: string): void {
-    this.nativeElement.style.setProperty('border-color', newColor);
+    this.nativeElement.style.setProperty('background-color', newColor);
   }
 }
 
 @memo({ methods: ['updateText', 'updateColor'] })
-class ThumbMarker extends View<ThumbMarkerProps> {
+class ThumbItemMarker extends View<ThumbItemMarkerProps> {
   attrs = {
-    class: 'range-slider__thumb__marker',
+    class: 'range-slider__thumb__item__marker',
   };
 
-  render({ text, color }: ThumbMarkerProps): void {
+  render({ text, color }: ThumbItemMarkerProps): void {
     this.updateText(text);
     this.updateColor(color);
   }
@@ -103,4 +114,4 @@ class ThumbMarker extends View<ThumbMarkerProps> {
   }
 }
 
-export { Track, Progress, ProgressSegment, Thumb, ThumbMarker };
+export { Track, Progress, ProgressSegment, Thumb, ThumbItem, ThumbItemMarker };
