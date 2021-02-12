@@ -8,7 +8,7 @@ exports[`Scale to match snapshot 1`] = `
     class="range-slider__scale__item"
   >
     <button
-      class="range-slider__scale__item-button"
+      class="range-slider__scale__button"
       type="button"
     >
       first
@@ -18,7 +18,7 @@ exports[`Scale to match snapshot 1`] = `
     class="range-slider__scale__item"
   >
     <button
-      class="range-slider__scale__item-button"
+      class="range-slider__scale__button"
       type="button"
     >
       second
@@ -28,7 +28,7 @@ exports[`Scale to match snapshot 1`] = `
     class="range-slider__scale__item"
   >
     <button
-      class="range-slider__scale__item-button"
+      class="range-slider__scale__button"
       type="button"
     >
       third
@@ -42,7 +42,7 @@ exports[`ScaleItem to match snapshot 1`] = `
   class="range-slider__scale__item"
 >
   <button
-    class="range-slider__scale__item-button"
+    class="range-slider__scale__button"
     type="button"
   >
     button text
@@ -52,7 +52,7 @@ exports[`ScaleItem to match snapshot 1`] = `
 
 exports[`ScaleItemButton to match snapshot 1`] = `
 <button
-  class="range-slider__scale__item-button"
+  class="range-slider__scale__button"
   type="button"
 >
   button text

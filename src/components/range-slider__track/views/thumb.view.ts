@@ -1,57 +1,5 @@
-import { ContainerView, View } from '@core';
+import { View, ContainerView } from '@core';
 import { memo } from 'core/utils';
-
-class Track extends View<TrackProps> {
-  attrs = {
-    class: 'range-slider__track',
-  };
-  children = {
-    progress: new Progress(),
-    thumb: new Thumb(),
-  };
-
-  render({ color, progressSegments: segments, thumbItems: thumbs }: TrackProps): void {
-    this.children.progress.render({ color, segments });
-    this.children.thumb.render({ color, thumbs });
-  }
-}
-
-class Progress extends ContainerView<ProgressProps> {
-  attrs = {
-    class: 'range-slider__progress',
-  };
-
-  childViewClass = ProgressSegment;
-
-  getProps({ segments: iterator, ...restProps }: ProgressProps): ContainerViewProps {
-    return { iterator, restProps };
-  }
-}
-
-@memo({ methods: ['updateColor', 'updateLeftOffset', 'updateRightOffset'] })
-class ProgressSegment extends View<ProgressSegmentProps> {
-  attrs = {
-    class: 'range-slider__progress__segment',
-  };
-
-  render({ color, leftOffset, rightOffset }: ProgressSegmentProps): void {
-    this.updateLeftOffset(leftOffset);
-    this.updateRightOffset(rightOffset);
-    this.updateColor(color);
-  }
-
-  updateColor(newColor: string): void {
-    this.nativeElement.style.setProperty('background-color', newColor);
-  }
-
-  updateLeftOffset(value: number): void {
-    this.nativeElement.style.setProperty('left', `${value}%`);
-  }
-
-  updateRightOffset(value: number): void {
-    this.nativeElement.style.setProperty('right', `${100 - value}%`);
-  }
-}
 
 class Thumb extends ContainerView<ThumbProps> {
   attrs = {
@@ -114,4 +62,4 @@ class ThumbItemMarker extends View<ThumbItemMarkerProps> {
   }
 }
 
-export { Track, Progress, ProgressSegment, Thumb, ThumbItem, ThumbItemMarker };
+export { Thumb, ThumbItem, ThumbItemMarker };

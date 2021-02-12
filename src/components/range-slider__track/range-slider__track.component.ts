@@ -1,8 +1,8 @@
 import { Component } from '@core';
 
-import { TrackController } from './range-slider__track.controller';
+import { Track } from './views/track.view';
 import { TrackModel } from './range-slider__track.model';
-import { Track } from './range-slider__track.view';
+import { TrackController } from './range-slider__track.controller';
 
 class TrackComponent extends Component {
   view = new Track();

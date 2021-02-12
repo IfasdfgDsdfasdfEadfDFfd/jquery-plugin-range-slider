@@ -1,5 +1,10 @@
-import { Track, Progress } from 'components/range-slider__track';
-import { ProgressSegment, ThumbItem, ThumbItemMarker } from '../range-slider__track.view';
+import {
+  Track,
+  Progress,
+  ProgressSegment,
+  ThumbItem,
+  ThumbItemMarker,
+} from 'components/range-slider__track/views';
 
 describe('Track', () => {
   let track: Track;

@@ -45,7 +45,7 @@ class ScaleItemButton extends View<ScaleItemButtonProps> {
   tag = 'button';
   attrs = {
     type: 'button',
-    class: 'range-slider__scale__item-button',
+    class: 'range-slider__scale__button',
   };
 
   render({ text }: ScaleItemButtonProps): void {

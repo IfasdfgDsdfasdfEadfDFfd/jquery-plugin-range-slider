@@ -45,3 +45,20 @@
   margin-top: -1.6rem;
   border: var(--thumb-border);
 }
+
+.range-slider__scale {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 0;
+  padding: var(--track-height) 0;
+  list-style: none;
+}
+
+.range-slider__scale__item {
+}
+
+.range-slider__scale__button {
+  border: none;
+  background-color: transparent;
+  color: var(--gray-color);
+}
