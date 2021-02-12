@@ -4,6 +4,7 @@ interface TrackProps extends ViewProps {
   color: string;
   progressSegments: ProgressProps['segments'];
   thumbItems: ThumbProps['thumbs'];
+  scaleItems: ScaleProps['items'];
 }
 
 interface ProgressProps extends ViewProps {
@@ -44,10 +45,15 @@ interface ScaleModelData extends ModelData {
 }
 
 interface ScaleProps extends ViewProps {
-  items: string[];
+  color: string;
+  items: Array<{
+    offset: number;
+    buttonText: string;
+  }>;
 }
 
 interface ScaleItemProps extends ViewProps {
+  color: string;
   buttonText: string;
 }
 

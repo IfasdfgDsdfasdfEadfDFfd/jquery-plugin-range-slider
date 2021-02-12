@@ -29,6 +29,16 @@ describe('Track', () => {
         markerText: 'marker text',
       },
     ],
+    scaleItems: [
+      {
+        offset: 25,
+        buttonText: 'button text',
+      },
+      {
+        offset: 55,
+        buttonText: 'button text',
+      },
+    ],
   };
 
   beforeEach(() => {

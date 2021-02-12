@@ -1,28 +1,16 @@
-import { View } from '@core';
+import { View, ContainerView } from '@core';
 import { memo } from 'core/utils';
 
-@memo({ methods: ['updateItems'] })
-class Scale extends View<ScaleProps> {
+class Scale extends ContainerView<ScaleProps> {
   tag = 'ul';
   attrs = {
     class: 'range-slider__scale',
   };
 
-  render({ items }: ScaleProps): void {
-    this.updateItems(items);
-  }
+  childViewClass = ScaleItem;
 
-  updateItems(newItems: string[]): void {
-    this.nativeElement.innerHTML = '';
-
-    this.children = newItems.reduce((newChildren, value, index) => {
-      const item = new ScaleItem();
-
-      item.init(this.nativeElement);
-      item.render({ buttonText: value });
-
-      return { ...newChildren, [index]: item };
-    }, {} as ViewChildren);
+  getProps({ items: iterator, ...restProps }: ScaleProps): ContainerViewProps {
+    return { iterator, restProps };
   }
 }
 

@@ -2,26 +2,32 @@ import { Scale, ScaleItem, ScaleItemButton } from 'components/range-slider__trac
 
 describe('Scale', () => {
   let scale: Scale;
-  const items = ['first', 'second', 'third'];
+
+  const color = 'rgb(255, 255, 255)';
+  const items: ScaleProps['items'] = [
+    {
+      offset: 25,
+      buttonText: 'first',
+    },
+    {
+      offset: 45,
+      buttonText: 'second',
+    },
+    {
+      offset: 75,
+      buttonText: 'third',
+    },
+  ];
+
+  const props: ScaleProps = {
+    color,
+    items,
+  };
 
   beforeEach(() => {
     scale = new Scale();
     scale.init();
-    scale.render({ items });
-  });
-
-  test('updateItems()', () => {
-    expect(Object.keys(scale.children).length).toEqual(items.length);
-
-    const newItems = ['alpha', 'beta', 'delta', 'gamma'];
-    expect(newItems.length).not.toEqual(items.length);
-
-    scale.updateItems(newItems);
-    expect(Object.keys(scale.children).length).toEqual(newItems.length);
-
-    for (const [index, child] of Object.entries(scale.children)) {
-      expect(child.nativeElement.innerHTML.includes(newItems[+index])).toBeTruthy;
-    }
+    scale.render(props);
   });
 
   test('to match snapshot', () => {
@@ -31,12 +37,21 @@ describe('Scale', () => {
 
 describe('ScaleItem', () => {
   let item: ScaleItem;
+
+  const color = 'rgb(255, 255, 255)';
+  const offset = 25;
   const buttonText = 'button text';
+
+  const props = {
+    color,
+    offset,
+    buttonText,
+  };
 
   beforeEach(() => {
     item = new ScaleItem();
     item.init();
-    item.render({ buttonText });
+    item.render(props);
   });
 
   test('to match snapshot', () => {
@@ -46,6 +61,7 @@ describe('ScaleItem', () => {
 
 describe('ScaleItemButton', () => {
   let button: ScaleItemButton;
+
   const text = 'button text';
 
   beforeEach(() => {

@@ -12,11 +12,13 @@ class TrackController extends Controller {
 
     const progressSegments = this.createProgressSegments(offsets);
     const thumbItems = this.createThumbPositions(input.values, offsets);
+    const scaleItems = this.createScaleValues(input);
 
     return {
       color: root.color,
       progressSegments,
       thumbItems,
+      scaleItems,
     };
   }
 
@@ -47,6 +49,19 @@ class TrackController extends Controller {
       positionOffset: offsets[index],
       markerText: value.toString(),
     }));
+  }
+
+  createScaleValues({ min, max, step }: InputModelData): ScaleProps['items'] {
+    const result = [];
+
+    for (let value = min; value <= max; value += step) {
+      result.push({
+        offset: this.calcOffset({ min, max, value }),
+        buttonText: String(value),
+      });
+    }
+
+    return result;
   }
 
   calcOffsets({ min, max, values }: { min: number; max: number; values: number[] }): number[] {
