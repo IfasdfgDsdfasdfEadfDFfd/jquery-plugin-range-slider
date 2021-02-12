@@ -1,11 +1,11 @@
 :root {
   --primary-color: #3293ee;
   --gray-color: #dfdfdf;
-  --track-height: 1.6rem;
+  --track-height: 2rem;
   --progress-height: 0.4rem;
   --track-offset: calc((var(--track-height) - var(--progress-height)) / 2);
-  --thumb-width: 1.2rem;
-  --thumb-height: 1.2rem;
+  --thumb-width: 1.5rem;
+  --thumb-height: 1.5rem;
   --thumb-border: 2px solid #fff;
   --thumb-border-radius: 50%;
 }
