@@ -2,11 +2,19 @@ type TrackModelData = ModelData;
 
 interface TrackProps extends ViewProps {
   color: string;
-  offsetPairs: Array<{ left: number; right: number }>;
+  progressSegments: ProgressProps['segments'];
 }
 
-interface TrackProgressProps extends ViewProps {
+interface ProgressProps extends ViewProps {
+  color: string;
+  segments: Array<{
+    leftOffset: number;
+    rightOffset: number;
+  }>;
+}
+
+interface ProgressSegmentProps extends ViewProps {
+  color: string;
   leftOffset: number;
   rightOffset: number;
-  color: string;
 }

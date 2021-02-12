@@ -5,13 +5,27 @@ class Track extends View<TrackProps> {
   attrs = {
     class: 'range-slider__track',
   };
+  children = {
+    progress: new Progress(),
+  };
 
-  render({ offsetPairs, color }: TrackProps): void {
-    offsetPairs.forEach((pair, index) => {
-      const props = { leftOffset: pair.left, rightOffset: pair.right, color };
+  render({ color, progressSegments: segments }: TrackProps): void {
+    this.children.progress.render({ color, segments });
+  }
+}
+
+class Progress extends View<ProgressProps> {
+  attrs = {
+    class: 'range-slider__progress',
+  };
+
+  render({ color, segments }: ProgressProps): void {
+    segments.forEach((segment, index) => {
+      const { leftOffset, rightOffset } = segment;
+      const props = { leftOffset, rightOffset, color };
 
       if (!this.children[index]) {
-        this.children[index] = new TrackProgress();
+        this.children[index] = new ProgressSegment();
         this.children[index].init(this.nativeElement);
       }
 
@@ -21,12 +35,12 @@ class Track extends View<TrackProps> {
 }
 
 @memo({ methods: ['updateColor', 'updateLeftOffset', 'updateRightOffset'] })
-class TrackProgress extends View<TrackProgressProps> {
+class ProgressSegment extends View<ProgressSegmentProps> {
   attrs = {
-    class: 'range-slider__track__progress',
+    class: 'range-slider__progress__segment',
   };
 
-  render({ color, leftOffset, rightOffset }: TrackProgressProps): void {
+  render({ color, leftOffset, rightOffset }: ProgressSegmentProps): void {
     this.updateLeftOffset(leftOffset);
     this.updateRightOffset(rightOffset);
     this.updateColor(color);
@@ -45,4 +59,4 @@ class TrackProgress extends View<TrackProgressProps> {
   }
 }
 
-export { Track, TrackProgress };
+export { Track, Progress, ProgressSegment };

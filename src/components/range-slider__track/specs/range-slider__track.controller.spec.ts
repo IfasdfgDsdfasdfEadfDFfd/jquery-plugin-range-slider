@@ -23,17 +23,17 @@ describe('TrackController', () => {
     });
   });
 
-  test('createOffsetPairs() with one offset', () => {
+  test('createProgressSegments() with one offset', () => {
     const offsets = [50];
-    const pairs = track.createOffsetPairs(offsets);
+    const pairs = track.createProgressSegments(offsets);
 
     expect(pairs).toHaveLength(1);
-    expect(pairs[0].right).toEqual(offsets[0]);
+    expect(pairs[0].rightOffset).toEqual(offsets[0]);
   });
 
-  test('createOffsetPairs() with multiple offsets', () => {
+  test('createProgressSegments() with multiple offsets', () => {
     const offsets = [30, 40, 50, 60, 70];
-    const pairs = track.createOffsetPairs(offsets);
+    const pairs = track.createProgressSegments(offsets);
 
     expect(pairs).toHaveLength(offsets.length - 1);
   });

@@ -1,7 +1,7 @@
 import { Controller } from '@core';
 import { memo } from 'core/utils';
 
-@memo({ methods: ['calcOffset', 'calcOffsets', 'createOffsetPairs'], cacheSize: Infinity })
+@memo({ methods: ['calcOffset', 'calcOffsets', 'createProgressSegments'], cacheSize: Infinity })
 class TrackController extends Controller {
   mapState({ root, input }: RangeSliderModelData): Partial<TrackProps> {
     const offsets = this.calcOffsets({
@@ -10,34 +10,34 @@ class TrackController extends Controller {
       values: input.values,
     });
 
-    const offsetPairs = this.createOffsetPairs(offsets);
+    const progressSegments = this.createProgressSegments(offsets);
 
     return {
       color: root.color,
-      offsetPairs,
+      progressSegments,
     };
   }
 
-  createOffsetPairs(offsets: number[]): Array<{ left: number; right: number }> {
-    const pairs = [];
+  createProgressSegments(offsets: number[]): TrackProps['progressSegments'] {
+    const segments = [];
 
     for (let index = 0; index < offsets.length - 1; index++) {
       if (offsets[index + 1]) {
-        pairs.push({
-          left: offsets[index],
-          right: offsets[index + 1],
+        segments.push({
+          leftOffset: offsets[index],
+          rightOffset: offsets[index + 1],
         });
       }
     }
 
-    if (pairs.length === 0) {
-      pairs.push({
-        left: 0,
-        right: offsets[0],
+    if (segments.length === 0) {
+      segments.push({
+        leftOffset: 0,
+        rightOffset: offsets[0],
       });
     }
 
-    return pairs;
+    return segments;
   }
 
   calcOffsets({ min, max, values }: { min: number; max: number; values: number[] }): number[] {

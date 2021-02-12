@@ -1,23 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Track to match snapshot 1`] = `
+exports[`Progress to match snapshot 1`] = `
 <div
-  class="range-slider__track"
+  class="range-slider__progress"
 >
   <div
-    class="range-slider__track__progress"
-    style="left: 25%; right: 25%; background-color: rgb(133, 133, 133);"
-  />
-  <div
-    class="range-slider__track__progress"
+    class="range-slider__progress__segment"
     style="left: 25%; right: 25%; background-color: rgb(133, 133, 133);"
   />
 </div>
 `;
 
-exports[`TrackProgress to match snapshot 1`] = `
+exports[`ProgressSegment to match snapshot 1`] = `
 <div
-  class="range-slider__track__progress"
+  class="range-slider__progress__segment"
   style="left: 25%; right: 25%; background-color: rgb(133, 133, 133);"
 />
+`;
+
+exports[`Track to match snapshot 1`] = `
+<div
+  class="range-slider__track"
+>
+  <div
+    class="range-slider__progress"
+  >
+    <div
+      class="range-slider__progress__segment"
+      style="left: 25%; right: 25%; background-color: rgb(133, 133, 133);"
+    />
+    <div
+      class="range-slider__progress__segment"
+      style="left: 25%; right: 25%; background-color: rgb(133, 133, 133);"
+    />
+  </div>
+</div>
 `;
