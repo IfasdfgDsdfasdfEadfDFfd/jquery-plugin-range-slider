@@ -1,6 +1,6 @@
 import './styles/index.css';
 
-export * from './range-slider__input.view';
-export * from './range-slider__input.model';
-export * from './range-slider__input.controller';
-export * from './range-slider__input.component';
+export * from './input.view';
+export * from './input.model';
+export * from './input.controller';
+export * from './input.component';

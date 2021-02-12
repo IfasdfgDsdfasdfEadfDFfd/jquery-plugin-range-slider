@@ -1,5 +1,5 @@
 import { Controller } from '@core';
-import { INPUT_ACTIONS } from './range-slider__input.model';
+import { INPUT_ACTIONS } from './input.model';
 
 class InputController extends Controller {
   mapState({ input }: RangeSliderModelData): Partial<InputProps> {

@@ -1,4 +1,4 @@
-import { changeInputValue, changeMax, changeMin, changeStep } from '../range-slider__input.model';
+import { changeInputValue, changeMax, changeMin, changeStep } from 'components/range-slider__input';
 
 describe('InputModel', () => {
   const originalData: InputModelData = {
