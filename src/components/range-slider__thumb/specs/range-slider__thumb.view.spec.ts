@@ -1,70 +1,68 @@
-import { Thumb, ThumbMarker } from '../range-slider__thumb.view';
+// describe('Thumb', () => {
+//   let thumb: Thumb;
+//   const props: ThumbProps = {
+//     color: 'rgb(255, 255, 255)',
+//     markerText: 'marker text',
+//     positionOffset: 0,
+//   };
 
-describe('Thumb', () => {
-  let thumb: Thumb;
-  const props: ThumbProps = {
-    color: 'rgb(255, 255, 255)',
-    markerText: 'marker text',
-    positionOffset: 0,
-  };
+//   beforeEach(() => {
+//     thumb = new Thumb();
+//     thumb.init();
+//     thumb.render(props);
+//   });
 
-  beforeEach(() => {
-    thumb = new Thumb();
-    thumb.init();
-    thumb.render(props);
-  });
+//   test('updatePosition()', () => {
+//     const newPositionOffset = 10;
 
-  test('updatePosition()', () => {
-    const newPositionOffset = 10;
+//     thumb.updatePosition(newPositionOffset);
+//     const elementOffset = parseFloat(thumb.nativeElement.style.getPropertyValue('left'));
+//     expect(elementOffset).toEqual(newPositionOffset);
+//   });
+//   test('updateColor()', () => {
+//     const newColor = 'rgb(133, 133, 133)';
+//     expect(newColor).not.toEqual(props.color);
 
-    thumb.updatePosition(newPositionOffset);
-    const elementOffset = parseFloat(thumb.nativeElement.style.getPropertyValue('left'));
-    expect(elementOffset).toEqual(newPositionOffset);
-  });
-  test('updateColor()', () => {
-    const newColor = 'rgb(133, 133, 133)';
-    expect(newColor).not.toEqual(props.color);
+//     thumb.updateColor(newColor);
+//     expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual(newColor);
+//   });
 
-    thumb.updateColor(newColor);
-    expect(thumb.nativeElement.style.getPropertyValue('border-color')).toEqual(newColor);
-  });
+//   test('to match snapshot', () => {
+//     expect(thumb.nativeElement).toMatchSnapshot();
+//   });
+// });
 
-  test('to match snapshot', () => {
-    expect(thumb.nativeElement).toMatchSnapshot();
-  });
-});
+// describe('ThumbMarker', () => {
+//   let marker: ThumbMarker;
 
-describe('ThumbMarker', () => {
-  let marker: ThumbMarker;
+//   const props: ThumbMarkerProps = {
+//     color: 'rgb(255, 255, 255)',
+//     text: 'marker text',
+//   };
 
-  const props: ThumbMarkerProps = {
-    color: 'rgb(255, 255, 255)',
-    text: 'marker text',
-  };
+//   beforeEach(() => {
+//     marker = new ThumbMarker();
+//     marker.init();
+//     marker.render(props);
+//   });
 
-  beforeEach(() => {
-    marker = new ThumbMarker();
-    marker.init();
-    marker.render(props);
-  });
+//   test('updateText()', () => {
+//     const newText = 'new marker text';
 
-  test('updateText()', () => {
-    const newText = 'new marker text';
+//     expect(newText).not.toEqual(props.text);
+//     marker.updateText(newText);
+//     expect(marker.nativeElement.textContent).toEqual(newText);
+//   });
 
-    expect(newText).not.toEqual(props.text);
-    marker.updateText(newText);
-    expect(marker.nativeElement.textContent).toEqual(newText);
-  });
+//   test('updateColor()', () => {
+//     const newColor = 'rgb(133, 133, 133)';
 
-  test('updateColor()', () => {
-    const newColor = 'rgb(133, 133, 133)';
+//     expect(newColor).not.toEqual(props.color);
+//     marker.updateColor(newColor);
+//     expect(marker.nativeElement.style.getPropertyValue('color')).toEqual(newColor);
+//   });
 
-    expect(newColor).not.toEqual(props.color);
-    marker.updateColor(newColor);
-    expect(marker.nativeElement.style.getPropertyValue('color')).toEqual(newColor);
-  });
-
-  test('to match snapshot', () => {
-    expect(marker.nativeElement).toMatchSnapshot();
-  });
-});
+//   test('to match snapshot', () => {
+//     expect(marker.nativeElement).toMatchSnapshot();
+//   });
+// });

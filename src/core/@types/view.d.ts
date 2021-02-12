@@ -14,3 +14,12 @@ interface ViewInterface {
 
   attachAttrs(attrs: ViewAttrs): void;
 }
+
+interface ViewConstructable {
+  new (): ViewInterface;
+}
+
+interface ContainerViewProps extends ViewProps {
+  iterator: Array<ViewProps>;
+  restProps: ViewProps;
+}

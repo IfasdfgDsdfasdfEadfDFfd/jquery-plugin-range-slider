@@ -11,7 +11,7 @@ const initData: RangeSliderModelData = {
     min: 0,
     max: 16,
     step: 2,
-    values: [6, 10],
+    values: [6, 10, 12],
   },
   thumb: {},
   track: {},

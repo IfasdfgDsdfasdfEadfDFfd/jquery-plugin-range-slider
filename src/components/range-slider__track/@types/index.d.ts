@@ -18,3 +18,14 @@ interface ProgressSegmentProps extends ViewProps {
   leftOffset: number;
   rightOffset: number;
 }
+
+interface ThumbProps extends ViewProps {
+  positionOffset: number;
+  markerText: string;
+  color: string;
+}
+
+interface ThumbMarkerProps extends ViewProps {
+  text: string;
+  color: string;
+}
