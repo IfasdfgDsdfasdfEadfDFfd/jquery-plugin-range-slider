@@ -1,6 +1,6 @@
 import './styles/index.css';
 
 export * from './views';
-export * from './range-slider__track.model';
-export * from './range-slider__track.controller';
-export * from './range-slider__track.component';
+export * from './track.model';
+export * from './track.controller';
+export * from './track.component';

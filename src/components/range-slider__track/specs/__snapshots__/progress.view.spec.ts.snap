@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Progress to match snapshot 1`] = `
+<div
+  class="range-slider__progress"
+>
+  <div
+    class="range-slider__progress__segment"
+    style="left: 25%; right: 25%; background-color: rgb(133, 133, 133);"
+  />
+</div>
+`;
+
+exports[`ProgressSegment to match snapshot 1`] = `
+<div
+  class="range-slider__progress__segment"
+  style="left: 25%; right: 25%; background-color: rgb(133, 133, 133);"
+/>
+`;

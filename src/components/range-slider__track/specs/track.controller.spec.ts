@@ -1,4 +1,4 @@
-import { TrackController } from '../range-slider__track.controller';
+import { TrackController } from 'components/range-slider__track';
 
 describe('TrackController', () => {
   let track: TrackController;

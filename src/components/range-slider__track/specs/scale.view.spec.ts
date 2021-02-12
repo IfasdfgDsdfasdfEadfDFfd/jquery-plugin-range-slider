@@ -1,4 +1,4 @@
-import { Scale, ScaleItem, ScaleItemButton } from 'components/range-slider__track/views';
+import { Scale, ScaleItem, ScaleItemButton } from 'components/range-slider__track';
 
 describe('Scale', () => {
   let scale: Scale;
