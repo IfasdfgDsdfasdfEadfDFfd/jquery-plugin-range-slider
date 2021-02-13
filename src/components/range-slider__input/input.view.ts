@@ -1,28 +1,25 @@
-import { View } from '@core';
+import { View, ContainerView } from '@core';
 import { memo } from 'core/utils';
 
-class Input extends View<InputProps> {
+class Input extends ContainerView<InputProps> {
   attrs = {
     class: 'range-slider__input',
   };
 
-  render({ min, max, step, values, valueChangeHandler }: InputProps): void {
-    values.forEach((value, index) => {
-      const childProps = { min, max, step, value, index, valueChangeHandler };
+  childViewClass = InputElement;
 
-      if (!this.children[index]) {
-        this.children[index] = new InputElement();
-        this.children[index].init(this.nativeElement);
-      }
+  render(props: InputProps): void {
+    super.render(props);
 
-      this.children[index].render(childProps);
-    });
+    this.nativeElement.classList.toggle(`${this.attrs.class}_interval`, props.values.length > 1);
+  }
 
-    this.nativeElement.classList.toggle(`${this.attrs.class}_interval`, values.length > 1);
+  getProps({ values, ...restProps }: InputProps): ContainerViewProps {
+    return { iterator: values.map((value, index) => ({ value, index })), restProps };
   }
 }
 
-@memo({ methods: ['updateMin', 'updateMax', 'updateStep', 'updateValue'] })
+@memo({ methods: ['updateMin', 'updateMax', 'updateStep', 'updateValue', 'updateInputHandler'] })
 class InputElement extends View<InputElementProps> {
   tag = 'input';
   attrs = {

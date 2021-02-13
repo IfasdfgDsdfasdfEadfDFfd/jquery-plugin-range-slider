@@ -4,12 +4,15 @@ function deepEqual(elm1: unknown, elm2: unknown): boolean {
 
   if (elm1Type !== elm2Type) {
     return false;
-  } else if (['undefined', 'string', 'number', 'boolean', 'function'].includes(elm1Type)) {
+  } else if (['undefined', 'string', 'number', 'boolean'].includes(elm1Type)) {
     if (Number.isNaN(elm1) && Number.isNaN(elm2)) {
       return true;
     } else {
       return elm1 === elm2;
     }
+  } else if (elm1Type === 'function') {
+    // eslint-disable-next-line @typescript-eslint/ban-types
+    return (elm1 as Function).toString() === (elm2 as Function).toString();
   } else if (elm1 === null) {
     return elm1 === elm2;
   } else if (Array.isArray(elm1) && Array.isArray(elm2)) {

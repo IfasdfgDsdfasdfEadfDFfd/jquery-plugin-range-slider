@@ -14,7 +14,7 @@ function memo({ methods, cacheSize = 1 }: { methods: string[]; cacheSize?: numbe
           const prevArgs = this.memos[methodName].prevArgs;
           const prevResults = this.memos[methodName].prevResults;
 
-          let index = prevArgs.findIndex((prev: any) => deepEqual(prev, newArgs));
+          let index = prevArgs.findIndex((prev: any) => deepEqual(newArgs, prev));
 
           // caching new newArgs and result
           if (index === -1) {
