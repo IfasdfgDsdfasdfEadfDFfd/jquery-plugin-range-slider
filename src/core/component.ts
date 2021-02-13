@@ -5,12 +5,13 @@ class Component implements ComponentInterface {
 
   childComponents: ComponentInterface[] = [];
 
-  init(initData: Record<string, ModelData>, parentView?: ViewInterface): void {
+  init(initData: Record<string, ModelData>): void {
     this.model.init(initData[this.model.name]);
-    this.view.init(parentView?.nativeElement);
+    this.view.init();
 
     for (const component of this.childComponents) {
-      component.init(initData, this.view);
+      component.model.init(initData[component.model.name]);
+      component.view.init(this.view.nativeElement);
 
       this.model.linkModel(component.model);
       this.addSubscriber(component);

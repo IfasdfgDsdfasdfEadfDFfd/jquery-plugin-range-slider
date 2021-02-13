@@ -13,14 +13,14 @@ class View<TProps extends ViewProps> implements ViewInterface {
     if (parentNode) parentNode.appendChild(this.nativeElement);
   }
 
-  render(_props: TProps): void {
-    throw new Error('Method not implemented.');
-  }
-
   attachAttrs(attrs: ViewAttrs): void {
     Object.entries(attrs).forEach(([name, value]) => {
       this.nativeElement.setAttribute(name, value);
     });
+  }
+
+  render(_props: TProps): void {
+    throw new Error('Method not implemented.');
   }
 }
 
