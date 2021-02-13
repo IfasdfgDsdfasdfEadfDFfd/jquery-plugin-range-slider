@@ -7,8 +7,8 @@ class Track extends View<TrackProps> {
     class: 'range-slider__track',
   };
   children = {
-    thumb: new Thumb(),
     progress: new Progress(),
+    thumb: new Thumb(),
     scale: new Scale(),
   };
 

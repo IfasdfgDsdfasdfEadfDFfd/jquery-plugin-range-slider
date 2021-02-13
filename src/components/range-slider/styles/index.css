@@ -1,4 +1,5 @@
 .range-slider {
   position: relative;
-  margin: 2rem 0.5rem;
+  height: var(--track-height);
+  margin: 2rem 5rem;
 }

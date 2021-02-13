@@ -8,11 +8,12 @@ class TrackController extends Controller {
       min: input.min,
       max: input.max,
       values: input.values,
+      offsetRatio: root.ratio,
     });
 
     const progressSegments = this.createProgressSegments(offsets);
     const thumbItems = this.createThumbPositions(input.values, offsets);
-    const scaleItems = this.createScaleValues(input);
+    const scaleItems = this.createScaleValues({ ...input, offsetRatio: root.ratio });
 
     return {
       color: root.color,
@@ -51,12 +52,23 @@ class TrackController extends Controller {
     }));
   }
 
-  createScaleValues({ min, max, step }: InputModelData): ScaleProps['items'] {
+  createScaleValues({
+    min,
+    max,
+    step,
+    offsetRatio,
+  }: {
+    min: number;
+    max: number;
+    step: number;
+    offsetRatio: number;
+  }): ScaleProps['items'] {
     const result = [];
 
     for (let value = min; value <= max; value += step) {
+      const offset = this.calcOffset({ min, max, value, offsetRatio });
       result.push({
-        offset: this.calcOffset({ min, max, value }),
+        offset: offset,
         buttonText: String(value),
       });
     }
@@ -64,12 +76,33 @@ class TrackController extends Controller {
     return result;
   }
 
-  calcOffsets({ min, max, values }: { min: number; max: number; values: number[] }): number[] {
-    return values.map(value => this.calcOffset({ min, max, value }));
+  calcOffsets({
+    min,
+    max,
+    values,
+    offsetRatio,
+  }: {
+    min: number;
+    max: number;
+    values: number[];
+    offsetRatio: number;
+  }): number[] {
+    return values.map(value => this.calcOffset({ min, max, value, offsetRatio }));
   }
 
-  calcOffset({ min, max, value }: { min: number; max: number; value: number }): number {
-    return ((value - min) / (max - min)) * 100;
+  calcOffset({
+    min,
+    max,
+    value,
+    offsetRatio,
+  }: {
+    min: number;
+    max: number;
+    value: number;
+    offsetRatio: number;
+  }): number {
+    const offset = ((value - min) / (max - min)) * 100;
+    return offset - offset * offsetRatio;
   }
 }
 

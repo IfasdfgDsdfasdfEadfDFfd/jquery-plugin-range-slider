@@ -6,18 +6,19 @@ describe('TrackController', () => {
   const min = 0;
   const max = 10;
   const values = [4, 5, 6];
+  const offsetRatio = 0;
 
   beforeEach(() => {
     track = new TrackController();
   });
 
   test('calcOffset()', () => {
-    const offset = track.calcOffset({ min, max, value: values[1] });
+    const offset = track.calcOffset({ min, max, value: values[1], offsetRatio });
     expect(offset).toEqual(50);
   });
 
   test('calcOffsets()', () => {
-    const offsets = track.calcOffsets({ min, max, values });
+    const offsets = track.calcOffsets({ min, max, values, offsetRatio });
     offsets.forEach((offset, index) => {
       expect(offset).toEqual(values[index] * 10);
     });

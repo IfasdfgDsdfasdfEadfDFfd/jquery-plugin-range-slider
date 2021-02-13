@@ -5,6 +5,18 @@ exports[`Track to match snapshot 1`] = `
   class="range-slider__track"
 >
   <div
+    class="range-slider__progress"
+  >
+    <div
+      class="range-slider__progress__segment"
+      style="left: 25%; right: 25%; background-color: rgb(133, 133, 133);"
+    />
+    <div
+      class="range-slider__progress__segment"
+      style="left: 25%; right: 25%; background-color: rgb(133, 133, 133);"
+    />
+  </div>
+  <div
     class="range-slider__thumb"
   >
     <div
@@ -29,18 +41,6 @@ exports[`Track to match snapshot 1`] = `
         marker text
       </div>
     </div>
-  </div>
-  <div
-    class="range-slider__progress"
-  >
-    <div
-      class="range-slider__progress__segment"
-      style="left: 25%; right: 25%; background-color: rgb(133, 133, 133);"
-    />
-    <div
-      class="range-slider__progress__segment"
-      style="left: 25%; right: 25%; background-color: rgb(133, 133, 133);"
-    />
   </div>
   <ul
     class="range-slider__scale"

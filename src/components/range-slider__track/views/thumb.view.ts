@@ -28,13 +28,8 @@ class ThumbItem extends View<ThumbItemProps> {
     this.children.marker.render({ text: markerText, color });
   }
 
-  getSelfWidth(): number {
-    return this.nativeElement.offsetWidth / (this.nativeElement.parentElement?.offsetWidth || 1);
-  }
-
   updatePosition(offset: number): void {
-    const selfOffset = this.getSelfWidth() * offset;
-    this.nativeElement.style.setProperty('left', `${offset - selfOffset}%`);
+    this.nativeElement.style.setProperty('left', `${offset}%`);
   }
 
   updateColor(newColor: string): void {

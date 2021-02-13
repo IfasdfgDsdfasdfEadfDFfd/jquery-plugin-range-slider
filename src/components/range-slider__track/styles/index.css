@@ -60,7 +60,18 @@
 }
 
 .range-slider__scale__button {
+  width: 100%;
+  padding: 0;
   border: none;
   background-color: transparent;
   color: var(--gray-color);
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 90%;
+    left: 50%;
+    height: 70%;
+    border-left: 2px solid var(--gray-color);
+  }
 }

@@ -22,5 +22,4 @@ interface ModelInterface {
   dispatch: ModelDispatch;
   reducer(data: ModelData, action: ModelAction<unknown>): ModelData;
   subscribe(listener: ModelListener): void;
-  coldStart(): void;
 }

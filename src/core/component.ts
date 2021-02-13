@@ -1,3 +1,5 @@
+import { gigletAction } from './utils';
+
 class Component implements ComponentInterface {
   view!: ViewInterface;
   model!: ModelInterface;
@@ -5,14 +7,12 @@ class Component implements ComponentInterface {
 
   childComponents: ComponentInterface[] = [];
 
-  init(initData: Record<string, ModelData>): void {
-    this.model.init(initData[this.model.name]);
+  init(): void {
     this.view.init();
+    this.addSubscriber(this);
 
     for (const component of this.childComponents) {
-      component.model.init(initData[component.model.name]);
       component.view.init(this.view.nativeElement);
-
       this.model.linkModel(component.model);
       this.addSubscriber(component);
     }
@@ -27,12 +27,14 @@ class Component implements ComponentInterface {
     });
   }
 
-  attachToDocument(root: HTMLElement, initData: Record<string, ModelData>): void {
-    this.init(initData);
+  attachToDocument(root: HTMLElement): void {
+    this.init();
     root.appendChild(this.view.nativeElement);
+  }
 
-    this.addSubscriber(this);
-    this.model.coldStart();
+  coldStart(initData: Record<string, ModelData>): void {
+    this.model.init(initData);
+    this.model.dispatch(gigletAction());
   }
 }
 
