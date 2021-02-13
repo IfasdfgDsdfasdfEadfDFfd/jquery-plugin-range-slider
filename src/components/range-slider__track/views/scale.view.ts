@@ -14,6 +14,7 @@ class Scale extends ContainerView<ScaleProps> {
   }
 }
 
+@memo({ methods: ['updateOffset'] })
 class ScaleItem extends View<ScaleItemProps> {
   tag = 'li';
   attrs = {
@@ -23,8 +24,13 @@ class ScaleItem extends View<ScaleItemProps> {
     button: new ScaleItemButton(),
   };
 
-  render({ buttonText }: ScaleItemProps): void {
+  render({ offset, buttonText }: ScaleItemProps): void {
+    this.updateOffset(offset);
     this.children.button.render({ text: buttonText });
+  }
+
+  updateOffset(offset: number): void {
+    this.nativeElement.style.setProperty('left', `${offset}%`);
   }
 }
 

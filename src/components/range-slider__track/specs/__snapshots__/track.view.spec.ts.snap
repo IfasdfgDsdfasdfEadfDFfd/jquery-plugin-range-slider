@@ -47,6 +47,7 @@ exports[`Track to match snapshot 1`] = `
   >
     <li
       class="range-slider__scale__item"
+      style="left: 25%;"
     >
       <button
         class="range-slider__scale__button"
@@ -57,6 +58,7 @@ exports[`Track to match snapshot 1`] = `
     </li>
     <li
       class="range-slider__scale__item"
+      style="left: 55%;"
     >
       <button
         class="range-slider__scale__button"

@@ -54,6 +54,7 @@ interface ScaleProps extends ViewProps {
 
 interface ScaleItemProps extends ViewProps {
   color: string;
+  offset: number;
   buttonText: string;
 }
 

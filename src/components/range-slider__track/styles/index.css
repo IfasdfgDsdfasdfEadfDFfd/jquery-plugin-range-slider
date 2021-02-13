@@ -47,6 +47,7 @@
 }
 
 .range-slider__scale {
+  position: relative;
   display: flex;
   flex-flow: row nowrap;
   margin: 0;
@@ -55,6 +56,7 @@
 }
 
 .range-slider__scale__item {
+  position: absolute;
 }
 
 .range-slider__scale__button {
