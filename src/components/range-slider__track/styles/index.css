@@ -3,6 +3,7 @@
   width: 100%;
   height: var(--progress-height);
   margin: var(--track-offset) 0;
+  border-radius: var(--track-border-radius);
   background-color: var(--gray-color);
 }
 
@@ -69,8 +70,8 @@
   &::after {
     content: "";
     position: absolute;
-    bottom: 90%;
-    left: 50%;
+    bottom: 120%;
+    left: calc(50% - 1px);
     height: 70%;
     border-left: 2px solid var(--gray-color);
   }

@@ -2,6 +2,7 @@
   --primary-color: #3293ee;
   --gray-color: #dfdfdf;
   --track-height: 2rem;
+  --track-border-radius: 0.5rem;
   --progress-height: 0.4rem;
   --track-offset: calc((var(--track-height) - var(--progress-height)) / 2);
   --thumb-width: 1.5rem;
