@@ -11,7 +11,7 @@ class TrackController extends Controller {
       offsetRatio: root.ratio,
     });
 
-    const progressSegments = this.createProgressSegments(offsets);
+    const progressSegments = this.createProgressSegments(offsets, root.ratio);
     const thumbItems = this.createThumbPositions(input.values, offsets);
     const scaleItems = this.createScaleValues({ ...input, offsetRatio: root.ratio });
 
@@ -24,8 +24,9 @@ class TrackController extends Controller {
     };
   }
 
-  createProgressSegments(offsets: number[]): TrackProps['progressSegments'] {
+  createProgressSegments(offsets: number[], ratio: number): TrackProps['progressSegments'] {
     const segments = [];
+    offsets = offsets.map(offset => offset + (ratio * 100) / 2);
 
     for (let index = 0; index < offsets.length - 1; index++) {
       if (offsets[index + 1]) {
