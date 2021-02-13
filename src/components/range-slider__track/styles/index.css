@@ -66,6 +66,7 @@
   border: none;
   background-color: transparent;
   color: var(--gray-color);
+  font-weight: 600;
 
   &::after {
     content: "";
@@ -73,6 +74,8 @@
     bottom: 120%;
     left: calc(50% - 1px);
     height: 70%;
-    border-left: 2px solid var(--gray-color);
+    border-right: 1px solid var(--gray-color);
+    border-left: 1px solid var(--gray-color);
+    border-radius: 0.4rem;
   }
 }
