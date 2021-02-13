@@ -14,13 +14,14 @@ class Track extends View<TrackProps> {
 
   render({
     color,
+    ratio,
     scaleItems: items,
     thumbItems: thumbs,
     progressSegments: segments,
   }: TrackProps): void {
     this.children.thumb.render({ color, thumbs });
     this.children.progress.render({ color, segments });
-    this.children.scale.render({ color, items });
+    this.children.scale.render({ color, items, ratio });
   }
 }
 

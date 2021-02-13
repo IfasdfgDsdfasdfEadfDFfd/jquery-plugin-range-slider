@@ -24,13 +24,15 @@ class ScaleItem extends View<ScaleItemProps> {
     button: new ScaleItemButton(),
   };
 
-  render({ offset, buttonText }: ScaleItemProps): void {
-    this.updateOffset(offset);
+  render({ offset, buttonText, ratio }: ScaleItemProps): void {
     this.children.button.render({ text: buttonText });
+    this.updateOffset(offset, ratio);
   }
 
-  updateOffset(offset: number): void {
-    this.nativeElement.style.setProperty('left', `${offset}%`);
+  updateOffset(offset: number, ratio: number): void {
+    const selfOffset =
+      this.nativeElement.offsetWidth / (this.nativeElement.parentElement?.offsetWidth || 1);
+    this.nativeElement.style.setProperty('left', `${offset + ((ratio - selfOffset) * 100) / 2}%`);
   }
 }
 

@@ -17,6 +17,7 @@ class TrackController extends Controller {
 
     return {
       color: root.color,
+      ratio: root.ratio,
       progressSegments,
       thumbItems,
       scaleItems,
@@ -68,7 +69,7 @@ class TrackController extends Controller {
     for (let value = min; value <= max; value += step) {
       const offset = this.calcOffset({ min, max, value, offsetRatio });
       result.push({
-        offset: offset,
+        offset,
         buttonText: String(value),
       });
     }

@@ -9,6 +9,7 @@ describe('Track', () => {
 
   const props: TrackProps = {
     color,
+    ratio: 0,
     progressSegments: [
       {
         leftOffset,

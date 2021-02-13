@@ -2,6 +2,7 @@ type TrackModelData = ModelData;
 
 interface TrackProps extends ViewProps {
   color: string;
+  ratio: number;
   progressSegments: ProgressProps['segments'];
   thumbItems: ThumbProps['thumbs'];
   scaleItems: ScaleProps['items'];
@@ -46,6 +47,7 @@ interface ScaleModelData extends ModelData {
 
 interface ScaleProps extends ViewProps {
   color: string;
+  ratio: number;
   items: Array<{
     offset: number;
     buttonText: string;
@@ -55,6 +57,7 @@ interface ScaleProps extends ViewProps {
 interface ScaleItemProps extends ViewProps {
   color: string;
   offset: number;
+  ratio: number;
   buttonText: string;
 }
 

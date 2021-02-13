@@ -21,6 +21,7 @@ describe('Scale', () => {
 
   const props: ScaleProps = {
     color,
+    ratio: 0,
     items,
   };
 
@@ -45,6 +46,7 @@ describe('ScaleItem', () => {
   const props = {
     color,
     offset,
+    ratio: 0,
     buttonText,
   };
 
