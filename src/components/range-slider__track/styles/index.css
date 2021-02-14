@@ -64,6 +64,7 @@
   width: 100%;
   padding: 0;
   border: none;
+  border-color: var(--gray-color);
   background-color: transparent;
   color: var(--gray-color);
   font-weight: 600;
@@ -74,8 +75,16 @@
     bottom: 120%;
     left: calc(50% - 1px);
     height: 70%;
-    border-right: 1px solid var(--gray-color);
-    border-left: 1px solid var(--gray-color);
+    border-color: inherit;
+    border-right: 1px solid;
+    border-left: 1px solid;
     border-radius: 0.4rem;
+  }
+
+  &:focus,
+  &:hover {
+    border-color: inherit;
+    color: inherit;
+    outline: none;
   }
 }
