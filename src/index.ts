@@ -18,10 +18,10 @@ const initData: RangeSliderModelData = {
     ratio,
   },
   input: {
-    min: 0,
-    max: 16,
-    step: 2,
-    values: [6, 10, 12],
+    min: -3.5,
+    max: 4,
+    step: 0.5,
+    values: [-1.5, 2.0],
   },
   track: {},
 };
