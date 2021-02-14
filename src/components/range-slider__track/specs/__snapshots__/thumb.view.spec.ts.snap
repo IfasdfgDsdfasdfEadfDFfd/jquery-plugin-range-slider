@@ -7,7 +7,7 @@ exports[`ThumbItem to match snapshot 1`] = `
 >
   <div
     class="range-slider__thumb__item__marker"
-    style="color: rgb(255, 255, 255);"
+    style="margin-left: -0px; background-color: rgb(255, 255, 255);"
   >
     marker text
   </div>
@@ -17,7 +17,7 @@ exports[`ThumbItem to match snapshot 1`] = `
 exports[`ThumbItemMarker to match snapshot 1`] = `
 <div
   class="range-slider__thumb__item__marker"
-  style="color: rgb(255, 255, 255);"
+  style="margin-left: -0px; background-color: rgb(255, 255, 255);"
 >
   marker text
 </div>

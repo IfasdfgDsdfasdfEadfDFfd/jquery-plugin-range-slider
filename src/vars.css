@@ -9,4 +9,6 @@
   --thumb-height: 1.5rem;
   --thumb-border: 2px solid #fff;
   --thumb-border-radius: 50%;
+  --thumb-marker-color: #fff;
+  --thumb-marker-border-radius: 0.3rem;
 }

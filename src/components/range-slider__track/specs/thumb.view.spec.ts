@@ -61,7 +61,7 @@ describe('ThumbItemMarker', () => {
 
     expect(newColor).not.toEqual(props.color);
     marker.updateColor(newColor);
-    expect(marker.nativeElement.style.getPropertyValue('color')).toEqual(newColor);
+    expect(marker.nativeElement.style.getPropertyValue('background-color')).toEqual(newColor);
   });
 
   test('to match snapshot', () => {

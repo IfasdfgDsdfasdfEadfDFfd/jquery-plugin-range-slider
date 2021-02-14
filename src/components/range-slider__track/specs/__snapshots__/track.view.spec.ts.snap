@@ -25,7 +25,7 @@ exports[`Track to match snapshot 1`] = `
     >
       <div
         class="range-slider__thumb__item__marker"
-        style="color: rgb(133, 133, 133);"
+        style="margin-left: -0px; background-color: rgb(133, 133, 133);"
       >
         marker text
       </div>
@@ -36,7 +36,7 @@ exports[`Track to match snapshot 1`] = `
     >
       <div
         class="range-slider__thumb__item__marker"
-        style="color: rgb(133, 133, 133);"
+        style="margin-left: -0px; background-color: rgb(133, 133, 133);"
       >
         marker text
       </div>

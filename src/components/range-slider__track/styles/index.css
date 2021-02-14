@@ -43,8 +43,14 @@
 .range-slider__thumb__item__marker {
   display: flex;
   justify-content: center;
-  margin-top: -1.6rem;
+  width: fit-content;
+  margin: auto;
+  margin-top: -1.8rem;
+  padding: 0.1rem 0.4rem;
   border: var(--thumb-border);
+  border-radius: var(--thumb-marker-border-radius);
+  color: var(--thumb-marker-color);
+  font-weight: 600;
 }
 
 .range-slider__scale {

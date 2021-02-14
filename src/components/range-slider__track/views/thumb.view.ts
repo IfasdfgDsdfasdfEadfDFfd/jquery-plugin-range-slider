@@ -22,10 +22,10 @@ class ThumbItem extends View<ThumbItemProps> {
     marker: new ThumbItemMarker(),
   };
 
-  render({ positionOffset, markerText, color }: ThumbItemProps): void {
+  render({ positionOffset, markerText: text, color }: ThumbItemProps): void {
     this.updatePosition(positionOffset);
     this.updateColor(color);
-    this.children.marker.render({ text: markerText, color });
+    this.children.marker.render({ text, color });
   }
 
   updatePosition(offset: number): void {
@@ -50,10 +50,18 @@ class ThumbItemMarker extends View<ThumbItemMarkerProps> {
 
   updateText(newText: string): void {
     this.nativeElement.textContent = newText;
+    this.positionCorrection();
   }
 
   updateColor(newColor: string): void {
-    this.nativeElement.style.setProperty('color', newColor);
+    this.nativeElement.style.setProperty('background-color', newColor);
+  }
+
+  positionCorrection(): void {
+    const parentWidth = this.nativeElement.parentElement?.clientWidth || 0;
+    const correctionOffset = Math.abs(this.nativeElement.offsetWidth - parentWidth) / 2;
+
+    this.nativeElement.style.setProperty('margin-left', `-${correctionOffset}px`);
   }
 }
 
