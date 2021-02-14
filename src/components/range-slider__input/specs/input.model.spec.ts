@@ -1,4 +1,5 @@
 import { changeInputValue, changeMax, changeMin, changeStep } from 'components/range-slider__input';
+import { changeNearestInputValue } from '../input.model';
 
 describe('InputModel', () => {
   const originalData: InputModelData = {
@@ -53,6 +54,29 @@ describe('InputModel', () => {
 
       const nextData = changeInputValue(originalData, { index, value });
       expect(nextData.values[index]).toEqual(originalData.min);
+    });
+  });
+
+  describe('changeNearestInputValue', () => {
+    test('do not change originalData', () => {
+      const value = originalData.max + 1;
+
+      const nextData = changeNearestInputValue(originalData, value);
+      expect(nextData).not.toEqual(originalData);
+    });
+
+    test('change nearest value', () => {
+      const data = {
+        min: -3.5,
+        max: 4.5,
+        step: 0.5,
+        values: [-2.0, 2.0],
+      };
+
+      [0.0, 0.5, 1.0, 1.5].forEach(value => {
+        const nextData = changeNearestInputValue(data, value);
+        expect(nextData.values).toEqual([-2.0, value]);
+      });
     });
   });
 

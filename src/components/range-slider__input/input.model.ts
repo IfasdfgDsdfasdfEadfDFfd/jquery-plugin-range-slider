@@ -79,13 +79,14 @@ const changeNearestInputValue: ModelReducerCase<InputModelData, number> = (
   const { index } = data.values.reduceRight(
     (result, value, index) => {
       const nextDiff = Math.abs(value - nextValue);
+
       if (nextDiff < result.diff) {
         return { diff: nextDiff, index };
       } else {
         return result;
       }
     },
-    { diff: nextValue, index: 0 },
+    { diff: Infinity, index: 0 },
   );
 
   return changeInputValue(data, { index, value: nextValue });
@@ -94,9 +95,9 @@ const changeNearestInputValue: ModelReducerCase<InputModelData, number> = (
 export {
   InputModel,
   INPUT_ACTIONS,
-  changeInputValue,
-  changeNearestInputValue,
   changeMin,
   changeMax,
   changeStep,
+  changeInputValue,
+  changeNearestInputValue,
 };
