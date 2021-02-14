@@ -5,6 +5,22 @@ html(lang="en")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title Example
   body
+
+    //- define mixins
+    mixin slider(index)
+      .slider
+        div(id="js-range-slider-" + index)
+        div(id="js-configuration-panel-" + index)
+          +checkbox("vertical")
+
+    mixin checkbox(name)
+      label
+        | #{name}:
+        input(type="checkbox", name=name, class="js-checkbox-" + name)
+
+    each index in [1, 2, 3, 4, 5]
+      +slider(index)
+
     script(
       crossorigin='anonymous',
       integrity='sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=',

@@ -8,6 +8,18 @@ class RangeSliderModel extends Model<RootModelData> {
     isVertical: false,
     ratio: 0,
   };
+
+  reducerCases = {
+    [RANGE_SLIDER_ACTIONS.CHANGE_IS_VERTICAL]: changeIsVertical,
+  };
 }
 
-export { RangeSliderModel };
+enum RANGE_SLIDER_ACTIONS {
+  CHANGE_IS_VERTICAL = '@CHANGE_IS_VERTICAL',
+}
+
+const changeIsVertical: ModelReducerCase<RootModelData, boolean> = (data, isVertical) => {
+  return { ...data, isVertical };
+};
+
+export { RangeSliderModel, RANGE_SLIDER_ACTIONS, changeIsVertical };
