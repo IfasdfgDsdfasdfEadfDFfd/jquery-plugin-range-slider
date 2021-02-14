@@ -9,8 +9,8 @@ html(lang="en")
     //- define mixins
     mixin slider(index)
       .slider
-        div(id="js-range-slider-" + index)
-        div(id="js-configuration-panel-" + index)
+        div.slider__element(id="js-range-slider-" + index)
+        div.slider__configuration-panel(id="js-configuration-panel-" + index)
           +checkbox("vertical")
 
     mixin checkbox(name)

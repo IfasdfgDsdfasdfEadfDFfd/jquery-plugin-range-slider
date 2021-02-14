@@ -1,5 +1,6 @@
+import './index.css';
+
 import $ from 'jquery';
-import { main } from 'jquery-plugin-range-slider';
 
 window.onload = () => {
   [1, 2, 3, 4, 5].forEach(index => {
