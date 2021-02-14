@@ -6,6 +6,7 @@ interface TrackProps extends ViewProps {
   progressSegments: ProgressProps['segments'];
   thumbItems: ThumbProps['thumbs'];
   scaleItems: ScaleProps['items'];
+  scaleButtonClickHandler: (value: number) => void;
 }
 
 interface ProgressProps extends ViewProps {
@@ -50,17 +51,23 @@ interface ScaleProps extends ViewProps {
   ratio: number;
   items: Array<{
     offset: number;
+    rawValue: number;
     buttonText: string;
   }>;
+  buttonClickHandler: (value: number) => void;
 }
 
 interface ScaleItemProps extends ViewProps {
   color: string;
-  offset: number;
   ratio: number;
   buttonText: string;
+  offset: number;
+  rawValue: number;
+  buttonClickHandler: (value: number) => void;
 }
 
 interface ScaleItemButtonProps extends ViewProps {
   text: string;
+  value: number;
+  clickHandler: (value: number) => void;
 }

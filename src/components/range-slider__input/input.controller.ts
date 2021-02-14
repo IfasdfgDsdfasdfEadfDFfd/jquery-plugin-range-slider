@@ -6,7 +6,7 @@ class InputController extends Controller {
     return input;
   }
 
-  mapDispatch(dispatch: ModelDispatch): Partial<InputProps> {
+  mapDispatch({ inputDispatch: dispatch }: Record<string, ModelDispatch>): Partial<InputProps> {
     return {
       valueChangeHandler(index, value) {
         dispatch({

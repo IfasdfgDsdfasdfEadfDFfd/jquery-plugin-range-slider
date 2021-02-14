@@ -34,6 +34,7 @@ class Model<TData extends ModelData> implements ModelInterface {
 
   dispatch(action: ModelAction<unknown>): void {
     this.data = this.reducer(this.data, action);
+    Object.values(this.linkedModels).forEach(model => model.dispatch(action));
     this.passDataToListeners();
   }
 

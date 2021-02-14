@@ -3,7 +3,7 @@ class Controller implements ControllerInterface {
     return {};
   }
 
-  mapDispatch(_dispatch: ModelDispatch): ViewProps {
+  mapDispatch(_dispatch: Record<string, ModelDispatch>): ViewProps {
     return {};
   }
 }

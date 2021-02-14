@@ -7,14 +7,17 @@ describe('Scale', () => {
   const items: ScaleProps['items'] = [
     {
       offset: 25,
+      rawValue: 0,
       buttonText: 'first',
     },
     {
       offset: 45,
+      rawValue: 1,
       buttonText: 'second',
     },
     {
       offset: 75,
+      rawValue: 2,
       buttonText: 'third',
     },
   ];
@@ -23,6 +26,7 @@ describe('Scale', () => {
     color,
     ratio: 0,
     items,
+    buttonClickHandler: jest.fn(),
   };
 
   beforeEach(() => {
@@ -43,11 +47,13 @@ describe('ScaleItem', () => {
   const offset = 25;
   const buttonText = 'button text';
 
-  const props = {
+  const props: ScaleItemProps = {
     color,
-    offset,
     ratio: 0,
+    offset,
+    rawValue: 0,
     buttonText,
+    buttonClickHandler: jest.fn(),
   };
 
   beforeEach(() => {
@@ -64,12 +70,20 @@ describe('ScaleItem', () => {
 describe('ScaleItemButton', () => {
   let button: ScaleItemButton;
 
+  const value = 0;
   const text = 'button text';
+  const clickHandler = jest.fn();
+
+  const props: ScaleItemButtonProps = {
+    value,
+    text,
+    clickHandler,
+  };
 
   beforeEach(() => {
     button = new ScaleItemButton();
     button.init();
-    button.render({ text });
+    button.render(props);
   });
 
   test('updateText()', () => {

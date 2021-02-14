@@ -30,13 +30,16 @@ describe('Track', () => {
         markerText: 'marker text',
       },
     ],
+    scaleButtonClickHandler: jest.fn(),
     scaleItems: [
       {
         offset: 25,
+        rawValue: 0,
         buttonText: 'button text',
       },
       {
         offset: 55,
+        rawValue: 1,
         buttonText: 'button text',
       },
     ],

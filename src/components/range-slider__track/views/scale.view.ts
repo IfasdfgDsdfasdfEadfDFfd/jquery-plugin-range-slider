@@ -24,8 +24,14 @@ class ScaleItem extends View<ScaleItemProps> {
     button: new ScaleItemButton(),
   };
 
-  render({ offset, buttonText, ratio }: ScaleItemProps): void {
-    this.children.button.render({ text: buttonText });
+  render({
+    ratio,
+    offset,
+    rawValue: value,
+    buttonText: text,
+    buttonClickHandler: clickHandler,
+  }: ScaleItemProps): void {
+    this.children.button.render({ text, value, clickHandler });
     this.updateOffset(offset, ratio);
   }
 
@@ -36,7 +42,7 @@ class ScaleItem extends View<ScaleItemProps> {
   }
 }
 
-@memo({ methods: ['updateText'] })
+@memo({ methods: ['updateText', 'updateClickHandler'] })
 class ScaleItemButton extends View<ScaleItemButtonProps> {
   tag = 'button';
   attrs = {
@@ -44,12 +50,17 @@ class ScaleItemButton extends View<ScaleItemButtonProps> {
     class: 'range-slider__scale__button',
   };
 
-  render({ text }: ScaleItemButtonProps): void {
+  render({ text, value, clickHandler }: ScaleItemButtonProps): void {
     this.updateText(text);
+    this.updateClickHandler(() => clickHandler(value));
   }
 
   updateText(newText: string): void {
     this.nativeElement.textContent = newText;
+  }
+
+  updateClickHandler(handler: () => void): void {
+    this.nativeElement.onclick = () => handler();
   }
 }
 

@@ -1,4 +1,4 @@
 interface ControllerInterface {
   mapState(state: ModelData): ViewProps;
-  mapDispatch(dispatch: ModelDispatch): ViewProps;
+  mapDispatch(dispatch: Record<string, ModelDispatch>): ViewProps;
 }

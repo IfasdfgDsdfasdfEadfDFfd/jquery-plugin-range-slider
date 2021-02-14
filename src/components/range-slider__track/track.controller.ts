@@ -1,7 +1,8 @@
 import { Controller } from '@core';
+import { INPUT_ACTIONS } from 'components/range-slider__input';
 import { memo } from 'core/utils';
 
-@memo({ methods: ['calcOffset', 'calcOffsets', 'createProgressSegments'], cacheSize: Infinity })
+@memo({ methods: ['calcOffset', 'calcOffsets', 'createProgressSegments'], cacheSize: 100 })
 class TrackController extends Controller {
   mapState({ root, input }: RangeSliderModelData): Partial<TrackProps> {
     const offsets = this.calcOffsets({
@@ -21,6 +22,17 @@ class TrackController extends Controller {
       progressSegments,
       thumbItems,
       scaleItems,
+    };
+  }
+
+  mapDispatch({ inputDispatch: dispatch }: Record<string, ModelDispatch>): Partial<TrackProps> {
+    return {
+      scaleButtonClickHandler(value) {
+        dispatch({
+          type: INPUT_ACTIONS.CHANGE_NEAREST_INPUT_VALUE,
+          payload: value,
+        });
+      },
     };
   }
 
@@ -71,6 +83,7 @@ class TrackController extends Controller {
       const offset = this.calcOffset({ min, max, value, offsetRatio });
       result.push({
         offset,
+        rawValue: value,
         buttonText: String(value),
       });
     }

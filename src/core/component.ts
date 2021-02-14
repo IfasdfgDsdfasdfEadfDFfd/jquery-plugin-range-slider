@@ -22,7 +22,16 @@ class Component implements ComponentInterface {
     this.model.subscribe(data => {
       component.view.render({
         ...component.controller.mapState(data),
-        ...component.controller.mapDispatch(component.model.dispatch.bind(component.model)),
+        ...component.controller.mapDispatch({
+          [`${this.model.name}Dispatch`]: this.model.dispatch.bind(this.model),
+
+          ...this.childComponents.reduce((dispatchers, component) => {
+            return {
+              ...dispatchers,
+              [`${component.model.name}Dispatch`]: component.model.dispatch.bind(component.model),
+            };
+          }, {}),
+        }),
       });
     });
   }

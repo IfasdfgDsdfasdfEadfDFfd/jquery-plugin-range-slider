@@ -16,6 +16,7 @@ class InputModel extends Model<InputModelData> {
     [INPUT_ACTIONS.CHANGE_MAX]: changeMax,
     [INPUT_ACTIONS.CHANGE_STEP]: changeStep,
     [INPUT_ACTIONS.CHANGE_VALUE]: changeInputValue,
+    [INPUT_ACTIONS.CHANGE_NEAREST_INPUT_VALUE]: changeNearestInputValue,
   };
 }
 
@@ -24,6 +25,7 @@ enum INPUT_ACTIONS {
   CHANGE_MAX = '@CHANGE_MAX',
   CHANGE_STEP = '@CHANGE_STEP',
   CHANGE_VALUE = '@CHANGE_VALUE',
+  CHANGE_NEAREST_INPUT_VALUE = '@CHANGE_NEAREST_INPUT_VALUE',
 }
 
 const changeMin: ModelReducerCase<InputModelData, number> = (data, min) => {
@@ -70,4 +72,31 @@ const changeInputValue: ModelReducerCase<InputModelData, { index: number; value:
   return { ...data, values };
 };
 
-export { InputModel, INPUT_ACTIONS, changeInputValue, changeMin, changeMax, changeStep };
+const changeNearestInputValue: ModelReducerCase<InputModelData, number> = (
+  data,
+  nextValue,
+): InputModelData => {
+  const { index } = data.values.reduceRight(
+    (result, value, index) => {
+      const nextDiff = Math.abs(value - nextValue);
+      if (nextDiff < result.diff) {
+        return { diff: nextDiff, index };
+      } else {
+        return result;
+      }
+    },
+    { diff: nextValue, index: 0 },
+  );
+
+  return changeInputValue(data, { index, value: nextValue });
+};
+
+export {
+  InputModel,
+  INPUT_ACTIONS,
+  changeInputValue,
+  changeNearestInputValue,
+  changeMin,
+  changeMax,
+  changeStep,
+};
