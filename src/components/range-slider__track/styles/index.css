@@ -81,7 +81,7 @@
     position: absolute;
     bottom: 120%;
     left: calc(50% - 1px);
-    height: 70%;
+    height: 1rem;
     border-color: inherit;
     border-right: 1px solid;
     border-left: 1px solid;

@@ -5,6 +5,7 @@ class RangeSliderModel extends Model<RootModelData> {
 
   data = {
     color: '',
+    isVertical: false,
     ratio: 0,
   };
 }

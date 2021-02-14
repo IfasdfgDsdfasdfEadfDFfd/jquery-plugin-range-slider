@@ -1,6 +1,7 @@
 interface RootModelData extends ModelData {
   color: string;
   ratio: number;
+  isVertical: boolean;
 }
 
 interface RangeSliderModelData extends Record<string, ModelData> {
@@ -10,5 +11,6 @@ interface RangeSliderModelData extends Record<string, ModelData> {
 }
 
 interface RangeSliderProps extends ViewProps {
+  isVertical: boolean;
   windowResizeHandler: EventListener;
 }

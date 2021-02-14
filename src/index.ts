@@ -15,6 +15,7 @@ const ratio = thumbWidth / rootComponent.view.nativeElement.offsetWidth;
 const initData: RangeSliderModelData = {
   root: {
     color: '#FF9933',
+    isVertical: true,
     ratio,
   },
   input: {
