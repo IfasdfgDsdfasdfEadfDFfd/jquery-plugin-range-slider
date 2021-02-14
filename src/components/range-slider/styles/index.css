@@ -20,7 +20,7 @@
 .range-slider_vertical .range-slider__scale__button::after {
   bottom: calc(50% - 1px);
   left: calc(50% - 1.9rem);
-  width: 1rem;
+  width: var(--scale-division-marker-size);
   height: 0;
   border-color: inherit;
   border-top: 1px solid;

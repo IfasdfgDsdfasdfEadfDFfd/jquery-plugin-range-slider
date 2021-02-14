@@ -58,7 +58,7 @@
   display: flex;
   flex-flow: row nowrap;
   margin: 0;
-  padding: var(--track-height) 0;
+  padding: calc(var(--track-height) + (var(--scale-division-marker-size) * 0.2)) 0 0;
   list-style: none;
 }
 
@@ -81,7 +81,7 @@
     position: absolute;
     bottom: 120%;
     left: calc(50% - 1px);
-    height: 1rem;
+    height: var(--scale-division-marker-size);
     border-color: inherit;
     border-right: 1px solid;
     border-left: 1px solid;
