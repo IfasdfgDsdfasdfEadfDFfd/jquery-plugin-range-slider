@@ -12,5 +12,8 @@ window.onload = () => {
     $vertical.on('change', event => {
       api.setVertical(event.target.checked);
     });
+
+    const $input_1 = $panel.find(`.js-input-value#1`);
+    const $input_2 = $panel.find(`.js-input-value#2`);
   });
 };

@@ -12,11 +12,23 @@ html(lang="en")
         div.slider__element(id="js-range-slider-" + index)
         div.slider__configuration-panel(id="js-configuration-panel-" + index)
           +checkbox("vertical")
+          .slider__configuration-panel__inputs
+            +input("value#1")
+            +input("value#2")
 
     mixin checkbox(name)
-      label
-        | #{name}:
+      +label(name)
         input(type="checkbox", name=name, class="js-checkbox-" + name)
+
+    mixin input(name)
+      +label(name)
+        input(type="text", name=name, class="js-input-" + name)
+
+    mixin label(name)
+      label.label
+        | #{name}:
+        block
+
 
     each index in [1, 2, 3, 4, 5]
       +slider(index)

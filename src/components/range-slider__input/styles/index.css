@@ -29,7 +29,7 @@
 }
 
 .range-slider__input_interval {
-  .range-slider__input__element {
+  & .range-slider__input__element {
     pointer-events: none;
   }
 }

@@ -1,13 +1,18 @@
 {
   "extends": [
     "stylelint-config-standard",
-    "stylelint-config-hudochenkov/full"
+    "stylelint-config-hudochenkov/full",
+    "stylelint-prettier/recommended"
   ],
   "plugins": [
-    "stylelint-order"
+    "stylelint-order",
+    "stylelint-prettier",
+    "stylelint-use-nesting"
   ],
   "ignoreFiles": "./dist/**/*.css",
   "rules": {
+    "prettier/prettier": true,
+    "csstools/use-nesting": "always",
     "order/properties-alphabetical-order": null,
     "indentation": 2,
     "max-nesting-depth": 2,

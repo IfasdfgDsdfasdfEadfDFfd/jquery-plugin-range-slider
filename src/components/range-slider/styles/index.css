@@ -7,24 +7,21 @@
 .range-slider_vertical {
   margin: 50% auto;
   transform: rotate(-90deg);
-}
 
-.range-slider_vertical .range-slider__thumb__item__marker {
-  transform: rotate(90deg);
-}
+  & .range-slider__scale__item,
+  & .range-slider__thumb__item__marker {
+    transform: rotate(90deg);
+  }
 
-.range-slider_vertical .range-slider__scale__item {
-  transform: rotate(90deg);
-}
-
-.range-slider_vertical .range-slider__scale__button::after {
-  bottom: calc(50% - 1px);
-  left: calc(50% - 1.9rem);
-  width: var(--scale-division-marker-size);
-  height: 0;
-  border-color: inherit;
-  border-top: 1px solid;
-  border-right: 0;
-  border-bottom: 1px solid;
-  border-left: 0;
+  & .range-slider__scale__button::after {
+    bottom: calc(50% - 1px);
+    left: calc(50% - 1.9rem);
+    width: var(--scale-division-marker-size);
+    height: 0;
+    border-color: inherit;
+    border-top: 1px solid;
+    border-right: 0;
+    border-bottom: 1px solid;
+    border-left: 0;
+  }
 }
