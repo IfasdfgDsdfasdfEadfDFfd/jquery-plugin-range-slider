@@ -1,10 +1,10 @@
 .range-slider__track {
   position: absolute;
   width: 100%;
-  height: var(--progress-height);
-  margin: var(--track-offset) 0;
-  border-radius: var(--track-border-radius);
-  background-color: var(--gray-color);
+  height: var(--rs-progress-height);
+  margin: var(--rs-track-offset) 0;
+  border-radius: var(--rs-track-border-radius);
+  background-color: var(--rs-gray-color);
 }
 
 .range-slider__progress {
@@ -27,17 +27,17 @@
   display: flex;
   align-items: center;
   width: 100%;
-  height: var(--track-height);
-  margin-top: calc((var(--track-offset)) * -1);
+  height: var(--rs-track-height);
+  margin-top: calc((var(--rs-track-offset)) * -1);
 }
 
 .range-slider__thumb__item {
   position: absolute;
-  width: var(--thumb-width);
-  height: var(--thumb-height);
-  border: var(--thumb-border);
-  border-radius: var(--thumb-border-radius);
-  background-color: var(--primary-color);
+  width: var(--rs-thumb-width);
+  height: var(--rs-thumb-height);
+  border: var(--rs-thumb-border);
+  border-radius: var(--rs-thumb-border-radius);
+  background-color: var(--rs-primary-color);
 }
 
 .range-slider__thumb__item__marker {
@@ -47,9 +47,9 @@
   margin: auto;
   margin-top: -1.8rem;
   padding: 0.1rem 0.4rem;
-  border: var(--thumb-border);
-  border-radius: var(--thumb-marker-border-radius);
-  color: var(--thumb-marker-color);
+  border: var(--rs-thumb-border);
+  border-radius: var(--rs-thumb-marker-border-radius);
+  color: var(--rs-thumb-marker-color);
   font-weight: 600;
 }
 
@@ -58,7 +58,7 @@
   display: flex;
   flex-flow: row nowrap;
   margin: 0;
-  padding: calc(var(--track-height) + (var(--scale-division-marker-size) * 0.2)) 0 0;
+  padding: calc(var(--rs-track-height) + (var(--rs-scale-division-marker-size) * 0.2)) 0 0;
   list-style: none;
 }
 
@@ -70,9 +70,9 @@
   width: 100%;
   padding: 0;
   border: none;
-  border-color: var(--gray-color);
+  border-color: var(--rs-gray-color);
   background-color: transparent;
-  color: var(--gray-color);
+  color: var(--rs-gray-color);
   font-weight: 600;
   cursor: pointer;
 
@@ -81,7 +81,7 @@
     position: absolute;
     bottom: 120%;
     left: calc(50% - 1px);
-    height: var(--scale-division-marker-size);
+    height: var(--rs-scale-division-marker-size);
     border-color: inherit;
     border-right: 1px solid;
     border-left: 1px solid;

@@ -1,15 +1,15 @@
 :root {
-  --primary-color: #3293ee;
-  --gray-color: #dfdfdf;
-  --track-height: 2rem;
-  --track-border-radius: 0.5rem;
-  --progress-height: 0.4rem;
-  --track-offset: calc((var(--track-height) - var(--progress-height)) / 2);
-  --thumb-width: 1.5rem;
-  --thumb-height: 1.5rem;
-  --thumb-border: 2px solid #fff;
-  --thumb-border-radius: 50%;
-  --thumb-marker-color: #fff;
-  --thumb-marker-border-radius: 0.3rem;
-  --scale-division-marker-size: 0.8rem;
+  --rs-primary-color: #3293ee;
+  --rs-gray-color: #dfdfdf;
+  --rs-track-height: 2rem;
+  --rs-track-border-radius: 0.5rem;
+  --rs-progress-height: 0.4rem;
+  --rs-track-offset: calc((var(--rs-track-height) - var(--rs-progress-height)) / 2);
+  --rs-thumb-width: 1.5rem;
+  --rs-thumb-height: 1.5rem;
+  --rs-thumb-border: 2px solid #fff;
+  --rs-thumb-border-radius: 50%;
+  --rs-thumb-marker-color: #fff;
+  --rs-thumb-marker-border-radius: 0.3rem;
+  --rs-scale-division-marker-size: 0.8rem;
 }

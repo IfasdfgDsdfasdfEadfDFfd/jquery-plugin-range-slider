@@ -6,7 +6,7 @@ function main(this: JQuery): PluginApi {
 
   const documentStyles = getComputedStyle(document.documentElement);
   const thumbWidth =
-    parseFloat(documentStyles.getPropertyValue('--thumb-width')) *
+    parseFloat(documentStyles.getPropertyValue('--rs-thumb-width')) *
     parseFloat(documentStyles.fontSize);
   const ratio = thumbWidth / rootComponent.view.nativeElement.offsetWidth;
 

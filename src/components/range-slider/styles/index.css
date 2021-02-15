@@ -1,6 +1,6 @@
 .range-slider {
   position: relative;
-  height: var(--track-height);
+  height: var(--rs-track-height);
   margin: 2rem auto;
 }
 
@@ -16,7 +16,7 @@
   & .range-slider__scale__button::after {
     bottom: calc(50% - 1px);
     left: calc(50% - 1.9rem);
-    width: var(--scale-division-marker-size);
+    width: var(--rs-scale-division-marker-size);
     height: 0;
     border-color: inherit;
     border-top: 1px solid;

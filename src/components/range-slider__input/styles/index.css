@@ -1,7 +1,7 @@
 .range-slider__input {
   position: absolute;
   width: 100%;
-  height: var(--track-height);
+  height: var(--rs-track-height);
 }
 
 .range-slider__input__element {
@@ -18,8 +18,8 @@
   }
 
   &::-webkit-slider-thumb {
-    width: var(--thumb-width);
-    height: var(--thumb-height);
+    width: var(--rs-thumb-width);
+    height: var(--rs-thumb-height);
     border-radius: 50%;
 
     /* background-color: blue; */
