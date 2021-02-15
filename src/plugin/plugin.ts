@@ -36,7 +36,7 @@ function main(this: JQuery): PluginApi {
   }
 
   return {
-    setVertical(value: boolean): void {
+    setVertical(value) {
       rootComponent.model.dispatch({
         type: RANGE_SLIDER_ACTIONS.CHANGE_IS_VERTICAL,
         payload: value,
