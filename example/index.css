@@ -6,5 +6,18 @@
 }
 
 .slider__element {
-  min-width: 50%;
+  flex: 3;
+}
+
+.slider__configuration-panel {
+  display: flex;
+  flex: 1;
+  flex-flow: column nowrap;
+  gap: 1rem;
+}
+
+.slider__configuration-panel__inputs {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.6rem;
 }
